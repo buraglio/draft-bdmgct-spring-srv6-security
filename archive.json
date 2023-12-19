@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-12-17T01:08:02.707123+00:00",
+  "timestamp": "2023-12-19T01:03:37.778860+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -197,6 +197,90 @@
       "mergedBy": "buraglio",
       "mergeCommit": {
         "oid": "fe96ebb41c2cc5cbfa15685a1266ea7f76775aea"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 6,
+      "id": "PR_kwDOKVF77M5iQTSD",
+      "title": "Attack section",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/6",
+      "state": "MERGED",
+      "author": "talmi",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Added a new section, \"Attacks\", describing the main attacks.",
+      "createdAt": "2023-12-18T11:51:46Z",
+      "updatedAt": "2023-12-18T21:37:50Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "8aba3f67ab971be3e2356843eb3f3140537c9826",
+      "headRepository": "talmi/draft-bdmgct-spring-srv6-security",
+      "headRefName": "attack-section",
+      "headRefOid": "a262fb04875e556a5cf855f2cf8d42a0978beda5",
+      "closedAt": "2023-12-18T21:37:50Z",
+      "mergedAt": "2023-12-18T21:37:50Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "c41f3e7e1c5bb9efa912b7034e25d3b138a75e1b"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 7,
+      "id": "PR_kwDOKVF77M5iQT0o",
+      "title": "Attack cleanup",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/7",
+      "state": "MERGED",
+      "author": "talmi",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Removed redundant text about attacks.\r\nMove some placeholder topics to appendix.",
+      "createdAt": "2023-12-18T11:53:15Z",
+      "updatedAt": "2023-12-18T21:38:09Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "8aba3f67ab971be3e2356843eb3f3140537c9826",
+      "headRepository": "talmi/draft-bdmgct-spring-srv6-security",
+      "headRefName": "attack-cleanup",
+      "headRefOid": "e499d34600dd9ea00a0152f74e8e9fd720fead8b",
+      "closedAt": "2023-12-18T21:38:09Z",
+      "mergedAt": "2023-12-18T21:38:09Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "896d86649e0f65b178ea82a912139f2f39d2d066"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 8,
+      "id": "PR_kwDOKVF77M5iQUku",
+      "title": "Threat update",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/8",
+      "state": "MERGED",
+      "author": "talmi",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Updated the threat model with the distinction between internal and external attackers.",
+      "createdAt": "2023-12-18T11:55:08Z",
+      "updatedAt": "2023-12-18T21:38:26Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "8aba3f67ab971be3e2356843eb3f3140537c9826",
+      "headRepository": "talmi/draft-bdmgct-spring-srv6-security",
+      "headRefName": "threat-update",
+      "headRefOid": "a76ace7d116441d5ae79ad59b76b2450c38e1458",
+      "closedAt": "2023-12-18T21:38:26Z",
+      "mergedAt": "2023-12-18T21:38:26Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "904a592ee3c6022ac02fb51d3291227a06347f81"
       },
       "comments": [],
       "reviews": []
