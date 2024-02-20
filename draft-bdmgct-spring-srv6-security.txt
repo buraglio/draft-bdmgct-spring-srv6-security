@@ -112,10 +112,6 @@ Table of Contents
        4.4.2.  Scope
        4.4.3.  Impact
      4.5.  Other Attacks
-     4.6.  Encapsulation of packets
-       4.6.1.  Allowing potential circumvention of existing network
-               ingress / egress policy.
-       4.6.2.  Default allow failure mode
    5.  Implications on Existing Equipment
      5.1.  Limitations in Filtering Capabilities
      5.2.  Middlebox Filtering Issues
@@ -389,6 +385,12 @@ Table of Contents
       by averting the traffic to another node that the attacker has
       access to and has more processing resources.
 
+   Manipulating the SRv6 network programming:  An attacker can trigger a
+      specific endpoint behavior by modifying the destination address
+      and/or SIDs in the segment list.  This attack can be invoked in
+      order to manipulate the path or in order to exhaust the resources
+      of the SR endpoint.
+
    Availability:  An attacker can add SIDs to the segment list in order
       to increase the number hops that each packet is forwarded through
       and thus increase the load on the network.  For example, a set of
@@ -504,22 +506,6 @@ Table of Contents
    specific to SRv6, but can be used in a network that uses SRv6.  Such
    attacks are outside the scope of this document.
 
-4.6.  Encapsulation of packets
-
-4.6.1.  Allowing potential circumvention of existing network ingress /
-        egress policy.
-
-   SRv6 packets rely on the routing header in order to steer traffic
-   that adheres to a defined SRv6 traffic policy.  This mechanism
-   supports not only use of the IPv6 routing header for packet steering,
-   it also allows for encapsulation of both IPv4 and IPv6 packets.
-
-4.6.2.  Default allow failure mode
-
-   Use of GUA addressing in data plane programming could result in an
-   fail open scenario when appropriate border filtering is not
-   implemented or supported.
-
 5.  Implications on Existing Equipment
 
 5.1.  Limitations in Filtering Capabilities
@@ -631,8 +617,6 @@ Table of Contents
        |                                                               |
        |                                                               |
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-
-                       Figure 2: SRH Format [RFC8754]
 
 7.3.  SRH Compression
 
