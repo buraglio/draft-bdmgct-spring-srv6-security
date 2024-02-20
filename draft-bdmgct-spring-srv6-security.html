@@ -13,11 +13,11 @@
        A typical IPv6 unicast address is comprised of a network prefix, host identifier, and a subnet mask. A typical SRv6 segment identifier (SID) is broken into a locator, a function identifier, and optionally, function arguments. The locator must be routable, which enables both SRv6 capable and incapable devices to participate in forwarding, either as normal IPv6 unicast or SRv6. The capability to operate in environments that may have gaps in SRv6 support allows the bridging of islands of SRv6 devices with standard IPv6 unicast routing. 
        As standard IPv6 addressing, there are security considerations that should be well understood that may not be obvious. 
     " name="description">
-<meta content="xml2rfc 3.19.2" name="generator">
+<meta content="xml2rfc 3.19.4" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-bdmgct-spring-srv6-security-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.19.2
+  xml2rfc 3.19.4
     Python 3.11.6
     ConfigArgParse 1.7
     google-i18n-address 3.1.0
@@ -1033,7 +1033,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Buraglio, et al.</td>
-<td class="center">Expires 15 August 2024</td>
+<td class="center">Expires 23 August 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1046,12 +1046,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-bdmgct-spring-srv6-security-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-02-12" class="published">12 February 2024</time>
+<time datetime="2024-02-20" class="published">20 February 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-08-15">15 August 2024</time></dd>
+<dd class="expires"><time datetime="2024-08-23">23 August 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1111,7 +1111,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 15 August 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 23 August 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1266,32 +1266,24 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </li>
                 </ul>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4">
-                <p id="section-toc.1-1.5.2.4.1"><a href="#section-5.4" class="auto internal xref">5.4</a>.  <a href="#name-limits-in-filtering-capabil" class="internal xref">Limits in filtering capabilities</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.5">
-                <p id="section-toc.1-1.5.2.5.1"><a href="#section-5.5" class="auto internal xref">5.5</a>.  <a href="#name-exposure-of-internal-traffi" class="internal xref">Exposure of internal Traffic Engineering paths</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.5.2.1">
-                    <p id="section-toc.1-1.5.2.5.2.1.1"><a href="#section-5.5.1" class="auto internal xref">5.5.1</a>.  <a href="#name-hidden-destination-address" class="internal xref">Hidden Destination Address</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.5.2.2">
-                    <p id="section-toc.1-1.5.2.5.2.2.1"><a href="#section-5.5.2" class="auto internal xref">5.5.2</a>.  <a href="#name-improper-traffic-filtering" class="internal xref">Improper Traffic Filtering</a></p>
-</li>
-                </ul>
-</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-implications-on-security-de" class="internal xref">Implications on Security Devices</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
-                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-emerging-technology-growing" class="internal xref">Emerging technology growing pains</a></p>
-</li>
-            </ul>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-mitigation-methods" class="internal xref">Mitigation Methods</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-mitigation-methods" class="internal xref">Mitigation Methods</a></p>
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-implications-on-existing-eq" class="internal xref">Implications on Existing Equipment</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1">
+                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.  <a href="#name-limitations-in-filtering-ca" class="internal xref">Limitations in Filtering Capabilities</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
+                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-middlebox-filtering-issues" class="internal xref">Middlebox Filtering Issues</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3">
+                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.  <a href="#name-emerging-technology-growing" class="internal xref">Emerging technology growing pains</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
             <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-gap-analysis" class="internal xref">Gap Analysis</a></p>
@@ -1808,65 +1800,49 @@ As shown in the figure, suppose that when the network element 1 of SRv6 manageme
 </div>
 </section>
 </div>
-<div id="limits-in-filtering-capabilities">
-<section id="section-5.4">
-        <h3 id="name-limits-in-filtering-capabil">
-<a href="#section-5.4" class="section-number selfRef">5.4. </a><a href="#name-limits-in-filtering-capabil" class="section-name selfRef">Limits in filtering capabilities</a>
-        </h3>
-<p id="section-5.4-1"><span>[<a href="#RFC9288" class="cite xref">RFC9288</a>]</span> provides recommendations on the filtering of IPv6 packets containing IPv6 extension headers at transit routers. SRv6 relies on the routing header (RH4). Because the technology is reasonably new, many platforms, routing and otherwise, do not posses the capability to filter and in some cases even provide logging for IPv6 next-header 43 Routing type 4.
-In addition to the limits of filtering on the routing header, as described in the Overview section, an edge case exists that may cause unintended denial of service based on a layer 4 checksum error.  Because of the methodologies used in SID compression, SRH compression does not necessarily use an SRH - in practice this means filtering based on the next header is not relevant, thereby removing an important filtering mechanism.
-Under certain specific conditions, a host may generate a SID list that is capable of being compressed into a single destination address (DA). Under these circumstances, the SRH may not be generated or may be removed during the process. In this case, a host may generate a layer 4 checksum that is created after SR policy and SID compression is applied and is done so using a DA that differs from the DA that will arrive at the final destination. This incorrect L4 checksum will cause any device in the path that utilizes a L4 checksum to discard or otherwise flag as erroneous the packets referenced by this checksum. Examples include deep packet inspection hardware that may exist transparently in a path or other higher layer packet inspection mechanisms that require or utilize an L4 checksum. Such behavior could result in blackholed or incorrectly dropped / filtered traffic that is otherwise legitimate.<a href="#section-5.4-1" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="exposure-of-internal-traffic-engineering-paths">
-<section id="section-5.5">
-        <h3 id="name-exposure-of-internal-traffi">
-<a href="#section-5.5" class="section-number selfRef">5.5. </a><a href="#name-exposure-of-internal-traffi" class="section-name selfRef">Exposure of internal Traffic Engineering paths</a>
-        </h3>
-<p id="section-5.5-1">Existing implementations may contain limited filtering capabilities necessary for proper isolation of the SRH from outside of an SRv6 domain.<a href="#section-5.5-1" class="pilcrow">¶</a></p>
-<div id="hidden-destination-address">
-<section id="section-5.5.1">
-          <h4 id="name-hidden-destination-address">
-<a href="#section-5.5.1" class="section-number selfRef">5.5.1. </a><a href="#name-hidden-destination-address" class="section-name selfRef">Hidden Destination Address</a>
-          </h4>
-<p id="section-5.5.1-1">When an SRv6 packet is forwarded in the SRv6 domain, its destination address changes constantly, the real destination address is hidden. Security devices on SRv6 network may not learn the real destination address and fail to take access control on some SRv6 traffic.<a href="#section-5.5.1-1" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="improper-traffic-filtering">
-<section id="section-5.5.2">
-          <h4 id="name-improper-traffic-filtering">
-<a href="#section-5.5.2" class="section-number selfRef">5.5.2. </a><a href="#name-improper-traffic-filtering" class="section-name selfRef">Improper Traffic Filtering</a>
-          </h4>
-<p id="section-5.5.2-1">The security devices on SRv6 networks need to take care of SRv6 packets. However, the SRv6 packets usually use loopback address of the PE device a as source address. As a result, the address information of SR packets may be asymmetric, resulting in improper filter traffic problems, which affects the effectiveness of security devices.
-For example, along the forwarding path in SRv6 network, the SR-aware firewall will check the association relationships of the bidirectional VPN traffic packets. And it is able to retrieve the final destination of SRv6 packet from the last entry in the . When the &lt;source, destination&gt; tuple of the packet from PE1 to PE2 is &lt;PE1-IP-ADDR, PE2-VPN-SID&gt;, and the other direction is &lt;PE2-IP-ADDR, PE1-VPN-SID&gt;, the source address and destination address of the forward and backward VPN traffic are regarded as different flow. Eventually, the legal traffic may be blocked by the firewall.<a href="#section-5.5.2-1" class="pilcrow">¶</a></p>
-</section>
-</div>
-</section>
-</div>
-</section>
-</div>
-<div id="implications-on-security-devices">
-<section id="section-6">
-      <h2 id="name-implications-on-security-de">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-implications-on-security-de" class="section-name selfRef">Implications on Security Devices</a>
-      </h2>
-<p id="section-6-1">SRv6 is commonly used as a tunneling technology in operator networks. To provide VPN service in an SRv6 network, the ingress PE encapsulates the payload with an outer IPv6 header with the SRH carrying the SR Policy segment List along with the VPN service SID. The user traffic towards SRv6 provider backbone will be encapsulated in SRv6 tunnel. When constructing an SRv6 packet, the destination address field of the SRv6 packet changes constantly and the source address field of the SRv6 packet is usually assigned using an address on the originating device, which may be a host or a network element depending on configuration. This may affect the security equipment and middle boxes in the traffic path. Because of the existence of the SRH, and the additional headers, older security appliances, monitoring systems, and middle boxes cold react in different ways if they are unaware of the additional header and tunneling mechanisms leveraged by SRv6. This lack of awareness may be due to software limits, or in some cases as has been seen in other emerging technologies, may be due to limits in ASICs or NPUs that could silently drop or otherwise impede SRv6 packets.
-<span>[<a href="#RFC6169" class="cite xref">RFC6169</a>]</span><a href="#section-6-1" class="pilcrow">¶</a></p>
-<div id="emerging-technology-growing-pains">
-<section id="section-6.1">
-        <h3 id="name-emerging-technology-growing">
-<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-emerging-technology-growing" class="section-name selfRef">Emerging technology growing pains</a>
-      </h3>
-</section>
-</div>
 </section>
 </div>
 <div id="mitigation-methods">
-<section id="section-7">
+<section id="section-6">
       <h2 id="name-mitigation-methods">
-<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-mitigation-methods" class="section-name selfRef">Mitigation Methods</a>
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-mitigation-methods" class="section-name selfRef">Mitigation Methods</a>
       </h2>
-<p id="section-7-1">This section presents methods that can be used to mitigate the threats and issues that were presented in previous sections. This section does not introduce new security solutions or protocols.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-6-1">This section presents methods that can be used to mitigate the threats and issues that were presented in previous sections. This section does not introduce new security solutions or protocols.<a href="#section-6-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="implications-on-existing-equipment">
+<section id="section-7">
+      <h2 id="name-implications-on-existing-eq">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-implications-on-existing-eq" class="section-name selfRef">Implications on Existing Equipment</a>
+      </h2>
+<div id="limitations-in-filtering-capabilities">
+<section id="section-7.1">
+        <h3 id="name-limitations-in-filtering-ca">
+<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-limitations-in-filtering-ca" class="section-name selfRef">Limitations in Filtering Capabilities</a>
+        </h3>
+<p id="section-7.1-1"><span>[<a href="#RFC9288" class="cite xref">RFC9288</a>]</span> provides recommendations on the filtering of IPv6 packets containing IPv6 extension headers at transit routers. SRv6 relies on the routing header (RH4). Because the technology is reasonably new, many platforms, routing and otherwise, do not posses the capability to filter and in some cases even provide logging for IPv6 next-header 43 Routing type 4.<a href="#section-7.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="middlebox-filtering-issues">
+<section id="section-7.2">
+        <h3 id="name-middlebox-filtering-issues">
+<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-middlebox-filtering-issues" class="section-name selfRef">Middlebox Filtering Issues</a>
+        </h3>
+<p id="section-7.2-1">An edge case exists that may cause a layer 4 checksum error.  Because of the methodologies used in SID compression, SRH compression does not necessarily use an SRH - in practice this means filtering based on the next header is not relevant, thereby removing an important filtering mechanism. Under certain specific conditions, a host may generate a SID list that is capable of being compressed into a single destination address (DA). Under these circumstances, the SRH may not be generated or may be removed during the process. In this case, a host may generate a layer 4 checksum that is created after SR policy and SID compression is applied and is done so using a DA that differs from the DA that will arrive at the final destination. This incorrect L4 checksum will cause any device in the path that utilizes a L4 checksum to discard or otherwise flag as erroneous the packets referenced by this checksum. Examples include deep packet inspection hardware that may exist transparently in a path or other higher layer packet inspection mechanisms that require or utilize an L4 checksum. Such behavior could result in blackholed or incorrectly dropped / filtered traffic that is otherwise legitimate.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
+<p id="section-7.2-2">When an SRv6 packet is forwarded in the SRv6 domain, its destination address changes constantly, the real destination address is hidden. Security devices on SRv6 network may not learn the real destination address and fail to take access control on some SRv6 traffic.<a href="#section-7.2-2" class="pilcrow">¶</a></p>
+<p id="section-7.2-3">The security devices on SRv6 networks need to take care of SRv6 packets. However, the SRv6 packets usually use loopback address of the PE device a as source address. As a result, the address information of SR packets may be asymmetric, resulting in improper filter traffic problems, which affects the effectiveness of security devices.
+For example, along the forwarding path in SRv6 network, the SR-aware firewall will check the association relationships of the bidirectional VPN traffic packets. And it is able to retrieve the final destination of SRv6 packet from the last entry in the . When the &lt;source, destination&gt; tuple of the packet from PE1 to PE2 is &lt;PE1-IP-ADDR, PE2-VPN-SID&gt;, and the other direction is &lt;PE2-IP-ADDR, PE1-VPN-SID&gt;, the source address and destination address of the forward and backward VPN traffic are regarded as different flow. Eventually, the legal traffic may be blocked by the firewall.<a href="#section-7.2-3" class="pilcrow">¶</a></p>
+<p id="section-7.2-4">SRv6 is commonly used as a tunneling technology in operator networks. To provide VPN service in an SRv6 network, the ingress PE encapsulates the payload with an outer IPv6 header with the SRH carrying the SR Policy segment List along with the VPN service SID. The user traffic towards SRv6 provider backbone will be encapsulated in SRv6 tunnel. When constructing an SRv6 packet, the destination address field of the SRv6 packet changes constantly and the source address field of the SRv6 packet is usually assigned using an address on the originating device, which may be a host or a network element depending on configuration. This may affect the security equipment and middle boxes in the traffic path. Because of the existence of the SRH, and the additional headers, older security appliances, monitoring systems, and middle boxes cold react in different ways if they are unaware of the additional header and tunneling mechanisms leveraged by SRv6. This lack of awareness may be due to software limits, or in some cases as has been seen in other emerging technologies, may be due to limits in ASICs or NPUs that could silently drop or otherwise impede SRv6 packets.
+<span>[<a href="#RFC6169" class="cite xref">RFC6169</a>]</span><a href="#section-7.2-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="emerging-technology-growing-pains">
+<section id="section-7.3">
+        <h3 id="name-emerging-technology-growing">
+<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-emerging-technology-growing" class="section-name selfRef">Emerging technology growing pains</a>
+      </h3>
+</section>
+</div>
 </section>
 </div>
 <div id="gap-analysis">
@@ -1973,7 +1949,7 @@ For example, along the forwarding path in SRv6 network, the SR-aware firewall wi
 <dl class="references">
 <dt id="I-D.ietf-spring-srv6-srh-compression">[I-D.ietf-spring-srv6-srh-compression]</dt>
         <dd>
-<span class="refAuthor">Cheng, W.</span>, <span class="refAuthor">Filsfils, C.</span>, <span class="refAuthor">Li, Z.</span>, <span class="refAuthor">Decraene, B.</span>, and <span class="refAuthor">F. Clad</span>, <span class="refTitle">"Compressed SRv6 Segment List Encoding"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-spring-srv6-srh-compression-11</span>, <time datetime="2024-01-18" class="refDate">18 January 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-spring-srv6-srh-compression-11">https://datatracker.ietf.org/doc/html/draft-ietf-spring-srv6-srh-compression-11</a>&gt;</span>. </dd>
+<span class="refAuthor">Cheng, W.</span>, <span class="refAuthor">Filsfils, C.</span>, <span class="refAuthor">Li, Z.</span>, <span class="refAuthor">Decraene, B.</span>, and <span class="refAuthor">F. Clad</span>, <span class="refTitle">"Compressed SRv6 Segment List Encoding"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-spring-srv6-srh-compression-12</span>, <time datetime="2024-02-14" class="refDate">14 February 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-spring-srv6-srh-compression-12">https://datatracker.ietf.org/doc/html/draft-ietf-spring-srv6-srh-compression-12</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="IANAIPv6SPAR">[IANAIPv6SPAR]</dt>
         <dd>

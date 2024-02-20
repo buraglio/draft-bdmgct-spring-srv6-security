@@ -5,10 +5,10 @@
 Source Packet Routing in Networking                          N. Buraglio
 Internet-Draft                                   Energy Sciences Network
 Intended status: Standards Track                              T. Mizrahi
-Expires: 15 August 2024                                           Huawei
+Expires: 23 August 2024                                           Huawei
                                                                  T. Tong
                                                             China Unicom
-                                                        12 February 2024
+                                                        20 February 2024
 
 
                       SRv6 Security Considerations
@@ -67,7 +67,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 August 2024.
+   This Internet-Draft will expire on 23 August 2024.
 
 Copyright Notice
 
@@ -122,13 +122,11 @@ Table of Contents
        5.3.1.  Source Routing at source host
        5.3.2.  Source Routing from PCC at network ingress
        5.3.3.  Source routing across network management domains
-     5.4.  Limits in filtering capabilities
-     5.5.  Exposure of internal Traffic Engineering paths
-       5.5.1.  Hidden Destination Address
-       5.5.2.  Improper Traffic Filtering
-   6.  Implications on Security Devices
-     6.1.  Emerging technology growing pains
-   7.  Mitigation Methods
+   6.  Mitigation Methods
+   7.  Implications on Existing Equipment
+     7.1.  Limitations in Filtering Capabilities
+     7.2.  Middlebox Filtering Issues
+     7.3.  Emerging technology growing pains
    8.  Gap Analysis
    9.  Other considerations
      9.1.  Existing IPv6 Vulnerabilities
@@ -612,49 +610,48 @@ Table of Contents
    different network management domains, and the management domain 2
    cannot be traced back to the location where the tampering occurred.
 
-5.4.  Limits in filtering capabilities
+6.  Mitigation Methods
+
+   This section presents methods that can be used to mitigate the
+   threats and issues that were presented in previous sections.  This
+   section does not introduce new security solutions or protocols.
+
+7.  Implications on Existing Equipment
+
+7.1.  Limitations in Filtering Capabilities
 
    [RFC9288] provides recommendations on the filtering of IPv6 packets
    containing IPv6 extension headers at transit routers.  SRv6 relies on
    the routing header (RH4).  Because the technology is reasonably new,
    many platforms, routing and otherwise, do not posses the capability
    to filter and in some cases even provide logging for IPv6 next-header
-   43 Routing type 4.  In addition to the limits of filtering on the
-   routing header, as described in the Overview section, an edge case
-   exists that may cause unintended denial of service based on a layer 4
-   checksum error.  Because of the methodologies used in SID
-   compression, SRH compression does not necessarily use an SRH - in
-   practice this means filtering based on the next header is not
-   relevant, thereby removing an important filtering mechanism.  Under
-   certain specific conditions, a host may generate a SID list that is
-   capable of being compressed into a single destination address (DA).
-   Under these circumstances, the SRH may not be generated or may be
-   removed during the process.  In this case, a host may generate a
-   layer 4 checksum that is created after SR policy and SID compression
-   is applied and is done so using a DA that differs from the DA that
-   will arrive at the final destination.  This incorrect L4 checksum
-   will cause any device in the path that utilizes a L4 checksum to
-   discard or otherwise flag as erroneous the packets referenced by this
-   checksum.  Examples include deep packet inspection hardware that may
-   exist transparently in a path or other higher layer packet inspection
-   mechanisms that require or utilize an L4 checksum.  Such behavior
-   could result in blackholed or incorrectly dropped / filtered traffic
-   that is otherwise legitimate.
+   43 Routing type 4.
 
-5.5.  Exposure of internal Traffic Engineering paths
+7.2.  Middlebox Filtering Issues
 
-   Existing implementations may contain limited filtering capabilities
-   necessary for proper isolation of the SRH from outside of an SRv6
-   domain.
-
-5.5.1.  Hidden Destination Address
+   An edge case exists that may cause a layer 4 checksum error.  Because
+   of the methodologies used in SID compression, SRH compression does
+   not necessarily use an SRH - in practice this means filtering based
+   on the next header is not relevant, thereby removing an important
+   filtering mechanism.  Under certain specific conditions, a host may
+   generate a SID list that is capable of being compressed into a single
+   destination address (DA).  Under these circumstances, the SRH may not
+   be generated or may be removed during the process.  In this case, a
+   host may generate a layer 4 checksum that is created after SR policy
+   and SID compression is applied and is done so using a DA that differs
+   from the DA that will arrive at the final destination.  This
+   incorrect L4 checksum will cause any device in the path that utilizes
+   a L4 checksum to discard or otherwise flag as erroneous the packets
+   referenced by this checksum.  Examples include deep packet inspection
+   hardware that may exist transparently in a path or other higher layer
+   packet inspection mechanisms that require or utilize an L4 checksum.
+   Such behavior could result in blackholed or incorrectly dropped /
+   filtered traffic that is otherwise legitimate.
 
    When an SRv6 packet is forwarded in the SRv6 domain, its destination
    address changes constantly, the real destination address is hidden.
    Security devices on SRv6 network may not learn the real destination
    address and fail to take access control on some SRv6 traffic.
-
-5.5.2.  Improper Traffic Filtering
 
    The security devices on SRv6 networks need to take care of SRv6
    packets.  However, the SRv6 packets usually use loopback address of
@@ -670,8 +667,6 @@ Table of Contents
    PE1-VPN-SID>, the source address and destination address of the
    forward and backward VPN traffic are regarded as different flow.
    Eventually, the legal traffic may be blocked by the firewall.
-
-6.  Implications on Security Devices
 
    SRv6 is commonly used as a tunneling technology in operator networks.
    To provide VPN service in an SRv6 network, the ingress PE
@@ -692,13 +687,7 @@ Table of Contents
    technologies, may be due to limits in ASICs or NPUs that could
    silently drop or otherwise impede SRv6 packets.  [RFC6169]
 
-6.1.  Emerging technology growing pains
-
-7.  Mitigation Methods
-
-   This section presents methods that can be used to mitigate the
-   threats and issues that were presented in previous sections.  This
-   section does not introduce new security solutions or protocols.
+7.3.  Emerging technology growing pains
 
 8.  Gap Analysis
 
@@ -755,9 +744,9 @@ Table of Contents
               Cheng, W., Filsfils, C., Li, Z., Decraene, B., and F.
               Clad, "Compressed SRv6 Segment List Encoding", Work in
               Progress, Internet-Draft, draft-ietf-spring-srv6-srh-
-              compression-11, 18 January 2024,
+              compression-12, 14 February 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-spring-
-              srv6-srh-compression-11>.
+              srv6-srh-compression-12>.
 
    [IANAIPv6SPAR]
               "IANA IPv6 Special-Purpose Address Registry", n.d.,
