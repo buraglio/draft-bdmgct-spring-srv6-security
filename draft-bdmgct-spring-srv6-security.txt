@@ -112,34 +112,35 @@ Table of Contents
        4.4.2.  Scope
        4.4.3.  Impact
      4.5.  Other Attacks
-   5.  Security Considerations in Operational SRv6 Enabled Networks
-     5.1.  Encapsulation of packets
-       5.1.1.  Allowing potential circumvention of existing network
+     4.6.  Encapsulation of packets
+       4.6.1.  Allowing potential circumvention of existing network
                ingress / egress policy.
-       5.1.2.  Default allow failure mode
-     5.2.  Segment Routing Header
-     5.3.  Source Routing
-       5.3.1.  Source Routing at source host
-       5.3.2.  Source Routing from PCC at network ingress
-       5.3.3.  Source routing across network management domains
-   6.  Mitigation Methods
-   7.  Implications on Existing Equipment
-     7.1.  Limitations in Filtering Capabilities
-     7.2.  Middlebox Filtering Issues
-     7.3.  Emerging technology growing pains
-   8.  Gap Analysis
-   9.  Other considerations
-     9.1.  Existing IPv6 Vulnerabilities
-   10. Topics for Further Consideration
-     10.1.  SRH Compression
-     10.2.  Spoofing
-     10.3.  Path enumeration
-     10.4.  Infrastructure and topology exposure
-   11. Security Considerations
-   12. IANA Considerations
-   13. References
-     13.1.  Normative References
-     13.2.  Informative References
+       4.6.2.  Default allow failure mode
+     4.7.  Source Routing
+       4.7.1.  Source Routing at source host
+       4.7.2.  Source Routing from PCC at network ingress
+       4.7.3.  Source routing across network management domains
+   5.  Mitigation Methods
+   6.  Implications on Existing Equipment
+     6.1.  Limitations in Filtering Capabilities
+     6.2.  Middlebox Filtering Issues
+     6.3.  Emerging technology growing pains
+   7.  Gap Analysis
+   8.  Other considerations
+     8.1.  Existing IPv6 Vulnerabilities
+   9.  Topics for Further Consideration
+     9.1.  Security Considerations in Operational SRv6 Enabled
+           Networks
+     9.2.  Segment Routing Header
+     9.3.  SRH Compression
+     9.4.  Spoofing
+     9.5.  Path enumeration
+     9.6.  Infrastructure and topology exposure
+   10. Security Considerations
+   11. IANA Considerations
+   12. References
+     12.1.  Normative References
+     12.2.  Informative References
    Acknowledgments
    Authors' Addresses
 
@@ -499,13 +500,9 @@ Table of Contents
    specific to SRv6, but can be used in a network that uses SRv6.  Such
    attacks are outside the scope of this document.
 
-5.  Security Considerations in Operational SRv6 Enabled Networks
+4.6.  Encapsulation of packets
 
-   RFC9256 [RFC8986]
-
-5.1.  Encapsulation of packets
-
-5.1.1.  Allowing potential circumvention of existing network ingress /
+4.6.1.  Allowing potential circumvention of existing network ingress /
         egress policy.
 
    SRv6 packets rely on the routing header in order to steer traffic
@@ -513,73 +510,19 @@ Table of Contents
    supports not only use of the IPv6 routing header for packet steering,
    it also allows for encapsulation of both IPv4 and IPv6 packets.
 
-   IPv6 routing header
-
-        0                   1                   2                   3
-        0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-       | Next Header   |  Hdr Ext Len  | Routing Type  | Segments Left |
-       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-       |  Last Entry   |     Flags     |              Tag              |
-       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-       |                                                               |
-       |            Segment List[0] (128 bits IPv6 address)            |
-       |                                                               |
-       |                                                               |
-       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-       |                                                               |
-       |                                                               |
-                                     ...
-       |                                                               |
-       |                                                               |
-       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-       |                                                               |
-       |            Segment List[n] (128 bits IPv6 address)            |
-       |                                                               |
-       |                                                               |
-       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-
-5.1.2.  Default allow failure mode
+4.6.2.  Default allow failure mode
 
    Use of GUA addressing in data plane programming could result in an
    fail open scenario when appropriate border filtering is not
    implemented or supported.
 
-5.2.  Segment Routing Header
-
-   [RFC8754] SRv6 routing header
-
-        0                   1                   2                   3
-        0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-       | Next Header   |  Hdr Ext Len  | Routing Type  | Segments Left |
-       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-       |  Last Entry   |     Flags     |              Tag              |
-       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-       |                                                               |
-       |            Segment List[0] (128 bits IPv6 address)            |
-       |                                                               |
-       |                                                               |
-       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-       |                                                               |
-       |                                                               |
-                                     ...
-       |                                                               |
-       |                                                               |
-       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-       |                                                               |
-       |            Segment List[n] (128 bits IPv6 address)            |
-       |                                                               |
-       |                                                               |
-       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-
-5.3.  Source Routing
+4.7.  Source Routing
 
    [RFC7855] In SRv6 network, each network element along the message
    forwarding path has the opportunity to tamper with the SRv6 segment
    list.
 
-5.3.1.  Source Routing at source host
+4.7.1.  Source Routing at source host
 
    Unlike SR-MPLS, SRv6 has a significantly more approachable host
    implementation.  Compared with SR-MPLS, SRv6 is easier to implement
@@ -590,13 +533,13 @@ Table of Contents
    operator network, SRH has also been tampered with, including
    interception/modification/falsification/abuse.
 
-5.3.2.  Source Routing from PCC at network ingress
+4.7.2.  Source Routing from PCC at network ingress
 
    Typically, the network operator joins the source routing at the
    header node of the SRv6 domain, and the source routing may also be
    tampered with by SRH in the SRv6 management domain.
 
-5.3.3.  Source routing across network management domains
+4.7.3.  Source routing across network management domains
 
    SRv6 is now typically deployed in only one network management domain
    and may be deployed in different network domains in the future.  In
@@ -610,15 +553,15 @@ Table of Contents
    different network management domains, and the management domain 2
    cannot be traced back to the location where the tampering occurred.
 
-6.  Mitigation Methods
+5.  Mitigation Methods
 
    This section presents methods that can be used to mitigate the
    threats and issues that were presented in previous sections.  This
    section does not introduce new security solutions or protocols.
 
-7.  Implications on Existing Equipment
+6.  Implications on Existing Equipment
 
-7.1.  Limitations in Filtering Capabilities
+6.1.  Limitations in Filtering Capabilities
 
    [RFC9288] provides recommendations on the filtering of IPv6 packets
    containing IPv6 extension headers at transit routers.  SRv6 relies on
@@ -627,7 +570,7 @@ Table of Contents
    to filter and in some cases even provide logging for IPv6 next-header
    43 Routing type 4.
 
-7.2.  Middlebox Filtering Issues
+6.2.  Middlebox Filtering Issues
 
    An edge case exists that may cause a layer 4 checksum error.  Because
    of the methodologies used in SID compression, SRH compression does
@@ -687,47 +630,81 @@ Table of Contents
    technologies, may be due to limits in ASICs or NPUs that could
    silently drop or otherwise impede SRv6 packets.  [RFC6169]
 
-7.3.  Emerging technology growing pains
+6.3.  Emerging technology growing pains
 
-8.  Gap Analysis
+7.  Gap Analysis
 
    This section analyzes the security related gaps with respect to the
    threats and issues that were discussed in the previous sections.
 
-9.  Other considerations
+8.  Other considerations
 
-9.1.  Existing IPv6 Vulnerabilities
+8.1.  Existing IPv6 Vulnerabilities
 
    Because SRv6 is completely reliant on IPv6 for addressing,
    forwarding, and fundamental networking basics, it is potentially
    subject to any existing or emerging IPv6 vulnerabilities, however,
    this is out of scope for this document.  [RFC9099]
 
-10.  Topics for Further Consideration
+9.  Topics for Further Consideration
 
-10.1.  SRH Compression
+9.1.  Security Considerations in Operational SRv6 Enabled Networks
 
-10.2.  Spoofing
+   RFC9256 [RFC8986]
 
-10.3.  Path enumeration
+9.2.  Segment Routing Header
 
-10.4.  Infrastructure and topology exposure
+   The SRv6 Segment Routing Header (SRH) is defined in [RFC8754].
+
+        0                   1                   2                   3
+        0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+       | Next Header   |  Hdr Ext Len  | Routing Type  | Segments Left |
+       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+       |  Last Entry   |     Flags     |              Tag              |
+       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+       |                                                               |
+       |            Segment List[0] (128 bits IPv6 address)            |
+       |                                                               |
+       |                                                               |
+       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+       |                                                               |
+       |                                                               |
+                                     ...
+       |                                                               |
+       |                                                               |
+       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+       |                                                               |
+       |            Segment List[n] (128 bits IPv6 address)            |
+       |                                                               |
+       |                                                               |
+       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+                       Figure 2: SRH Format [RFC8754]
+
+9.3.  SRH Compression
+
+9.4.  Spoofing
+
+9.5.  Path enumeration
+
+9.6.  Infrastructure and topology exposure
 
    This seems like a non-issue from a WAN perspective.  Needs more
    thought - could be problematic in a host to host scenario involving a
    WAN and/or a data center fabric.
 
-11.  Security Considerations
+10.  Security Considerations
 
    TODO Security
 
-12.  IANA Considerations
+11.  IANA Considerations
 
    Example non-RFC link [IANAIPv6SPAR]
 
-13.  References
+12.  References
 
-13.1.  Normative References
+12.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -738,7 +715,7 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
-13.2.  Informative References
+12.2.  Informative References
 
    [I-D.ietf-spring-srv6-srh-compression]
               Cheng, W., Filsfils, C., Li, Z., Decraene, B., and F.
