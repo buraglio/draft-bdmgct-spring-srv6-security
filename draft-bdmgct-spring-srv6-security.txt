@@ -107,7 +107,7 @@ Table of Contents
        4.3.1.  Overview
        4.3.2.  Scope
        4.3.3.  Impact
-     4.4.  Control Plane Attacks
+     4.4.  Control and Management Plane Attacks
        4.4.1.  Overview
        4.4.2.  Scope
        4.4.3.  Impact
@@ -116,29 +116,24 @@ Table of Contents
        4.6.1.  Allowing potential circumvention of existing network
                ingress / egress policy.
        4.6.2.  Default allow failure mode
-     4.7.  Source Routing
-       4.7.1.  Source Routing at source host
-       4.7.2.  Source Routing from PCC at network ingress
-       4.7.3.  Source routing across network management domains
-   5.  Mitigation Methods
-   6.  Implications on Existing Equipment
-     6.1.  Limitations in Filtering Capabilities
-     6.2.  Middlebox Filtering Issues
-     6.3.  Emerging technology growing pains
-   7.  Gap Analysis
-   8.  Topics for Further Consideration
-     8.1.  Security Considerations in Operational SRv6 Enabled
+   5.  Implications on Existing Equipment
+     5.1.  Limitations in Filtering Capabilities
+     5.2.  Middlebox Filtering Issues
+     5.3.  Emerging technology growing pains
+   6.  Gap Analysis
+   7.  Topics for Further Consideration
+     7.1.  Security Considerations in Operational SRv6 Enabled
            Networks
-     8.2.  Segment Routing Header
-     8.3.  SRH Compression
-     8.4.  Spoofing
-     8.5.  Path enumeration
-     8.6.  Infrastructure and topology exposure
-   9.  Security Considerations
-   10. IANA Considerations
-   11. References
-     11.1.  Normative References
-     11.2.  Informative References
+     7.2.  Segment Routing Header
+     7.3.  SRH Compression
+     7.4.  Spoofing
+     7.5.  Path enumeration
+     7.6.  Infrastructure and topology exposure
+   8.  Security Considerations
+   9.  IANA Considerations
+   10. References
+     10.1.  Normative References
+     10.2.  Informative References
    Acknowledgments
    Authors' Addresses
 
@@ -310,6 +305,9 @@ Table of Contents
    deployed within a limited domain [RFC8799] with filtering at the
    domain boundaries, forming a trusted domain with respect to SRv6.
    Thus, external attackers are outside of the trusted domain.
+   Specifically, an attack on one domain that is invoked from within a
+   different domain is considered an external attack in the context of
+   the current document.
 
    Following the spirit of [RFC8402], the current document mandates a
    filtering mechanism that eliminates the threats from external
@@ -455,7 +453,7 @@ Table of Contents
    compromises the availability of the network, as described in
    Section 4.1.3.
 
-4.4.  Control Plane Attacks
+4.4.  Control and Management Plane Attacks
 
 4.4.1.  Overview
 
@@ -467,29 +465,37 @@ Table of Contents
    messages, selectively removing legitimate messages, replaying them or
    passively listening to them.
 
+   A compromised management plane can also facilitate a wide range of
+   attacks, including manipulating the SR policies or compromising the
+   network availability.
+
 4.4.2.  Scope
 
    Control plane attacks can be performed by internal attackers.
    Injection can be performed by off-path attackers, while removal,
-   replaying and listening require on-path access.
+   replaying and listening require on-path access.  The scope of
+   management attacks depends on the specific management protocol and
+   architecture.
 
    It is assumed that SRv6 domain boundary filtering is used for
-   mitigating potential control plane attacks from external attackers.
-   Segment routing does not define any specific security mechanisms in
-   existing control plane protocols.  However, existing control plane
-   protocols use authentication and security mechanisms to validate
-   control plane information.
+   mitigating potential control plane and management plane attacks from
+   external attackers.  Segment routing does not define any specific
+   security mechanisms in existing control plane or management plane
+   protocols.  However, existing control plane and management plane
+   protocols use authentication and security mechanisms to validate the
+   authenticity of information.
 
 4.4.3.  Impact
 
-   A compromised control plane can impact the network in various
-   possible ways.  SR policies can be manipulated by the attacker to
-   avoid specific paths or to prefer specific paths, as described in
-   Section 4.1.3.  Alternatively, the attacker can compromise the
-   availability, either by defining SR policies that load the network
-   resources, as described in Section 4.1.3, or by blackholing some or
-   all of the SR policies.  A passive attacker can use the control plane
-   messages as a means for recon, in a similar manner to Section 4.1.3.
+   A compromised control plane or management plane can impact the
+   network in various possible ways.  SR policies can be manipulated by
+   the attacker to avoid specific paths or to prefer specific paths, as
+   described in Section 4.1.3.  Alternatively, the attacker can
+   compromise the availability, either by defining SR policies that load
+   the network resources, as described in Section 4.1.3, or by
+   blackholing some or all of the SR policies.  A passive attacker can
+   use the control plane or management plane messages as a means for
+   recon, in a similar manner to Section 4.1.3.
 
 4.5.  Other Attacks
 
@@ -514,52 +520,9 @@ Table of Contents
    fail open scenario when appropriate border filtering is not
    implemented or supported.
 
-4.7.  Source Routing
+5.  Implications on Existing Equipment
 
-   [RFC7855] In SRv6 network, each network element along the message
-   forwarding path has the opportunity to tamper with the SRv6 segment
-   list.
-
-4.7.1.  Source Routing at source host
-
-   Unlike SR-MPLS, SRv6 has a significantly more approachable host
-   implementation.  Compared with SR-MPLS, SRv6 is easier to implement
-   on the host side, and the threats are as follows: 1) The attacker
-   generates SRv6 message by obtaining and stealing the identity and
-   real SRH of real users to use unauthorized services. 2) In the
-   process of transmitting SRv6 message from the user host to the
-   operator network, SRH has also been tampered with, including
-   interception/modification/falsification/abuse.
-
-4.7.2.  Source Routing from PCC at network ingress
-
-   Typically, the network operator joins the source routing at the
-   header node of the SRv6 domain, and the source routing may also be
-   tampered with by SRH in the SRv6 management domain.
-
-4.7.3.  Source routing across network management domains
-
-   SRv6 is now typically deployed in only one network management domain
-   and may be deployed in different network domains in the future.  In
-   particular, the network elements and threats that have really
-   tampered with the list may be in different network management domains
-   in Operational SRv6 Enabled Networks, causing threats that are
-   difficult to trace.  As shown in the figure, suppose that when the
-   network element 1 of SRv6 management domain 1 has tampered with the
-   segment list, but the threat takes effect at SRv6 management domain
-   2.  At this time, the threat generation and effective place are in
-   different network management domains, and the management domain 2
-   cannot be traced back to the location where the tampering occurred.
-
-5.  Mitigation Methods
-
-   This section presents methods that can be used to mitigate the
-   threats and issues that were presented in previous sections.  This
-   section does not introduce new security solutions or protocols.
-
-6.  Implications on Existing Equipment
-
-6.1.  Limitations in Filtering Capabilities
+5.1.  Limitations in Filtering Capabilities
 
    [RFC9288] provides recommendations on the filtering of IPv6 packets
    containing IPv6 extension headers at transit routers.  SRv6 relies on
@@ -568,7 +531,7 @@ Table of Contents
    to filter and in some cases even provide logging for IPv6 next-header
    43 Routing type 4.
 
-6.2.  Middlebox Filtering Issues
+5.2.  Middlebox Filtering Issues
 
    An edge case exists that may cause a layer 4 checksum error.  Because
    of the methodologies used in SID compression, SRH compression does
@@ -628,20 +591,20 @@ Table of Contents
    technologies, may be due to limits in ASICs or NPUs that could
    silently drop or otherwise impede SRv6 packets.  [RFC6169]
 
-6.3.  Emerging technology growing pains
+5.3.  Emerging technology growing pains
 
-7.  Gap Analysis
+6.  Gap Analysis
 
    This section analyzes the security related gaps with respect to the
    threats and issues that were discussed in the previous sections.
 
-8.  Topics for Further Consideration
+7.  Topics for Further Consideration
 
-8.1.  Security Considerations in Operational SRv6 Enabled Networks
+7.1.  Security Considerations in Operational SRv6 Enabled Networks
 
    RFC9256 [RFC8986]
 
-8.2.  Segment Routing Header
+7.2.  Segment Routing Header
 
    The SRv6 Segment Routing Header (SRH) is defined in [RFC8754].
 
@@ -671,29 +634,29 @@ Table of Contents
 
                        Figure 2: SRH Format [RFC8754]
 
-8.3.  SRH Compression
+7.3.  SRH Compression
 
-8.4.  Spoofing
+7.4.  Spoofing
 
-8.5.  Path enumeration
+7.5.  Path enumeration
 
-8.6.  Infrastructure and topology exposure
+7.6.  Infrastructure and topology exposure
 
    This seems like a non-issue from a WAN perspective.  Needs more
    thought - could be problematic in a host to host scenario involving a
    WAN and/or a data center fabric.
 
-9.  Security Considerations
+8.  Security Considerations
 
    TODO Security
 
-10.  IANA Considerations
+9.  IANA Considerations
 
    Example non-RFC link [IANAIPv6SPAR]
 
-11.  References
+10.  References
 
-11.1.  Normative References
+10.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -704,7 +667,7 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
-11.2.  Informative References
+10.2.  Informative References
 
    [I-D.ietf-spring-srv6-srh-compression]
               Cheng, W., Filsfils, C., Li, Z., Decraene, B., and F.
