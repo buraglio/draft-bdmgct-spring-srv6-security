@@ -126,21 +126,19 @@ Table of Contents
      6.2.  Middlebox Filtering Issues
      6.3.  Emerging technology growing pains
    7.  Gap Analysis
-   8.  Other considerations
-     8.1.  Existing IPv6 Vulnerabilities
-   9.  Topics for Further Consideration
-     9.1.  Security Considerations in Operational SRv6 Enabled
+   8.  Topics for Further Consideration
+     8.1.  Security Considerations in Operational SRv6 Enabled
            Networks
-     9.2.  Segment Routing Header
-     9.3.  SRH Compression
-     9.4.  Spoofing
-     9.5.  Path enumeration
-     9.6.  Infrastructure and topology exposure
-   10. Security Considerations
-   11. IANA Considerations
-   12. References
-     12.1.  Normative References
-     12.2.  Informative References
+     8.2.  Segment Routing Header
+     8.3.  SRH Compression
+     8.4.  Spoofing
+     8.5.  Path enumeration
+     8.6.  Infrastructure and topology exposure
+   9.  Security Considerations
+   10. IANA Considerations
+   11. References
+     11.1.  Normative References
+     11.2.  Informative References
    Acknowledgments
    Authors' Addresses
 
@@ -637,22 +635,13 @@ Table of Contents
    This section analyzes the security related gaps with respect to the
    threats and issues that were discussed in the previous sections.
 
-8.  Other considerations
+8.  Topics for Further Consideration
 
-8.1.  Existing IPv6 Vulnerabilities
-
-   Because SRv6 is completely reliant on IPv6 for addressing,
-   forwarding, and fundamental networking basics, it is potentially
-   subject to any existing or emerging IPv6 vulnerabilities, however,
-   this is out of scope for this document.  [RFC9099]
-
-9.  Topics for Further Consideration
-
-9.1.  Security Considerations in Operational SRv6 Enabled Networks
+8.1.  Security Considerations in Operational SRv6 Enabled Networks
 
    RFC9256 [RFC8986]
 
-9.2.  Segment Routing Header
+8.2.  Segment Routing Header
 
    The SRv6 Segment Routing Header (SRH) is defined in [RFC8754].
 
@@ -682,29 +671,29 @@ Table of Contents
 
                        Figure 2: SRH Format [RFC8754]
 
-9.3.  SRH Compression
+8.3.  SRH Compression
 
-9.4.  Spoofing
+8.4.  Spoofing
 
-9.5.  Path enumeration
+8.5.  Path enumeration
 
-9.6.  Infrastructure and topology exposure
+8.6.  Infrastructure and topology exposure
 
    This seems like a non-issue from a WAN perspective.  Needs more
    thought - could be problematic in a host to host scenario involving a
    WAN and/or a data center fabric.
 
-10.  Security Considerations
+9.  Security Considerations
 
    TODO Security
 
-11.  IANA Considerations
+10.  IANA Considerations
 
    Example non-RFC link [IANAIPv6SPAR]
 
-12.  References
+11.  References
 
-12.1.  Normative References
+11.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -715,7 +704,7 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
-12.2.  Informative References
+11.2.  Informative References
 
    [I-D.ietf-spring-srv6-srh-compression]
               Cheng, W., Filsfils, C., Li, Z., Decraene, B., and F.
