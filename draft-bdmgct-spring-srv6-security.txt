@@ -5,10 +5,10 @@
 Source Packet Routing in Networking                          N. Buraglio
 Internet-Draft                                   Energy Sciences Network
 Intended status: Standards Track                              T. Mizrahi
-Expires: 23 August 2024                                           Huawei
+Expires: 25 August 2024                                           Huawei
                                                                  T. Tong
                                                             China Unicom
-                                                        20 February 2024
+                                                        22 February 2024
 
 
                       SRv6 Security Considerations
@@ -67,7 +67,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 August 2024.
+   This Internet-Draft will expire on 25 August 2024.
 
 Copyright Notice
 
@@ -112,24 +112,29 @@ Table of Contents
        4.4.2.  Scope
        4.4.3.  Impact
      4.5.  Other Attacks
-   5.  Implications on Existing Equipment
-     5.1.  Limitations in Filtering Capabilities
-     5.2.  Middlebox Filtering Issues
-     5.3.  Emerging technology growing pains
-   6.  Gap Analysis
-   7.  Topics for Further Consideration
-     7.1.  Security Considerations in Operational SRv6 Enabled
+   5.  Mitigation Methods
+     5.1.  Filtering
+       5.1.1.  SRH Filtering
+       5.1.2.  Address Range Filtering
+     5.2.  Encapsulation of Packets
+   6.  Implications on Existing Equipment
+     6.1.  Limitations in Filtering Capabilities
+     6.2.  Middlebox Filtering Issues
+     6.3.  Emerging technology growing pains
+   7.  Gap Analysis
+   8.  Topics for Further Consideration
+     8.1.  Security Considerations in Operational SRv6 Enabled
            Networks
-     7.2.  Segment Routing Header
-     7.3.  SRH Compression
-     7.4.  Spoofing
-     7.5.  Path enumeration
-     7.6.  Infrastructure and topology exposure
-   8.  Security Considerations
-   9.  IANA Considerations
-   10. References
-     10.1.  Normative References
-     10.2.  Informative References
+     8.2.  Segment Routing Header
+     8.3.  SRH Compression
+     8.4.  Spoofing
+     8.5.  Path enumeration
+     8.6.  Infrastructure and topology exposure
+   9.  Security Considerations
+   10. IANA Considerations
+   11. References
+     11.1.  Normative References
+     11.2.  Informative References
    Acknowledgments
    Authors' Addresses
 
@@ -506,9 +511,53 @@ Table of Contents
    specific to SRv6, but can be used in a network that uses SRv6.  Such
    attacks are outside the scope of this document.
 
-5.  Implications on Existing Equipment
+   Because SRv6 is completely reliant on IPv6 for addressing,
+   forwarding, and fundamental networking basics, it is potentially
+   subject to any existing or emerging IPv6 vulnerabilities [RFC9099],
+   however, this is out of scope for this document.
 
-5.1.  Limitations in Filtering Capabilities
+5.  Mitigation Methods
+
+   This section presents methods that can be used to mitigate the
+   threats and issues that were presented in previous sections.  This
+   section does not introduce new security solutions or protocols.
+
+5.1.  Filtering
+
+5.1.1.  SRH Filtering
+
+   SRv6 packets rely on the routing header in order to steer traffic
+   that adheres to a defined SRv6 traffic policy.  Thus, SRH filtering
+   can be enforced at the ingress and egress nodes of the SR domain, so
+   that packets with an SRH cannot be forwarded into the SR domain or
+   out of the SR domain.
+
+5.1.2.  Address Range Filtering
+
+   The IPv6 destination address can be filtered at the SR ingress node
+   in order to mitigate external attacks.  An ingress packet with a
+   destination address that defines an active segment with an SR
+   endpoint in the SR domain is filtered.
+
+   In order to apply such a filtering mechanism the SR domain needs to
+   have an allocated address range that can be detected and enforced by
+   the SR ingress, for example by using LUA addresses.
+
+   Note that the use of GUA addressing in data plane programming could
+   result in an fail open scenario when appropriate border filtering is
+   not implemented or supported.
+
+5.2.  Encapsulation of Packets
+
+   Packets steered in an SR domain are often encapsulated in an IPv6
+   encapsulation.  This mechanism allows for encapsulation of both IPv4
+   and IPv6 packets.  Encapsulation of packets at the SR ingress node
+   and decapsulation at the SR egress node mitigates the ability of
+   external attackers to impact SR steering within the domain.
+
+6.  Implications on Existing Equipment
+
+6.1.  Limitations in Filtering Capabilities
 
    [RFC9288] provides recommendations on the filtering of IPv6 packets
    containing IPv6 extension headers at transit routers.  SRv6 relies on
@@ -517,7 +566,7 @@ Table of Contents
    to filter and in some cases even provide logging for IPv6 next-header
    43 Routing type 4.
 
-5.2.  Middlebox Filtering Issues
+6.2.  Middlebox Filtering Issues
 
    An edge case exists that may cause a layer 4 checksum error.  Because
    of the methodologies used in SID compression, SRH compression does
@@ -577,20 +626,20 @@ Table of Contents
    technologies, may be due to limits in ASICs or NPUs that could
    silently drop or otherwise impede SRv6 packets.  [RFC6169]
 
-5.3.  Emerging technology growing pains
+6.3.  Emerging technology growing pains
 
-6.  Gap Analysis
+7.  Gap Analysis
 
    This section analyzes the security related gaps with respect to the
    threats and issues that were discussed in the previous sections.
 
-7.  Topics for Further Consideration
+8.  Topics for Further Consideration
 
-7.1.  Security Considerations in Operational SRv6 Enabled Networks
+8.1.  Security Considerations in Operational SRv6 Enabled Networks
 
    RFC9256 [RFC8986]
 
-7.2.  Segment Routing Header
+8.2.  Segment Routing Header
 
    The SRv6 Segment Routing Header (SRH) is defined in [RFC8754].
 
@@ -618,29 +667,30 @@ Table of Contents
        |                                                               |
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-7.3.  SRH Compression
+8.3.  SRH Compression
 
-7.4.  Spoofing
+8.4.  Spoofing
 
-7.5.  Path enumeration
+8.5.  Path enumeration
 
-7.6.  Infrastructure and topology exposure
+8.6.  Infrastructure and topology exposure
 
    This seems like a non-issue from a WAN perspective.  Needs more
    thought - could be problematic in a host to host scenario involving a
    WAN and/or a data center fabric.
 
-8.  Security Considerations
+9.  Security Considerations
 
-   TODO Security
+   The security considerations of SRv6 are presented throughout this
+   document.
 
-9.  IANA Considerations
+10.  IANA Considerations
 
-   Example non-RFC link [IANAIPv6SPAR]
+   This document has no IANA actions.
 
-10.  References
+11.  References
 
-10.1.  Normative References
+11.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -651,7 +701,7 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
-10.2.  Informative References
+11.2.  Informative References
 
    [I-D.ietf-spring-srv6-srh-compression]
               Cheng, W., Filsfils, C., Li, Z., Decraene, B., and F.
