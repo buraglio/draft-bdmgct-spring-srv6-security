@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-02-22T00:59:04.515897+00:00",
+  "timestamp": "2024-02-25T01:03:24.160021+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -430,24 +430,26 @@
       "id": "PR_kwDOKVF77M5nevra",
       "title": "Mitigation method cleanup",
       "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/14",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "talmi",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "This fixes some conflicts in previous pull requests that caused some text to be erased, including the \"Mitigation Methods\" section, and some text in the \"Other Attacks\" subsection.\r\n\r\nThe \"Security Considerations\" section and the \"IANA Considerations\" section were also updated in this version.",
       "createdAt": "2024-02-21T06:50:03Z",
-      "updatedAt": "2024-02-21T06:50:04Z",
+      "updatedAt": "2024-02-22T21:14:55Z",
       "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
       "baseRefName": "main",
       "baseRefOid": "21df57f45ee3fc32f835735a463dc58fa57bab10",
       "headRepository": "talmi/draft-bdmgct-spring-srv6-security",
       "headRefName": "mitigation-cleanup",
       "headRefOid": "1f57041efad36df97159a9318d853c0cab6c9c26",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-02-22T21:14:55Z",
+      "mergedAt": "2024-02-22T21:14:55Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "93b4a1097148f43a01e58a93eaf3814ab595d3f5"
+      },
       "comments": [],
       "reviews": []
     }
