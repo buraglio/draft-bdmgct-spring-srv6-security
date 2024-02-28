@@ -5,10 +5,10 @@
 Source Packet Routing in Networking                          N. Buraglio
 Internet-Draft                                   Energy Sciences Network
 Intended status: Standards Track                              T. Mizrahi
-Expires: 25 August 2024                                           Huawei
+Expires: 31 August 2024                                           Huawei
                                                                  T. Tong
                                                             China Unicom
-                                                        22 February 2024
+                                                        28 February 2024
 
 
                       SRv6 Security Considerations
@@ -16,23 +16,12 @@ Expires: 25 August 2024                                           Huawei
 
 Abstract
 
-   SRv6 is a traffic engineering, encapsulation, and steering mechanism
+   SRv6 is a traffic engineering, encapsulation and steering mechanism
    utilizing IPv6 addresses to identify segments in a pre-defined
-   policy.  While SRv6 uses what appear to be typical IPv6 addresses,
-   the address space is treated differently, and in most (all?) cases.
-
-   A typical IPv6 unicast address is comprised of a network prefix, host
-   identifier, and a subnet mask.  A typical SRv6 segment identifier
-   (SID) is broken into a locator, a function identifier, and
-   optionally, function arguments.  The locator must be routable, which
-   enables both SRv6 capable and incapable devices to participate in
-   forwarding, either as normal IPv6 unicast or SRv6.  The capability to
-   operate in environments that may have gaps in SRv6 support allows the
-   bridging of islands of SRv6 devices with standard IPv6 unicast
-   routing.
-
-   As standard IPv6 addressing, there are security considerations that
-   should be well understood that may not be obvious.
+   policy.  This document discusses security considerations in SRv6
+   networks, including the potential threats and the possible mitigation
+   methods.  The document does not define any new security protocols or
+   extensions to existing protocols.
 
 About This Document
 
@@ -67,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 August 2024.
+   This Internet-Draft will expire on 31 August 2024.
 
 Copyright Notice
 
@@ -87,6 +76,8 @@ Table of Contents
 
    1.  Introduction
    2.  Conventions and Definitions
+     2.1.  Requirements Language
+     2.2.  Terminology
    3.  Threat Model
      3.1.  Security Components
        3.1.1.  Confidentiality
@@ -130,6 +121,7 @@ Table of Contents
      8.4.  Spoofing
      8.5.  Path enumeration
      8.6.  Infrastructure and topology exposure
+     8.7.  Terms that may be used in a future version
    9.  Security Considerations
    10. IANA Considerations
    11. References
@@ -149,20 +141,35 @@ Table of Contents
    protocol, and because of the reliance of a new header there are
    security considerations which must be noted or addressed in order to
    operate an SRv6 network in a reliable and secure manner.
+   Specifically, some of the main properties of SRv6 that affect the
+   security considerations are:
 
    *  SRv6 makes use of the SRH which is a new type of Routing Extension
-      Header.  Therefore, the security properties of the Routing
-      Extension Header are addressed by the SRH.  See [RFC5095] and
-      [RFC8754] for details.
+      Header.  Some of the security considerations of the SRH are
+      discussed in [RFC5095] and [RFC8754].
 
-   *  SRv6 consists of using the SRH on the IPv6 dataplane which
-      security properties can be understood based on previous work
-      [RFC4301], [RFC4302], [RFC4303] and [RFC4942].
+   *  SRv6 consists of using the SRH on the IPv6 dataplane, and
+      therefore known security considerations of IPv6 [RFC9099] are
+      applicable to SRv6 as well.
+
+   *  While SRv6 uses what appear to be typical IPv6 addresses, the
+      address space is processed differently by segment endpoints.  A
+      typical IPv6 unicast address is comprised of a network prefix,
+      host identifier, and a subnet mask.  A typical SRv6 segment
+      identifier (SID) is broken into a locator, a function identifier,
+      and optionally, function arguments.  The locator must be routable,
+      which enables both SRv6 capable and incapable devices to
+      participate in forwarding, either as normal IPv6 unicast or SRv6.
+      The capability to operate in environments that may have gaps in
+      SRv6 support allows the bridging of islands of SRv6 devices with
+      standard IPv6 unicast routing.
 
    This document describes various threats to SRv6 networks and also
    presents existing approaches to avoid or mitigate the threats.
 
 2.  Conventions and Definitions
+
+2.1.  Requirements Language
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
@@ -170,7 +177,13 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-   SRv6 Locator Block FRR SID uSID SRH
+2.2.  Terminology
+
+   *  SID: Segment Identifier [RFC8402]
+
+   *  SRH: Segment Routing Header [RFC8754]
+
+   *  SRv6: Segment Routing over IPv6 [RFC8402]
 
 3.  Threat Model
 
@@ -196,7 +209,7 @@ Table of Contents
    of SRv6-related information are within the scope; collecting
    information about SR endpoint addresses, SR policies, and network
    topologies, is a specific form of reconnaissance, which is further
-   discussed in TBD.
+   discussed in Section 4.2.
 
 3.1.2.  Integrity
 
@@ -207,7 +220,7 @@ Table of Contents
    policies to different users or sources.  In the context of SRv6,
    compromising the integrity may result in packets being routed in
    different paths than they were intended to be routed through, which
-   may have various implications, as further discussed in TBD.
+   may have various implications, as further discussed in Section 4.
 
 3.1.3.  Availability
 
@@ -678,6 +691,10 @@ Table of Contents
    This seems like a non-issue from a WAN perspective.  Needs more
    thought - could be problematic in a host to host scenario involving a
    WAN and/or a data center fabric.
+
+8.7.  Terms that may be used in a future version
+
+   Locator Block FRR uSID
 
 9.  Security Considerations
 
