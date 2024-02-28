@@ -39,6 +39,13 @@ author:
     org: China Unicom
     email: tongt5@chinaunicom.cn
 
+ -
+    ins: L.M. Contreras
+    name: Luis M. Contreras
+    org: Telefonica
+    email: luismiguel.contrerasmurillo@telefonica.com
+
+
 normative:
   RFC2119:
 
@@ -218,6 +225,31 @@ Manipulating the SRv6 network programming:
 Availability:
 : An attacker can add SIDs to the segment list in order to increase the number hops that each packet is forwarded through and thus increase the load on the network. For example, a set of SIDs can be inserted in a way that creates a forwarding loop ([RFC8402], [RFC5095]) and thus loads the nodes along the loop. Network programming can be used in some cases to manipulate segment endpoints to perform unnecessary functions that consume processing resources. Path inflation, malicious looping and unnecessary instructions have a common outcome, resource exhaustion, which may in severe cases cause Denial of Service (DoS).
 
+##  Attack on compressed headers
+
+###  Overview
+
+Header compression in SRv6 allows to encode multiple compressed SIDs within a single 128-bit SID. That multiple compressed SIDs are concatenated in the DA reflecting each of the nodes that the flow will traverse up to reaching its destination, thus conforming the traffic engineering path to follow. As long as the flow traverses the SRv6 nodes, the compressed SIDs corresponding to each of those nodes is removed with the DA being shifted to the left. The process is repeated up to reaching the last SRv6 node.
+
+With this processing of the SIDs, each node only determines the next compressed SID applicable only after processing its own corresponding compressed SID. It is only at that moment where issues can be revealed in terms of the validity of the next compressed SID. 
+
+###  Scope
+
+A modification or alteration of the compressed header can motivate different undesirable situations. An attack of these characteristics can be performed by on-path attackers.
+
+A first case is that the same kind of issues as the ones identified for SR modification also apply in this case, despite the encoding of the traffic engineered path is different. 
+
+A second case can be the insertion of a wrong compressed SID, or the modification of an existing one, in some point of the DA implies the processing of the packet flows up to a point in the network where no longer can be forwarded.
+
+Finally, it is also possible the creation of loops by sequencing the compressed SIDs in a manner that the flows are rerouted towards preceding nodes.
+
+###  Impact
+
+Similar effects as the ones described for the case of SR modification also apply to this case, in terms of affection to the flow steering. 
+
+Furthermore, the attacks focused on introducing wrong compressed SIDs or the creation of loops can generate DoS situations either by keeping the nodes processing multiple flows with wrong compressed SIDs, or by generating artificial traffic between nodes in the network which can lead to link congestion. 
+
+
 ## Reconnaissance {#recon}
 
 ### Overview
@@ -344,7 +376,6 @@ The SRv6 Segment Routing Header (SRH) is defined in [RFC8754].
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 ~~~~~~~~~~~
 
-## SRH Compression
 
 ## Spoofing
 
