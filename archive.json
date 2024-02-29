@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-02-27T00:58:59.258245+00:00",
+  "timestamp": "2024-02-29T00:58:49.291730+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -450,6 +450,68 @@
       "mergeCommit": {
         "oid": "93b4a1097148f43a01e58a93eaf3814ab595d3f5"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 15,
+      "id": "PR_kwDOKVF77M5oKVV3",
+      "title": "Abstract and Introduction Cleanup",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/15",
+      "state": "MERGED",
+      "author": "talmi",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Moved some of the text from the abstract to the introduction.  Rearranged the abstract and introduction (mainly editorial). Added some terms to the terminology section.\r\nMinor updates in other sections: removed two TBDs and added references instead.",
+      "createdAt": "2024-02-28T11:43:53Z",
+      "updatedAt": "2024-02-28T14:33:15Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "93b4a1097148f43a01e58a93eaf3814ab595d3f5",
+      "headRepository": "talmi/draft-bdmgct-spring-srv6-security",
+      "headRefName": "abstract-intro-cleanup",
+      "headRefOid": "5aae2daed6ae1f5ccc886ccd87299ad9b947d85e",
+      "closedAt": "2024-02-28T14:33:15Z",
+      "mergedAt": "2024-02-28T14:33:15Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "6d0171e76236cc305fe23e9d3356dbe4351c124e"
+      },
+      "comments": [
+        {
+          "author": "buraglio",
+          "authorAssociation": "OWNER",
+          "body": "Merged. Will fix linting issues after merge",
+          "createdAt": "2024-02-28T14:29:42Z",
+          "updatedAt": "2024-02-28T14:29:42Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 16,
+      "id": "PR_kwDOKVF77M5oON85",
+      "title": "Update draft-bdmgct-spring-srv6-security.md",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/16",
+      "state": "OPEN",
+      "author": "luismcontreras",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Added sub-section in section 4 related to compression",
+      "createdAt": "2024-02-28T21:29:07Z",
+      "updatedAt": "2024-02-28T21:29:08Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "f6dfc28ab8ef457dcfdba601f8de1ea1c22210a0",
+      "headRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "headRefName": "luismcontreras-patch-1",
+      "headRefOid": "4b35d0bb911653e70cf9f436d9a3f2354c7f6818",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
