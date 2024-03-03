@@ -5,10 +5,12 @@
 Source Packet Routing in Networking                          N. Buraglio
 Internet-Draft                                   Energy Sciences Network
 Intended status: Standards Track                              T. Mizrahi
-Expires: 31 August 2024                                           Huawei
+Expires: 4 September 2024                                         Huawei
                                                                  T. Tong
                                                             China Unicom
-                                                        28 February 2024
+                                                         L. M. Contreras
+                                                              Telefonica
+                                                            3 March 2024
 
 
                       SRv6 Security Considerations
@@ -56,7 +58,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 31 August 2024.
+   This Internet-Draft will expire on 4 September 2024.
 
 Copyright Notice
 
@@ -113,17 +115,9 @@ Table of Contents
      6.2.  Middlebox Filtering Issues
      6.3.  Emerging technology growing pains
    7.  Gap Analysis
-   8.  Topics for Further Consideration
-     8.1.  Security Considerations in Operational SRv6 Enabled
-           Networks
-     8.2.  Segment Routing Header
-     8.3.  SRH Compression
-     8.4.  Spoofing
-     8.5.  Path enumeration
-     8.6.  Infrastructure and topology exposure
-     8.7.  Terms that may be used in a future version
-   9.  Security Considerations
-   10. IANA Considerations
+   8.  Security Considerations
+   9.  IANA Considerations
+   10. Topics for Further Consideration
    11. References
      11.1.  Normative References
      11.2.  Informative References
@@ -363,8 +357,10 @@ Table of Contents
    IPv6 header affects the active segment.  However, DA modification can
    affect the SR policy even in the absence of an SRH.  One example is
    modifying a DA which is used as a Binding SID [RFC8402].  Another
-   example is a compressed segment list that is incorporated in the DA
-   without an SRH [I-D.ietf-spring-srv6-srh-compression].
+   example is modifying a DA which represents a compressed segment list
+   [I-D.ietf-spring-srv6-srh-compression].  SRH compression allows to
+   encode multiple compressed SIDs within a single 128-bit SID, and thus
+   modifying the DA can affect one or more hops in the SR policy.
 
 4.1.2.  Scope
 
@@ -402,6 +398,11 @@ Table of Contents
       by an attacker, while it facilitates more complex on-path attacks
       by averting the traffic to another node that the attacker has
       access to and has more processing resources.
+
+   Forwarding through a path that causes the packet to be discarded:  SR
+      modification may casue a packet to be forwarded to a point in the
+      network where it can no longer be forwarded, causing the packet to
+      be discarded.
 
    Manipulating the SRv6 network programming:  An attacker can trigger a
       specific endpoint behavior by modifying the destination address
@@ -543,7 +544,15 @@ Table of Contents
    that adheres to a defined SRv6 traffic policy.  Thus, SRH filtering
    can be enforced at the ingress and egress nodes of the SR domain, so
    that packets with an SRH cannot be forwarded into the SR domain or
-   out of the SR domain.
+   out of the SR domain.  Specifically, such filtering is performed by
+   detecting Next Header 43 (Routing Header) with Routing Type 4 (SRH).
+
+   Because of the methodologies used in SID compression
+   [I-D.ietf-spring-srv6-srh-compression], SRH compression does not
+   necessarily use an SRH.  In practice this means that when compressed
+   segment lists are used without an SRH, filtering based on the Next
+   Header is not relevant, and thus filtering can only be applied baed
+   on the address range, as described below.
 
 5.1.2.  Address Range Filtering
 
@@ -580,25 +589,6 @@ Table of Contents
    43 Routing type 4.
 
 6.2.  Middlebox Filtering Issues
-
-   An edge case exists that may cause a layer 4 checksum error.  Because
-   of the methodologies used in SID compression, SRH compression does
-   not necessarily use an SRH - in practice this means filtering based
-   on the next header is not relevant, thereby removing an important
-   filtering mechanism.  Under certain specific conditions, a host may
-   generate a SID list that is capable of being compressed into a single
-   destination address (DA).  Under these circumstances, the SRH may not
-   be generated or may be removed during the process.  In this case, a
-   host may generate a layer 4 checksum that is created after SR policy
-   and SID compression is applied and is done so using a DA that differs
-   from the DA that will arrive at the final destination.  This
-   incorrect L4 checksum will cause any device in the path that utilizes
-   a L4 checksum to discard or otherwise flag as erroneous the packets
-   referenced by this checksum.  Examples include deep packet inspection
-   hardware that may exist transparently in a path or other higher layer
-   packet inspection mechanisms that require or utilize an L4 checksum.
-   Such behavior could result in blackholed or incorrectly dropped /
-   filtered traffic that is otherwise legitimate.
 
    When an SRv6 packet is forwarded in the SRv6 domain, its destination
    address changes constantly, the real destination address is hidden.
@@ -646,15 +636,54 @@ Table of Contents
    This section analyzes the security related gaps with respect to the
    threats and issues that were discussed in the previous sections.
 
-8.  Topics for Further Consideration
+8.  Security Considerations
 
-8.1.  Security Considerations in Operational SRv6 Enabled Networks
+   The security considerations of SRv6 are presented throughout this
+   document.
 
-   RFC9256 [RFC8986]
+9.  IANA Considerations
 
-8.2.  Segment Routing Header
+   This document has no IANA actions.
 
-   The SRv6 Segment Routing Header (SRH) is defined in [RFC8754].
+10.  Topics for Further Consideration
+
+   This section lists topics that will be discussed further before
+   deciding whether they need to be included in this document, as well
+   as some placeholders for items that need further work.
+
+   *  The following references may be used in the future: RFC9256
+      [RFC8986]
+
+   *  SRH compression
+
+   *  Spoofing
+
+   *  Path enumeration
+
+   *  Infrastructure and topology exposure: this seems like a non-issue
+      from a WAN perspective.  Needs more thought - could be problematic
+      in a host to host scenario involving a WAN and/or a data center
+      fabric.
+
+   *  Terms that may be used in a future version: Locator Block, FRR,
+      uSID
+
+   *  L4 checksum: [RFC8200] specifies that when the Routing header is
+      present the L4 checksum is computed by the originating node based
+      on the IPv6 address of the last element of the Routing header.
+      When compressed segment lists
+      [I-D.ietf-spring-srv6-srh-compression] are used, the last element
+      of the Routing header may be different than the Destination
+      Address as received by the final destination.  Furthermore,
+      compressed segment lists can be used in the Destination Address
+      without the presence of a Routing header, and in this case the
+      IPv6 Destination address can be modified along the path.  As a
+      result, some existing middleboxes which verify the L4 checksum
+      might miscalculate the checksum.  This issue is currently under
+      discusison in the SPRING WG.
+
+   *  Segment Routing Header figure: the SRv6 Segment Routing Header
+      (SRH) is defined in [RFC8754].
 
         0                   1                   2                   3
         0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
@@ -680,31 +709,6 @@ Table of Contents
        |                                                               |
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-8.3.  SRH Compression
-
-8.4.  Spoofing
-
-8.5.  Path enumeration
-
-8.6.  Infrastructure and topology exposure
-
-   This seems like a non-issue from a WAN perspective.  Needs more
-   thought - could be problematic in a host to host scenario involving a
-   WAN and/or a data center fabric.
-
-8.7.  Terms that may be used in a future version
-
-   Locator Block FRR uSID
-
-9.  Security Considerations
-
-   The security considerations of SRv6 are presented throughout this
-   document.
-
-10.  IANA Considerations
-
-   This document has no IANA actions.
-
 11.  References
 
 11.1.  Normative References
@@ -724,9 +728,9 @@ Table of Contents
               Cheng, W., Filsfils, C., Li, Z., Decraene, B., and F.
               Clad, "Compressed SRv6 Segment List Encoding", Work in
               Progress, Internet-Draft, draft-ietf-spring-srv6-srh-
-              compression-12, 14 February 2024,
+              compression-13, 29 February 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-spring-
-              srv6-srh-compression-12>.
+              srv6-srh-compression-13>.
 
    [IANAIPv6SPAR]
               "IANA IPv6 Special-Purpose Address Registry", n.d.,
@@ -836,3 +840,8 @@ Authors' Addresses
    Tian Tong
    China Unicom
    Email: tongt5@chinaunicom.cn
+
+
+   Luis M. Contreras
+   Telefonica
+   Email: luismiguel.contrerasmurillo@telefonica.com
