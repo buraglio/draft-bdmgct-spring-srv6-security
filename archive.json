@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-03-03T01:02:45.213643+00:00",
+  "timestamp": "2024-03-05T00:59:23.231292+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -512,6 +512,34 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 17,
+      "id": "PR_kwDOKVF77M5ogYSa",
+      "title": "Updated attacks and mitigation methods",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/17",
+      "state": "MERGED",
+      "author": "talmi",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "- Integrated the SRH compression related content (based on PR 16 - https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/16/files) into the \"Attacks\" section. Added general text explaining SRH compression and DA modification. Added the impact of causing packets to be discarded. Other impacts from PR16 are already detailed in the text.\r\n- Added Luis as a co-author.\r\n- The paragraph starting with \"An edge case exists...\" in the \"Middlebox Filtering Issues\" section was split into two: the SRH compression filtering issue was moved to the filtering section (under \"Mitigation Methods\"), and the L4 checksum issue was moved to the \"Topics for further consideration\".\r\n- Section \"Topics for Further Consideration\" - updated the style to a bullet list instead of a section for each topic. Moved to the end.",
+      "createdAt": "2024-03-03T08:25:53Z",
+      "updatedAt": "2024-03-03T18:01:14Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "f6dfc28ab8ef457dcfdba601f8de1ea1c22210a0",
+      "headRepository": "talmi/draft-bdmgct-spring-srv6-security",
+      "headRefName": "attack-updates",
+      "headRefOid": "5003f582bdd7cad9dcda1951625f40480a397815",
+      "closedAt": "2024-03-03T18:01:14Z",
+      "mergedAt": "2024-03-03T18:01:14Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "ffd5e4b03b7def95d6640f508c727624a439bbc3"
+      },
       "comments": [],
       "reviews": []
     }
