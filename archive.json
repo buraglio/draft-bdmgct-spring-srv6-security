@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-03-21T01:01:22.142111+00:00",
+  "timestamp": "2024-03-24T01:06:00.214088+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -49,7 +49,40 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 18,
+      "id": "I_kwDOKVF77M6DJ0Gg",
+      "title": "Incorperate RFC 8754",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/issues/18",
+      "state": "OPEN",
+      "author": "buraglio",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Need to incorporate RFC8754 security considerations section per IETF 119 discussion",
+      "createdAt": "2024-03-21T14:43:56Z",
+      "updatedAt": "2024-03-21T14:43:56Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 19,
+      "id": "I_kwDOKVF77M6DJ0bA",
+      "title": "Gap analysis ",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/issues/19",
+      "state": "OPEN",
+      "author": "buraglio",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Lack of text in gap analysis needs remedied",
+      "createdAt": "2024-03-21T14:44:30Z",
+      "updatedAt": "2024-03-21T14:44:30Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
   "pulls": [
     {
       "number": 1,
