@@ -12,12 +12,12 @@
 <meta content="
        SRv6 is a traffic engineering, encapsulation and steering mechanism utilizing IPv6 addresses to identify segments in a pre-defined policy. This document discusses security considerations in SRv6 networks, including the potential threats and the possible mitigation methods. The document does not define any new security protocols or extensions to existing protocols. 
     " name="description">
-<meta content="xml2rfc 3.20.0" name="generator">
+<meta content="xml2rfc 3.21.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-bdmgct-spring-srv6-security-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.20.0
-    Python 3.11.8
+  xml2rfc 3.21.0
+    Python 3.11.9
     ConfigArgParse 1.7
     google-i18n-address 3.1.0
     intervaltree 3.1.0
@@ -1028,11 +1028,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">SRv6 Security Considerations</td>
-<td class="right">March 2024</td>
+<td class="right">April 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Buraglio, et al.</td>
-<td class="center">Expires 4 September 2024</td>
+<td class="center">Expires 21 October 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1045,12 +1045,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-bdmgct-spring-srv6-security-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-03-03" class="published">3 March 2024</time>
+<time datetime="2024-04-19" class="published">19 April 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-09-04">4 September 2024</time></dd>
+<dd class="expires"><time datetime="2024-10-21">21 October 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1112,7 +1112,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 4 September 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 21 October 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1176,7 +1176,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-threat-abstractions" class="internal xref">Threat Abstractions</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
-                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-threat-taxonomy" class="internal xref">Threat Taxonomy</a></p>
+                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-impact" class="internal xref">Impact</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4">
+                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.  <a href="#name-threat-taxonomy" class="internal xref">Threat Taxonomy</a></p>
 </li>
             </ul>
 </li>
@@ -1193,7 +1196,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
                     <p id="section-toc.1-1.4.2.1.2.2.1"><a href="#section-4.1.2" class="auto internal xref">4.1.2</a>.  <a href="#name-scope" class="internal xref">Scope</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.3">
-                    <p id="section-toc.1-1.4.2.1.2.3.1"><a href="#section-4.1.3" class="auto internal xref">4.1.3</a>.  <a href="#name-impact" class="internal xref">Impact</a></p>
+                    <p id="section-toc.1-1.4.2.1.2.3.1"><a href="#section-4.1.3" class="auto internal xref">4.1.3</a>.  <a href="#name-impact-2" class="internal xref">Impact</a></p>
 </li>
                 </ul>
 </li>
@@ -1207,7 +1210,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
                     <p id="section-toc.1-1.4.2.2.2.2.1"><a href="#section-4.2.2" class="auto internal xref">4.2.2</a>.  <a href="#name-scope-2" class="internal xref">Scope</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.3">
-                    <p id="section-toc.1-1.4.2.2.2.3.1"><a href="#section-4.2.3" class="auto internal xref">4.2.3</a>.  <a href="#name-impact-2" class="internal xref">Impact</a></p>
+                    <p id="section-toc.1-1.4.2.2.2.3.1"><a href="#section-4.2.3" class="auto internal xref">4.2.3</a>.  <a href="#name-impact-3" class="internal xref">Impact</a></p>
 </li>
                 </ul>
 </li>
@@ -1221,7 +1224,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
                     <p id="section-toc.1-1.4.2.3.2.2.1"><a href="#section-4.3.2" class="auto internal xref">4.3.2</a>.  <a href="#name-scope-3" class="internal xref">Scope</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3.2.3">
-                    <p id="section-toc.1-1.4.2.3.2.3.1"><a href="#section-4.3.3" class="auto internal xref">4.3.3</a>.  <a href="#name-impact-3" class="internal xref">Impact</a></p>
+                    <p id="section-toc.1-1.4.2.3.2.3.1"><a href="#section-4.3.3" class="auto internal xref">4.3.3</a>.  <a href="#name-impact-4" class="internal xref">Impact</a></p>
 </li>
                 </ul>
 </li>
@@ -1235,7 +1238,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
                     <p id="section-toc.1-1.4.2.4.2.2.1"><a href="#section-4.4.2" class="auto internal xref">4.4.2</a>.  <a href="#name-scope-4" class="internal xref">Scope</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4.2.3">
-                    <p id="section-toc.1-1.4.2.4.2.3.1"><a href="#section-4.4.3" class="auto internal xref">4.4.3</a>.  <a href="#name-impact-4" class="internal xref">Impact</a></p>
+                    <p id="section-toc.1-1.4.2.4.2.3.1"><a href="#section-4.4.3" class="auto internal xref">4.4.3</a>.  <a href="#name-impact-5" class="internal xref">Impact</a></p>
 </li>
                 </ul>
 </li>
@@ -1440,28 +1443,38 @@ appear in all capitals, as shown here.<a href="#section-2.1-1" class="pilcrow">�
         </ul>
 </section>
 </div>
-<div id="threat-taxonomy">
+<div id="impact">
 <section id="section-3.3">
-        <h3 id="name-threat-taxonomy">
-<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-threat-taxonomy" class="section-name selfRef">Threat Taxonomy</a>
+        <h3 id="name-impact">
+<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-impact" class="section-name selfRef">Impact</a>
         </h3>
-<p id="section-3.3-1">The threat terminology used in this document is based on <span>[<a href="#RFC3552" class="cite xref">RFC3552</a>]</span>. Threats are classified according to two main criteria: internal vs. external attackers, and on-path vs. off-path attackers, as discussed in <span>[<a href="#RFC9055" class="cite xref">RFC9055</a>]</span>.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlParallel" id="section-3.3-2">
-          <dt id="section-3.3-2.1">Internal vs. External:</dt>
-          <dd style="margin-left: 1.5em" id="section-3.3-2.2">
-            <p id="section-3.3-2.2.1">An internal attacker in the context of SRv6 is an attacker who is located within an SR domain. Specifically, an internal attacker either has access to a node in the SR domain, or is located on an internal path between two nodes in the SR domain. In this context, the latter means that the attacker can be reached from a node in the SR domain without traversing an SR egress node, and can reach a node in the SR domain without traversing an SR ingress node. External attackers, on the other hand, are not within the SR domain.<a href="#section-3.3-2.2.1" class="pilcrow">¶</a></p>
+<p id="section-3.3-1">One of the important aspects of a threat analysis is the potential impact of each threat. For example, an attack on SRv6 may cause packets to be forwarded through a different path than they were intended to be forwarded through, or in other cases may compromise the availability of the system.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.3-2">The STRIDE approach <span>[<a href="#STRIDE" class="cite xref">STRIDE</a>]</span> classifies threats according to their potential impact. STRIDE stands for Spoofing, Tampering, Repudiation, Information disclosure, Denial of service and Elevation of privilege. Tampering and denial of service are the most relevant to SRv6. The remaing aspects of STRIDE, namely spoofing, repudiation, information disclosure and elevation of privilege are applicable to user data, and are not relevant to the SRv6 data plane. Although these aspects can be analyzed in the context of the control plane and/or management plane of networks in general, these aspects are not specific to SRv6 and are therefore not discussed further in the current document.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
+<p id="section-3.3-3">The impact of each class of attacks is widely discussed in <a href="#attacks" class="auto internal xref">Section 4</a>, with a focus on tampering, denial of service and reconnaissance, as well as other derived aspects, which are discussed in further detail.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="threat-taxonomy">
+<section id="section-3.4">
+        <h3 id="name-threat-taxonomy">
+<a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-threat-taxonomy" class="section-name selfRef">Threat Taxonomy</a>
+        </h3>
+<p id="section-3.4-1">The threat terminology used in this document is based on <span>[<a href="#RFC3552" class="cite xref">RFC3552</a>]</span>. Threats are classified according to two main criteria: internal vs. external attackers, and on-path vs. off-path attackers, as discussed in <span>[<a href="#RFC9055" class="cite xref">RFC9055</a>]</span>.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-3.4-2">
+          <dt id="section-3.4-2.1">Internal vs. External:</dt>
+          <dd style="margin-left: 1.5em" id="section-3.4-2.2">
+            <p id="section-3.4-2.2.1">An internal attacker in the context of SRv6 is an attacker who is located within an SR domain. Specifically, an internal attacker either has access to a node in the SR domain, or is located on an internal path between two nodes in the SR domain. In this context, the latter means that the attacker can be reached from a node in the SR domain without traversing an SR egress node, and can reach a node in the SR domain without traversing an SR ingress node. External attackers, on the other hand, are not within the SR domain.<a href="#section-3.4-2.2.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-3.3-2.3">On-path vs. Off-path:</dt>
-          <dd style="margin-left: 1.5em" id="section-3.3-2.4">
-            <p id="section-3.3-2.4.1">On-path attackers are located in a position that allows interception, modification or dropping of in-flight packets, as well as insertion (generation) of packets. Off-path attackers can only attack by insertion of packets.<a href="#section-3.3-2.4.1" class="pilcrow">¶</a></p>
+<dt id="section-3.4-2.3">On-path vs. Off-path:</dt>
+          <dd style="margin-left: 1.5em" id="section-3.4-2.4">
+            <p id="section-3.4-2.4.1">On-path attackers are located in a position that allows interception, modification or dropping of in-flight packets, as well as insertion (generation) of packets. Off-path attackers can only attack by insertion of packets.<a href="#section-3.4-2.4.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
-<p id="section-3.3-3">The following figure depicts the attacker types according to the taxonomy above. As illustrated in the figure, on-path attackers are located along the path of the traffic that is under attack, and therefore can listen, insert, delete, modify or replay packets in transit. Off-path attackers can insert packets, and in some cases can passively listen to some of the traffic, such as multicast transmissions.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
+<p id="section-3.4-3">The following figure depicts the attacker types according to the taxonomy above. As illustrated in the figure, on-path attackers are located along the path of the traffic that is under attack, and therefore can listen, insert, delete, modify or replay packets in transit. Off-path attackers can insert packets, and in some cases can passively listen to some of the traffic, such as multicast transmissions.<a href="#section-3.4-3" class="pilcrow">¶</a></p>
 <span id="name-threat-model-taxonomy"></span><div id="threat-figure">
 <figure id="figure-1">
-          <div class="alignLeft art-text artwork" id="section-3.3-4.1">
+          <div class="alignLeft art-text artwork" id="section-3.4-4.1">
 <pre>
      on-path         on-path        off-path      off-path
      external        internal       internal      external
@@ -1485,19 +1498,19 @@ appear in all capitals, as shown here.<a href="#section-2.1-1" class="pilcrow">�
 <a href="#name-threat-model-taxonomy" class="selfRef">Threat Model Taxonomy</a>
           </figcaption></figure>
 </div>
-<p id="section-3.3-5">In the current threat model the SR domain defines the boundary that distinguishes internal from external threats. As specified in <span>[<a href="#RFC8402" class="cite xref">RFC8402</a>]</span>:<a href="#section-3.3-5" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-3.3-6">
+<p id="section-3.4-5">In the current threat model the SR domain defines the boundary that distinguishes internal from external threats. As specified in <span>[<a href="#RFC8402" class="cite xref">RFC8402</a>]</span>:<a href="#section-3.4-5" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3.4-6">
 <pre>
    By default, SR operates within a trusted domain.  Traffic MUST be
    filtered at the domain boundaries.
    The use of best practices to reduce the risk of tampering within the
    trusted domain is important.  Such practices are discussed in
    [RFC4381] and are applicable to both SR-MPLS and SRv6.
-</pre><a href="#section-3.3-6" class="pilcrow">¶</a>
+</pre><a href="#section-3.4-6" class="pilcrow">¶</a>
 </div>
-<p id="section-3.3-7">In the context of the current document it is assumed that SRv6 is deployed within a limited domain <span>[<a href="#RFC8799" class="cite xref">RFC8799</a>]</span> with filtering at the domain boundaries, forming a trusted domain with respect to SRv6. Thus, external attackers are outside of the trusted domain. Specifically, an attack on one domain that is invoked from within a different domain is considered an external attack in the context of the current document.<a href="#section-3.3-7" class="pilcrow">¶</a></p>
-<p id="section-3.3-8">Following the spirit of <span>[<a href="#RFC8402" class="cite xref">RFC8402</a>]</span>, the current document  mandates a filtering mechanism that eliminates the threats from external attackers. This approach limits the scope of the attacks described in this document to within the domain (i.e., internal attackers).<a href="#section-3.3-8" class="pilcrow">¶</a></p>
-<p id="section-3.3-9">It should be noted that in some threat models the distinction between internal and external attackers depends on whether an attacker has access to a cryptographically secured (encrypted or authenticated) domain. Specifically, in some of these models there is a distinction between an attacker who becomes internal by having physical access, for example by plugging into an active port of a network device, and an attacker who has full access to a legitimate network node, including for example encryption keys if the network is encrypted. The current model does not distinguish between these two types of attackers and there is no assumption about whether the SR domain is cryptographically secured or not.<a href="#section-3.3-9" class="pilcrow">¶</a></p>
+<p id="section-3.4-7">In the context of the current document it is assumed that SRv6 is deployed within a limited domain <span>[<a href="#RFC8799" class="cite xref">RFC8799</a>]</span> with filtering at the domain boundaries, forming a trusted domain with respect to SRv6. Thus, external attackers are outside of the trusted domain. Specifically, an attack on one domain that is invoked from within a different domain is considered an external attack in the context of the current document.<a href="#section-3.4-7" class="pilcrow">¶</a></p>
+<p id="section-3.4-8">Following the spirit of <span>[<a href="#RFC8402" class="cite xref">RFC8402</a>]</span>, the current document  mandates a filtering mechanism that eliminates the threats from external attackers. This approach limits the scope of the attacks described in this document to within the domain (i.e., internal attackers).<a href="#section-3.4-8" class="pilcrow">¶</a></p>
+<p id="section-3.4-9">It should be noted that in some threat models the distinction between internal and external attackers depends on whether an attacker has access to a cryptographically secured (encrypted or authenticated) domain. Specifically, in some of these models there is a distinction between an attacker who becomes internal by having physical access, for example by plugging into an active port of a network device, and an attacker who has full access to a legitimate network node, including for example encryption keys if the network is encrypted. The current model does not distinguish between these two types of attackers and there is no assumption about whether the SR domain is cryptographically secured or not.<a href="#section-3.4-9" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1532,8 +1545,8 @@ appear in all capitals, as shown here.<a href="#section-2.1-1" class="pilcrow">�
 </div>
 <div id="mod-impact">
 <section id="section-4.1.3">
-          <h4 id="name-impact">
-<a href="#section-4.1.3" class="section-number selfRef">4.1.3. </a><a href="#name-impact" class="section-name selfRef">Impact</a>
+          <h4 id="name-impact-2">
+<a href="#section-4.1.3" class="section-number selfRef">4.1.3. </a><a href="#name-impact-2" class="section-name selfRef">Impact</a>
           </h4>
 <p id="section-4.1.3-1">The SR modification attack allows an attacker to change the SR policy that the packet is steered through and thus to manipulate the path and the processing that the packet is subject to.<a href="#section-4.1.3-1" class="pilcrow">¶</a></p>
 <p id="section-4.1.3-2">Specifically, the SR modification attack can impact the network and the forwarding behavior of packets in one or more of the following ways:<a href="#section-4.1.3-2" class="pilcrow">¶</a></p>
@@ -1590,10 +1603,10 @@ appear in all capitals, as shown here.<a href="#section-2.1-1" class="pilcrow">�
 <p id="section-4.2.2-2">It is assumed that the SRv6 domain is filtered in a way that prevents any leaks of explicit SRv6 routing information through the boundaries of the administrative domain. External attackers can only collect SRv6-related data in a malfunctioning network in which SRv6-related information is leaked through the boundaries of an SR domain.<a href="#section-4.2.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="impact">
+<div id="impact-1">
 <section id="section-4.2.3">
-          <h4 id="name-impact-2">
-<a href="#section-4.2.3" class="section-number selfRef">4.2.3. </a><a href="#name-impact-2" class="section-name selfRef">Impact</a>
+          <h4 id="name-impact-3">
+<a href="#section-4.2.3" class="section-number selfRef">4.2.3. </a><a href="#name-impact-3" class="section-name selfRef">Impact</a>
           </h4>
 <p id="section-4.2.3-1">While the information collected in a recon attack does not compromise the confidentiality of the user data, it allows an attacker to gather information about the network which in turn can be used to enable other attacks.<a href="#section-4.2.3-1" class="pilcrow">¶</a></p>
 </section>
@@ -1622,10 +1635,10 @@ appear in all capitals, as shown here.<a href="#section-2.1-1" class="pilcrow">�
 <p id="section-4.3.2-2">SRv6 domains are assumed to be filtered in a way that mitigates insertion attacks from external attackers.<a href="#section-4.3.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="impact-1">
+<div id="impact-2">
 <section id="section-4.3.3">
-          <h4 id="name-impact-3">
-<a href="#section-4.3.3" class="section-number selfRef">4.3.3. </a><a href="#name-impact-3" class="section-name selfRef">Impact</a>
+          <h4 id="name-impact-4">
+<a href="#section-4.3.3" class="section-number selfRef">4.3.3. </a><a href="#name-impact-4" class="section-name selfRef">Impact</a>
           </h4>
 <p id="section-4.3.3-1">The main impact of this attack is resource exhaustion which compromises the availability of the network, as described in <a href="#mod-impact" class="auto internal xref">Section 4.1.3</a>.<a href="#section-4.3.3-1" class="pilcrow">¶</a></p>
 </section>
@@ -1655,10 +1668,10 @@ appear in all capitals, as shown here.<a href="#section-2.1-1" class="pilcrow">�
 <p id="section-4.4.2-2">It is assumed that SRv6 domain boundary filtering is used for mitigating potential control plane and management plane attacks from external attackers. Segment routing does not define any specific security mechanisms in existing control plane or management plane protocols. However, existing control plane and management plane protocols use authentication and security mechanisms to validate the authenticity of information.<a href="#section-4.4.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="impact-2">
+<div id="impact-3">
 <section id="section-4.4.3">
-          <h4 id="name-impact-4">
-<a href="#section-4.4.3" class="section-number selfRef">4.4.3. </a><a href="#name-impact-4" class="section-name selfRef">Impact</a>
+          <h4 id="name-impact-5">
+<a href="#section-4.4.3" class="section-number selfRef">4.4.3. </a><a href="#name-impact-5" class="section-name selfRef">Impact</a>
           </h4>
 <p id="section-4.4.3-1">A compromised control plane or management plane can impact the network in various possible ways. SR policies can be manipulated by the attacker to avoid specific paths or to prefer specific paths, as described in <a href="#mod-impact" class="auto internal xref">Section 4.1.3</a>. Alternatively, the attacker can compromise the availability, either by defining SR policies that load the network resources, as described in <a href="#mod-impact" class="auto internal xref">Section 4.1.3</a>, or by blackholing some or all of the SR policies. A passive attacker can use the control plane or management plane messages as a means for recon, in a similar manner to <a href="#mod-impact" class="auto internal xref">Section 4.1.3</a>.<a href="#section-4.4.3-1" class="pilcrow">¶</a></p>
 </section>
@@ -1866,7 +1879,7 @@ For example, along the forwarding path in SRv6 network, the SR-aware firewall wi
 <dl class="references">
 <dt id="I-D.ietf-spring-srv6-srh-compression">[I-D.ietf-spring-srv6-srh-compression]</dt>
         <dd>
-<span class="refAuthor">Cheng, W.</span>, <span class="refAuthor">Filsfils, C.</span>, <span class="refAuthor">Li, Z.</span>, <span class="refAuthor">Decraene, B.</span>, and <span class="refAuthor">F. Clad</span>, <span class="refTitle">"Compressed SRv6 Segment List Encoding"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-spring-srv6-srh-compression-13</span>, <time datetime="2024-02-29" class="refDate">29 February 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-spring-srv6-srh-compression-13">https://datatracker.ietf.org/doc/html/draft-ietf-spring-srv6-srh-compression-13</a>&gt;</span>. </dd>
+<span class="refAuthor">Cheng, W.</span>, <span class="refAuthor">Filsfils, C.</span>, <span class="refAuthor">Li, Z.</span>, <span class="refAuthor">Decraene, B.</span>, and <span class="refAuthor">F. Clad</span>, <span class="refTitle">"Compressed SRv6 Segment List Encoding"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-spring-srv6-srh-compression-15</span>, <time datetime="2024-04-08" class="refDate">8 April 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-spring-srv6-srh-compression-15">https://datatracker.ietf.org/doc/html/draft-ietf-spring-srv6-srh-compression-15</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="IANAIPv6SPAR">[IANAIPv6SPAR]</dt>
         <dd>
@@ -1937,8 +1950,12 @@ For example, along the forwarding path in SRv6 network, the SR-aware firewall wi
 <span class="refAuthor">Filsfils, C.</span>, <span class="refAuthor">Talaulikar, K., Ed.</span>, <span class="refAuthor">Voyer, D.</span>, <span class="refAuthor">Bogdanov, A.</span>, and <span class="refAuthor">P. Mattes</span>, <span class="refTitle">"Segment Routing Policy Architecture"</span>, <span class="seriesInfo">RFC 9256</span>, <span class="seriesInfo">DOI 10.17487/RFC9256</span>, <time datetime="2022-07" class="refDate">July 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9256">https://www.rfc-editor.org/rfc/rfc9256</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9288">[RFC9288]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Gont, F.</span> and <span class="refAuthor">W. Liu</span>, <span class="refTitle">"Recommendations on the Filtering of IPv6 Packets Containing IPv6 Extension Headers at Transit Routers"</span>, <span class="seriesInfo">RFC 9288</span>, <span class="seriesInfo">DOI 10.17487/RFC9288</span>, <time datetime="2022-08" class="refDate">August 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9288">https://www.rfc-editor.org/rfc/rfc9288</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="STRIDE">[STRIDE]</dt>
+      <dd>
+<span class="refTitle">"The STRIDE Threat Model"</span>, <time datetime="2018" class="refDate">2018</time>, <span>&lt;<a href="https://msdn.microsoft.com/en-us/library/ee823878(v=cs.20).aspx">https://msdn.microsoft.com/en-us/library/ee823878(v=cs.20).aspx</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
