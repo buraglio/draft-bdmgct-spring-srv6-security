@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-04-18T01:01:11.288007+00:00",
+  "timestamp": "2024-04-21T01:06:19.022566+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -572,6 +572,34 @@
       "mergedBy": "buraglio",
       "mergeCommit": {
         "oid": "ffd5e4b03b7def95d6640f508c727624a439bbc3"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 20,
+      "id": "PR_kwDOKVF77M5tFLLI",
+      "title": "Stride model",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/20",
+      "state": "MERGED",
+      "author": "talmi",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Added discussion about the STRIDE model to the new \"Impact\" subsection.",
+      "createdAt": "2024-04-18T18:00:46Z",
+      "updatedAt": "2024-04-19T13:47:31Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "ffd5e4b03b7def95d6640f508c727624a439bbc3",
+      "headRepository": "talmi/draft-bdmgct-spring-srv6-security",
+      "headRefName": "stride-model",
+      "headRefOid": "4d6979b4f429b24f0cccc861a2d5b9806a56e639",
+      "closedAt": "2024-04-19T13:47:31Z",
+      "mergedAt": "2024-04-19T13:47:31Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "361259452b1e2716b1b253c6fa1145fe7aebd0f4"
       },
       "comments": [],
       "reviews": []
