@@ -79,58 +79,59 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction
-   2.  Conventions and Definitions
-     2.1.  Requirements Language
-     2.2.  Terminology
-   3.  Threat Model
-     3.1.  Security Components
-       3.1.1.  Confidentiality
-       3.1.2.  Integrity
-       3.1.3.  Availability
-     3.2.  Threat Abstractions
-     3.3.  Impact
-     3.4.  Threat Taxonomy
-   4.  Attacks
-     4.1.  SR Modification Attack
-       4.1.1.  Overview
-       4.1.2.  Scope
-       4.1.3.  Impact
-     4.2.  Attack on compressed headers
-       4.2.1.  Overview
-       4.2.2.  Scope
-       4.2.3.  Impact
-     4.3.  Reconnaissance
-       4.3.1.  Overview
-       4.3.2.  Scope
-       4.3.3.  Impact
-     4.4.  Packet Insertion
-       4.4.1.  Overview
-       4.4.2.  Scope
-       4.4.3.  Impact
-     4.5.  Control and Management Plane Attacks
-       4.5.1.  Overview
-       4.5.2.  Scope
-       4.5.3.  Impact
-     4.6.  Other Attacks
-   5.  Mitigation Methods
-     5.1.  Filtering
-       5.1.1.  SRH Filtering
-       5.1.2.  Address Range Filtering
-     5.2.  Encapsulation of Packets
-     5.3.  Hashed Message Authentication Code (HMAC)
-   6.  Implications on Existing Equipment
-     6.1.  Limitations in Filtering Capabilities
-     6.2.  Middlebox Filtering Issues
-     6.3.  Emerging technology growing pains
-   7.  Gap Analysis
-   8.  Security Considerations
-   9.  IANA Considerations
-   10. Topics for Further Consideration
-   11. Security Considerations
-   12. IANA Considerations
-   13. References
-     13.1.  Normative References
-     13.2.  Informative References
+   2.  Scope of this Document
+   3.  Conventions and Definitions
+     3.1.  Requirements Language
+     3.2.  Terminology
+   4.  Threat Model
+     4.1.  Security Components
+       4.1.1.  Confidentiality
+       4.1.2.  Integrity
+       4.1.3.  Availability
+     4.2.  Threat Abstractions
+     4.3.  Impact
+     4.4.  Threat Taxonomy
+   5.  Attacks
+     5.1.  SR Modification Attack
+       5.1.1.  Overview
+       5.1.2.  Scope
+       5.1.3.  Impact
+     5.2.  Attack on compressed headers
+       5.2.1.  Overview
+       5.2.2.  Scope
+       5.2.3.  Impact
+     5.3.  Reconnaissance
+       5.3.1.  Overview
+       5.3.2.  Scope
+       5.3.3.  Impact
+     5.4.  Packet Insertion
+       5.4.1.  Overview
+       5.4.2.  Scope
+       5.4.3.  Impact
+     5.5.  Control and Management Plane Attacks
+       5.5.1.  Overview
+       5.5.2.  Scope
+       5.5.3.  Impact
+     5.6.  Other Attacks
+   6.  Mitigation Methods
+     6.1.  Filtering
+       6.1.1.  SRH Filtering
+       6.1.2.  Address Range Filtering
+     6.2.  Encapsulation of Packets
+     6.3.  Hashed Message Authentication Code (HMAC)
+   7.  Implications on Existing Equipment
+     7.1.  Limitations in Filtering Capabilities
+     7.2.  Middlebox Filtering Issues
+     7.3.  Emerging technology growing pains
+   8.  Gap Analysis
+   9.  Security Considerations
+   10. IANA Considerations
+   11. Topics for Further Consideration
+   12. Security Considerations
+   13. IANA Considerations
+   14. References
+     14.1.  Normative References
+     14.2.  Informative References
    Acknowledgments
    Authors' Addresses
 
@@ -171,9 +172,34 @@ Table of Contents
    This document describes various threats to SRv6 networks and also
    presents existing approaches to avoid or mitigate the threats.
 
-2.  Conventions and Definitions
+2.  Scope of this Document
 
-2.1.  Requirements Language
+   The following IETF RFCs were selected for security assessment as part
+   of this effort:
+
+   *  [RFC8402] : "Segment Routing Architecture"
+
+   *  [RFC8754] : "IPv6 Segment Routing Header (SRH)"
+
+   *  [RFC8986] : "Segment Routing over IPv6 (SRv6) Network Programming"
+
+   *  [RFC9020] : "YANG Data Model for Segment Routing"
+
+   *  [RFC9256] : "Segment Routing Policy Architecture"
+
+   *  [RFC9491] : "Integration of the Network Service Header (NSH) and
+      Segment Routing for Service Function Chaining (SFC)"
+
+   *  [RFC9524] : "Segment Routing Replication for Multipoint Service
+      Delivery"
+
+   We note that SRv6 is under active development and, as such, the above
+   documents might not cover all protocols employed in an SRv6
+   deployment.
+
+3.  Conventions and Definitions
+
+3.1.  Requirements Language
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
@@ -181,7 +207,7 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-2.2.  Terminology
+3.2.  Terminology
 
    *  HMAC TLV: Hashed Message Authentication Code Type Length Value
       [RFC8754]
@@ -192,7 +218,7 @@ Table of Contents
 
    *  SRv6: Segment Routing over IPv6 [RFC8402]
 
-3.  Threat Model
+4.  Threat Model
 
    This section introduces the threat model that is used in this
    document.  The model is based on terminology from the Internet threat
@@ -200,14 +226,14 @@ Table of Contents
    [RFC7384].  Details regarding inter-domain segment routing (SR) are
    out of scope for this document.
 
-3.1.  Security Components
+4.1.  Security Components
 
    The main components of information security are confidentiality,
    integrity and availability, often referred to by the acronym CIA.  A
    short description of each of these components is presented below in
    the context of SRv6 security.
 
-3.1.1.  Confidentiality
+4.1.1.  Confidentiality
 
    The purpose of confidentiality is to protect the user data from being
    exposed to unauthorized users, i.e., preventing attackers from
@@ -216,9 +242,9 @@ Table of Contents
    of SRv6-related information are within the scope; collecting
    information about SR endpoint addresses, SR policies, and network
    topologies, is a specific form of reconnaissance, which is further
-   discussed in Section 4.3.
+   discussed in Section 5.3.
 
-3.1.2.  Integrity
+4.1.2.  Integrity
 
    Preventing information from being modified is a key property of
    information security.  Other aspects of integrity include
@@ -227,9 +253,9 @@ Table of Contents
    policies to different users or sources.  In the context of SRv6,
    compromising the integrity may result in packets being routed in
    different paths than they were intended to be routed through, which
-   may have various implications, as further discussed in Section 4.
+   may have various implications, as further discussed in Section 5.
 
-3.1.3.  Availability
+4.1.3.  Availability
 
    Protecting the availability of a system means keeping the system
    running continuously without disruptions.  The availability aspects
@@ -237,7 +263,7 @@ Table of Contents
    for compromising the performance of a network or for causing Denial
    of Service (DoS).
 
-3.2.  Threat Abstractions
+4.2.  Threat Abstractions
 
    A security attack is implemented by performing a set of one or more
    basic operations.  These basic operations (abstractions) are as
@@ -263,7 +289,7 @@ Table of Contents
 
    *  Packet modification: the attacker modifies packets during transit.
 
-3.3.  Impact
+4.3.  Impact
 
    One of the important aspects of a threat analysis is the potential
    impact of each threat.  For example, an attack on SRv6 may cause
@@ -283,11 +309,11 @@ Table of Contents
    are not specific to SRv6 and are therefore not discussed further in
    the current document.
 
-   The impact of each class of attacks is widely discussed in Section 4,
+   The impact of each class of attacks is widely discussed in Section 5,
    with a focus on tampering, denial of service and reconnaissance, as
    well as other derived aspects, which are discussed in further detail.
 
-3.4.  Threat Taxonomy
+4.4.  Threat Taxonomy
 
    The threat terminology used in this document is based on [RFC3552].
    Threats are classified according to two main criteria: internal vs.
@@ -371,13 +397,13 @@ Table of Contents
    attackers and there is no assumption about whether the SR domain is
    cryptographically secured or not.  Thus, some of the attacks that are
    described in the next section can be mitigated by cryptographic
-   means, as further discussed in Section 5.3.
+   means, as further discussed in Section 6.3.
 
-4.  Attacks
+5.  Attacks
 
-4.1.  SR Modification Attack
+5.1.  SR Modification Attack
 
-4.1.1.  Overview
+5.1.1.  Overview
 
    An attacker can modify a packet while it is in transit in a way that
    directly affects the packet's SR policy.  The modification can affect
@@ -401,14 +427,14 @@ Table of Contents
    encode multiple compressed SIDs within a single 128-bit SID, and thus
    modifying the DA can affect one or more hops in the SR policy.
 
-4.1.2.  Scope
+5.1.2.  Scope
 
    An SR modification attack can be performed by on-path attackers.  As
-   discussed in Section 3, it assumed that filtering is deployed at the
+   discussed in Section 4, it assumed that filtering is deployed at the
    domain boundaries, thus limiting the ability of implementing SR
    modification attacks to on-path internal attackers.
 
-4.1.3.  Impact
+5.1.3.  Impact
 
    The SR modification attack allows an attacker to change the SR policy
    that the packet is steered through and thus to manipulate the path
@@ -461,9 +487,9 @@ Table of Contents
       exhaustion, which may in severe cases cause Denial of Service
       (DoS).
 
-4.2.  Attack on compressed headers
+5.2.  Attack on compressed headers
 
-4.2.1.  Overview
+5.2.1.  Overview
 
    Header compression in SRv6 allows to encode multiple compressed SIDs
    within a single 128-bit SID.  That multiple compressed SIDs are
@@ -479,7 +505,7 @@ Table of Contents
    compressed SID.  It is only at that moment where issues can be
    revealed in terms of the validity of the next compressed SID.
 
-4.2.2.  Scope
+5.2.2.  Scope
 
    A modification or alteration of the compressed header can motivate
    different undesirable situations.  An attack of these characteristics
@@ -498,7 +524,7 @@ Table of Contents
    compressed SIDs in a manner that the flows are rerouted towards
    preceding nodes.
 
-4.2.3.  Impact
+5.2.3.  Impact
 
    Similar effects as the ones described for the case of SR modification
    also apply to this case, in terms of affection to the flow steering.
@@ -509,9 +535,9 @@ Table of Contents
    SIDs, or by generating artificial traffic between nodes in the
    network which can lead to link congestion.
 
-4.3.  Reconnaissance
+5.3.  Reconnaissance
 
-4.3.1.  Overview
+5.3.1.  Overview
 
    An on-path attacker can passively listen to packets and specifically
    to the SRv6-related information that is conveyed in the IPv6 header
@@ -519,7 +545,7 @@ Table of Contents
    about SIDs and policies, and thus to facilitate mapping the structure
    of the network and its potential vulnerabilities.
 
-4.3.2.  Scope
+5.3.2.  Scope
 
    A recon attack is limited to on-path internal attackers.
 
@@ -529,23 +555,23 @@ Table of Contents
    SRv6-related data in a malfunctioning network in which SRv6-related
    information is leaked through the boundaries of an SR domain.
 
-4.3.3.  Impact
+5.3.3.  Impact
 
    While the information collected in a recon attack does not compromise
    the confidentiality of the user data, it allows an attacker to gather
    information about the network which in turn can be used to enable
    other attacks.
 
-4.4.  Packet Insertion
+5.4.  Packet Insertion
 
-4.4.1.  Overview
+5.4.1.  Overview
 
    In this attack packets are inserted (injected) into the network with
    a segment list that defines a specific SR policy.  The attack can be
    applied either by using synthetic packets or by replaying previously
    recorded packets.
 
-4.4.2.  Scope
+5.4.2.  Scope
 
    Packet insertion can be performed by internal attackers, either on-
    path or off-path.  In the case of a replay attack, recording packets
@@ -555,15 +581,15 @@ Table of Contents
    SRv6 domains are assumed to be filtered in a way that mitigates
    insertion attacks from external attackers.
 
-4.4.3.  Impact
+5.4.3.  Impact
 
    The main impact of this attack is resource exhaustion which
    compromises the availability of the network, as described in
-   Section 4.1.3.
+   Section 5.1.3.
 
-4.5.  Control and Management Plane Attacks
+5.5.  Control and Management Plane Attacks
 
-4.5.1.  Overview
+5.5.1.  Overview
 
    Depending on the control plane protocols used in a network, it is
    possible to use the control plane as a way of compromising the
@@ -577,7 +603,7 @@ Table of Contents
    attacks, including manipulating the SR policies or compromising the
    network availability.
 
-4.5.2.  Scope
+5.5.2.  Scope
 
    Control plane attacks can be performed by internal attackers.
    Injection can be performed by off-path attackers, while removal,
@@ -593,19 +619,19 @@ Table of Contents
    protocols use authentication and security mechanisms to validate the
    authenticity of information.
 
-4.5.3.  Impact
+5.5.3.  Impact
 
    A compromised control plane or management plane can impact the
    network in various possible ways.  SR policies can be manipulated by
    the attacker to avoid specific paths or to prefer specific paths, as
-   described in Section 4.1.3.  Alternatively, the attacker can
+   described in Section 5.1.3.  Alternatively, the attacker can
    compromise the availability, either by defining SR policies that load
-   the network resources, as described in Section 4.1.3, or by
+   the network resources, as described in Section 5.1.3, or by
    blackholing some or all of the SR policies.  A passive attacker can
    use the control plane or management plane messages as a means for
-   recon, in a similar manner to Section 4.1.3.
+   recon, in a similar manner to Section 5.1.3.
 
-4.6.  Other Attacks
+5.6.  Other Attacks
 
    Various attacks which are not specific to SRv6 can be used to
    compromise networks that deploy SRv6.  For example, spoofing is not
@@ -617,15 +643,15 @@ Table of Contents
    subject to any existing or emerging IPv6 vulnerabilities [RFC9099],
    however, this is out of scope for this document.
 
-5.  Mitigation Methods
+6.  Mitigation Methods
 
    This section presents methods that can be used to mitigate the
    threats and issues that were presented in previous sections.  This
    section does not introduce new security solutions or protocols.
 
-5.1.  Filtering
+6.1.  Filtering
 
-5.1.1.  SRH Filtering
+6.1.1.  SRH Filtering
 
    SRv6 packets rely on the routing header in order to steer traffic
    that adheres to a defined SRv6 traffic policy.  Thus, SRH filtering
@@ -641,7 +667,7 @@ Table of Contents
    Header is not relevant, and thus filtering can only be applied baed
    on the address range, as described below.
 
-5.1.2.  Address Range Filtering
+6.1.2.  Address Range Filtering
 
    The IPv6 destination address can be filtered at the SR ingress node
    in order to mitigate external attacks.  An ingress packet with a
@@ -656,7 +682,7 @@ Table of Contents
    result in an fail open scenario when appropriate border filtering is
    not implemented or supported.
 
-5.2.  Encapsulation of Packets
+6.2.  Encapsulation of Packets
 
    Packets steered in an SR domain are often encapsulated in an IPv6
    encapsulation.  This mechanism allows for encapsulation of both IPv4
@@ -664,7 +690,7 @@ Table of Contents
    and decapsulation at the SR egress node mitigates the ability of
    external attackers to impact SR steering within the domain.
 
-5.3.  Hashed Message Authentication Code (HMAC)
+6.3.  Hashed Message Authentication Code (HMAC)
 
    The SRH can be secured by an HMAC TLV, as defined in [RFC8754].  The
    HMAC is an optional TLV that secures the segment list, the SRH flags,
@@ -672,7 +698,7 @@ Table of Contents
    key is used in the generation and verification of the HMAC.
 
    Using an HMAC in an SR domain can mitigate some of the SR
-   Modification Attacks (Section 4.1).  For example, the segment list is
+   Modification Attacks (Section 5.1).  For example, the segment list is
    protected by the HMAC.  However, an internal attacker who does not
    have access to the pre-shared key can capture legitimate packets, and
    later replay the SRH and HMAC from these recorded packets.  This
@@ -681,9 +707,9 @@ Table of Contents
    replace the SRH of an in-transit packet with a different SRH that was
    previously captured.
 
-6.  Implications on Existing Equipment
+7.  Implications on Existing Equipment
 
-6.1.  Limitations in Filtering Capabilities
+7.1.  Limitations in Filtering Capabilities
 
    [RFC9288] provides recommendations on the filtering of IPv6 packets
    containing IPv6 extension headers at transit routers.  SRv6 relies on
@@ -692,7 +718,7 @@ Table of Contents
    to filter and in some cases even provide logging for IPv6 next-header
    43 Routing type 4.
 
-6.2.  Middlebox Filtering Issues
+7.2.  Middlebox Filtering Issues
 
    When an SRv6 packet is forwarded in the SRv6 domain, its destination
    address changes constantly, the real destination address is hidden.
@@ -733,23 +759,23 @@ Table of Contents
    extension headers may result in SRv6 packets being dropped RFC7872
    [RFC9098].
 
-6.3.  Emerging technology growing pains
+7.3.  Emerging technology growing pains
 
-7.  Gap Analysis
+8.  Gap Analysis
 
    This section analyzes the security related gaps with respect to the
    threats and issues that were discussed in the previous sections.
 
-8.  Security Considerations
+9.  Security Considerations
 
    The security considerations of SRv6 are presented throughout this
    document.
 
-9.  IANA Considerations
+10.  IANA Considerations
 
    This document has no IANA actions.
 
-10.  Topics for Further Consideration
+11.  Topics for Further Consideration
 
    This section lists topics that will be discussed further before
    deciding whether they need to be included in this document, as well
@@ -813,18 +839,18 @@ Table of Contents
        |                                                               |
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-11.  Security Considerations
+12.  Security Considerations
 
    The security considerations of SRv6 are presented throughout this
    document.
 
-12.  IANA Considerations
+13.  IANA Considerations
 
    This document has no IANA actions.
 
-13.  References
+14.  References
 
-13.1.  Normative References
+14.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -845,12 +871,34 @@ Table of Contents
               (SRH)", RFC 8754, DOI 10.17487/RFC8754, March 2020,
               <https://www.rfc-editor.org/rfc/rfc8754>.
 
+   [RFC8986]  Filsfils, C., Ed., Camarillo, P., Ed., Leddy, J., Voyer,
+              D., Matsushima, S., and Z. Li, "Segment Routing over IPv6
+              (SRv6) Network Programming", RFC 8986,
+              DOI 10.17487/RFC8986, February 2021,
+              <https://www.rfc-editor.org/rfc/rfc8986>.
+
+   [RFC9020]  Litkowski, S., Qu, Y., Lindem, A., Sarkar, P., and J.
+              Tantsura, "YANG Data Model for Segment Routing", RFC 9020,
+              DOI 10.17487/RFC9020, May 2021,
+              <https://www.rfc-editor.org/rfc/rfc9020>.
+
    [RFC9256]  Filsfils, C., Talaulikar, K., Ed., Voyer, D., Bogdanov,
               A., and P. Mattes, "Segment Routing Policy Architecture",
               RFC 9256, DOI 10.17487/RFC9256, July 2022,
               <https://www.rfc-editor.org/rfc/rfc9256>.
 
-13.2.  Informative References
+   [RFC9491]  Guichard, J., Ed. and J. Tantsura, Ed., "Integration of
+              the Network Service Header (NSH) and Segment Routing for
+              Service Function Chaining (SFC)", RFC 9491,
+              DOI 10.17487/RFC9491, November 2023,
+              <https://www.rfc-editor.org/rfc/rfc9491>.
+
+   [RFC9524]  Voyer, D., Ed., Filsfils, C., Parekh, R., Bidgoli, H., and
+              Z. Zhang, "Segment Routing Replication for Multipoint
+              Service Delivery", RFC 9524, DOI 10.17487/RFC9524,
+              February 2024, <https://www.rfc-editor.org/rfc/rfc9524>.
+
+14.2.  Informative References
 
    [I-D.ietf-spring-srv6-srh-compression]
               Cheng, W., Filsfils, C., Li, Z., Decraene, B., and F.
@@ -894,12 +942,6 @@ Table of Contents
    [RFC8799]  Carpenter, B. and B. Liu, "Limited Domains and Internet
               Protocols", RFC 8799, DOI 10.17487/RFC8799, July 2020,
               <https://www.rfc-editor.org/rfc/rfc8799>.
-
-   [RFC8986]  Filsfils, C., Ed., Camarillo, P., Ed., Leddy, J., Voyer,
-              D., Matsushima, S., and Z. Li, "Segment Routing over IPv6
-              (SRv6) Network Programming", RFC 8986,
-              DOI 10.17487/RFC8986, February 2021,
-              <https://www.rfc-editor.org/rfc/rfc8986>.
 
    [RFC9055]  Grossman, E., Ed., Mizrahi, T., and A. Hacker,
               "Deterministic Networking (DetNet) Security
