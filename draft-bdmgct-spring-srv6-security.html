@@ -9,7 +9,7 @@
 <meta content="Tal Mizrahi" name="author">
 <meta content="Tian Tong" name="author">
 <meta content="Luis M. Contreras" name="author">
-<meta content="Luis M. Contreras" name="author">
+<meta content="Fernando Gont" name="author">
 <meta content="
        SRv6 is a traffic engineering, encapsulation and steering mechanism utilizing IPv6 addresses to identify segments in a pre-defined policy. This document discusses security considerations in SRv6 networks, including the potential threats and the possible mitigation methods. The document does not define any new security protocols or extensions to existing protocols. 
     " name="description">
@@ -1033,7 +1033,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Buraglio, et al.</td>
-<td class="center">Expires 6 December 2024</td>
+<td class="center">Expires 7 December 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1046,12 +1046,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-bdmgct-spring-srv6-security-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-06-04" class="published">4 June 2024</time>
+<time datetime="2024-06-05" class="published">5 June 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-12-06">6 December 2024</time></dd>
+<dd class="expires"><time datetime="2024-12-07">7 December 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1071,8 +1071,8 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <div class="org">Telefonica</div>
 </div>
 <div class="author">
-      <div class="author-name">L. M. Contreras</div>
-<div class="org">Telefonica</div>
+      <div class="author-name">F. Gont</div>
+<div class="org">SI6 Networks</div>
 </div>
 </dd>
 </dl>
@@ -1117,7 +1117,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 6 December 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 7 December 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1828,8 +1828,7 @@ appear in all capitals, as shown here.<a href="#section-2.1-1" class="pilcrow">�
 <p id="section-6.2-1">When an SRv6 packet is forwarded in the SRv6 domain, its destination address changes constantly, the real destination address is hidden. Security devices on SRv6 network may not learn the real destination address and fail to take access control on some SRv6 traffic.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 <p id="section-6.2-2">The security devices on SRv6 networks need to take care of SRv6 packets. However, the SRv6 packets usually use loopback address of the PE device a as source address. As a result, the address information of SR packets may be asymmetric, resulting in improper filter traffic problems, which affects the effectiveness of security devices.
 For example, along the forwarding path in SRv6 network, the SR-aware firewall will check the association relationships of the bidirectional VPN traffic packets. And it is able to retrieve the final destination of SRv6 packet from the last entry in the . When the &lt;source, destination&gt; tuple of the packet from PE1 to PE2 is &lt;PE1-IP-ADDR, PE2-VPN-SID&gt;, and the other direction is &lt;PE2-IP-ADDR, PE1-VPN-SID&gt;, the source address and destination address of the forward and backward VPN traffic are regarded as different flow. Eventually, the legal traffic may be blocked by the firewall.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
-<p id="section-6.2-3">SRv6 is commonly used as a tunneling technology in operator networks. To provide VPN service in an SRv6 network, the ingress PE encapsulates the payload with an outer IPv6 header with the SRH carrying the SR Policy segment List along with the VPN service SID. The user traffic towards SRv6 provider backbone will be encapsulated in SRv6 tunnel. When constructing an SRv6 packet, the destination address field of the SRv6 packet changes constantly and the source address field of the SRv6 packet is usually assigned using an address on the originating device, which may be a host or a network element depending on configuration. This may affect the security equipment and middle boxes in the traffic path. Because of the existence of the SRH, and the additional headers, older security appliances, monitoring systems, and middle boxes cold react in different ways if they are unaware of the additional header and tunneling mechanisms leveraged by SRv6. This lack of awareness may be due to software limits, or in some cases as has been seen in other emerging technologies, may be due to limits in ASICs or NPUs that could silently drop or otherwise impede SRv6 packets.
-<span>[<a href="#RFC6169" class="cite xref">RFC6169</a>]</span><a href="#section-6.2-3" class="pilcrow">¶</a></p>
+<p id="section-6.2-3">SRv6 is commonly used as a tunneling technology in operator networks. To provide VPN service in an SRv6 network, the ingress PE encapsulates the payload with an outer IPv6 header with the SRH carrying the SR Policy segment List along with the VPN service SID. The user traffic towards SRv6 provider backbone will be encapsulated in SRv6 tunnel. When constructing an SRv6 packet, the destination address field of the SRv6 packet changes constantly and the source address field of the SRv6 packet is usually assigned using an address on the originating device, which may be a host or a network element depending on configuration. This may affect the security equipment and middle boxes in the traffic path. Because of the existence of the SRH, and the additional headers, security appliances, monitoring systems, and middle boxes could react in different ways if do not incorporate support for the supporting SRv6 mechanisms, such as the IPv6 Segment Routing Header (SRH) <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span>. Additionally, implementation limitations in the processing of IPv6 packets with extension headers may result in SRv6 packets being dropped <span><a href="#RFC9098" class="internal xref">RFC7872</a> [<a href="#RFC9098" class="cite xref">RFC9098</a>]</span>.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="emerging-technology-growing-pains">
@@ -1957,8 +1956,20 @@ For example, along the forwarding path in SRv6 network, the SR-aware firewall wi
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8402">[RFC8402]</dt>
+        <dd>
+<span class="refAuthor">Filsfils, C., Ed.</span>, <span class="refAuthor">Previdi, S., Ed.</span>, <span class="refAuthor">Ginsberg, L.</span>, <span class="refAuthor">Decraene, B.</span>, <span class="refAuthor">Litkowski, S.</span>, and <span class="refAuthor">R. Shakir</span>, <span class="refTitle">"Segment Routing Architecture"</span>, <span class="seriesInfo">RFC 8402</span>, <span class="seriesInfo">DOI 10.17487/RFC8402</span>, <time datetime="2018-07" class="refDate">July 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8402">https://www.rfc-editor.org/rfc/rfc8402</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8754">[RFC8754]</dt>
+        <dd>
+<span class="refAuthor">Filsfils, C., Ed.</span>, <span class="refAuthor">Dukes, D., Ed.</span>, <span class="refAuthor">Previdi, S.</span>, <span class="refAuthor">Leddy, J.</span>, <span class="refAuthor">Matsushima, S.</span>, and <span class="refAuthor">D. Voyer</span>, <span class="refTitle">"IPv6 Segment Routing Header (SRH)"</span>, <span class="seriesInfo">RFC 8754</span>, <span class="seriesInfo">DOI 10.17487/RFC8754</span>, <time datetime="2020-03" class="refDate">March 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8754">https://www.rfc-editor.org/rfc/rfc8754</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9256">[RFC9256]</dt>
+      <dd>
+<span class="refAuthor">Filsfils, C.</span>, <span class="refAuthor">Talaulikar, K., Ed.</span>, <span class="refAuthor">Voyer, D.</span>, <span class="refAuthor">Bogdanov, A.</span>, and <span class="refAuthor">P. Mattes</span>, <span class="refTitle">"Segment Routing Policy Architecture"</span>, <span class="seriesInfo">RFC 9256</span>, <span class="seriesInfo">DOI 10.17487/RFC9256</span>, <time datetime="2022-07" class="refDate">July 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9256">https://www.rfc-editor.org/rfc/rfc9256</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -1981,29 +1992,9 @@ For example, along the forwarding path in SRv6 network, the SR-aware firewall wi
         <dd>
 <span class="refAuthor">Rescorla, E.</span> and <span class="refAuthor">B. Korver</span>, <span class="refTitle">"Guidelines for Writing RFC Text on Security Considerations"</span>, <span class="seriesInfo">BCP 72</span>, <span class="seriesInfo">RFC 3552</span>, <span class="seriesInfo">DOI 10.17487/RFC3552</span>, <time datetime="2003-07" class="refDate">July 2003</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3552">https://www.rfc-editor.org/rfc/rfc3552</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC4301">[RFC4301]</dt>
-        <dd>
-<span class="refAuthor">Kent, S.</span> and <span class="refAuthor">K. Seo</span>, <span class="refTitle">"Security Architecture for the Internet Protocol"</span>, <span class="seriesInfo">RFC 4301</span>, <span class="seriesInfo">DOI 10.17487/RFC4301</span>, <time datetime="2005-12" class="refDate">December 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4301">https://www.rfc-editor.org/rfc/rfc4301</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC4302">[RFC4302]</dt>
-        <dd>
-<span class="refAuthor">Kent, S.</span>, <span class="refTitle">"IP Authentication Header"</span>, <span class="seriesInfo">RFC 4302</span>, <span class="seriesInfo">DOI 10.17487/RFC4302</span>, <time datetime="2005-12" class="refDate">December 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4302">https://www.rfc-editor.org/rfc/rfc4302</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC4303">[RFC4303]</dt>
-        <dd>
-<span class="refAuthor">Kent, S.</span>, <span class="refTitle">"IP Encapsulating Security Payload (ESP)"</span>, <span class="seriesInfo">RFC 4303</span>, <span class="seriesInfo">DOI 10.17487/RFC4303</span>, <time datetime="2005-12" class="refDate">December 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4303">https://www.rfc-editor.org/rfc/rfc4303</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC4942">[RFC4942]</dt>
-        <dd>
-<span class="refAuthor">Davies, E.</span>, <span class="refAuthor">Krishnan, S.</span>, and <span class="refAuthor">P. Savola</span>, <span class="refTitle">"IPv6 Transition/Co-existence Security Considerations"</span>, <span class="seriesInfo">RFC 4942</span>, <span class="seriesInfo">DOI 10.17487/RFC4942</span>, <time datetime="2007-09" class="refDate">September 2007</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4942">https://www.rfc-editor.org/rfc/rfc4942</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="RFC5095">[RFC5095]</dt>
         <dd>
 <span class="refAuthor">Abley, J.</span>, <span class="refAuthor">Savola, P.</span>, and <span class="refAuthor">G. Neville-Neil</span>, <span class="refTitle">"Deprecation of Type 0 Routing Headers in IPv6"</span>, <span class="seriesInfo">RFC 5095</span>, <span class="seriesInfo">DOI 10.17487/RFC5095</span>, <time datetime="2007-12" class="refDate">December 2007</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5095">https://www.rfc-editor.org/rfc/rfc5095</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC6169">[RFC6169]</dt>
-        <dd>
-<span class="refAuthor">Krishnan, S.</span>, <span class="refAuthor">Thaler, D.</span>, and <span class="refAuthor">J. Hoagland</span>, <span class="refTitle">"Security Concerns with IP Tunneling"</span>, <span class="seriesInfo">RFC 6169</span>, <span class="seriesInfo">DOI 10.17487/RFC6169</span>, <time datetime="2011-04" class="refDate">April 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6169">https://www.rfc-editor.org/rfc/rfc6169</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC7384">[RFC7384]</dt>
         <dd>
@@ -2013,13 +2004,9 @@ For example, along the forwarding path in SRv6 network, the SR-aware firewall wi
         <dd>
 <span class="refAuthor">Previdi, S., Ed.</span>, <span class="refAuthor">Filsfils, C., Ed.</span>, <span class="refAuthor">Decraene, B.</span>, <span class="refAuthor">Litkowski, S.</span>, <span class="refAuthor">Horneffer, M.</span>, and <span class="refAuthor">R. Shakir</span>, <span class="refTitle">"Source Packet Routing in Networking (SPRING) Problem Statement and Requirements"</span>, <span class="seriesInfo">RFC 7855</span>, <span class="seriesInfo">DOI 10.17487/RFC7855</span>, <time datetime="2016-05" class="refDate">May 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7855">https://www.rfc-editor.org/rfc/rfc7855</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC8402">[RFC8402]</dt>
+<dt id="RFC7872">[RFC7872]</dt>
         <dd>
-<span class="refAuthor">Filsfils, C., Ed.</span>, <span class="refAuthor">Previdi, S., Ed.</span>, <span class="refAuthor">Ginsberg, L.</span>, <span class="refAuthor">Decraene, B.</span>, <span class="refAuthor">Litkowski, S.</span>, and <span class="refAuthor">R. Shakir</span>, <span class="refTitle">"Segment Routing Architecture"</span>, <span class="seriesInfo">RFC 8402</span>, <span class="seriesInfo">DOI 10.17487/RFC8402</span>, <time datetime="2018-07" class="refDate">July 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8402">https://www.rfc-editor.org/rfc/rfc8402</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC8754">[RFC8754]</dt>
-        <dd>
-<span class="refAuthor">Filsfils, C., Ed.</span>, <span class="refAuthor">Dukes, D., Ed.</span>, <span class="refAuthor">Previdi, S.</span>, <span class="refAuthor">Leddy, J.</span>, <span class="refAuthor">Matsushima, S.</span>, and <span class="refAuthor">D. Voyer</span>, <span class="refTitle">"IPv6 Segment Routing Header (SRH)"</span>, <span class="seriesInfo">RFC 8754</span>, <span class="seriesInfo">DOI 10.17487/RFC8754</span>, <time datetime="2020-03" class="refDate">March 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8754">https://www.rfc-editor.org/rfc/rfc8754</a>&gt;</span>. </dd>
+<span class="refAuthor">Gont, F.</span>, <span class="refAuthor">Linkova, J.</span>, <span class="refAuthor">Chown, T.</span>, and <span class="refAuthor">W. Liu</span>, <span class="refTitle">"Observations on the Dropping of Packets with IPv6 Extension Headers in the Real World"</span>, <span class="seriesInfo">RFC 7872</span>, <span class="seriesInfo">DOI 10.17487/RFC7872</span>, <time datetime="2016-06" class="refDate">June 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7872">https://www.rfc-editor.org/rfc/rfc7872</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8799">[RFC8799]</dt>
         <dd>
@@ -2033,13 +2020,13 @@ For example, along the forwarding path in SRv6 network, the SR-aware firewall wi
         <dd>
 <span class="refAuthor">Grossman, E., Ed.</span>, <span class="refAuthor">Mizrahi, T.</span>, and <span class="refAuthor">A. Hacker</span>, <span class="refTitle">"Deterministic Networking (DetNet) Security Considerations"</span>, <span class="seriesInfo">RFC 9055</span>, <span class="seriesInfo">DOI 10.17487/RFC9055</span>, <time datetime="2021-06" class="refDate">June 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9055">https://www.rfc-editor.org/rfc/rfc9055</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC9098">[RFC9098]</dt>
+        <dd>
+<span class="refAuthor">Gont, F.</span>, <span class="refAuthor">Hilliard, N.</span>, <span class="refAuthor">Doering, G.</span>, <span class="refAuthor">Kumari, W.</span>, <span class="refAuthor">Huston, G.</span>, and <span class="refAuthor">W. Liu</span>, <span class="refTitle">"Operational Implications of IPv6 Packets with Extension Headers"</span>, <span class="seriesInfo">RFC 9098</span>, <span class="seriesInfo">DOI 10.17487/RFC9098</span>, <time datetime="2021-09" class="refDate">September 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9098">https://www.rfc-editor.org/rfc/rfc9098</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC9099">[RFC9099]</dt>
         <dd>
 <span class="refAuthor">Vyncke, É.</span>, <span class="refAuthor">Chittimaneni, K.</span>, <span class="refAuthor">Kaeo, M.</span>, and <span class="refAuthor">E. Rey</span>, <span class="refTitle">"Operational Security Considerations for IPv6 Networks"</span>, <span class="seriesInfo">RFC 9099</span>, <span class="seriesInfo">DOI 10.17487/RFC9099</span>, <time datetime="2021-08" class="refDate">August 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9099">https://www.rfc-editor.org/rfc/rfc9099</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC9256">[RFC9256]</dt>
-        <dd>
-<span class="refAuthor">Filsfils, C.</span>, <span class="refAuthor">Talaulikar, K., Ed.</span>, <span class="refAuthor">Voyer, D.</span>, <span class="refAuthor">Bogdanov, A.</span>, and <span class="refAuthor">P. Mattes</span>, <span class="refTitle">"Segment Routing Policy Architecture"</span>, <span class="seriesInfo">RFC 9256</span>, <span class="seriesInfo">DOI 10.17487/RFC9256</span>, <time datetime="2022-07" class="refDate">July 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9256">https://www.rfc-editor.org/rfc/rfc9256</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9288">[RFC9288]</dt>
         <dd>
@@ -2099,11 +2086,11 @@ For example, along the forwarding path in SRv6 network, the SR-aware firewall wi
 </div>
 </address>
 <address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Luis M. Contreras</span></div>
-<div dir="auto" class="left"><span class="org">Telefonica</span></div>
+        <div dir="auto" class="left"><span class="fn nameRole">Fernando Gont</span></div>
+<div dir="auto" class="left"><span class="org">SI6 Networks</span></div>
 <div class="email">
 <span>Email:</span>
-<a href="mailto:luismiguel.contrerasmurillo@telefonica.com" class="email">luismiguel.contrerasmurillo@telefonica.com</a>
+<a href="mailto:fgont@si6networks.com" class="email">fgont@si6networks.com</a>
 </div>
 </address>
 </section>
