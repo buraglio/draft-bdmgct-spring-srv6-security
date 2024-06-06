@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-06-04T01:06:47.848221+00:00",
+  "timestamp": "2024-06-06T01:06:09.975380+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -527,26 +527,42 @@
       "id": "PR_kwDOKVF77M5oON85",
       "title": "Update draft-bdmgct-spring-srv6-security.md",
       "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/16",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "luismcontreras",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Added sub-section in section 4 related to compression",
       "createdAt": "2024-02-28T21:29:07Z",
-      "updatedAt": "2024-02-28T21:29:08Z",
+      "updatedAt": "2024-06-04T16:12:58Z",
       "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
       "baseRefName": "main",
-      "baseRefOid": "f6dfc28ab8ef457dcfdba601f8de1ea1c22210a0",
+      "baseRefOid": "361259452b1e2716b1b253c6fa1145fe7aebd0f4",
       "headRepository": "buraglio/draft-bdmgct-spring-srv6-security",
       "headRefName": "luismcontreras-patch-1",
-      "headRefOid": "4b35d0bb911653e70cf9f436d9a3f2354c7f6818",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "7d45900d416a7801909073a98c6e7daebe21c62f",
+      "closedAt": "2024-06-04T16:12:58Z",
+      "mergedAt": "2024-06-04T16:12:58Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "1bef83f15cb5e4928ee3c5e67727afbde5e2fcd8"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOKVF77M58-2md",
+          "commit": {
+            "abbreviatedOid": "4b35d0b"
+          },
+          "author": "buraglio",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-04T16:09:07Z",
+          "updatedAt": "2024-06-04T16:09:07Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 17,
@@ -601,6 +617,138 @@
       "mergeCommit": {
         "oid": "361259452b1e2716b1b253c6fa1145fe7aebd0f4"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 21,
+      "id": "PR_kwDOKVF77M5xZ-ho",
+      "title": "Update draft-bdmgct-spring-srv6-security.md",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/21",
+      "state": "MERGED",
+      "author": "talmi",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Added a description of the HMAC [RFC8754] to the mitigation section. A few minor related updates in other sections.",
+      "createdAt": "2024-06-04T10:14:33Z",
+      "updatedAt": "2024-06-04T16:15:58Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "361259452b1e2716b1b253c6fa1145fe7aebd0f4",
+      "headRepository": "talmi/draft-bdmgct-spring-srv6-security",
+      "headRefName": "hmac",
+      "headRefOid": "736dc2100ea1e85c1941d32bfae40fb2737888e3",
+      "closedAt": "2024-06-04T16:15:58Z",
+      "mergedAt": "2024-06-04T16:15:58Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "e2e6b4de772a72b04e8261077d8ce5df7e343fd5"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 22,
+      "id": "PR_kwDOKVF77M5xheGF",
+      "title": "Mostly editorial changes + improvement about the implications of IPv6 EHs handling",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/22",
+      "state": "MERGED",
+      "author": "fernandogont",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "* Remove unused references\r\n* split references into normative/non-normative\r\n* add myself as co-author\r\n* Replace reference to rfc6169 (which is really about IPv6 automatic tunnels) with a reference to RFC7872 and RFC9098.\r\n",
+      "createdAt": "2024-06-05T09:05:10Z",
+      "updatedAt": "2024-06-05T13:02:50Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "6f84171b758d52920ab6859232b8a7004e964da0",
+      "headRepository": "fernandogont/draft-bdmgct-spring-srv6-security",
+      "headRefName": "editorial",
+      "headRefOid": "f3317680145d9946f09df4342d075f2e515e8372",
+      "closedAt": "2024-06-05T13:02:49Z",
+      "mergedAt": "2024-06-05T13:02:49Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "6c1db4ecf4add429b650789e899a1ff88dc08aee"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 23,
+      "id": "PR_kwDOKVF77M5xh2Jg",
+      "title": "Scope",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/23",
+      "state": "MERGED",
+      "author": "fernandogont",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Add a \"Scope\" section that spells out the documents assessed as part of this effort.",
+      "createdAt": "2024-06-05T09:52:32Z",
+      "updatedAt": "2024-06-05T18:54:32Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "6f84171b758d52920ab6859232b8a7004e964da0",
+      "headRepository": "fernandogont/draft-bdmgct-spring-srv6-security",
+      "headRefName": "scope",
+      "headRefOid": "8112db0771953751273c1c0e1f5fb8787b2dfb36",
+      "closedAt": "2024-06-05T18:54:32Z",
+      "mergedAt": "2024-06-05T18:54:32Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "87b7d85a487e2f33933dbb8b10e9d310e724fed2"
+      },
+      "comments": [
+        {
+          "author": "fernandogont",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@buraglio : Hi nick, could you merge this one?",
+          "createdAt": "2024-06-05T15:07:59Z",
+          "updatedAt": "2024-06-05T15:07:59Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKVF77M59HdqD",
+          "commit": {
+            "abbreviatedOid": "8112db0"
+          },
+          "author": "buraglio",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "Looks good",
+          "createdAt": "2024-06-05T13:08:35Z",
+          "updatedAt": "2024-06-05T13:08:35Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 24,
+      "id": "PR_kwDOKVF77M5xi0iu",
+      "title": "Modification to the threat model",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/24",
+      "state": "OPEN",
+      "author": "fernandogont",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "I've reorganized/re-ordered the text, and have included a new section. This is the rationale:\r\n\r\n* STRIDE is a model for finding threats. So it should guide us in that regard (note that RFC3552 is rather dated).\r\n\r\n* All threats in S-T-R-I-D-E are really relevant. The new section that I've added tries to elaborate on that.\r\n\r\n* This new section also calls out the issue that protection for tampering/spoofing relies an a feature (HMAC TLV) which is really optional.\r\n\r\n* I wouldn't focus on \"packet-based attacks\" for the threat model. -- yes, that can help the thought process. But when doing threat model ing, there more to analyze of SRV6 as a \"system\". And this things become more evident if one follows a structured model such as STRIDE.\r\n\r\n* In this edit, I've removed the dsicussion on the \"CIA\" triad. Mostly because is basic security terminology, but also because just the \"CIA\" triad does not help much to find threats as (otoh) e.g. STRIDE.\r\n\r\n* There were a number of things that were flagged as \"out of scope\". I believe unless we have a very good documented rationale for that, we should cover all angles.",
+      "createdAt": "2024-06-05T11:55:53Z",
+      "updatedAt": "2024-06-05T11:55:53Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "6f84171b758d52920ab6859232b8a7004e964da0",
+      "headRepository": "fernandogont/draft-bdmgct-spring-srv6-security",
+      "headRefName": "threat-model",
+      "headRefOid": "28d3edc7b2a6d9b49502747b9f2fb0b199b76cbc",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
