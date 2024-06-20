@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-06-18T01:07:58.843603+00:00",
+  "timestamp": "2024-06-20T01:06:13.380706+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -764,7 +764,7 @@
       "labels": [],
       "body": "A set of updates related to threats and impacts, based on PR 24 (https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/24). Following a discussion of the authors, the text is adapted to be based on ANSI impact components rather than STRIDE components.\r\n\r\nThe text of this PR is based on the text of PR 24.\r\n\r\nThe main aspects of this PR:\r\n- A new section about impacts which is based on the six ANSI components, incorporating the aspects from PR 24.\r\n- The HMAC aspects of PR 24 were moved to the mitigation section.\r\n- CIA was removed from the threat model section.\r\n- Packet based attack abstractions were moved from the threat model section to the attack section.\r\n- Attack subsection heading fixed in order to be consistent.",
       "createdAt": "2024-06-13T05:58:12Z",
-      "updatedAt": "2024-06-13T05:58:12Z",
+      "updatedAt": "2024-06-19T10:34:49Z",
       "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
       "baseRefName": "main",
       "baseRefOid": "87b7d85a487e2f33933dbb8b10e9d310e724fed2",
@@ -776,7 +776,40 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOKVF77M5-0tD8",
+          "commit": {
+            "abbreviatedOid": "7082cb3"
+          },
+          "author": "fernandogont",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "Hi @talmi ! I've reviewed your proposed changes. Thoughts?",
+          "createdAt": "2024-06-19T10:00:55Z",
+          "updatedAt": "2024-06-19T10:34:49Z",
+          "comments": [
+            {
+              "originalPosition": 68,
+              "body": "These references should be clarified. RFC3552 and RFC9416 are both part of BCP72. As such, they are IETF's guidelines on how to write security considerations sections and do threat modeling, so to speak (e.g., RFC9416 even introduces requirements to spec writers).  Regarding [RFC9055] and [RFC7384], I'd reference them in the specific sections where they are applied, with the spe ific issue being discussed in such RFCs.",
+              "createdAt": "2024-06-19T10:00:55Z",
+              "updatedAt": "2024-06-19T10:34:49Z"
+            },
+            {
+              "originalPosition": 122,
+              "body": "Note: HMAC is also meant to protect against packet forging.",
+              "createdAt": "2024-06-19T10:24:21Z",
+              "updatedAt": "2024-06-19T10:34:49Z"
+            },
+            {
+              "originalPosition": 80,
+              "body": "I believe there are a number of aspects that need to be addressed here:\r\n\r\n1. Things like STRIDE, ANSI-sec, or the like, may be approaches for conducting threat modeling -- i.e., finding possible threats. However, they don't really classify the impact, because the impact may be affected by a number of aspects, including mitigating factors or techniques.\r\n\r\n2. The method/technique one uses simply has the goal of finding threats. As such, i wouldn't flag any threats as \"out of scope\" -- they actually aren't. If anything, we might be unable to find any. \r\n3. Rather than listing the \"threats\" in ANSI-sec, I would probably add a top level \"threats\" section, and then add one level-2 section for each of the threts, where we can elaborate how each of \"unauthorized access\", \"masquerade\" (etc) could be launched/implemented in a SRV6 domain.\r\ni.e., rather than focus on the model in ANSI-sec, just I'd just make use of it. -- and if we were to find a threat that doesn;t fit cleanly in the taxonomy in ANSI-sec,  nevertheless add it as a level-2 section (child of top level \"Threats\" section), together with the other ones. -- IOW, any threat-modeling framework or methodology are simply tools to find threats, as opposed to e.g., an exhaustive/specific taxonomy for threats.\r\n",
+              "createdAt": "2024-06-19T10:33:02Z",
+              "updatedAt": "2024-06-19T10:34:49Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 26,
