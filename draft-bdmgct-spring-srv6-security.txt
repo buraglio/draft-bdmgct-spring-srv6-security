@@ -5,14 +5,14 @@
 Source Packet Routing in Networking                          N. Buraglio
 Internet-Draft                                   Energy Sciences Network
 Intended status: Standards Track                              T. Mizrahi
-Expires: 7 December 2024                                          Huawei
+Expires: 25 December 2024                                         Huawei
                                                                  T. Tong
                                                             China Unicom
                                                          L. M. Contreras
                                                               Telefonica
                                                                  F. Gont
                                                             SI6 Networks
-                                                             5 June 2024
+                                                            23 June 2024
 
 
                       SRv6 Security Considerations
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 December 2024.
+   This Internet-Draft will expire on 25 December 2024.
 
 Copyright Notice
 
@@ -84,54 +84,44 @@ Table of Contents
      3.1.  Requirements Language
      3.2.  Terminology
    4.  Threat Model
-     4.1.  Security Components
-       4.1.1.  Confidentiality
-       4.1.2.  Integrity
-       4.1.3.  Availability
-     4.2.  Threat Abstractions
-     4.3.  Impact
-     4.4.  Threat Taxonomy
-   5.  Attacks
-     5.1.  SR Modification Attack
-       5.1.1.  Overview
-       5.1.2.  Scope
-       5.1.3.  Impact
-     5.2.  Attack on compressed headers
-       5.2.1.  Overview
-       5.2.2.  Scope
-       5.2.3.  Impact
-     5.3.  Reconnaissance
-       5.3.1.  Overview
-       5.3.2.  Scope
-       5.3.3.  Impact
-     5.4.  Packet Insertion
-       5.4.1.  Overview
-       5.4.2.  Scope
-       5.4.3.  Impact
-     5.5.  Control and Management Plane Attacks
-       5.5.1.  Overview
-       5.5.2.  Scope
-       5.5.3.  Impact
-     5.6.  Other Attacks
-   6.  Mitigation Methods
-     6.1.  Filtering
-       6.1.1.  SRH Filtering
-       6.1.2.  Address Range Filtering
-     6.2.  Encapsulation of Packets
-     6.3.  Hashed Message Authentication Code (HMAC)
-   7.  Implications on Existing Equipment
-     7.1.  Limitations in Filtering Capabilities
-     7.2.  Middlebox Filtering Issues
-     7.3.  Emerging technology growing pains
-   8.  Gap Analysis
-   9.  Security Considerations
-   10. IANA Considerations
-   11. Topics for Further Consideration
-   12. Security Considerations
-   13. IANA Considerations
-   14. References
-     14.1.  Normative References
-     14.2.  Informative References
+   5.  Impact
+   6.  Attacks
+     6.1.  Attack Abstractions
+     6.2.  SR Modification Attack
+       6.2.1.  Overview
+       6.2.2.  Scope
+       6.2.3.  Impact
+       6.2.4.  Overview
+       6.2.5.  Scope
+       6.2.6.  Impact
+     6.3.  Packet Insertion
+       6.3.1.  Overview
+       6.3.2.  Scope
+       6.3.3.  Impact
+     6.4.  Control and Management Plane Attacks
+       6.4.1.  Overview
+       6.4.2.  Scope
+       6.4.3.  Impact
+     6.5.  Other Attacks
+   7.  Mitigation Methods
+     7.1.  Filtering
+       7.1.1.  SRH Filtering
+       7.1.2.  Address Range Filtering
+     7.2.  Encapsulation of Packets
+     7.3.  Hashed Message Authentication Code (HMAC)
+   8.  Implications on Existing Equipment
+     8.1.  Limitations in Filtering Capabilities
+     8.2.  Middlebox Filtering Issues
+     8.3.  Emerging technology growing pains
+   9.  Gap Analysis
+   10. Security Considerations
+   11. IANA Considerations
+   12. Topics for Further Consideration
+   13. Security Considerations
+   14. IANA Considerations
+   15. References
+     15.1.  Normative References
+     15.2.  Informative References
    Acknowledgments
    Authors' Addresses
 
@@ -222,103 +212,9 @@ Table of Contents
 
    This section introduces the threat model that is used in this
    document.  The model is based on terminology from the Internet threat
-   model [RFC3552], as well as some concepts from [RFC9055] and
-   [RFC7384].  Details regarding inter-domain segment routing (SR) are
-   out of scope for this document.
-
-4.1.  Security Components
-
-   The main components of information security are confidentiality,
-   integrity and availability, often referred to by the acronym CIA.  A
-   short description of each of these components is presented below in
-   the context of SRv6 security.
-
-4.1.1.  Confidentiality
-
-   The purpose of confidentiality is to protect the user data from being
-   exposed to unauthorized users, i.e., preventing attackers from
-   eavesdropping to user data.  The confidentiality of user data is
-   outside the scope of this document.  However, confidentiality aspects
-   of SRv6-related information are within the scope; collecting
-   information about SR endpoint addresses, SR policies, and network
-   topologies, is a specific form of reconnaissance, which is further
-   discussed in Section 5.3.
-
-4.1.2.  Integrity
-
-   Preventing information from being modified is a key property of
-   information security.  Other aspects of integrity include
-   authentication, which is the ability to verify the source of
-   information, and authorization, which enforces different permission
-   policies to different users or sources.  In the context of SRv6,
-   compromising the integrity may result in packets being routed in
-   different paths than they were intended to be routed through, which
-   may have various implications, as further discussed in Section 5.
-
-4.1.3.  Availability
-
-   Protecting the availability of a system means keeping the system
-   running continuously without disruptions.  The availability aspects
-   of SRv6 include the ability of attackers to leverage SRv6 as a means
-   for compromising the performance of a network or for causing Denial
-   of Service (DoS).
-
-4.2.  Threat Abstractions
-
-   A security attack is implemented by performing a set of one or more
-   basic operations.  These basic operations (abstractions) are as
-   follows:
-
-   *  Passive listening: an attacker who reads packets off the network
-      can collect information about SR endpoint addresses, SR policies
-      and the network topology.  This information can then be used to
-      deploy other types of attacks.
-
-   *  Packet replaying: in a replay attack the attacker records one or
-      more packets and transmits them at a later point in time.
-
-   *  Packet insertion: an attacker generates and injects a packet to
-      the network.  The generated packet may be maliciously crafted to
-      include false information, including for example false addresses
-      and SRv6-related information.
-
-   *  Packet deletion: by intercepting and removing packets from the
-      network, an attacker prevents these packets from reaching their
-      destination.  Selective removal of packets may, in some cases,
-      cause more severe damage than random packet loss.
-
-   *  Packet modification: the attacker modifies packets during transit.
-
-4.3.  Impact
-
-   One of the important aspects of a threat analysis is the potential
-   impact of each threat.  For example, an attack on SRv6 may cause
-   packets to be forwarded through a different path than they were
-   intended to be forwarded through, or in other cases may compromise
-   the availability of the system.
-
-   The STRIDE approach [STRIDE] classifies threats according to their
-   potential impact.  STRIDE stands for Spoofing, Tampering,
-   Repudiation, Information disclosure, Denial of service and Elevation
-   of privilege.  Tampering and denial of service are the most relevant
-   to SRv6.  The remaing aspects of STRIDE, namely spoofing,
-   repudiation, information disclosure and elevation of privilege are
-   applicable to user data, and are not relevant to the SRv6 data plane.
-   Although these aspects can be analyzed in the context of the control
-   plane and/or management plane of networks in general, these aspects
-   are not specific to SRv6 and are therefore not discussed further in
-   the current document.
-
-   The impact of each class of attacks is widely discussed in Section 5,
-   with a focus on tampering, denial of service and reconnaissance, as
-   well as other derived aspects, which are discussed in further detail.
-
-4.4.  Threat Taxonomy
-
-   The threat terminology used in this document is based on [RFC3552].
-   Threats are classified according to two main criteria: internal vs.
-   external attackers, and on-path vs. off-path attackers, as discussed
-   in [RFC9055].
+   model [RFC3552], as well as some concepts from [RFC9055], [RFC7384]
+   and [RFC9416].  Details regarding inter-domain segment routing (SR)
+   are out of scope for this document.
 
    Internal vs. External:  An internal attacker in the context of SRv6
       is an attacker who is located within an SR domain.  Specifically,
@@ -397,13 +293,105 @@ Table of Contents
    attackers and there is no assumption about whether the SR domain is
    cryptographically secured or not.  Thus, some of the attacks that are
    described in the next section can be mitigated by cryptographic
-   means, as further discussed in Section 6.3.
+   means, as further discussed in Section 7.3.
 
-5.  Attacks
+5.  Impact
 
-5.1.  SR Modification Attack
+   One of the important aspects of a threat analysis is the potential
+   impact of each threat.  SRv6 allows for the sending of IPv6 packets
+   via arbitrary paths.  An attack on SRv6 may cause packets to traverse
+   arbitrary paths within an SR domain.  This may allow an attacker to
+   perform a number of attacks on the victim networks and hosts that
+   would be mostly unfeasible for a non-SRv6 environment.
 
-5.1.1.  Overview
+   The threat model in [ANSI-Sec] classifies threats according to their
+   potential impact, defining six categories.  For each of these
+   categories we briefly discuss its applicability to SRv6 attacks.
+
+   *  Unauthorized Access: an attack that results in unauthorized access
+      might be achieved by having an attacker leverage SRv6 to
+      circumvent security controls as a result of security devices being
+      unable to enforce security policies in the presence of IPv6
+      Extension Headers (see [RFC9098]), or by directing packets through
+      paths where packet-filtering policies are not enforced.
+
+   *  Masquerade: various attacks that result in spoofing or
+      masquerading are possible in IPv6 networks (e.g., [RFC9098]).
+      However, these attacks are not specific to SRv6, and are therefore
+      not within the scope of this document.
+
+   *  System Integrity: attacks on SRv6 can manipulate the path and the
+      processing that the packet is subject to, thus compromising the
+      integrity of the system.  Furthermore, an attack that compromises
+      the control plane and/or the management plane is also a means of
+      impacting the system integrity.
+
+   *  Communication Integrity: SRv6 attacks may cause packets to be
+      forwarded through paths that the attacker controls, which may
+      facilitate other attacks that compromise the integrity of user
+      data.  Integrity protection of user data, which is implemented in
+      higher layers, avoids these aspects, and therefore communication
+      integrity is not within the scope of this document.
+
+   *  Confidentiality: as in communication integrity, packets forwarded
+      through uninteded paths may traverse nodes controlled by the
+      attacker.  Since eavsedropping to user data can be avoided by
+      using encryption in higher layers, it is not within the scope of
+      this document.  However, eavesdropping to a network that uses SRv6
+      allows the attacker to collect information about SR endpoint
+      addresses, SR policies, and network topologies, is a specific form
+      of reconnaissance
+
+   *  Denial of Service: the availability aspects of SRv6 include the
+      ability of attackers to leverage SRv6 as a means for compromising
+      the performance of a network or for causing Denial of Service
+      (DoS).  Compromising the availability of the system can be
+      achieved by sending multiple SRv6-enabled packets to/through
+      victim nodes, where the SRv6-enabled packets result in a negative
+      performance impact of the victim systems (see [RFC9098] for
+      further details).  Alternatively, an attacker might achieve attack
+      amplification by causing packets to "bounce" multiple times
+      between a set of victim nodes, with the goal of exhausing
+      processing resources and/or bandwidth (see [CanSecWest2007] for a
+      discussion of this type of attack).
+
+   Section 6 discusses specific implementations of these attacks, and
+   possible mitigations are discussed in Section 7.
+
+6.  Attacks
+
+6.1.  Attack Abstractions
+
+   Packet manipulation and processing attacks can be implemented by
+   performing a set of one or more basic operations.  These basic
+   operations (abstractions) are as follows:
+
+   *  Passive listening: an attacker who reads packets off the network
+      can collect information about SR endpoint addresses, SR policies
+      and the network topology.  This information can then be used to
+      deploy other types of attacks.
+
+   *  Packet replaying: in a replay attack the attacker records one or
+      more packets and transmits them at a later point in time.
+
+   *  Packet insertion: an attacker generates and injects a packet to
+      the network.  The generated packet may be maliciously crafted to
+      include false information, including for example false addresses
+      and SRv6-related information.
+
+   *  Packet deletion: by intercepting and removing packets from the
+      network, an attacker prevents these packets from reaching their
+      destination.  Selective removal of packets may, in some cases,
+      cause more severe damage than random packet loss.
+
+   *  Packet modification: the attacker modifies packets during transit.
+
+   This section describes attacks that are based on packet manipulation
+   and processing, as well as attacks performed by other means.
+
+6.2.  SR Modification Attack
+
+6.2.1.  Overview
 
    An attacker can modify a packet while it is in transit in a way that
    directly affects the packet's SR policy.  The modification can affect
@@ -427,14 +415,14 @@ Table of Contents
    encode multiple compressed SIDs within a single 128-bit SID, and thus
    modifying the DA can affect one or more hops in the SR policy.
 
-5.1.2.  Scope
+6.2.2.  Scope
 
    An SR modification attack can be performed by on-path attackers.  As
    discussed in Section 4, it assumed that filtering is deployed at the
    domain boundaries, thus limiting the ability of implementing SR
    modification attacks to on-path internal attackers.
 
-5.1.3.  Impact
+6.2.3.  Impact
 
    The SR modification attack allows an attacker to change the SR policy
    that the packet is steered through and thus to manipulate the path
@@ -487,57 +475,7 @@ Table of Contents
       exhaustion, which may in severe cases cause Denial of Service
       (DoS).
 
-5.2.  Attack on compressed headers
-
-5.2.1.  Overview
-
-   Header compression in SRv6 allows to encode multiple compressed SIDs
-   within a single 128-bit SID.  That multiple compressed SIDs are
-   concatenated in the DA reflecting each of the nodes that the flow
-   will traverse up to reaching its destination, thus conforming the
-   traffic engineering path to follow.  As long as the flow traverses
-   the SRv6 nodes, the compressed SIDs corresponding to each of those
-   nodes is removed with the DA being shifted to the left.  The process
-   is repeated up to reaching the last SRv6 node.
-
-   With this processing of the SIDs, each node only determines the next
-   compressed SID applicable only after processing its own corresponding
-   compressed SID.  It is only at that moment where issues can be
-   revealed in terms of the validity of the next compressed SID.
-
-5.2.2.  Scope
-
-   A modification or alteration of the compressed header can motivate
-   different undesirable situations.  An attack of these characteristics
-   can be performed by on-path attackers.
-
-   A first case is that the same kind of issues as the ones identified
-   for SR modification also apply in this case, despite the encoding of
-   the traffic engineered path is different.
-
-   A second case can be the insertion of a wrong compressed SID, or the
-   modification of an existing one, in some point of the DA implies the
-   processing of the packet flows up to a point in the network where no
-   longer can be forwarded.
-
-   Finally, it is also possible the creation of loops by sequencing the
-   compressed SIDs in a manner that the flows are rerouted towards
-   preceding nodes.
-
-5.2.3.  Impact
-
-   Similar effects as the ones described for the case of SR modification
-   also apply to this case, in terms of affection to the flow steering.
-
-   Furthermore, the attacks focused on introducing wrong compressed SIDs
-   or the creation of loops can generate DoS situations either by
-   keeping the nodes processing multiple flows with wrong compressed
-   SIDs, or by generating artificial traffic between nodes in the
-   network which can lead to link congestion.
-
-5.3.  Reconnaissance
-
-5.3.1.  Overview
+6.2.4.  Overview
 
    An on-path attacker can passively listen to packets and specifically
    to the SRv6-related information that is conveyed in the IPv6 header
@@ -545,7 +483,7 @@ Table of Contents
    about SIDs and policies, and thus to facilitate mapping the structure
    of the network and its potential vulnerabilities.
 
-5.3.2.  Scope
+6.2.5.  Scope
 
    A recon attack is limited to on-path internal attackers.
 
@@ -555,23 +493,23 @@ Table of Contents
    SRv6-related data in a malfunctioning network in which SRv6-related
    information is leaked through the boundaries of an SR domain.
 
-5.3.3.  Impact
+6.2.6.  Impact
 
    While the information collected in a recon attack does not compromise
    the confidentiality of the user data, it allows an attacker to gather
    information about the network which in turn can be used to enable
    other attacks.
 
-5.4.  Packet Insertion
+6.3.  Packet Insertion
 
-5.4.1.  Overview
+6.3.1.  Overview
 
    In this attack packets are inserted (injected) into the network with
    a segment list that defines a specific SR policy.  The attack can be
    applied either by using synthetic packets or by replaying previously
    recorded packets.
 
-5.4.2.  Scope
+6.3.2.  Scope
 
    Packet insertion can be performed by internal attackers, either on-
    path or off-path.  In the case of a replay attack, recording packets
@@ -581,15 +519,15 @@ Table of Contents
    SRv6 domains are assumed to be filtered in a way that mitigates
    insertion attacks from external attackers.
 
-5.4.3.  Impact
+6.3.3.  Impact
 
    The main impact of this attack is resource exhaustion which
    compromises the availability of the network, as described in
-   Section 5.1.3.
+   Section 6.2.3.
 
-5.5.  Control and Management Plane Attacks
+6.4.  Control and Management Plane Attacks
 
-5.5.1.  Overview
+6.4.1.  Overview
 
    Depending on the control plane protocols used in a network, it is
    possible to use the control plane as a way of compromising the
@@ -603,7 +541,7 @@ Table of Contents
    attacks, including manipulating the SR policies or compromising the
    network availability.
 
-5.5.2.  Scope
+6.4.2.  Scope
 
    Control plane attacks can be performed by internal attackers.
    Injection can be performed by off-path attackers, while removal,
@@ -619,19 +557,19 @@ Table of Contents
    protocols use authentication and security mechanisms to validate the
    authenticity of information.
 
-5.5.3.  Impact
+6.4.3.  Impact
 
    A compromised control plane or management plane can impact the
    network in various possible ways.  SR policies can be manipulated by
    the attacker to avoid specific paths or to prefer specific paths, as
-   described in Section 5.1.3.  Alternatively, the attacker can
+   described in Section 6.2.3.  Alternatively, the attacker can
    compromise the availability, either by defining SR policies that load
-   the network resources, as described in Section 5.1.3, or by
+   the network resources, as described in Section 6.2.3, or by
    blackholing some or all of the SR policies.  A passive attacker can
    use the control plane or management plane messages as a means for
-   recon, in a similar manner to Section 5.1.3.
+   recon, in a similar manner to Section 6.2.3.
 
-5.6.  Other Attacks
+6.5.  Other Attacks
 
    Various attacks which are not specific to SRv6 can be used to
    compromise networks that deploy SRv6.  For example, spoofing is not
@@ -643,15 +581,15 @@ Table of Contents
    subject to any existing or emerging IPv6 vulnerabilities [RFC9099],
    however, this is out of scope for this document.
 
-6.  Mitigation Methods
+7.  Mitigation Methods
 
    This section presents methods that can be used to mitigate the
    threats and issues that were presented in previous sections.  This
    section does not introduce new security solutions or protocols.
 
-6.1.  Filtering
+7.1.  Filtering
 
-6.1.1.  SRH Filtering
+7.1.1.  SRH Filtering
 
    SRv6 packets rely on the routing header in order to steer traffic
    that adheres to a defined SRv6 traffic policy.  Thus, SRH filtering
@@ -667,7 +605,7 @@ Table of Contents
    Header is not relevant, and thus filtering can only be applied baed
    on the address range, as described below.
 
-6.1.2.  Address Range Filtering
+7.1.2.  Address Range Filtering
 
    The IPv6 destination address can be filtered at the SR ingress node
    in order to mitigate external attacks.  An ingress packet with a
@@ -682,7 +620,7 @@ Table of Contents
    result in an fail open scenario when appropriate border filtering is
    not implemented or supported.
 
-6.2.  Encapsulation of Packets
+7.2.  Encapsulation of Packets
 
    Packets steered in an SR domain are often encapsulated in an IPv6
    encapsulation.  This mechanism allows for encapsulation of both IPv4
@@ -690,7 +628,7 @@ Table of Contents
    and decapsulation at the SR egress node mitigates the ability of
    external attackers to impact SR steering within the domain.
 
-6.3.  Hashed Message Authentication Code (HMAC)
+7.3.  Hashed Message Authentication Code (HMAC)
 
    The SRH can be secured by an HMAC TLV, as defined in [RFC8754].  The
    HMAC is an optional TLV that secures the segment list, the SRH flags,
@@ -698,18 +636,30 @@ Table of Contents
    key is used in the generation and verification of the HMAC.
 
    Using an HMAC in an SR domain can mitigate some of the SR
-   Modification Attacks (Section 5.1).  For example, the segment list is
-   protected by the HMAC.  However, an internal attacker who does not
-   have access to the pre-shared key can capture legitimate packets, and
-   later replay the SRH and HMAC from these recorded packets.  This
-   allows the attacker to insert the previously recorded SRH and HMAC
-   into a newly injected packet.  An on-path internal attacker can also
-   replace the SRH of an in-transit packet with a different SRH that was
-   previously captured.
+   Modification Attacks (Section 6.2).  For example, the segment list is
+   protected by the HMAC.
 
-7.  Implications on Existing Equipment
+   The following aspects of the HAMC should be considered:
 
-7.1.  Limitations in Filtering Capabilities
+   *  The HMAC TLV is OPTIONAL.
+
+   *  While it is presumed that unique keys will be employed by each
+      participating node, in scenarios where the network resorts to
+      manual configuration of pre-shared keys, the same key might be
+      reused by multiple systems as an (incorrect) shortcut to keeeping
+      the problem of pre-shared key configuration manageable.
+
+   *  An internal attacker who does not have access to the pre-shared
+      key can capture legitimate packets, and later replay the SRH and
+      HMAC from these recorded packets.  This allows the attacker to
+      insert the previously recorded SRH and HMAC into a newly injected
+      packet.  An on-path internal attacker can also replace the SRH of
+      an in-transit packet with a different SRH that was previously
+      captured.
+
+8.  Implications on Existing Equipment
+
+8.1.  Limitations in Filtering Capabilities
 
    [RFC9288] provides recommendations on the filtering of IPv6 packets
    containing IPv6 extension headers at transit routers.  SRv6 relies on
@@ -718,7 +668,7 @@ Table of Contents
    to filter and in some cases even provide logging for IPv6 next-header
    43 Routing type 4.
 
-7.2.  Middlebox Filtering Issues
+8.2.  Middlebox Filtering Issues
 
    When an SRv6 packet is forwarded in the SRv6 domain, its destination
    address changes constantly, the real destination address is hidden.
@@ -759,23 +709,23 @@ Table of Contents
    extension headers may result in SRv6 packets being dropped RFC7872
    [RFC9098].
 
-7.3.  Emerging technology growing pains
+8.3.  Emerging technology growing pains
 
-8.  Gap Analysis
+9.  Gap Analysis
 
    This section analyzes the security related gaps with respect to the
    threats and issues that were discussed in the previous sections.
 
-9.  Security Considerations
+10.  Security Considerations
 
    The security considerations of SRv6 are presented throughout this
    document.
 
-10.  IANA Considerations
+11.  IANA Considerations
 
    This document has no IANA actions.
 
-11.  Topics for Further Consideration
+12.  Topics for Further Consideration
 
    This section lists topics that will be discussed further before
    deciding whether they need to be included in this document, as well
@@ -839,18 +789,18 @@ Table of Contents
        |                                                               |
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-12.  Security Considerations
+13.  Security Considerations
 
    The security considerations of SRv6 are presented throughout this
    document.
 
-13.  IANA Considerations
+14.  IANA Considerations
 
    This document has no IANA actions.
 
-14.  References
+15.  References
 
-14.1.  Normative References
+15.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -898,7 +848,17 @@ Table of Contents
               Service Delivery", RFC 9524, DOI 10.17487/RFC9524,
               February 2024, <https://www.rfc-editor.org/rfc/rfc9524>.
 
-14.2.  Informative References
+15.2.  Informative References
+
+   [ANSI-Sec] "Operations, Administration, Maintenance, and Provisioning
+              Security Requirements for the Public Telecommunications
+              Network: A Baseline of Security Requirements for the
+              Management Plane", 2003, <https://www.ieee802.org/1/ecsg-
+              linksec/meetings/July03/3m150075.pdf>.
+
+   [CanSecWest2007]
+              "IPv6 Routing Header Security", 2007, <https://airbus-
+              seclab.github.io/ipv6/IPv6_RH_security-csw07.pdf>.
 
    [I-D.ietf-spring-srv6-srh-compression]
               Cheng, W., Filsfils, C., Li, Z., Decraene, B., and F.
@@ -962,6 +922,11 @@ Table of Contents
               IPv6 Packets Containing IPv6 Extension Headers at Transit
               Routers", RFC 9288, DOI 10.17487/RFC9288, August 2022,
               <https://www.rfc-editor.org/rfc/rfc9288>.
+
+   [RFC9416]  Gont, F. and I. Arce, "Security Considerations for
+              Transient Numeric Identifiers Employed in Network
+              Protocols", BCP 72, RFC 9416, DOI 10.17487/RFC9416, July
+              2023, <https://www.rfc-editor.org/rfc/rfc9416>.
 
    [STRIDE]   "The STRIDE Threat Model", 2018,
               <https://msdn.microsoft.com/en-us/library/
