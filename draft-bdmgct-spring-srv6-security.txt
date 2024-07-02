@@ -5,14 +5,14 @@
 Source Packet Routing in Networking                          N. Buraglio
 Internet-Draft                                   Energy Sciences Network
 Intended status: Standards Track                              T. Mizrahi
-Expires: 25 December 2024                                         Huawei
+Expires: 3 January 2025                                           Huawei
                                                                  T. Tong
                                                             China Unicom
                                                          L. M. Contreras
                                                               Telefonica
                                                                  F. Gont
                                                             SI6 Networks
-                                                            23 June 2024
+                                                             2 July 2024
 
 
                       SRv6 Security Considerations
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 December 2024.
+   This Internet-Draft will expire on 3 January 2025.
 
 Copyright Notice
 
@@ -112,16 +112,14 @@ Table of Contents
    8.  Implications on Existing Equipment
      8.1.  Limitations in Filtering Capabilities
      8.2.  Middlebox Filtering Issues
-     8.3.  Emerging technology growing pains
-   9.  Gap Analysis
-   10. Security Considerations
-   11. IANA Considerations
-   12. Topics for Further Consideration
-   13. Security Considerations
-   14. IANA Considerations
-   15. References
-     15.1.  Normative References
-     15.2.  Informative References
+   9.  Security Considerations
+   10. IANA Considerations
+   11. Topics for Further Consideration
+   12. Security Considerations
+   13. IANA Considerations
+   14. References
+     14.1.  Normative References
+     14.2.  Informative References
    Acknowledgments
    Authors' Addresses
 
@@ -709,23 +707,16 @@ Table of Contents
    extension headers may result in SRv6 packets being dropped RFC7872
    [RFC9098].
 
-8.3.  Emerging technology growing pains
-
-9.  Gap Analysis
-
-   This section analyzes the security related gaps with respect to the
-   threats and issues that were discussed in the previous sections.
-
-10.  Security Considerations
+9.  Security Considerations
 
    The security considerations of SRv6 are presented throughout this
    document.
 
-11.  IANA Considerations
+10.  IANA Considerations
 
    This document has no IANA actions.
 
-12.  Topics for Further Consideration
+11.  Topics for Further Consideration
 
    This section lists topics that will be discussed further before
    deciding whether they need to be included in this document, as well
@@ -789,18 +780,18 @@ Table of Contents
        |                                                               |
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-13.  Security Considerations
+12.  Security Considerations
 
    The security considerations of SRv6 are presented throughout this
    document.
 
-14.  IANA Considerations
+13.  IANA Considerations
 
    This document has no IANA actions.
 
-15.  References
+14.  References
 
-15.1.  Normative References
+14.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -848,7 +839,7 @@ Table of Contents
               Service Delivery", RFC 9524, DOI 10.17487/RFC9524,
               February 2024, <https://www.rfc-editor.org/rfc/rfc9524>.
 
-15.2.  Informative References
+14.2.  Informative References
 
    [ANSI-Sec] "Operations, Administration, Maintenance, and Provisioning
               Security Requirements for the Public Telecommunications
