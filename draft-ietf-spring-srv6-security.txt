@@ -138,19 +138,19 @@ Table of Contents
    security considerations are:
 
    *  SRv6 makes use of the SRH which is a new type of Routing Extension
-      Header.  Some of the security considerations of the SRH are
-      discussed in [RFC5095] and [RFC8754].
+      Header.  Some security considerations of the SRH are discussed in
+      [RFC5095] and [RFC8754].
 
-   *  SRv6 consists of using the SRH on the IPv6 dataplane, and
+   *  SRv6 consists of using the SRH on the IPv6 data-plane, and
       therefore known security considerations of IPv6 [RFC9099] are
       applicable to SRv6 as well.
 
    *  While SRv6 uses what appear to be typical IPv6 addresses, the
       address space is processed differently by segment endpoints.  A
-      typical IPv6 unicast address is comprised of a network prefix,
-      host identifier, and a subnet mask.  A typical SRv6 segment
-      identifier (SID) is broken into a locator, a function identifier,
-      and optionally, function arguments.  The locator must be routable,
+      typical IPv6 unicast address is composed of a network prefix, host
+      identifier, and a subnet mask.  A typical SRv6 segment identifier
+      (SID) is broken into a locator, a function identifier, and
+      optionally, function arguments.  The locator must be routable,
       which enables both SRv6 capable and incapable devices to
       participate in forwarding, either as normal IPv6 unicast or SRv6.
       The capability to operate in environments that may have gaps in
@@ -269,7 +269,7 @@ Table of Contents
    In the context of the current document it is assumed that SRv6 is
    deployed within a limited domain [RFC8799] with filtering at the
    domain boundaries, forming a trusted domain with respect to SRv6.
-   Thus, external attackers are outside of the trusted domain.
+   Thus, external attackers are outside the trusted domain.
    Specifically, an attack on one domain that is invoked from within a
    different domain is considered an external attack in the context of
    the current document.
@@ -332,8 +332,8 @@ Table of Contents
       integrity is not within the scope of this document.
 
    *  Confidentiality: as in communication integrity, packets forwarded
-      through uninteded paths may traverse nodes controlled by the
-      attacker.  Since eavsedropping to user data can be avoided by
+      through unintended paths may traverse nodes controlled by the
+      attacker.  Since eavesdropping to user data can be avoided by
       using encryption in higher layers, it is not within the scope of
       this document.  However, eavesdropping to a network that uses SRv6
       allows the attacker to collect information about SR endpoint
@@ -349,7 +349,7 @@ Table of Contents
       performance impact of the victim systems (see [RFC9098] for
       further details).  Alternatively, an attacker might achieve attack
       amplification by causing packets to "bounce" multiple times
-      between a set of victim nodes, with the goal of exhausing
+      between a set of victim nodes, with the goal of exhausting
       processing resources and/or bandwidth (see [CanSecWest2007] for a
       discussion of this type of attack).
 
@@ -395,23 +395,23 @@ Table of Contents
    directly affects the packet's SR policy.  The modification can affect
    the destination address of the IPv6 header and/or the SRH.  In this
    context SRH modification may refer to inserting an SRH, removing an
-   SRH, or modifying some of the fields of an existing SRH.
+   SRH, or modifying some fields of an existing SRH.
 
    Modification of an existing SRH can be further classified into
    several possible attacks.  Specifically, the attack can include
    adding one or more SIDs to the segment list, removing one or more
-   SIDs or replacing some of the SIDs with differnet SIDs.  Another
-   possible type of modification is by adding, removing or modifying TLV
-   fields in the SRH.
+   SIDs or replacing some SIDs with different SIDs.  Another possible
+   type of modification is by adding, removing or modifying TLV fields
+   in the SRH.
 
    When an SRH is present modifying the destination address (DA) of the
    IPv6 header affects the active segment.  However, DA modification can
    affect the SR policy even in the absence of an SRH.  One example is
    modifying a DA which is used as a Binding SID [RFC8402].  Another
    example is modifying a DA which represents a compressed segment list
-   [I-D.ietf-spring-srv6-srh-compression].  SRH compression allows to
-   encode multiple compressed SIDs within a single 128-bit SID, and thus
-   modifying the DA can affect one or more hops in the SR policy.
+   [I-D.ietf-spring-srv6-srh-compression].  SRH compression allows
+   encoding multiple compressed SIDs within a single 128-bit SID, and
+   thus modifying the DA can affect one or more hops in the SR policy.
 
 6.2.2.  Scope
 
@@ -451,7 +451,7 @@ Table of Contents
       access to and has more processing resources.
 
    Forwarding through a path that causes the packet to be discarded:  SR
-      modification may casue a packet to be forwarded to a point in the
+      modification may cause a packet to be forwarded to a point in the
       network where it can no longer be forwarded, causing the packet to
       be discarded.
 
@@ -565,7 +565,7 @@ Table of Contents
    the network resources, as described in Section 6.2.3, or by
    blackholing some or all of the SR policies.  A passive attacker can
    use the control plane or management plane messages as a means for
-   recon, in a similar manner to Section 6.2.3.
+   recon, similarly to Section 6.2.3.
 
 6.5.  Other Attacks
 
@@ -751,7 +751,7 @@ Table of Contents
       IPv6 Destination address can be modified along the path.  As a
       result, some existing middleboxes which verify the L4 checksum
       might miscalculate the checksum.  This issue is currently under
-      discusison in the SPRING WG.
+      discussion in the SPRING WG.
 
    *  Segment Routing Header figure: the SRv6 Segment Routing Header
       (SRH) is defined in [RFC8754].
