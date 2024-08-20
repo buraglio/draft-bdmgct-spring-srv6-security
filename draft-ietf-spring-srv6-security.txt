@@ -5,18 +5,18 @@
 Source Packet Routing in Networking                          N. Buraglio
 Internet-Draft                                   Energy Sciences Network
 Intended status: Standards Track                              T. Mizrahi
-Expires: 3 January 2025                                           Huawei
+Expires: 21 February 2025                                         Huawei
                                                                  T. Tong
                                                             China Unicom
                                                          L. M. Contreras
                                                               Telefonica
                                                                  F. Gont
                                                             SI6 Networks
-                                                             2 July 2024
+                                                          20 August 2024
 
 
-                      SRv6 Security Considerations
-                draft-bdmgct-spring-srv6-security-latest
+              Segment Routing IPv6 Security Considerations
+                 draft-ietf-spring-srv6-security-latest
 
 Abstract
 
@@ -34,8 +34,8 @@ About This Document
    The latest revision of this draft can be found at
    https://buraglio.github.io/draft-bdmgct-spring-srv6-security/draft-
    bdmgct-spring-srv6-security.html.  Status information for this
-   document may be found at https://datatracker.ietf.org/doc/draft-
-   bdmgct-spring-srv6-security/.
+   document may be found at https://datatracker.ietf.org/doc/draft-ietf-
+   spring-srv6-security/.
 
    Discussion of this document takes place on the Source Packet Routing
    in Networking Working Group mailing list (mailto:spring@ietf.org),
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 January 2025.
+   This Internet-Draft will expire on 21 February 2025.
 
 Copyright Notice
 
@@ -127,11 +127,11 @@ Table of Contents
 
    Segment Routing (SR) [RFC8402] utilizing an IPv6 data plane is a
    source routing model that leverages an IPv6 underlay and an IPv6
-   extension header called the Segment Routing Header (SRH) to signal
-   and control the forwarding and path of packets by imposing an ordered
-   list of path details that are processed at each hop along the
+   extension header called the Segment Routing Header (SRH) [RFC8754] to
+   signal and control the forwarding and path of packets by imposing an
+   ordered list of path details that are processed at each hop along the
    signaled path.  Because SRv6 is fundamentally bound to the IPv6
-   protocol, and because of the reliance of a new header there are
+   protocol, and because of the reliance on a new header there are
    security considerations which must be noted or addressed in order to
    operate an SRv6 network in a reliable and secure manner.
    Specifically, some of the main properties of SRv6 that affect the
@@ -600,7 +600,7 @@ Table of Contents
    [I-D.ietf-spring-srv6-srh-compression], SRH compression does not
    necessarily use an SRH.  In practice this means that when compressed
    segment lists are used without an SRH, filtering based on the Next
-   Header is not relevant, and thus filtering can only be applied baed
+   Header is not relevant, and thus filtering can only be applied based
    on the address range, as described below.
 
 7.1.2.  Address Range Filtering
@@ -612,7 +612,7 @@ Table of Contents
 
    In order to apply such a filtering mechanism the SR domain needs to
    have an allocated address range that can be detected and enforced by
-   the SR ingress, for example by using LUA addresses.
+   the SR ingress, for example by using ULA addresses.
 
    Note that the use of GUA addressing in data plane programming could
    result in an fail open scenario when appropriate border filtering is
@@ -644,7 +644,7 @@ Table of Contents
    *  While it is presumed that unique keys will be employed by each
       participating node, in scenarios where the network resorts to
       manual configuration of pre-shared keys, the same key might be
-      reused by multiple systems as an (incorrect) shortcut to keeeping
+      reused by multiple systems as an (incorrect) shortcut to keeping
       the problem of pre-shared key configuration manageable.
 
    *  An internal attacker who does not have access to the pre-shared
@@ -662,7 +662,7 @@ Table of Contents
    [RFC9288] provides recommendations on the filtering of IPv6 packets
    containing IPv6 extension headers at transit routers.  SRv6 relies on
    the routing header (RH4).  Because the technology is reasonably new,
-   many platforms, routing and otherwise, do not posses the capability
+   many platforms, routing and otherwise, do not possess the capability
    to filter and in some cases even provide logging for IPv6 next-header
    43 Routing type 4.
 
@@ -675,14 +675,14 @@ Table of Contents
 
    The security devices on SRv6 networks need to take care of SRv6
    packets.  However, the SRv6 packets usually use loopback address of
-   the PE device a as source address.  As a result, the address
+   the PE device as a source address.  As a result, the address
    information of SR packets may be asymmetric, resulting in improper
    filter traffic problems, which affects the effectiveness of security
    devices.  For example, along the forwarding path in SRv6 network, the
    SR-aware firewall will check the association relationships of the
    bidirectional VPN traffic packets.  And it is able to retrieve the
-   final destination of SRv6 packet from the last entry in the . When
-   the <source, destination> tuple of the packet from PE1 to PE2 is
+   final destination of SRv6 packet from the last entry in the SRH.
+   When the <source, destination> tuple of the packet from PE1 to PE2 is
    <PE1-IP-ADDR, PE2-VPN-SID>, and the other direction is <PE2-IP-ADDR,
    PE1-VPN-SID>, the source address and destination address of the
    forward and backward VPN traffic are regarded as different flow.
@@ -855,9 +855,9 @@ Table of Contents
               Cheng, W., Filsfils, C., Li, Z., Decraene, B., and F.
               Clad, "Compressed SRv6 Segment List Encoding", Work in
               Progress, Internet-Draft, draft-ietf-spring-srv6-srh-
-              compression-17, 16 May 2024,
+              compression-18, 22 July 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-spring-
-              srv6-srh-compression-17>.
+              srv6-srh-compression-18>.
 
    [IANAIPv6SPAR]
               "IANA IPv6 Special-Purpose Address Registry", n.d.,
@@ -889,6 +889,11 @@ Table of Contents
               Extension Headers in the Real World", RFC 7872,
               DOI 10.17487/RFC7872, June 2016,
               <https://www.rfc-editor.org/rfc/rfc7872>.
+
+   [RFC8200]  Deering, S. and R. Hinden, "Internet Protocol, Version 6
+              (IPv6) Specification", STD 86, RFC 8200,
+              DOI 10.17487/RFC8200, July 2017,
+              <https://www.rfc-editor.org/rfc/rfc8200>.
 
    [RFC8799]  Carpenter, B. and B. Liu, "Limited Domains and Internet
               Protocols", RFC 8799, DOI 10.17487/RFC8799, July 2020,
