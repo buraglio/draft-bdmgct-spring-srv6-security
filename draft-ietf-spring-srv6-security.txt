@@ -5,14 +5,14 @@
 Source Packet Routing in Networking                          N. Buraglio
 Internet-Draft                                   Energy Sciences Network
 Intended status: Standards Track                              T. Mizrahi
-Expires: 21 February 2025                                         Huawei
+Expires: 22 February 2025                                         Huawei
                                                                  T. Tong
                                                             China Unicom
                                                          L. M. Contreras
                                                               Telefonica
                                                                  F. Gont
                                                             SI6 Networks
-                                                          20 August 2024
+                                                          21 August 2024
 
 
               Segment Routing IPv6 Security Considerations
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 February 2025.
+   This Internet-Draft will expire on 22 February 2025.
 
 Copyright Notice
 
@@ -115,11 +115,9 @@ Table of Contents
    9.  Security Considerations
    10. IANA Considerations
    11. Topics for Further Consideration
-   12. Security Considerations
-   13. IANA Considerations
-   14. References
-     14.1.  Normative References
-     14.2.  Informative References
+   12. References
+     12.1.  Normative References
+     12.2.  Informative References
    Acknowledgments
    Authors' Addresses
 
@@ -134,28 +132,27 @@ Table of Contents
    protocol, and because of the reliance on a new header there are
    security considerations which must be noted or addressed in order to
    operate an SRv6 network in a reliable and secure manner.
-   Specifically, some of the main properties of SRv6 that affect the
+   Specifically, some primary properties of SRv6 that affect the
    security considerations are:
 
-   *  SRv6 makes use of the SRH which is a new type of Routing Extension
-      Header.  Some security considerations of the SRH are discussed in
-      [RFC5095] and [RFC8754].
+   *  SRv6 may use the SRH which is a type of Routing Extension Header
+      defined by [RFC8754].  Some security considerations of the SRH are
+      discussed in [RFC5095] section 5 and [RFC8754] section 7.
 
-   *  SRv6 consists of using the SRH on the IPv6 data-plane, and
-      therefore known security considerations of IPv6 [RFC9099] are
-      applicable to SRv6 as well.
+   *  SRv6 uses the IPv6 data-plane, and therefore known security
+      considerations of IPv6 [RFC9099] are applicable to SRv6 as well.
 
    *  While SRv6 uses what appear to be typical IPv6 addresses, the
       address space is processed differently by segment endpoints.  A
       typical IPv6 unicast address is composed of a network prefix, host
       identifier, and a subnet mask.  A typical SRv6 segment identifier
-      (SID) is broken into a locator, a function identifier, and
-      optionally, function arguments.  The locator must be routable,
-      which enables both SRv6 capable and incapable devices to
-      participate in forwarding, either as normal IPv6 unicast or SRv6.
-      The capability to operate in environments that may have gaps in
-      SRv6 support allows the bridging of islands of SRv6 devices with
-      standard IPv6 unicast routing.
+      (SID) consists of a locator, a function identifier, and
+      optionally, function arguments (LOC:FUNCT:ARG [RFC8986]).  The
+      locator must be routable, which enables both SRv6 capable and
+      incapable devices to participate in forwarding, either as normal
+      IPv6 unicast or SRv6.  The capability to operate in environments
+      that may have gaps in SRv6 support allows the bridging of islands
+      of SRv6 devices with standard IPv6 unicast routing.
 
    This document describes various threats to SRv6 networks and also
    presents existing approaches to avoid or mitigate the threats.
@@ -218,11 +215,8 @@ Table of Contents
       is an attacker who is located within an SR domain.  Specifically,
       an internal attacker either has access to a node in the SR domain,
       or is located on an internal path between two nodes in the SR
-      domain.  In this context, the latter means that the attacker can
-      be reached from a node in the SR domain without traversing an SR
-      egress node, and can reach a node in the SR domain without
-      traversing an SR ingress node.  External attackers, on the other
-      hand, are not within the SR domain.
+      domain.  External attackers, on the other hand, are not within the
+      SR domain.
 
    On-path vs. Off-path:  On-path attackers are located in a position
       that allows interception, modification or dropping of in-flight
@@ -234,7 +228,7 @@ Table of Contents
    located along the path of the traffic that is under attack, and
    therefore can listen, insert, delete, modify or replay packets in
    transit.  Off-path attackers can insert packets, and in some cases
-   can passively listen to some of the traffic, such as multicast
+   can passively listen to some traffic, such as multicast
    transmissions.
 
         on-path         on-path        off-path      off-path
@@ -612,7 +606,8 @@ Table of Contents
 
    In order to apply such a filtering mechanism the SR domain needs to
    have an allocated address range that can be detected and enforced by
-   the SR ingress, for example by using ULA addresses.
+   the SR ingress, for example by using ULA addresses, or preferably, by
+   using the IANA special use prefix [IANAIPv6SPAR] for SRv6, 5f00::/16.
 
    Note that the use of GUA addressing in data plane programming could
    result in an fail open scenario when appropriate border filtering is
@@ -704,8 +699,8 @@ Table of Contents
    incorporate support for the supporting SRv6 mechanisms, such as the
    IPv6 Segment Routing Header (SRH) [RFC8754].  Additionally,
    implementation limitations in the processing of IPv6 packets with
-   extension headers may result in SRv6 packets being dropped RFC7872
-   [RFC9098].
+   extension headers may result in SRv6 packets being dropped
+   [RFC7872],[RFC9098].
 
 9.  Security Considerations
 
@@ -780,18 +775,9 @@ Table of Contents
        |                                                               |
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-12.  Security Considerations
+12.  References
 
-   The security considerations of SRv6 are presented throughout this
-   document.
-
-13.  IANA Considerations
-
-   This document has no IANA actions.
-
-14.  References
-
-14.1.  Normative References
+12.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -839,7 +825,7 @@ Table of Contents
               Service Delivery", RFC 9524, DOI 10.17487/RFC9524,
               February 2024, <https://www.rfc-editor.org/rfc/rfc9524>.
 
-14.2.  Informative References
+12.2.  Informative References
 
    [ANSI-Sec] "Operations, Administration, Maintenance, and Provisioning
               Security Requirements for the Public Telecommunications
@@ -931,8 +917,8 @@ Table of Contents
 Acknowledgments
 
    The authors would like to acknowledge the contributions from Andrew
-   Alston, Dale Carder, Bruno Decraene, Joel Halpern, Alvaro Retana, and
-   Eric Vyncke.
+   Alston, Dale Carder, Bruno Decraene, Joel Halpern, Bruno Hassanov,
+   Alvaro Retana, and Eric Vyncke.
 
 Authors' Addresses
 
