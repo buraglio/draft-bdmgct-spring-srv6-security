@@ -5,14 +5,14 @@
 Source Packet Routing in Networking                          N. Buraglio
 Internet-Draft                                   Energy Sciences Network
 Intended status: Standards Track                              T. Mizrahi
-Expires: 22 February 2025                                         Huawei
+Expires: 18 April 2025                                            Huawei
                                                                  T. Tong
                                                             China Unicom
                                                          L. M. Contreras
                                                               Telefonica
                                                                  F. Gont
                                                             SI6 Networks
-                                                          21 August 2024
+                                                         15 October 2024
 
 
               Segment Routing IPv6 Security Considerations
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 February 2025.
+   This Internet-Draft will expire on 18 April 2025.
 
 Copyright Notice
 
@@ -136,11 +136,14 @@ Table of Contents
    security considerations are:
 
    *  SRv6 may use the SRH which is a type of Routing Extension Header
-      defined by [RFC8754].  Some security considerations of the SRH are
-      discussed in [RFC5095] section 5 and [RFC8754] section 7.
+      defined by [RFC8754].  Some security considerations of the Routing
+      Header, and specifically the SRH, are discussed in [RFC5095]
+      section 5 and [RFC8754] section 7.
 
    *  SRv6 uses the IPv6 data-plane, and therefore known security
-      considerations of IPv6 [RFC9099] are applicable to SRv6 as well.
+      considerations of IPv6 are applicable to SRv6 as well.  Some of
+      these considerations are discussed in Section 10 of [RFC8200] and
+      in [RFC9099].
 
    *  While SRv6 uses what appear to be typical IPv6 addresses, the
       address space is processed differently by segment endpoints.  A
