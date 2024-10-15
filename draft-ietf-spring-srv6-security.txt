@@ -91,22 +91,24 @@ Table of Contents
        6.2.1.  Overview
        6.2.2.  Scope
        6.2.3.  Impact
-       6.2.4.  Overview
-       6.2.5.  Scope
-       6.2.6.  Impact
-     6.3.  Packet Insertion
+     6.3.  Passive Listening
        6.3.1.  Overview
        6.3.2.  Scope
        6.3.3.  Impact
-     6.4.  Control and Management Plane Attacks
+     6.4.  Packet Insertion
        6.4.1.  Overview
        6.4.2.  Scope
        6.4.3.  Impact
-     6.5.  Other Attacks
+     6.5.  Control and Management Plane Attacks
+       6.5.1.  Overview
+       6.5.2.  Scope
+       6.5.3.  Impact
+     6.6.  Other Attacks
    7.  Mitigation Methods
-     7.1.  Filtering
-       7.1.1.  SRH Filtering
-       7.1.2.  Address Range Filtering
+     7.1.  Trusted Domains and Filtering
+       7.1.1.  Overview
+       7.1.2.  SRH Filtering
+       7.1.3.  Address Range Filtering
      7.2.  Encapsulation of Packets
      7.3.  Hashed Message Authentication Code (HMAC)
    8.  Implications on Existing Equipment
@@ -253,49 +255,21 @@ Table of Contents
 
                       Figure 1: Threat Model Taxonomy
 
-   In the current threat model the SR domain defines the boundary that
-   distinguishes internal from external threats.  As specified in
-   [RFC8402]:
-
-    By default, SR operates within a trusted domain.  Traffic MUST be
-    filtered at the domain boundaries.
-    The use of best practices to reduce the risk of tampering within the
-    trusted domain is important.  Such practices are discussed in
-    [RFC4381] and are applicable to both SR-MPLS and SRv6.
-
-   In the context of the current document it is assumed that SRv6 is
-   deployed within a limited domain [RFC8799] with filtering at the
-   domain boundaries, forming a trusted domain with respect to SRv6.
-   Thus, external attackers are outside the trusted domain.
+   As defined in [RFC8402], SR operates within a "trusted domain".
+   Therefore, in the current threat model the SR domain defines the
+   boundary that distinguishes internal from external threats.
    Specifically, an attack on one domain that is invoked from within a
    different domain is considered an external attack in the context of
    the current document.
 
-   Following the spirit of [RFC8402], the current document mandates a
-   filtering mechanism that eliminates the threats from external
-   attackers.  This approach limits the scope of the attacks described
-   in this document to within the domain (i.e., internal attackers).
-
-   It should be noted that in some threat models the distinction between
-   internal and external attackers depends on whether an attacker has
-   access to a cryptographically secured (encrypted or authenticated)
-   domain.  Specifically, in some of these models there is a distinction
-   between an attacker who becomes internal by having physical access,
-   for example by plugging into an active port of a network device, and
-   an attacker who has full access to a legitimate network node,
-   including for example encryption keys if the network is encrypted.
-   The current model does not distinguish between these two types of
-   attackers and there is no assumption about whether the SR domain is
-   cryptographically secured or not.  Thus, some of the attacks that are
-   described in the next section can be mitigated by cryptographic
-   means, as further discussed in Section 7.3.
-
 5.  Impact
 
    One of the important aspects of a threat analysis is the potential
-   impact of each threat.  SRv6 allows for the sending of IPv6 packets
-   via arbitrary paths.  An attack on SRv6 may cause packets to traverse
-   arbitrary paths within an SR domain.  This may allow an attacker to
+   impact of each threat.  SRv6 allows for the forwarding of IPv6
+   packets via predetermined SR policies, which determine the paths and
+   the processing of these packets.  An attack on SRv6 may cause packets
+   to traverse arbitrary paths and to be subject to arbitrary processing
+   by SR endpoints within an SR domain.  This may allow an attacker to
    perform a number of attacks on the victim networks and hosts that
    would be mostly unfeasible for a non-SRv6 environment.
 
@@ -306,14 +280,15 @@ Table of Contents
    *  Unauthorized Access: an attack that results in unauthorized access
       might be achieved by having an attacker leverage SRv6 to
       circumvent security controls as a result of security devices being
-      unable to enforce security policies in the presence of IPv6
-      Extension Headers (see [RFC9098]), or by directing packets through
-      paths where packet-filtering policies are not enforced.
+      unable to enforce security policies.  For example, this can occur
+      if packets are directed through paths where packet filtering
+      policies are not enforced, or if some of the security policies are
+      not enforced in the presence of IPv6 Extension Headers.
 
    *  Masquerade: various attacks that result in spoofing or
-      masquerading are possible in IPv6 networks (e.g., [RFC9098]).
-      However, these attacks are not specific to SRv6, and are therefore
-      not within the scope of this document.
+      masquerading are possible in IPv6 networks.  However, these
+      attacks are not specific to SRv6, and are therefore not within the
+      scope of this document.
 
    *  System Integrity: attacks on SRv6 can manipulate the path and the
       processing that the packet is subject to, thus compromising the
@@ -412,10 +387,10 @@ Table of Contents
 
 6.2.2.  Scope
 
-   An SR modification attack can be performed by on-path attackers.  As
-   discussed in Section 4, it assumed that filtering is deployed at the
-   domain boundaries, thus limiting the ability of implementing SR
-   modification attacks to on-path internal attackers.
+   An SR modification attack can be performed by on-path attackers.  If
+   filtering is deployed at the domain boundaries (Section 7.1), the
+   ability of implementing SR modification attacks is limited to on-path
+   internal attackers.
 
 6.2.3.  Impact
 
@@ -465,94 +440,106 @@ Table of Contents
       ([RFC8402], [RFC5095]) and thus loads the nodes along the loop.
       Network programming can be used in some cases to manipulate
       segment endpoints to perform unnecessary functions that consume
-      processing resources.  Path inflation, malicious looping and
-      unnecessary instructions have a common outcome, resource
-      exhaustion, which may in severe cases cause Denial of Service
-      (DoS).
+      processing resources.  TLV fields such as the HMAC TLV can be
+      maliciously added to the SRH in order to consume processing
+      resources.  Path inflation, malicious looping and unnecessary
+      instructions and TLVs have a common outcome, resource exhaustion,
+      which may in severe cases cause Denial of Service (DoS).
 
-6.2.4.  Overview
+6.3.  Passive Listening
+
+6.3.1.  Overview
 
    An on-path attacker can passively listen to packets and specifically
    to the SRv6-related information that is conveyed in the IPv6 header
-   and the SRH.  This approach can be used for collecting information
-   about SIDs and policies, and thus to facilitate mapping the structure
-   of the network and its potential vulnerabilities.
+   and the SRH.  This approach can be used for reconnaissance, i.e., for
+   collecting information about SIDs and policies, and thus it can
+   facilitate mapping the structure of the network and its potential
+   vulnerabilities.
 
-6.2.5.  Scope
+6.3.2.  Scope
 
-   A recon attack is limited to on-path internal attackers.
+   A recon attack is limited to on-path attackers.
 
-   It is assumed that the SRv6 domain is filtered in a way that prevents
-   any leaks of explicit SRv6 routing information through the boundaries
-   of the administrative domain.  External attackers can only collect
-   SRv6-related data in a malfunctioning network in which SRv6-related
-   information is leaked through the boundaries of an SR domain.
+   If filtering is deployed at the domain boundaries (Section 7.1), it
+   prevents any leaks of explicit SRv6 routing information through the
+   boundaries of the administrative domain.  In this case external
+   attackers can only collect SRv6-related data in a malfunctioning
+   network in which SRv6-related information is leaked through the
+   boundaries of an SR domain.
 
-6.2.6.  Impact
+6.3.3.  Impact
 
    While the information collected in a recon attack does not compromise
    the confidentiality of the user data, it allows an attacker to gather
    information about the network which in turn can be used to enable
    other attacks.
 
-6.3.  Packet Insertion
+6.4.  Packet Insertion
 
-6.3.1.  Overview
+6.4.1.  Overview
 
    In this attack packets are inserted (injected) into the network with
    a segment list that defines a specific SR policy.  The attack can be
    applied either by using synthetic packets or by replaying previously
    recorded packets.
 
-6.3.2.  Scope
+6.4.2.  Scope
 
-   Packet insertion can be performed by internal attackers, either on-
-   path or off-path.  In the case of a replay attack, recording packets
-   in-flight requires on-path access and the recorded packets can later
-   be injected either from an on-path or an off-path location.
+   Packet insertion can be performed by either on-path or off-path
+   attackers.  In the case of a replay attack, recording packets in-
+   flight requires on-path access and the recorded packets can later be
+   injected either from an on-path or an off-path location.
 
-   SRv6 domains are assumed to be filtered in a way that mitigates
-   insertion attacks from external attackers.
+   If filtering is deployed at the domain boundaries (Section 7.1),
+   insertion attacks can only be implemented by internal attackers.
 
-6.3.3.  Impact
+6.4.3.  Impact
 
    The main impact of this attack is resource exhaustion which
    compromises the availability of the network, as described in
    Section 6.2.3.
 
-6.4.  Control and Management Plane Attacks
+6.5.  Control and Management Plane Attacks
 
-6.4.1.  Overview
+6.5.1.  Overview
 
    Depending on the control plane protocols used in a network, it is
    possible to use the control plane as a way of compromising the
    network.  For example, an attacker can advertise SIDs in order to
-   manipulate the SR policies used in the network.  A wide range of
-   attacks can be implemented, including injecting control plane
-   messages, selectively removing legitimate messages, replaying them or
-   passively listening to them.
+   manipulate the SR policies used in the network.  Known IPv6 control
+   plane attacks (e.g., overclaiming) are applicable to SRv6 as well.
 
    A compromised management plane can also facilitate a wide range of
    attacks, including manipulating the SR policies or compromising the
    network availability.
 
-6.4.2.  Scope
+6.5.2.  Scope
 
-   Control plane attacks can be performed by internal attackers.
-   Injection can be performed by off-path attackers, while removal,
-   replaying and listening require on-path access.  The scope of
-   management attacks depends on the specific management protocol and
-   architecture.
+   The control plane and management plane may be either in-band or out-
+   of-band, and thus the on-path and off-path taxonomy of Section 4 is
+   not necessarily common between the data plane, control plane and
+   management plane.  As in the data plane, on-path attackers can be
+   implement a wide range of attacks in order to compromise the control
+   and/or management plane, including selectively removing legitimate
+   messages, replaying them or passively listening to them.  However,
+   while an on-path attacker in the data plane is potentially more
+   harmful than an off-path attacker, effective control and/or
+   management plane attacks can be implemented off-path rather than by
+   trying to intercept or modify traffic in-flight, for example by
+   exchanging malicious control plane messages with legitimate routers,
+   by spoofing an SDN (Software Defined Network) controller, or by
+   gaining access to an NMS (Network Management System).
 
-   It is assumed that SRv6 domain boundary filtering is used for
-   mitigating potential control plane and management plane attacks from
-   external attackers.  Segment routing does not define any specific
-   security mechanisms in existing control plane or management plane
-   protocols.  However, existing control plane and management plane
-   protocols use authentication and security mechanisms to validate the
-   authenticity of information.
+   SRv6 domain boundary filtering can be used for mitigating potential
+   control plane and management plane attacks from external attackers.
+   Segment routing does not define any specific security mechanisms in
+   existing control plane or management plane protocols.  However,
+   existing control plane and management plane protocols use
+   authentication and security mechanisms to validate the authenticity
+   of information.
 
-6.4.3.  Impact
+6.5.3.  Impact
 
    A compromised control plane or management plane can impact the
    network in various possible ways.  SR policies can be manipulated by
@@ -564,7 +551,7 @@ Table of Contents
    use the control plane or management plane messages as a means for
    recon, similarly to Section 6.2.3.
 
-6.5.  Other Attacks
+6.6.  Other Attacks
 
    Various attacks which are not specific to SRv6 can be used to
    compromise networks that deploy SRv6.  For example, spoofing is not
@@ -582,9 +569,25 @@ Table of Contents
    threats and issues that were presented in previous sections.  This
    section does not introduce new security solutions or protocols.
 
-7.1.  Filtering
+7.1.  Trusted Domains and Filtering
 
-7.1.1.  SRH Filtering
+7.1.1.  Overview
+
+   As specified in [RFC8402]:
+
+    By default, SR operates within a trusted domain.  Traffic MUST be
+    filtered at the domain boundaries.
+    The use of best practices to reduce the risk of tampering within the
+    trusted domain is important.  Such practices are discussed in
+    [RFC4381] and are applicable to both SR-MPLS and SRv6.
+
+   Following the spirit of [RFC8402], the current document assumes that
+   SRv6 is deployed within a trusted domain.  Traffic MUST be filtered
+   at the domain boundaries.  Thus, most of the attacks described in
+   this document are limited to within the domain (i.e., internal
+   attackers).
+
+7.1.2.  SRH Filtering
 
    SRv6 packets rely on the routing header in order to steer traffic
    that adheres to a defined SRv6 traffic policy.  Thus, SRH filtering
@@ -600,7 +603,7 @@ Table of Contents
    Header is not relevant, and thus filtering can only be applied based
    on the address range, as described below.
 
-7.1.2.  Address Range Filtering
+7.1.3.  Address Range Filtering
 
    The IPv6 destination address can be filtered at the SR ingress node
    in order to mitigate external attacks.  An ingress packet with a
@@ -644,6 +647,15 @@ Table of Contents
       manual configuration of pre-shared keys, the same key might be
       reused by multiple systems as an (incorrect) shortcut to keeping
       the problem of pre-shared key configuration manageable.
+
+   *  When the HMAC is used there is a distinction between an attacker
+      who becomes internal by having physical access, for example by
+      plugging into an active port of a network device, and an attacker
+      who has full access to a legitimate network node, including for
+      example encryption keys if the network is encrypted.  The latter
+      type of attacker is an internal attacker who can perform any of
+      the attacks that were described in the previous section as
+      relevant to internal attackers.
 
    *  An internal attacker who does not have access to the pre-shared
       key can capture legitimate packets, and later replay the SRH and
@@ -883,10 +895,6 @@ Table of Contents
               (IPv6) Specification", STD 86, RFC 8200,
               DOI 10.17487/RFC8200, July 2017,
               <https://www.rfc-editor.org/rfc/rfc8200>.
-
-   [RFC8799]  Carpenter, B. and B. Liu, "Limited Domains and Internet
-              Protocols", RFC 8799, DOI 10.17487/RFC8799, July 2020,
-              <https://www.rfc-editor.org/rfc/rfc8799>.
 
    [RFC9055]  Grossman, E., Ed., Mizrahi, T., and A. Hacker,
               "Deterministic Networking (DetNet) Security
