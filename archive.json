@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-03T01:24:45.100790+00:00",
+  "timestamp": "2024-11-05T01:17:59.505848+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -1008,6 +1008,34 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 31,
+      "id": "PR_kwDOKVF77M6AuRqp",
+      "title": "Further address comments.",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/31",
+      "state": "MERGED",
+      "author": "buraglio",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-11-03T12:06:48Z",
+      "updatedAt": "2024-11-03T12:11:54Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "9bb4777dc019dde031eaa8459935a782a89a1861",
+      "headRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "headRefName": "nb-pre-121",
+      "headRefOid": "1c36053cbe39241db1ce8a988b876df2d4b0e7af",
+      "closedAt": "2024-11-03T12:11:48Z",
+      "mergedAt": "2024-11-03T12:11:48Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "a8d08df29c0d0e0c850b0817ce02e61b9fc1424b"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
