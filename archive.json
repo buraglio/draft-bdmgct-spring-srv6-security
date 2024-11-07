@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-05T01:17:59.505848+00:00",
+  "timestamp": "2024-11-07T01:18:12.940806+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -1034,6 +1034,32 @@
       "mergeCommit": {
         "oid": "a8d08df29c0d0e0c850b0817ce02e61b9fc1424b"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 32,
+      "id": "PR_kwDOKVF77M6BD0YG",
+      "title": "Issue18",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/32",
+      "state": "OPEN",
+      "author": "darrendukes",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "work in progress to resolve issue 18",
+      "createdAt": "2024-11-06T13:56:23Z",
+      "updatedAt": "2024-11-06T13:56:23Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "a8d08df29c0d0e0c850b0817ce02e61b9fc1424b",
+      "headRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "headRefName": "issue18",
+      "headRefOid": "52c4770deec958eef6f587d2e21b0d4eff71ef16",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
