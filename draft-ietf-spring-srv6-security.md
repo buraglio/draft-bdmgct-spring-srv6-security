@@ -101,19 +101,18 @@ SRv6 is a traffic engineering, encapsulation and steering mechanism utilizing IP
 
 Segment Routing (SR) [RFC8402] utilizing an IPv6 data plane is a source routing model that leverages an IPv6 underlay
 and an IPv6 extension header called the Segment Routing Header (SRH) [RFC8754] to signal and control the forwarding and path of packets by imposing an ordered list of
-path details that are processed at each hop along the signaled path. Because SRv6 is fundamentally bound to the IPv6 protocol, and because of the reliance on a
-new header, there are security considerations which must be noted or addressed in order to operate an SRv6 network in a reliable and secure manner.
+segments that are processed at each hop along the signaled path. SRv6 is fundamentally bound to the IPv6 protocol and introduces a new extension header. There are security considerations which must be noted or addressed in order to operate an SRv6 network in a reliable and secure manner.
 Specifically, some primary properties of SRv6 that affect the security considerations are:
 
    *  SRv6 may use the SRH which is a type of Routing Extension Header defined by [RFC8754].
-      Some security considerations of the Routing Header, and specifically the SRH, are discussed in [RFC5095] section 5 and [RFC8754] section 7.
+      Security considerations of the SRH are discussed [RFC8754] section 7, and were based in part on security considerations of the deprecated routing header 0 as discussed in [RFC5095] section 5.
 
-   *  SRv6 uses the IPv6 data-plane, and therefore known security considerations of IPv6 are applicable to SRv6 as well. Some of these considerations are discussed in Section 10 of [RFC8200] and in [RFC9099].
+   *  SRv6 uses the IPv6 data-plane, and therefore security considerations of IPv6 are applicable to SRv6 as well. Some of these considerations are discussed in Section 10 of [RFC8200] and in [RFC9099].
 
    *  While SRv6 uses what appear to be typical IPv6 addresses, the address space is processed differently by segment endpoints.
-      A typical IPv6 unicast address is composed of a network prefix, host identifier, and a subnet mask.
-      A typical SRv6 segment identifier (SID) consists of a locator, a function identifier, and optionally, function arguments (LOC:FUNCT:ARG [RFC8986]).
-      The locator must be routable, which enables both SRv6 capable and incapable devices to participate in forwarding, either as normal IPv6 unicast or SRv6.
+      A typical IPv6 unicast address is comprised of a network prefix, host identifier.
+      A typical SRv6 segment identifier (SID) is comprised of a locator, a function identifier, and optionally, function arguments.
+      The locator must be routable, which enables both SRv6 capable and incapable devices to participate in forwarding, either as normal IPv6 unicast or SRv6 segment endpoints.
       The capability to operate in environments that may have gaps in SRv6 support allows the bridging of islands of SRv6 devices with standard IPv6 unicast routing.
 
 This document describes various threats to SRv6 networks and also presents existing approaches to avoid or mitigate the threats.
@@ -216,22 +215,28 @@ Packet manipulation and processing attacks can be implemented by performing a se
 - Packet deletion: by intercepting and removing packets from the network, an attacker prevents these packets from reaching their destination. Selective removal of packets may, in some cases, cause more severe damage than random packet loss.
 - Packet modification: the attacker modifies packets during transit.
 
-This section describes attacks that are based on packet manipulation and processing, as well as attacks performed by other means.
+This section describes attacks that are based on packet manipulation and processing, as well as attacks performed by other means. While it is possible for packet manipulation and processing attacks against all the fields of the IPv6 header and its extension headers, this document limits itself to the IPv6 header and the SRH.
 
-## SR Modification Attack {#modification}
+## Modification Attack {#modification}
 
 ### Overview
-An attacker can modify a packet while it is in transit in a way that directly affects the packet's SR policy. The modification can affect the destination address of the IPv6 header and/or the SRH. In this context SRH modification may refer to inserting an SRH, removing an SRH, or modifying some fields of an existing SRH.
+An on-path internal attacker can modify a packet while it is in transit in a way that directly affects the packet's segment list and other extension headers.
 
-Modification of an existing SRH can be further classified into several possible attacks. Specifically, the attack can include adding one or more SIDs to the segment list, removing one or more SIDs or replacing some SIDs with different SIDs. Another possible type of modification is by adding, removing or modifying TLV fields in the SRH.
+| Header Modification | Impact |
+| source address | spoof another source |
+| destination address| modify the segment list active segment and arguments, including next segments like binding SIDs Binding SID [RFC8402] or compressed segments {{I-D.ietf-spring-srv6-srh-compression}}|
+| SRH | insert or delete the SRH modifying the previous and next segments in the segment list |
+| SRH segment list | insert, delete or modify the previous or next segments in the segment list |
+| SRH TLV | insert, delete or modify TLVs in the SRH |
+| SRH flags and tag | modify tags and flags |
 
-When an SRH is present modifying the destination address (DA) of the IPv6 header affects the active segment. However, DA modification can affect the SR policy even in the absence of an SRH. One example is modifying a DA which is used as a Binding SID [RFC8402]. Another example is modifying a DA which represents a compressed segment list {{I-D.ietf-spring-srv6-srh-compression}}. SRH compression allows encoding multiple compressed SIDs within a single 128-bit SID, and thus modifying the DA can affect one or more hops in the SR policy.
+An on-path internal attacker can also modify, insert or delete other extension headers but these are outside the scope of this document.
 
 ### Scope
-An SR modification attack can be performed by on-path attackers. If filtering is deployed at the domain boundaries ({{filtering}}), the ability of implementing SR modification attacks is limited to on-path internal attackers.
+An SR modification attack can be performed by on-path attackers. If filtering is deployed at the domain boundaries as described in {{filtering}}, the ability to implement SR modification attacks is limited to on-path internal attackers.
 
 ### Impact {#mod-impact}
-The SR modification attack allows an attacker to change the SR policy that the packet is steered through and thus to manipulate the path and the processing that the packet is subject to.
+The SR modification attack allows an on-path internal attacker to change the segment list in the packet, i.e. the SR policy that the packet is steered through, and thus to manipulate the path and the processing that the packet is subject to.
 
 Specifically, the SR modification attack can impact the network and the forwarding behavior of packets in one or more of the following ways:
 
@@ -239,7 +244,7 @@ Avoiding a specific node or path:
 : An attacker can manipulate the DA and/or SRH in order to avoid a specific node or path. This approach can be used, for example, for bypassing the billing service or avoiding access controls and security filters.
 
 Preferring a specific path:
-: The packet can be manipulated to avert packets to a specific path. This attack can result in allowing various unauthorized services such as traffic acceleration. Alternatively, an attacker can avert traffic to be forwarded through a specific node that the attacker has access to, thus facilitating more complex on-path attacks such as passive listening, recon and various man-in-the-middle attacks. It is noted that the SR modification attack is performed by an on-path attacker who has access to packets in transit, and thus can implement these attacks directly. However, SR modification is relatively easy to implement and requires low processing resources by an attacker, while it facilitates more complex on-path attacks by averting the traffic to another node that the attacker has access to and has more processing resources.
+: The packet can be manipulated to divert packets to a specific path. This attack can result in allowing various unauthorized services such as traffic acceleration. Alternatively, an attacker can divert traffic to be forwarded through a specific node that the attacker has access to, thus facilitating more complex on-path attacks such as passive listening, recon and various man-in-the-middle attacks. It is noted that the SR modification attack is performed by an on-path attacker who has access to packets in transit, and thus can implement these attacks directly. However, SR modification is relatively easy to implement and requires low processing resources by an attacker, while it facilitates more complex on-path attacks by averting the traffic to another node that the attacker has access to and has more processing resources.
 
 Forwarding through a path that causes the packet to be discarded:
 : SR modification may cause a packet to be forwarded to a point in the network where it can no longer be forwarded, causing the packet to be discarded.
@@ -253,20 +258,20 @@ Availability:
 ## Passive Listening
 
 ### Overview
-An on-path attacker can passively listen to packets and specifically to the SRv6-related information that is conveyed in the IPv6 header and the SRH. This approach can be used for reconnaissance, i.e., for collecting information about SIDs and policies, and thus it can facilitate mapping the structure of the network and its potential vulnerabilities.
+An on-path internal attacker can passively listen to packets and specifically listen to the SRv6-related information that is conveyed in the IPv6 header and the SRH. This approach can be used for reconnaissance, i.e., for collecting segment lists.
 
 ### Scope
-A recon attack is limited to on-path attackers.
+A reconnaisance attack is limited to on-path internal attackers.
 
 If filtering is deployed at the domain boundaries ({{filtering}}), it prevents any leaks of explicit SRv6 routing information through the boundaries of the administrative domain. In this case external attackers can only collect SRv6-related data in a malfunctioning network in which SRv6-related information is leaked through the boundaries of an SR domain.
 
 ### Impact
-While the information collected in a recon attack does not compromise the confidentiality of the user data, it allows an attacker to gather information about the network which in turn can be used to enable other attacks.
+While the information collected in a reconnaisance attack does not compromise the confidentiality of the user data, it allows an attacker to gather information about the network which in turn can be used to enable other attacks.
 
 ## Packet Insertion
 
 ### Overview
-In this attack packets are inserted (injected) into the network with a segment list that defines a specific SR policy. The attack can be applied either by using synthetic packets or by replaying previously recorded packets.
+In a packet insertion attack packets are inserted (injected) into the network with a segment list. The attack can be applied either by using synthetic packets or by replaying previously recorded packets.
 
 ### Scope
 Packet insertion can be performed by either on-path or off-path attackers. In the case of a replay attack, recording packets in-flight requires on-path access and the recorded packets can later be injected either from an on-path or an off-path location.
@@ -318,21 +323,30 @@ Following the spirit of [RFC8402], the current document assumes that SRv6 is dep
 
 ### SRH Filtering
 
-SRv6 packets rely on the routing header in order to steer traffic that adheres to a defined SRv6 traffic policy. Thus, SRH filtering can be enforced at the ingress and egress nodes of the SR domain, so that packets with an SRH cannot be forwarded into the SR domain or out of the SR domain. Specifically, such filtering is performed by detecting Next Header 43 (Routing Header) with Routing Type 4 (SRH).
+Filtering on presence of an SRH is possible but not useful for two reasons:
+1. The SRH is optional for SID processing as described in [RFC8754] section 3.1 and 4.1.
+2. A packet containing an SRH may not be destined to the SR domain, it may be simply transiting the domain.
 
-Because of the methodologies used in SID compression {{I-D.ietf-spring-srv6-srh-compression}}, SRH compression does not necessarily use an SRH. In practice this means that when compressed segment lists are used without an SRH, filtering based on the Next Header is not relevant, and thus filtering can only be applied based on the address range, as described below.
+For these reasons SRH filtering is not a useful method of mitigation, and thus filtering can only be applied based on the address range, as described below.
 
 ### Address Range Filtering
 
-The IPv6 destination address can be filtered at the SR ingress node in order to mitigate external attacks. An ingress packet with a destination address that defines an active segment with an SR endpoint in the SR domain is filtered.
+The IPv6 destination address can be filtered at the SR ingress node and at all nodes implementing SRv6 SIDs within the SR domain in order to mitigate external attacks. Section 5.1 of [RFC8754] describes this in detail, it's summarized here as:
+1. At ingress nodes, any packet entering the SR domain and destined to a SID within the SR domain is dropped.
+2. At every SRv6 enabled node, any packet destined to a SID instantiated at the node from a source address outside the SR domain is dropped.
 
-In order to apply such a filtering mechanism the SR domain needs to have an allocated address range that can be detected and enforced by the SR ingress, for example by using ULA addresses, or preferably, by using the IANA special use prefix [IANAIPv6SPAR] for SRv6, 5f00::/16.
+In order to apply such a filtering mechanism the SR domain needs to have an infrastructure address range for SIDs, and an infrastructure address range for source addresses, that can be detected and enforced. Some examples of an infrastructure address range for SIDs are:
+1. ULA addresses
+2. The prefix defined in [RFC9602].
+3. GUA addresses
 
-Note that the use of GUA addressing in data plane programming could result in an fail open scenario when appropriate border filtering is not implemented or supported.
+Many operators reserve a /64 block for all loopback addresses and allocate /128 for each loopback interface. This simplifies the filtering of permitted source addresses.
+
+Failure to implement address range filtering at ingress nodes is mitigated with filtering at SRv6 enabled node. Failure to implement both filtering mechanisms could result in a "fail open" scenario, where some attacks by internal attackers described in this document may be launched by external attackers.
 
 ## Encapsulation of Packets
 
-Packets steered in an SR domain are often encapsulated in an IPv6 encapsulation. This mechanism allows for encapsulation of both IPv4 and IPv6 packets. Encapsulation of packets at the SR ingress node and decapsulation at the SR egress node mitigates the ability of external attackers to impact SR steering within the domain.
+Packets steered in an SR domain are often encapsulated in an IPv6 encapsulation. This mechanism allows for encapsulation of both IPv4 and IPv6 packets. Encapsulation of packets at the SR ingress node and decapsulation at the SR egress node mitigates the ability of external attackers to attack the domain.
 
 ## Hashed Message Authentication Code (HMAC) {#hmac}
 
@@ -340,7 +354,7 @@ The SRH can be secured by an HMAC TLV, as defined in [RFC8754]. The HMAC is an o
 
 Using an HMAC in an SR domain can mitigate some of the SR Modification Attacks ({{modification}}). For example, the segment list is protected by the HMAC.
 
-The following aspects of the HAMC should be considered:
+The following aspects of the HMAC should be considered:
 
 - The HMAC TLV is OPTIONAL.
 - While it is presumed that unique keys will be employed by each participating node, in scenarios where the network resorts to manual configuration of pre-shared keys, the same key might be reused by multiple systems as an (incorrect) shortcut to keeping the problem of pre-shared key configuration manageable.
@@ -352,7 +366,9 @@ The following aspects of the HAMC should be considered:
 
 ## Limitations in Filtering Capabilities
 
-{{RFC9288}} provides recommendations on the filtering of IPv6 packets containing IPv6 extension headers at transit routers. SRv6 may rely on the routing header (RH4). Because the technology is reasonably new, deployments that use RH4 may not possess the capability to filter and in some cases even provide logging for IPv6 next-header 43 Routing type 4.
+{{RFC9288}} provides recommendations on the filtering of IPv6 packets containing IPv6 extension headers at transit routers. However, this class of filtering is shown to not be useful and can be ignored.
+
+Filtering on prefixes has been shown to be useful, specifically [RFC8754]'s description of packet filtering. There are no known limitations with filtering on infrastructure addresses, and [RFC9099] expands on the concept with control plane filtering.
 
 ## Middlebox Filtering Issues
 When an SRv6 packet is forwarded in the SRv6 domain, its destination address changes constantly, the real destination address is hidden. Security devices on SRv6 network may not learn the real destination address and fail to take access control on some SRv6 traffic.
