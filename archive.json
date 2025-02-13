@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-11T01:18:45.238149+00:00",
+  "timestamp": "2025-02-13T01:19:30.259482+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -79,6 +79,22 @@
       "body": "Lack of text in gap analysis needs remedied",
       "createdAt": "2024-03-21T14:44:30Z",
       "updatedAt": "2024-03-21T14:44:30Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 34,
+      "id": "I_kwDOKVF77M6pta4C",
+      "title": "Control and Management Plane Attacks and Mitigations",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/issues/34",
+      "state": "OPEN",
+      "author": "talmi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Generally speaking, most of the \"generic\" security considerations for the control plane and management plane apply to SRv6 as well.\nBelow is a list of issues taken from SRv6-related documents that may be worth mentioning. Some of these issues are SRv6-specific, while others are generic (not SRv6-specific), and the latter are marked below with a [generic] tag.\n\nControl plane attacks\n=====================\n\n[draft-ietf-spring-srv6-security]\n- an attacker can advertise SIDs in order to manipulate the SR policies used in the network\n- [generic] Known IPv6 control plane attacks (e.g., overclaiming) are applicable to SRv6 as well.\n\n[draft-ietf-pce-segment-routing-policy-cp]\n- provide an eavesdropper with additional information about the SR Policy\n\n[RFC9259]\n- The O-flag may be set by an attacking node attempting a denial-of-service attack on the OAM process at the segment endpoint node.\n- An on-path attacker able to observe this OAM channel could conduct traffic analysis, or potentially eavesdropping (depending on the OAM configuration), of this telemetry for the entire SR domain from such a vantage point.\n- Once an HMAC is generated for a segment list with the O-flag set, it can be used for an arbitrary amount of traffic using that segment list with the O-flag set.\n\n[RFC8476]\n- Advertisement of an incorrect MSD value may have negative consequences.  If the value is smaller than supported, path computation may fail to compute a viable path.  If the value is larger than supported, an attempt to instantiate a path that can't be supported by the head-end (the node performing the SID imposition) may occur.\n\n\nControl plane mitigation methods\n================================\n\n[draft-ietf-idr-bgp-ls-sr-policy]\n- the SR Policy information advertised via BGP sessions is limited to nodes and/or controllers/applications in a secure manner within this trusted SR domain.\n- [generic] isolation of BGP-LS sessions from BGP sessions for other address-families\n\n[draft-ietf-pce-segment-routing-policy-cp]\n- [generic] As per [RFC8231], it is RECOMMENDED that these PCEP extensions can only be activated on authenticated and encrypted sessions across PCEs and PCCs belonging to the same administrative authority, using Transport Layer Security (TLS) [RFC8253] as per the recommendations and best current practices in [RFC9325].\n\n[RFC9513]\n- [generic] [RFC7166] describes an alternative and improved authentication mechanism to IPsec for OSPFv3.  The use of authentication is RECOMMENDED for OSPFv3 deployment.\n\n[RFC9259]\n- An implementation correctly implementing the rate limiting described in Section 2.1.1 is not susceptible to that denial-of-service attack.\n\n\nManagement plane attacks\n===================================\n[draft-ietf-lsr-isis-srv6-yang]\n[draft-ietf-lsr-ospf-srv6-yang]\n- [generic] There are a number of data nodes defined in this YANG module that are writable/creatable/deletable (i.e., config true, which is the default).  These data nodes may be considered sensitive or vulnerable in some network environments.  Write operations (e.g., edit-config) to these data nodes without proper protection can have a negative effect on network operations.\n\nManagement plane mitigation methods\n===================================\n\n[draft-ietf-lsr-isis-srv6-yang]\n[draft-ietf-lsr-ospf-srv6-yang]\n- [generic] The lowest NETCONF layer is the secure transport layer, and the mandatory-to-implement secure transport is Secure Shell (SSH) [RFC6242].  The lowest RESTCONF layer is HTTPS, and the mandatory-to-implement secure transport is TLS [RFC8446].\n- [generic] The Network Configuration Access Control Model (NACM) [RFC8341] provides the means to restrict access for particular NETCONF or RESTCONF users to a pre-configured subset of all available NETCONF or RESTCONF protocol operations and content.\n\n",
+      "createdAt": "2025-02-12T05:56:57Z",
+      "updatedAt": "2025-02-12T06:02:05Z",
       "closedAt": null,
       "comments": []
     }
@@ -1062,6 +1078,48 @@
       "mergeCommit": null,
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 33,
+      "id": "PR_kwDOKVF77M6KzaiZ",
+      "title": "Terminology update",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/33",
+      "state": "MERGED",
+      "author": "talmi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "- Added a distinction between data plane, control plane, and management plane attacks. Inspired by RFC 7835 (LISP threat analysis).\r\n- Updated on-path and off-path terminology in light of the distinction above. As a reference, on/off path are discussed in the context of control plane attacks in RFC 7835 and in RFC 6952 as well.",
+      "createdAt": "2025-02-11T13:19:55Z",
+      "updatedAt": "2025-02-12T15:44:38Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "497d4b0e84124e14f96d518cdbf982cb55165f08",
+      "headRepository": "talmi/draft-bdmgct-spring-srv6-security",
+      "headRefName": "terminology-update",
+      "headRefOid": "e7569d888fc7551122d084e3f1f05ed4b268a9ba",
+      "closedAt": "2025-02-12T15:44:37Z",
+      "mergedAt": "2025-02-12T15:44:37Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "352b8905cf316714efe5a0b703b62c2253eab3db"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKVF77M6bh-Xk",
+          "commit": {
+            "abbreviatedOid": "e7569d8"
+          },
+          "author": "buraglio",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-11T16:47:03Z",
+          "updatedAt": "2025-02-11T16:47:03Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
