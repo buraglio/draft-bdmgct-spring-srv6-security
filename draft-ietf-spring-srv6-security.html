@@ -13,12 +13,12 @@
 <meta content="
        SRv6 is a traffic engineering, encapsulation and steering mechanism utilizing IPv6 addresses to identify segments in a pre-defined policy. This document discusses security considerations in SRv6 networks, including the potential threats and the possible mitigation methods. The document does not define any new security protocols or extensions to existing protocols. 
     " name="description">
-<meta content="xml2rfc 3.26.0" name="generator">
+<meta content="xml2rfc 3.27.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ietf-spring-srv6-security-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.26.0
-    Python 3.12.8
+  xml2rfc 3.27.0
+    Python 3.12.9
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
@@ -439,7 +439,7 @@ dl {
     margin-bottom: 0;
   }
 }
-dl > dt {
+dl:not(.dlNewline) > dt {
   float: left;
   margin-right: 2ch;
   min-width: 8ch;
@@ -1052,7 +1052,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Buraglio, et al.</td>
-<td class="center">Expires 16 August 2025</td>
+<td class="center">Expires 30 August 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1065,12 +1065,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-spring-srv6-security-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-02-12" class="published">12 February 2025</time>
+<time datetime="2025-02-26" class="published">26 February 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-08-16">16 August 2025</time></dd>
+<dd class="expires"><time datetime="2025-08-30">30 August 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1136,7 +1136,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 16 August 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 30 August 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1195,7 +1195,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-attack-abstractions" class="internal xref">Attack Abstractions</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
-                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-sr-modification-attack" class="internal xref">SR Modification Attack</a></p>
+                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-modification-attack" class="internal xref">Modification Attack</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.1">
                     <p id="section-toc.1-1.6.2.2.2.1.1"><a href="#section-6.2.1" class="auto internal xref">6.2.1</a>.  <a href="#name-overview" class="internal xref">Overview</a></p>
@@ -1331,22 +1331,21 @@ svg :is([fill="white"], [fill^="#fff"]) {
       </h2>
 <p id="section-1-1">Segment Routing (SR) <span>[<a href="#RFC8402" class="cite xref">RFC8402</a>]</span> utilizing an IPv6 data plane is a source routing model that leverages an IPv6 underlay
 and an IPv6 extension header called the Segment Routing Header (SRH) <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span> to signal and control the forwarding and path of packets by imposing an ordered list of
-path details that are processed at each hop along the signaled path. Because SRv6 is fundamentally bound to the IPv6 protocol, and because of the reliance on a
-new header, there are security considerations which must be noted or addressed in order to operate an SRv6 network in a reliable and secure manner.
+segments that are processed at each hop along the signaled path. SRv6 is fundamentally bound to the IPv6 protocol and introduces a new extension header. There are security considerations which must be noted or addressed in order to operate an SRv6 network in a reliable and secure manner.
 Specifically, some primary properties of SRv6 that affect the security considerations are:<a href="#section-1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1-2.1">
           <p id="section-1-2.1.1">SRv6 may use the SRH which is a type of Routing Extension Header defined by <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span>.
-Some security considerations of the Routing Header, and specifically the SRH, are discussed in <span>[<a href="#RFC5095" class="cite xref">RFC5095</a>]</span> section 5 and <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span> section 7.<a href="#section-1-2.1.1" class="pilcrow">¶</a></p>
+Security considerations of the SRH are discussed <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span> section 7, and were based in part on security considerations of the deprecated routing header 0 as discussed in <span>[<a href="#RFC5095" class="cite xref">RFC5095</a>]</span> section 5.<a href="#section-1-2.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-1-2.2">
-          <p id="section-1-2.2.1">SRv6 uses the IPv6 data-plane, and therefore known security considerations of IPv6 are applicable to SRv6 as well. Some of these considerations are discussed in Section 10 of <span>[<a href="#RFC8200" class="cite xref">RFC8200</a>]</span> and in <span>[<a href="#RFC9099" class="cite xref">RFC9099</a>]</span>.<a href="#section-1-2.2.1" class="pilcrow">¶</a></p>
+          <p id="section-1-2.2.1">SRv6 uses the IPv6 data-plane, and therefore security considerations of IPv6 are applicable to SRv6 as well. Some of these considerations are discussed in Section 10 of <span>[<a href="#RFC8200" class="cite xref">RFC8200</a>]</span> and in <span>[<a href="#RFC9099" class="cite xref">RFC9099</a>]</span>.<a href="#section-1-2.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-1-2.3">
           <p id="section-1-2.3.1">While SRv6 uses what appear to be typical IPv6 addresses, the address space is processed differently by segment endpoints.
-A typical IPv6 unicast address is composed of a network prefix, host identifier, and a subnet mask.
-A typical SRv6 segment identifier (SID) consists of a locator, a function identifier, and optionally, function arguments (LOC:FUNCT:ARG <span>[<a href="#RFC8986" class="cite xref">RFC8986</a>]</span>).
-The locator must be routable, which enables both SRv6 capable and incapable devices to participate in forwarding, either as normal IPv6 unicast or SRv6.
+A typical IPv6 unicast address is comprised of a network prefix, host identifier.
+A typical SRv6 segment identifier (SID) is comprised of a locator, a function identifier, and optionally, function arguments.
+The locator must be routable, which enables both SRv6 capable and incapable devices to participate in forwarding, either as normal IPv6 unicast or SRv6 segment endpoints.
 The capability to operate in environments that may have gaps in SRv6 support allows the bridging of islands of SRv6 devices with standard IPv6 unicast routing.<a href="#section-1-2.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
@@ -1536,22 +1535,57 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
             <p id="section-6.1-2.5.1">Packet modification: the attacker modifies packets during transit.<a href="#section-6.1-2.5.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-6.1-3">This section describes attacks that are based on packet manipulation and processing, as well as attacks performed by other means.<a href="#section-6.1-3" class="pilcrow">¶</a></p>
+<p id="section-6.1-3">This section describes attacks that are based on packet manipulation and processing, as well as attacks performed by other means. While it is possible for packet manipulation and processing attacks against all the fields of the IPv6 header and its extension headers, this document limits itself to the IPv6 header and the SRH.<a href="#section-6.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="modification">
 <section id="section-6.2">
-        <h3 id="name-sr-modification-attack">
-<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-sr-modification-attack" class="section-name selfRef">SR Modification Attack</a>
+        <h3 id="name-modification-attack">
+<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-modification-attack" class="section-name selfRef">Modification Attack</a>
         </h3>
 <div id="overview">
 <section id="section-6.2.1">
           <h4 id="name-overview">
 <a href="#section-6.2.1" class="section-number selfRef">6.2.1. </a><a href="#name-overview" class="section-name selfRef">Overview</a>
           </h4>
-<p id="section-6.2.1-1">An attacker can modify a packet while it is in transit in a way that directly affects the packet's SR policy. The modification can affect the destination address of the IPv6 header and/or the SRH. In this context SRH modification may refer to inserting an SRH, removing an SRH, or modifying some fields of an existing SRH.<a href="#section-6.2.1-1" class="pilcrow">¶</a></p>
-<p id="section-6.2.1-2">Modification of an existing SRH can be further classified into several possible attacks. Specifically, the attack can include adding one or more SIDs to the segment list, removing one or more SIDs or replacing some SIDs with different SIDs. Another possible type of modification is by adding, removing or modifying TLV fields in the SRH.<a href="#section-6.2.1-2" class="pilcrow">¶</a></p>
-<p id="section-6.2.1-3">When an SRH is present modifying the destination address (DA) of the IPv6 header affects the active segment. However, DA modification can affect the SR policy even in the absence of an SRH. One example is modifying a DA which is used as a Binding SID <span>[<a href="#RFC8402" class="cite xref">RFC8402</a>]</span>. Another example is modifying a DA which represents a compressed segment list <span>[<a href="#I-D.ietf-spring-srv6-srh-compression" class="cite xref">I-D.ietf-spring-srv6-srh-compression</a>]</span>. SRH compression allows encoding multiple compressed SIDs within a single 128-bit SID, and thus modifying the DA can affect one or more hops in the SR policy.<a href="#section-6.2.1-3" class="pilcrow">¶</a></p>
+<p id="section-6.2.1-1">An on-path internal attacker can modify a packet while it is in transit in a way that directly affects the packet's segment list and other extension headers.<a href="#section-6.2.1-1" class="pilcrow">¶</a></p>
+<table class="center" id="table-1">
+            <caption><a href="#table-1" class="selfRef">Table 1</a></caption>
+<thead>
+              <tr>
+                <th class="text-left" rowspan="1" colspan="1">Header Modification</th>
+                <th class="text-left" rowspan="1" colspan="1">Impact</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">source address</td>
+                <td class="text-left" rowspan="1" colspan="1">spoof another source</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">destination address</td>
+                <td class="text-left" rowspan="1" colspan="1">modify the segment list active segment and arguments, including next segments like binding SIDs Binding SID <span>[<a href="#RFC8402" class="cite xref">RFC8402</a>]</span> or compressed segments <span>[<a href="#I-D.ietf-spring-srv6-srh-compression" class="cite xref">I-D.ietf-spring-srv6-srh-compression</a>]</span>
+</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">SRH</td>
+                <td class="text-left" rowspan="1" colspan="1">insert or delete the SRH modifying the previous and next segments in the segment list</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">SRH segment list</td>
+                <td class="text-left" rowspan="1" colspan="1">insert, delete or modify the previous or next segments in the segment list</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">SRH TLV</td>
+                <td class="text-left" rowspan="1" colspan="1">insert, delete or modify TLVs in the SRH</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">SRH flags and tag</td>
+                <td class="text-left" rowspan="1" colspan="1">modify tags and flags</td>
+              </tr>
+            </tbody>
+          </table>
+<p id="section-6.2.1-3">An on-path internal attacker can also modify, insert or delete other extension headers but these are outside the scope of this document.<a href="#section-6.2.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="scope">
@@ -1559,7 +1593,7 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
           <h4 id="name-scope">
 <a href="#section-6.2.2" class="section-number selfRef">6.2.2. </a><a href="#name-scope" class="section-name selfRef">Scope</a>
           </h4>
-<p id="section-6.2.2-1">An SR modification attack can be performed by on-path attackers. If filtering is deployed at the domain boundaries (<a href="#filtering" class="auto internal xref">Section 7.1</a>), the ability of implementing SR modification attacks is limited to on-path internal attackers.<a href="#section-6.2.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2.2-1">An SR modification attack can be performed by on-path attackers. If filtering is deployed at the domain boundaries as described in <a href="#filtering" class="auto internal xref">Section 7.1</a>, the ability to implement SR modification attacks is limited to on-path internal attackers.<a href="#section-6.2.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="mod-impact">
@@ -1567,7 +1601,7 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
           <h4 id="name-impact-2">
 <a href="#section-6.2.3" class="section-number selfRef">6.2.3. </a><a href="#name-impact-2" class="section-name selfRef">Impact</a>
           </h4>
-<p id="section-6.2.3-1">The SR modification attack allows an attacker to change the SR policy that the packet is steered through and thus to manipulate the path and the processing that the packet is subject to.<a href="#section-6.2.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.2.3-1">The SR modification attack allows an on-path internal attacker to change the segment list in the packet, i.e. the SR policy that the packet is steered through, and thus to manipulate the path and the processing that the packet is subject to.<a href="#section-6.2.3-1" class="pilcrow">¶</a></p>
 <p id="section-6.2.3-2">Specifically, the SR modification attack can impact the network and the forwarding behavior of packets in one or more of the following ways:<a href="#section-6.2.3-2" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-6.2.3-3">
             <dt id="section-6.2.3-3.1">Avoiding a specific node or path:</dt>
@@ -1577,7 +1611,7 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
             <dd class="break"></dd>
 <dt id="section-6.2.3-3.3">Preferring a specific path:</dt>
             <dd style="margin-left: 1.5em" id="section-6.2.3-3.4">
-              <p id="section-6.2.3-3.4.1">The packet can be manipulated to avert packets to a specific path. This attack can result in allowing various unauthorized services such as traffic acceleration. Alternatively, an attacker can avert traffic to be forwarded through a specific node that the attacker has access to, thus facilitating more complex on-path attacks such as passive listening, recon and various man-in-the-middle attacks. It is noted that the SR modification attack is performed by an on-path attacker who has access to packets in transit, and thus can implement these attacks directly. However, SR modification is relatively easy to implement and requires low processing resources by an attacker, while it facilitates more complex on-path attacks by averting the traffic to another node that the attacker has access to and has more processing resources.<a href="#section-6.2.3-3.4.1" class="pilcrow">¶</a></p>
+              <p id="section-6.2.3-3.4.1">The packet can be manipulated to divert packets to a specific path. This attack can result in allowing various unauthorized services such as traffic acceleration. Alternatively, an attacker can divert traffic to be forwarded through a specific node that the attacker has access to, thus facilitating more complex on-path attacks such as passive listening, recon and various man-in-the-middle attacks. It is noted that the SR modification attack is performed by an on-path attacker who has access to packets in transit, and thus can implement these attacks directly. However, SR modification is relatively easy to implement and requires low processing resources by an attacker, while it facilitates more complex on-path attacks by averting the traffic to another node that the attacker has access to and has more processing resources.<a href="#section-6.2.3-3.4.1" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
 <dt id="section-6.2.3-3.5">Forwarding through a path that causes the packet to be discarded:</dt>
@@ -1610,7 +1644,7 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
           <h4 id="name-overview-2">
 <a href="#section-6.3.1" class="section-number selfRef">6.3.1. </a><a href="#name-overview-2" class="section-name selfRef">Overview</a>
           </h4>
-<p id="section-6.3.1-1">An on-path attacker can passively listen to packets and specifically to the SRv6-related information that is conveyed in the IPv6 header and the SRH. This approach can be used for reconnaissance, i.e., for collecting information about SIDs and policies, and thus it can facilitate mapping the structure of the network and its potential vulnerabilities.<a href="#section-6.3.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.3.1-1">An on-path internal attacker can passively listen to packets and specifically listen to the SRv6-related information that is conveyed in the IPv6 header and the SRH. This approach can be used for reconnaissance, i.e., for collecting segment lists.<a href="#section-6.3.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="scope-1">
@@ -1618,7 +1652,7 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
           <h4 id="name-scope-2">
 <a href="#section-6.3.2" class="section-number selfRef">6.3.2. </a><a href="#name-scope-2" class="section-name selfRef">Scope</a>
           </h4>
-<p id="section-6.3.2-1">A recon attack is limited to on-path attackers.<a href="#section-6.3.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.3.2-1">A reconnaisance attack is limited to on-path internal attackers.<a href="#section-6.3.2-1" class="pilcrow">¶</a></p>
 <p id="section-6.3.2-2">If filtering is deployed at the domain boundaries (<a href="#filtering" class="auto internal xref">Section 7.1</a>), it prevents any leaks of explicit SRv6 routing information through the boundaries of the administrative domain. In this case external attackers can only collect SRv6-related data in a malfunctioning network in which SRv6-related information is leaked through the boundaries of an SR domain.<a href="#section-6.3.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1627,7 +1661,7 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
           <h4 id="name-impact-3">
 <a href="#section-6.3.3" class="section-number selfRef">6.3.3. </a><a href="#name-impact-3" class="section-name selfRef">Impact</a>
           </h4>
-<p id="section-6.3.3-1">While the information collected in a recon attack does not compromise the confidentiality of the user data, it allows an attacker to gather information about the network which in turn can be used to enable other attacks.<a href="#section-6.3.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.3.3-1">While the information collected in a reconnaisance attack does not compromise the confidentiality of the user data, it allows an attacker to gather information about the network which in turn can be used to enable other attacks.<a href="#section-6.3.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1642,7 +1676,7 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
           <h4 id="name-overview-3">
 <a href="#section-6.4.1" class="section-number selfRef">6.4.1. </a><a href="#name-overview-3" class="section-name selfRef">Overview</a>
           </h4>
-<p id="section-6.4.1-1">In this attack packets are inserted (injected) into the network with a segment list that defines a specific SR policy. The attack can be applied either by using synthetic packets or by replaying previously recorded packets.<a href="#section-6.4.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.4.1-1">In a packet insertion attack packets are inserted (injected) into the network with a segment list. The attack can be applied either by using synthetic packets or by replaying previously recorded packets.<a href="#section-6.4.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="scope-2">
@@ -1742,8 +1776,10 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
           <h4 id="name-srh-filtering">
 <a href="#section-7.1.2" class="section-number selfRef">7.1.2. </a><a href="#name-srh-filtering" class="section-name selfRef">SRH Filtering</a>
           </h4>
-<p id="section-7.1.2-1">SRv6 packets rely on the routing header in order to steer traffic that adheres to a defined SRv6 traffic policy. Thus, SRH filtering can be enforced at the ingress and egress nodes of the SR domain, so that packets with an SRH cannot be forwarded into the SR domain or out of the SR domain. Specifically, such filtering is performed by detecting Next Header 43 (Routing Header) with Routing Type 4 (SRH).<a href="#section-7.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-7.1.2-2">Because of the methodologies used in SID compression <span>[<a href="#I-D.ietf-spring-srv6-srh-compression" class="cite xref">I-D.ietf-spring-srv6-srh-compression</a>]</span>, SRH compression does not necessarily use an SRH. In practice this means that when compressed segment lists are used without an SRH, filtering based on the Next Header is not relevant, and thus filtering can only be applied based on the address range, as described below.<a href="#section-7.1.2-2" class="pilcrow">¶</a></p>
+<p id="section-7.1.2-1">Filtering on presence of an SRH is possible but not useful for two reasons:
+1. The SRH is optional for SID processing as described in <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span> section 3.1 and 4.1.
+2. A packet containing an SRH may not be destined to the SR domain, it may be simply transiting the domain.<a href="#section-7.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-7.1.2-2">For these reasons SRH filtering is not a useful method of mitigation, and thus filtering can only be applied based on the address range, as described below.<a href="#section-7.1.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="address-range-filtering">
@@ -1751,9 +1787,15 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
           <h4 id="name-address-range-filtering">
 <a href="#section-7.1.3" class="section-number selfRef">7.1.3. </a><a href="#name-address-range-filtering" class="section-name selfRef">Address Range Filtering</a>
           </h4>
-<p id="section-7.1.3-1">The IPv6 destination address can be filtered at the SR ingress node in order to mitigate external attacks. An ingress packet with a destination address that defines an active segment with an SR endpoint in the SR domain is filtered.<a href="#section-7.1.3-1" class="pilcrow">¶</a></p>
-<p id="section-7.1.3-2">In order to apply such a filtering mechanism the SR domain needs to have an allocated address range that can be detected and enforced by the SR ingress, for example by using ULA addresses, or preferably, by using the IANA special use prefix <span>[<a href="#IANAIPv6SPAR" class="cite xref">IANAIPv6SPAR</a>]</span> for SRv6, 5f00::/16.<a href="#section-7.1.3-2" class="pilcrow">¶</a></p>
-<p id="section-7.1.3-3">Note that the use of GUA addressing in data plane programming could result in an fail open scenario when appropriate border filtering is not implemented or supported.<a href="#section-7.1.3-3" class="pilcrow">¶</a></p>
+<p id="section-7.1.3-1">The IPv6 destination address can be filtered at the SR ingress node and at all nodes implementing SRv6 SIDs within the SR domain in order to mitigate external attacks. Section 5.1 of <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span> describes this in detail, it's summarized here as:
+1. At ingress nodes, any packet entering the SR domain and destined to a SID within the SR domain is dropped.
+2. At every SRv6 enabled node, any packet destined to a SID instantiated at the node from a source address outside the SR domain is dropped.<a href="#section-7.1.3-1" class="pilcrow">¶</a></p>
+<p id="section-7.1.3-2">In order to apply such a filtering mechanism the SR domain needs to have an infrastructure address range for SIDs, and an infrastructure address range for source addresses, that can be detected and enforced. Some examples of an infrastructure address range for SIDs are:
+1. ULA addresses
+2. The prefix defined in [RFC9602].
+3. GUA addresses<a href="#section-7.1.3-2" class="pilcrow">¶</a></p>
+<p id="section-7.1.3-3">Many operators reserve a /64 block for all loopback addresses and allocate /128 for each loopback interface. This simplifies the filtering of permitted source addresses.<a href="#section-7.1.3-3" class="pilcrow">¶</a></p>
+<p id="section-7.1.3-4">Failure to implement address range filtering at ingress nodes is mitigated with filtering at SRv6 enabled node. Failure to implement both filtering mechanisms could result in a "fail open" scenario, where some attacks by internal attackers described in this document may be launched by external attackers.<a href="#section-7.1.3-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1763,7 +1805,7 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
         <h3 id="name-encapsulation-of-packets">
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-encapsulation-of-packets" class="section-name selfRef">Encapsulation of Packets</a>
         </h3>
-<p id="section-7.2-1">Packets steered in an SR domain are often encapsulated in an IPv6 encapsulation. This mechanism allows for encapsulation of both IPv4 and IPv6 packets. Encapsulation of packets at the SR ingress node and decapsulation at the SR egress node mitigates the ability of external attackers to impact SR steering within the domain.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
+<p id="section-7.2-1">Packets steered in an SR domain are often encapsulated in an IPv6 encapsulation. This mechanism allows for encapsulation of both IPv4 and IPv6 packets. Encapsulation of packets at the SR ingress node and decapsulation at the SR egress node mitigates the ability of external attackers to attack the domain.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="hmac">
@@ -1773,7 +1815,7 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
         </h3>
 <p id="section-7.3-1">The SRH can be secured by an HMAC TLV, as defined in <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span>. The HMAC is an optional TLV that secures the segment list, the SRH flags, the SRH Last Entry field and the IPv6 source address. A pre-shared key is used in the generation and verification of the HMAC.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
 <p id="section-7.3-2">Using an HMAC in an SR domain can mitigate some of the SR Modification Attacks (<a href="#modification" class="auto internal xref">Section 6.2</a>). For example, the segment list is protected by the HMAC.<a href="#section-7.3-2" class="pilcrow">¶</a></p>
-<p id="section-7.3-3">The following aspects of the HAMC should be considered:<a href="#section-7.3-3" class="pilcrow">¶</a></p>
+<p id="section-7.3-3">The following aspects of the HMAC should be considered:<a href="#section-7.3-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-7.3-4.1">
             <p id="section-7.3-4.1.1">The HMAC TLV is <span class="bcp14">OPTIONAL</span>.<a href="#section-7.3-4.1.1" class="pilcrow">¶</a></p>
@@ -1802,7 +1844,8 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
         <h3 id="name-limitations-in-filtering-ca">
 <a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-limitations-in-filtering-ca" class="section-name selfRef">Limitations in Filtering Capabilities</a>
         </h3>
-<p id="section-8.1-1"><span>[<a href="#RFC9288" class="cite xref">RFC9288</a>]</span> provides recommendations on the filtering of IPv6 packets containing IPv6 extension headers at transit routers. SRv6 may rely on the routing header (RH4). Because the technology is reasonably new, deployments that use RH4 may not possess the capability to filter and in some cases even provide logging for IPv6 next-header 43 Routing type 4.<a href="#section-8.1-1" class="pilcrow">¶</a></p>
+<p id="section-8.1-1"><span>[<a href="#RFC9288" class="cite xref">RFC9288</a>]</span> provides recommendations on the filtering of IPv6 packets containing IPv6 extension headers at transit routers. However, this class of filtering is shown to not be useful and can be ignored.<a href="#section-8.1-1" class="pilcrow">¶</a></p>
+<p id="section-8.1-2">Filtering on prefixes has been shown to be useful, specifically <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span>'s description of packet filtering. There are no known limitations with filtering on infrastructure addresses, and <span>[<a href="#RFC9099" class="cite xref">RFC9099</a>]</span> expands on the concept with control plane filtering.<a href="#section-8.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="middlebox-filtering-issues">
