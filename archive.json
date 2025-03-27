@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-25T01:25:33.477604+00:00",
+  "timestamp": "2025-03-27T01:24:52.905926+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -78,9 +78,17 @@
       "labels": [],
       "body": "Lack of text in gap analysis needs remedied",
       "createdAt": "2024-03-21T14:44:30Z",
-      "updatedAt": "2024-03-21T14:44:30Z",
+      "updatedAt": "2025-03-26T07:16:30Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "talmi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I believe it makes sense to work on the gap analysis after we complete all the other content.",
+          "createdAt": "2025-03-26T07:16:28Z",
+          "updatedAt": "2025-03-26T07:16:28Z"
+        }
+      ]
     },
     {
       "number": 34,
@@ -1136,6 +1144,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 35,
+      "id": "PR_kwDOKVF77M6QKAl1",
+      "title": "Minor updates",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/35",
+      "state": "OPEN",
+      "author": "talmi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Minor updates in acknowledgments, git link and threat section title.",
+      "createdAt": "2025-03-26T07:24:39Z",
+      "updatedAt": "2025-03-26T07:24:39Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "68b83edf387b9d9e93bf845b56069ee9e87c82d7",
+      "headRepository": "talmi/draft-bdmgct-spring-srv6-security",
+      "headRefName": "minor-updates",
+      "headRefOid": "2056a70e7e81dc450e1f3a2928346f096072fc4e",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
