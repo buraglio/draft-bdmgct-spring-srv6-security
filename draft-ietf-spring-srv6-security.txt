@@ -5,14 +5,14 @@
 Source Packet Routing in Networking                          N. Buraglio
 Internet-Draft                                   Energy Sciences Network
 Intended status: Standards Track                              T. Mizrahi
-Expires: 30 August 2025                                           Huawei
+Expires: 8 October 2025                                           Huawei
                                                                  T. Tong
                                                             China Unicom
                                                          L. M. Contreras
                                                               Telefonica
                                                                  F. Gont
                                                             SI6 Networks
-                                                        26 February 2025
+                                                            6 April 2025
 
 
               Segment Routing IPv6 Security Considerations
@@ -32,10 +32,9 @@ About This Document
    This note is to be removed before publishing as an RFC.
 
    The latest revision of this draft can be found at
-   https://buraglio.github.io/draft-bdmgct-spring-srv6-security/draft-
-   bdmgct-spring-srv6-security.html.  Status information for this
-   document may be found at https://datatracker.ietf.org/doc/draft-ietf-
-   spring-srv6-security/.
+   https://github.com/buraglio/draft-bdmgct-spring-srv6-security.
+   Status information for this document may be found at
+   https://datatracker.ietf.org/doc/draft-ietf-spring-srv6-security/.
 
    Discussion of this document takes place on the Source Packet Routing
    in Networking Working Group mailing list (mailto:spring@ietf.org),
@@ -60,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 August 2025.
+   This Internet-Draft will expire on 8 October 2025.
 
 Copyright Notice
 
@@ -83,7 +82,7 @@ Table of Contents
    3.  Conventions and Definitions
      3.1.  Requirements Language
      3.2.  Terminology
-   4.  Threat Model
+   4.  Threat Terminology
    5.  Impact
    6.  Attacks
      6.1.  Attack Abstractions
@@ -209,7 +208,7 @@ Table of Contents
 
    *  SRv6: Segment Routing over IPv6 [RFC8402]
 
-4.  Threat Model
+4.  Threat Terminology
 
    This section introduces the threat model that is used in this
    document.  The model is based on terminology from the Internet threat
@@ -975,7 +974,7 @@ Acknowledgments
 
    The authors would like to acknowledge the valuable input and
    contributions from Zafar Ali, Andrew Alston, Dale Carder, Bruno
-   Decraene, Dhruv Dhody, Darren Dukes, Joel Halpern, Bruno Hassanov,
+   Decraene, Dhruv Dhody, Darren Dukes, Joel Halpern, Boris Hassanov,
    Alvaro Retana, Eric Vyncke, and Russ White.
 
 Authors' Addresses
