@@ -1431,11 +1431,11 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
       <h2 id="name-threat-terminology">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-threat-terminology" class="section-name selfRef">Threat Terminology</a>
       </h2>
-<p id="section-4-1">This section introduces the threat model that is used in this document. The model is based on terminology from the Internet threat model <span>[<a href="#RFC3552" class="cite xref">RFC3552</a>]</span>, as well as some concepts from <span>[<a href="#RFC9055" class="cite xref">RFC9055</a>]</span>, <span>[<a href="#RFC7384" class="cite xref">RFC7384</a>]</span>, [RFC7835] and <span>[<a href="#RFC9416" class="cite xref">RFC9416</a>]</span>. Details regarding inter-domain segment routing (SR) are out of scope for this document.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">This section introduces the threat taxonomy that is used in this document, based on terminology from the Internet threat model <span>[<a href="#RFC3552" class="cite xref">RFC3552</a>]</span>, as well as some concepts from <span>[<a href="#RFC9055" class="cite xref">RFC9055</a>]</span>, <span>[<a href="#RFC7384" class="cite xref">RFC7384</a>]</span>, [RFC7835] and <span>[<a href="#RFC9416" class="cite xref">RFC9416</a>]</span>. Details regarding inter-domain segment routing (SR) are out of scope for this document.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-4-2">
         <dt id="section-4-2.1">Internal vs. External:</dt>
         <dd style="margin-left: 1.5em" id="section-4-2.2">
-          <p id="section-4-2.2.1">An internal attacker in the context of SRv6 is an attacker who is located within an SR domain.  Specifically, an internal attacker either has access to a node in the SR domain, or is located on an internal path between two nodes in the SR domain.  External attackers, on the other hand, are not within the SR domain.<a href="#section-4-2.2.1" class="pilcrow">¶</a></p>
+          <p id="section-4-2.2.1">An internal attacker in the context of SRv6 is an attacker who is located within an SR domain.  Specifically, an internal attacker either has access to a node in the SR domain, or is located such that it can send and receive packets to and from a node in the SR domain without traversing an SR ingress node or an SR egress node.  External attackers, on the other hand, are not within the SR domain.<a href="#section-4-2.2.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-4-2.3">On-path vs. Off-path:</dt>
@@ -1445,22 +1445,22 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
         <dd class="break"></dd>
 <dt id="section-4-2.5">Data plane vs. control plane vs. Management plane:</dt>
         <dd style="margin-left: 1.5em" id="section-4-2.6">
-          <p id="section-4-2.6.1">Attacks can be classified based on the plane they target: data, control, or management. The distinction between on-path and off-path attackers depends on the plane where the attack occurs. For instance, an attacker might be off-path from a data plane perspective but on-path from a management plane perspective.<a href="#section-4-2.6.1" class="pilcrow">¶</a></p>
+          <p id="section-4-2.6.1">Attacks can be classified based on the plane they target: data, control, or management. The distinction between on-path and off-path attackers depends on the plane where the attack occurs. For instance, an attacker might be off-path from a data plane perspective but on-path from a control plane perspective.<a href="#section-4-2.6.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
-<p id="section-4-3">The following figure depicts an example of an SR domain with six attacker types, labeled 1-6. For instance, attacker 2 is located along the path between the SR ingress node and SR endpoint 1, and is therefore an on-path attacker both in the data plane and in the control plane. Thus, attacker 2 can listen, insert, delete, modify or replay data plane and/or control plane packets in transit. Off-path attackers, such as attackers 4 and 5, can insert packets, and in some cases can passively listen to some traffic, such as multicast transmissions. Attacker 3 is internal an on-path attacker in the management plane, as it is located along the path between the Network Management System (NMS) and SR endpoint 1.<a href="#section-4-3" class="pilcrow">¶</a></p>
+<p id="section-4-3">The following figure depicts an example of an SR domain with five attacker types, labeled 1-5. For instance, attacker 2 is located along the path between the SR ingress node and SR endpoint 1, and is therefore an on-path attacker both in the data plane and in the control plane. Thus, attacker 2 can listen, insert, delete, modify or replay data plane and/or control plane packets in transit. Off-path attackers, such as attackers 4 and 5, can insert packets, and in some cases can passively listen to some traffic, such as multicast transmissions. In this example a Path Computation Element as a Central Controller (PCECC) [RFC9050] is used as part of the control plane. Thus, attacker 3 is an internal on-path attacker in the control plane, as it is located along the path between the PCECC and SR endpoint 1.<a href="#section-4-3" class="pilcrow">¶</a></p>
 <span id="name-threat-model-taxonomy"></span><div id="threat-figure">
 <figure id="figure-1">
         <div class="alignLeft art-text artwork" id="section-4-4.1">
 <pre>
-  1.on-path   2.on-path   3.mgmt.  network       4.off-path 5.off-path
-  external    internal    plane    management    internal   external
-  attacker    attacker    on-path  system (NMS)  attacker   attacker
+  1.on-path   2.on-path   3.mgmt.  PCE as a Central  4.off-path 5.off-path
+  external    internal    plane    Controller        internal   external
+  attacker    attacker    on-path  (PCECC)           attacker   attacker
        |            |           |        |            |          |
        |            |           v  _____ v ____     _ | __       |
        |     SR  __ | _  __   /        +---+   \___/  |   \      |
-       | domain /   |  \/  \_/  X------|NMS|          v   /      v
+       | domain /   |  \/  \_/  X-----|PCECC|         v   /      v
        |        \   |           |      +---+          X   \      X
        v        /   v           |                         /
  -----&gt;X------&gt;O---&gt;X----------&gt;O-------&gt;O--------------&gt;O----&gt;

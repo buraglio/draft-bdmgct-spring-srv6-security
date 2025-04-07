@@ -211,18 +211,19 @@ Table of Contents
 
 4.  Threat Terminology
 
-   This section introduces the threat model that is used in this
-   document.  The model is based on terminology from the Internet threat
-   model [RFC3552], as well as some concepts from [RFC9055], [RFC7384],
+   This section introduces the threat taxonomy that is used in this
+   document, based on terminology from the Internet threat model
+   [RFC3552], as well as some concepts from [RFC9055], [RFC7384],
    [RFC7835] and [RFC9416].  Details regarding inter-domain segment
    routing (SR) are out of scope for this document.
 
    Internal vs. External:  An internal attacker in the context of SRv6
       is an attacker who is located within an SR domain.  Specifically,
       an internal attacker either has access to a node in the SR domain,
-      or is located on an internal path between two nodes in the SR
-      domain.  External attackers, on the other hand, are not within the
-      SR domain.
+      or is located such that it can send and receive packets to and
+      from a node in the SR domain without traversing an SR ingress node
+      or an SR egress node.  External attackers, on the other hand, are
+      not within the SR domain.
 
    On-path vs. Off-path:  On-path attackers are located in a position
       that allows interception, modification or dropping of in-flight
@@ -234,39 +235,41 @@ Table of Contents
       management.  The distinction between on-path and off-path
       attackers depends on the plane where the attack occurs.  For
       instance, an attacker might be off-path from a data plane
-      perspective but on-path from a management plane perspective.
+      perspective but on-path from a control plane perspective.
 
-   The following figure depicts an example of an SR domain with six
-   attacker types, labeled 1-6.  For instance, attacker 2 is located
+   The following figure depicts an example of an SR domain with five
+   attacker types, labeled 1-5.  For instance, attacker 2 is located
    along the path between the SR ingress node and SR endpoint 1, and is
    therefore an on-path attacker both in the data plane and in the
    control plane.  Thus, attacker 2 can listen, insert, delete, modify
    or replay data plane and/or control plane packets in transit.  Off-
    path attackers, such as attackers 4 and 5, can insert packets, and in
    some cases can passively listen to some traffic, such as multicast
-   transmissions.  Attacker 3 is internal an on-path attacker in the
-   management plane, as it is located along the path between the Network
-   Management System (NMS) and SR endpoint 1.
+   transmissions.  In this example a Path Computation Element as a
+   Central Controller (PCECC) [RFC9050] is used as part of the control
+   plane.  Thus, attacker 3 is an internal on-path attacker in the
+   control plane, as it is located along the path between the PCECC and
+   SR endpoint 1.
 
-    1.on-path   2.on-path   3.mgmt.  network       4.off-path 5.off-path
-    external    internal    plane    management    internal   external
-    attacker    attacker    on-path  system (NMS)  attacker   attacker
-         |            |           |        |            |          |
-         |            |           v  _____ v ____     _ | __       |
-         |     SR  __ | _  __   /        +---+   \___/  |   \      |
-         | domain /   |  \/  \_/  X------|NMS|          v   /      v
-         |        \   |           |      +---+          X   \      X
-         v        /   v           |                         /
-   ----->X------>O--->X---------->O------->O-------------->O---->
-                 ^\               ^       /^\             /^
-                 | \___/\_    /\_ | _/\__/ | \___/\______/ |
-                 |        \__/    |        |               |
-                 |                |        |               |
-                SR               SR        SR              SR
-                ingress      endpoint 1   endpoint 2       egress
-                node                                       node
+  1.on-path   2.on-path   3.mgmt.  PCE as a Central  4.off-path 5.off-path
+  external    internal    plane    Controller        internal   external
+  attacker    attacker    on-path  (PCECC)           attacker   attacker
+       |            |           |        |            |          |
+       |            |           v  _____ v ____     _ | __       |
+       |     SR  __ | _  __   /        +---+   \___/  |   \      |
+       | domain /   |  \/  \_/  X-----|PCECC|         v   /      v
+       |        \   |           |      +---+          X   \      X
+       v        /   v           |                         /
+ ----->X------>O--->X---------->O------->O-------------->O---->
+               ^\               ^       /^\             /^
+               | \___/\_    /\_ | _/\__/ | \___/\______/ |
+               |        \__/    |        |               |
+               |                |        |               |
+              SR               SR        SR              SR
+              ingress      endpoint 1   endpoint 2       egress
+              node                                       node
 
-                     Figure 1: Threat Model Taxonomy
+                   Figure 1: Threat Model Taxonomy
 
    As defined in [RFC8402], SR operates within a "trusted domain".
    Therefore, in the current threat model the SR domain defines the
