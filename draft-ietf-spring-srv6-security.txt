@@ -5,14 +5,14 @@
 Source Packet Routing in Networking                          N. Buraglio
 Internet-Draft                                   Energy Sciences Network
 Intended status: Standards Track                              T. Mizrahi
-Expires: 8 October 2025                                           Huawei
+Expires: 9 October 2025                                           Huawei
                                                                  T. Tong
                                                             China Unicom
                                                          L. M. Contreras
                                                               Telefonica
                                                                  F. Gont
                                                             SI6 Networks
-                                                            6 April 2025
+                                                            7 April 2025
 
 
               Segment Routing IPv6 Security Considerations
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 October 2025.
+   This Internet-Draft will expire on 9 October 2025.
 
 Copyright Notice
 
@@ -103,6 +103,7 @@ Table of Contents
        6.5.2.  Scope
        6.5.3.  Impact
      6.6.  Other Attacks
+     6.7.  Attacks - Summary
    7.  Mitigation Methods
      7.1.  Trusted Domains and Filtering
        7.1.1.  Overview
@@ -586,6 +587,42 @@ Table of Contents
    forwarding, and fundamental networking basics, it is potentially
    subject to any existing or emerging IPv6 vulnerabilities [RFC9099],
    however, this is out of scope for this document.
+
+6.7.  Attacks - Summary
+
+   The following table summarizes the attacks that were described in the
+   previous subsections, and the corresponding impact of each of the
+   attacks.  Details about the impact are described in Section 5.
+
+  +=============+==================+===================================+
+  | Attack      | Details          | Impact                            |
+  +=============+==================+===================================+
+  |Modification |Modification of:  |* Unauthorized access              |
+  |             |* SID list        |* Avoiding a specific node or path |
+  |             |* IPv6 DA         |* Preferring a specific path       |
+  |             |Add/remove/modify:|* Causing header modifications     |
+  |             |* SRH             |* Causing packets to be discarded  |
+  |             |* SRH TLV         |* Resource exhaustion              |
+  |             |                  |* Forwarding loops                 |
+  +-------------+------------------+-----------------------------------+
+  |Passive      |Passively listen  |* Reconnaissance                   |
+  |listening    |to SRv6-related   |                                   |
+  |             |information       |                                   |
+  +-------------+------------------+-----------------------------------+
+  |Packet       |Maliciously inject|* Resource exhaustion              |
+  |insertion    |packets with a    |                                   |
+  |             |segment list      |                                   |
+  +-------------+------------------+-----------------------------------+
+  |Control and  |Manipulate control|* Unauthorized access              |
+  |management   |or management     |* Avoiding a specific node or path |
+  |plane attacks|plane in order to |* Preferring a specific path       |
+  |             |manipulate SRv6   |* Causing header modifications     |
+  |             |functionality     |* Causing packets to be discarded  |
+  |             |                  |* Resource exhaustion              |
+  |             |                  |* Forwarding loops                 |
+  +-------------+------------------+-----------------------------------+
+
+                         Figure 2: Attack Summary
 
 7.  Mitigation Methods
 
