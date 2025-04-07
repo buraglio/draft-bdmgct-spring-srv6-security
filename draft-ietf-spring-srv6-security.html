@@ -1551,44 +1551,24 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
           <h4 id="name-overview">
 <a href="#section-6.2.1" class="section-number selfRef">6.2.1. </a><a href="#name-overview" class="section-name selfRef">Overview</a>
           </h4>
-<p id="section-6.2.1-1">An on-path internal attacker can modify a packet while it is in transit in a way that directly affects the packet's segment list and other extension headers.<a href="#section-6.2.1-1" class="pilcrow">¶</a></p>
-<table class="center" id="table-1">
-            <caption><a href="#table-1" class="selfRef">Table 1</a></caption>
-<thead>
-              <tr>
-                <th class="text-left" rowspan="1" colspan="1">Header Modification</th>
-                <th class="text-left" rowspan="1" colspan="1">Impact</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="text-left" rowspan="1" colspan="1">source address</td>
-                <td class="text-left" rowspan="1" colspan="1">spoof another source</td>
-              </tr>
-              <tr>
-                <td class="text-left" rowspan="1" colspan="1">destination address</td>
-                <td class="text-left" rowspan="1" colspan="1">modify the segment list active segment and arguments, including next segments like binding SIDs Binding SID <span>[<a href="#RFC8402" class="cite xref">RFC8402</a>]</span> or compressed segments <span>[<a href="#I-D.ietf-spring-srv6-srh-compression" class="cite xref">I-D.ietf-spring-srv6-srh-compression</a>]</span>
-</td>
-              </tr>
-              <tr>
-                <td class="text-left" rowspan="1" colspan="1">SRH</td>
-                <td class="text-left" rowspan="1" colspan="1">insert or delete the SRH modifying the previous and next segments in the segment list</td>
-              </tr>
-              <tr>
-                <td class="text-left" rowspan="1" colspan="1">SRH segment list</td>
-                <td class="text-left" rowspan="1" colspan="1">insert, delete or modify the previous or next segments in the segment list</td>
-              </tr>
-              <tr>
-                <td class="text-left" rowspan="1" colspan="1">SRH TLV</td>
-                <td class="text-left" rowspan="1" colspan="1">insert, delete or modify TLVs in the SRH</td>
-              </tr>
-              <tr>
-                <td class="text-left" rowspan="1" colspan="1">SRH flags and tag</td>
-                <td class="text-left" rowspan="1" colspan="1">modify tags and flags</td>
-              </tr>
-            </tbody>
-          </table>
-<p id="section-6.2.1-3">An on-path internal attacker can also modify, insert or delete other extension headers but these are outside the scope of this document.<a href="#section-6.2.1-3" class="pilcrow">¶</a></p>
+<p id="section-6.2.1-1">An on-path internal attacker can modify a packet while it is in transit in a way that directly affects the packet's segment list.<a href="#section-6.2.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.2.1-2">A modification attack can be performed in one or more of the following ways:<a href="#section-6.2.1-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.2.1-3.1">
+              <p id="section-6.2.1-3.1.1">SID list: the SRH can be manipulated by adding or removing SIDs, or by modifying existing SIDs.<a href="#section-6.2.1-3.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.1-3.2">
+              <p id="section-6.2.1-3.2.1">IPv6 Destination Address (DA): when an SRH is present modifying the destination address (DA) of the IPv6 header affects the active segment. However, DA modification can affect the SR policy even in the absence of an SRH. One example is modifying a DA which is used as a Binding SID <span>[<a href="#RFC8402" class="cite xref">RFC8402</a>]</span>. Another example is modifying a DA which represents a compressed segment list <span>[<a href="#I-D.ietf-spring-srv6-srh-compression" class="cite xref">I-D.ietf-spring-srv6-srh-compression</a>]</span>. SRH compression allows encoding multiple compressed SIDs within a single 128-bit SID, and thus modifying the DA can affect one or more hops in the SR policy.<a href="#section-6.2.1-3.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.1-3.3">
+              <p id="section-6.2.1-3.3.1">Add/remove SRH: an attacker can insert or remove an SRH.<a href="#section-6.2.1-3.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.1-3.4">
+              <p id="section-6.2.1-3.4.1">SRH TLV: adding, removing or modifying TLV fields in the SRH.<a href="#section-6.2.1-3.4.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<p id="section-6.2.1-4">It is noted that the SR modification attack is performed by an on-path attacker who has access to packets in transit, and thus can implement these attacks directly. However, SR modification is relatively easy to implement and requires low processing resources by an attacker, while it facilitates more complex on-path attacks by averting the traffic to another node that the attacker has access to and has more processing resources.<a href="#section-6.2.1-4" class="pilcrow">¶</a></p>
+<p id="section-6.2.1-5">An on-path internal attacker can also modify, insert or delete other extension headers but these are outside the scope of this document.<a href="#section-6.2.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="scope">
@@ -1604,35 +1584,31 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
           <h4 id="name-impact-2">
 <a href="#section-6.2.3" class="section-number selfRef">6.2.3. </a><a href="#name-impact-2" class="section-name selfRef">Impact</a>
           </h4>
-<p id="section-6.2.3-1">The SR modification attack allows an on-path internal attacker to change the segment list in the packet, i.e. the SR policy that the packet is steered through, and thus to manipulate the path and the processing that the packet is subject to.<a href="#section-6.2.3-1" class="pilcrow">¶</a></p>
-<p id="section-6.2.3-2">Specifically, the SR modification attack can impact the network and the forwarding behavior of packets in one or more of the following ways:<a href="#section-6.2.3-2" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlParallel" id="section-6.2.3-3">
-            <dt id="section-6.2.3-3.1">Avoiding a specific node or path:</dt>
-            <dd style="margin-left: 1.5em" id="section-6.2.3-3.2">
-              <p id="section-6.2.3-3.2.1">An attacker can manipulate the DA and/or SRH in order to avoid a specific node or path. This approach can be used, for example, for bypassing the billing service or avoiding access controls and security filters.<a href="#section-6.2.3-3.2.1" class="pilcrow">¶</a></p>
-</dd>
-            <dd class="break"></dd>
-<dt id="section-6.2.3-3.3">Preferring a specific path:</dt>
-            <dd style="margin-left: 1.5em" id="section-6.2.3-3.4">
-              <p id="section-6.2.3-3.4.1">The packet can be manipulated to divert packets to a specific path. This attack can result in allowing various unauthorized services such as traffic acceleration. Alternatively, an attacker can divert traffic to be forwarded through a specific node that the attacker has access to, thus facilitating more complex on-path attacks such as passive listening, recon and various man-in-the-middle attacks. It is noted that the SR modification attack is performed by an on-path attacker who has access to packets in transit, and thus can implement these attacks directly. However, SR modification is relatively easy to implement and requires low processing resources by an attacker, while it facilitates more complex on-path attacks by averting the traffic to another node that the attacker has access to and has more processing resources.<a href="#section-6.2.3-3.4.1" class="pilcrow">¶</a></p>
-</dd>
-            <dd class="break"></dd>
-<dt id="section-6.2.3-3.5">Forwarding through a path that causes the packet to be discarded:</dt>
-            <dd style="margin-left: 1.5em" id="section-6.2.3-3.6">
-              <p id="section-6.2.3-3.6.1">SR modification may cause a packet to be forwarded to a point in the network where it can no longer be forwarded, causing the packet to be discarded.<a href="#section-6.2.3-3.6.1" class="pilcrow">¶</a></p>
-</dd>
-            <dd class="break"></dd>
-<dt id="section-6.2.3-3.7">Manipulating the SRv6 network programming:</dt>
-            <dd style="margin-left: 1.5em" id="section-6.2.3-3.8">
-              <p id="section-6.2.3-3.8.1">An attacker can trigger a specific endpoint behavior by modifying the destination address and/or SIDs in the segment list. This attack can be invoked in order to manipulate the path or in order to exhaust the resources of the SR endpoint.<a href="#section-6.2.3-3.8.1" class="pilcrow">¶</a></p>
-</dd>
-            <dd class="break"></dd>
-<dt id="section-6.2.3-3.9">Availability:</dt>
-            <dd style="margin-left: 1.5em" id="section-6.2.3-3.10">
-              <p id="section-6.2.3-3.10.1">An attacker can add SIDs to the segment list in order to increase the number hops that each packet is forwarded through and thus increase the load on the network. For example, a set of SIDs can be inserted in a way that creates a forwarding loop (<span>[<a href="#RFC8402" class="cite xref">RFC8402</a>]</span>, <span>[<a href="#RFC5095" class="cite xref">RFC5095</a>]</span>) and thus loads the nodes along the loop. Network programming can be used in some cases to manipulate segment endpoints to perform unnecessary functions that consume processing resources. TLV fields such as the HMAC TLV can be maliciously added to the SRH in order to consume processing resources.  Path inflation, malicious looping and unnecessary instructions and TLVs have a common outcome, resource exhaustion, which may in severe cases cause Denial of Service (DoS).<a href="#section-6.2.3-3.10.1" class="pilcrow">¶</a></p>
-</dd>
-          <dd class="break"></dd>
-</dl>
+<p id="section-6.2.3-1">SR modification attacks, including adding/removing an SRH, modifying the SID list and modifying the IPv6 DA, can have one or more of the following outcomes, which are described in <a href="#sec-impact" class="auto internal xref">Section 5</a>.<a href="#section-6.2.3-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.2.3-2.1">
+              <p id="section-6.2.3-2.1.1">Unauthorized access<a href="#section-6.2.3-2.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.3-2.2">
+              <p id="section-6.2.3-2.2.1">Avoiding a specific node or path<a href="#section-6.2.3-2.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.3-2.3">
+              <p id="section-6.2.3-2.3.1">Preferring a specific path<a href="#section-6.2.3-2.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.3-2.4">
+              <p id="section-6.2.3-2.4.1">Causing header modifications<a href="#section-6.2.3-2.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.3-2.5">
+              <p id="section-6.2.3-2.5.1">Causing packets to be discarded<a href="#section-6.2.3-2.5.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.3-2.6">
+              <p id="section-6.2.3-2.6.1">Resource exhaustion<a href="#section-6.2.3-2.6.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.3-2.7">
+              <p id="section-6.2.3-2.7.1">Forwarding loops<a href="#section-6.2.3-2.7.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<p id="section-6.2.3-3">Maliciously adding unnecessary TLV fields can cause further resource exhaustion.<a href="#section-6.2.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>

@@ -380,34 +380,36 @@ Table of Contents
 6.2.1.  Overview
 
    An on-path internal attacker can modify a packet while it is in
-   transit in a way that directly affects the packet's segment list and
-   other extension headers.
+   transit in a way that directly affects the packet's segment list.
 
-    +==============+=================================================+
-    | Header       | Impact                                          |
-    | Modification |                                                 |
-    +==============+=================================================+
-    | source       | spoof another source                            |
-    | address      |                                                 |
-    +--------------+-------------------------------------------------+
-    | destination  | modify the segment list active segment and      |
-    | address      | arguments, including next segments like binding |
-    |              | SIDs Binding SID [RFC8402] or compressed        |
-    |              | segments [I-D.ietf-spring-srv6-srh-compression] |
-    +--------------+-------------------------------------------------+
-    | SRH          | insert or delete the SRH modifying the previous |
-    |              | and next segments in the segment list           |
-    +--------------+-------------------------------------------------+
-    | SRH segment  | insert, delete or modify the previous or next   |
-    | list         | segments in the segment list                    |
-    +--------------+-------------------------------------------------+
-    | SRH TLV      | insert, delete or modify TLVs in the SRH        |
-    +--------------+-------------------------------------------------+
-    | SRH flags    | modify tags and flags                           |
-    | and tag      |                                                 |
-    +--------------+-------------------------------------------------+
+   A modification attack can be performed in one or more of the
+   following ways:
 
-                                 Table 1
+   *  SID list: the SRH can be manipulated by adding or removing SIDs,
+      or by modifying existing SIDs.
+
+   *  IPv6 Destination Address (DA): when an SRH is present modifying
+      the destination address (DA) of the IPv6 header affects the active
+      segment.  However, DA modification can affect the SR policy even
+      in the absence of an SRH.  One example is modifying a DA which is
+      used as a Binding SID [RFC8402].  Another example is modifying a
+      DA which represents a compressed segment list
+      [I-D.ietf-spring-srv6-srh-compression].  SRH compression allows
+      encoding multiple compressed SIDs within a single 128-bit SID, and
+      thus modifying the DA can affect one or more hops in the SR
+      policy.
+
+   *  Add/remove SRH: an attacker can insert or remove an SRH.
+
+   *  SRH TLV: adding, removing or modifying TLV fields in the SRH.
+
+   It is noted that the SR modification attack is performed by an on-
+   path attacker who has access to packets in transit, and thus can
+   implement these attacks directly.  However, SR modification is
+   relatively easy to implement and requires low processing resources by
+   an attacker, while it facilitates more complex on-path attacks by
+   averting the traffic to another node that the attacker has access to
+   and has more processing resources.
 
    An on-path internal attacker can also modify, insert or delete other
    extension headers but these are outside the scope of this document.
@@ -421,58 +423,26 @@ Table of Contents
 
 6.2.3.  Impact
 
-   The SR modification attack allows an on-path internal attacker to
-   change the segment list in the packet, i.e. the SR policy that the
-   packet is steered through, and thus to manipulate the path and the
-   processing that the packet is subject to.
+   SR modification attacks, including adding/removing an SRH, modifying
+   the SID list and modifying the IPv6 DA, can have one or more of the
+   following outcomes, which are described in Section 5.
 
-   Specifically, the SR modification attack can impact the network and
-   the forwarding behavior of packets in one or more of the following
-   ways:
+   *  Unauthorized access
 
-   Avoiding a specific node or path:  An attacker can manipulate the DA
-      and/or SRH in order to avoid a specific node or path.  This
-      approach can be used, for example, for bypassing the billing
-      service or avoiding access controls and security filters.
+   *  Avoiding a specific node or path
 
-   Preferring a specific path:  The packet can be manipulated to divert
-      packets to a specific path.  This attack can result in allowing
-      various unauthorized services such as traffic acceleration.
-      Alternatively, an attacker can divert traffic to be forwarded
-      through a specific node that the attacker has access to, thus
-      facilitating more complex on-path attacks such as passive
-      listening, recon and various man-in-the-middle attacks.  It is
-      noted that the SR modification attack is performed by an on-path
-      attacker who has access to packets in transit, and thus can
-      implement these attacks directly.  However, SR modification is
-      relatively easy to implement and requires low processing resources
-      by an attacker, while it facilitates more complex on-path attacks
-      by averting the traffic to another node that the attacker has
-      access to and has more processing resources.
+   *  Preferring a specific path
 
-   Forwarding through a path that causes the packet to be discarded:  SR
-      modification may cause a packet to be forwarded to a point in the
-      network where it can no longer be forwarded, causing the packet to
-      be discarded.
+   *  Causing header modifications
 
-   Manipulating the SRv6 network programming:  An attacker can trigger a
-      specific endpoint behavior by modifying the destination address
-      and/or SIDs in the segment list.  This attack can be invoked in
-      order to manipulate the path or in order to exhaust the resources
-      of the SR endpoint.
+   *  Causing packets to be discarded
 
-   Availability:  An attacker can add SIDs to the segment list in order
-      to increase the number hops that each packet is forwarded through
-      and thus increase the load on the network.  For example, a set of
-      SIDs can be inserted in a way that creates a forwarding loop
-      ([RFC8402], [RFC5095]) and thus loads the nodes along the loop.
-      Network programming can be used in some cases to manipulate
-      segment endpoints to perform unnecessary functions that consume
-      processing resources.  TLV fields such as the HMAC TLV can be
-      maliciously added to the SRH in order to consume processing
-      resources.  Path inflation, malicious looping and unnecessary
-      instructions and TLVs have a common outcome, resource exhaustion,
-      which may in severe cases cause Denial of Service (DoS).
+   *  Resource exhaustion
+
+   *  Forwarding loops
+
+   Maliciously adding unnecessary TLV fields can cause further resource
+   exhaustion.
 
 6.3.  Passive Listening
 
