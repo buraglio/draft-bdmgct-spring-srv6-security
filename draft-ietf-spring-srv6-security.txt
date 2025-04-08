@@ -5,14 +5,14 @@
 Source Packet Routing in Networking                          N. Buraglio
 Internet-Draft                                   Energy Sciences Network
 Intended status: Standards Track                              T. Mizrahi
-Expires: 9 October 2025                                           Huawei
+Expires: 10 October 2025                                          Huawei
                                                                  T. Tong
                                                             China Unicom
                                                          L. M. Contreras
                                                               Telefonica
                                                                  F. Gont
                                                             SI6 Networks
-                                                            7 April 2025
+                                                            8 April 2025
 
 
               Segment Routing IPv6 Security Considerations
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 October 2025.
+   This Internet-Draft will expire on 10 October 2025.
 
 Copyright Notice
 
@@ -310,7 +310,27 @@ Table of Contents
       processing that the packet is subject to, thus compromising the
       integrity of the system.  Furthermore, an attack that compromises
       the control plane and/or the management plane is also a means of
-      impacting the system integrity.
+      impacting the system integrity.  Specific SRv6-targeted attack may
+      cause one or more of the following outcomes:
+
+      -  Avoiding a specific node or path: when an SRv6 policy is
+         manipulated, specific nodes or paths may be bypassed, for
+         example in order to bypass the billing service or avoid access
+         controls and security filters.
+
+      -  Preferring a specific path: packets can be manipulated so that
+         they are diverted to a specific path.  This can result in
+         allowing various unauthorized services such as traffic
+         acceleration.  Alternatively, an attacker can divert traffic to
+         be forwarded through a specific node that the attacker has
+         access to, thus facilitating more complex on-path attacks such
+         as passive listening, recon and various man-in-the-middle
+         attacks.
+
+      -  Causing header modifications: SRv6 network programming
+         determines the SR endpoint behavior, including potential header
+         modifications.  Thus, one of the potential outcomes of an
+         attack is unwanted header modifications.
 
    *  Communication Integrity: SRv6 attacks may cause packets to be
       forwarded through paths that the attacker controls, which may
@@ -331,15 +351,27 @@ Table of Contents
    *  Denial of Service: the availability aspects of SRv6 include the
       ability of attackers to leverage SRv6 as a means for compromising
       the performance of a network or for causing Denial of Service
-      (DoS).  Compromising the availability of the system can be
-      achieved by sending multiple SRv6-enabled packets to/through
-      victim nodes, where the SRv6-enabled packets result in a negative
-      performance impact of the victim systems (see [RFC9098] for
-      further details).  Alternatively, an attacker might achieve attack
-      amplification by causing packets to "bounce" multiple times
-      between a set of victim nodes, with the goal of exhausting
-      processing resources and/or bandwidth (see [CanSecWest2007] for a
-      discussion of this type of attack).
+      (DoS), including:
+
+      -  Resource exhaustion: compromising the availability of the
+         system can be achieved by sending SRv6-enabled packets to/
+         through victim nodes in a way that results in a negative
+         performance impact of the victim systems (e.g., [RFC9098]).
+         For example, network programming can be used in some cases to
+         manipulate segment endpoints to perform unnecessary functions
+         that consume processing resources.  Resource exhaustion may in
+         severe cases cause Denial of Service (DoS).
+
+      -  Forwarding loops: an attacker might achieve attack
+         amplification by increasing the number hops that each packet is
+         forwarded through and thus increase the load on the network.
+         For example, a set of SIDs can be inserted in a way that
+         creates a forwarding loop ([RFC8402], [RFC5095],
+         [CanSecWest2007]) and thus loads the nodes along the loop.
+
+      -  Causing packets to be discarded: an attacker may cause a packet
+         to be forwarded to a point in the network where it can no
+         longer be forwarded, causing the packet to be discarded.
 
    Section 6 discusses specific implementations of these attacks, and
    possible mitigations are discussed in Section 7.
