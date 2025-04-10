@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-08T01:25:47.108933+00:00",
+  "timestamp": "2025-04-10T01:25:50.310996+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -1206,24 +1206,26 @@
       "id": "PR_kwDOKVF77M6Rh5Co",
       "title": "Updated Impact Section",
       "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/37",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "talmi",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Some of the impacts that were described in the attack section were moved into the impact section.",
       "createdAt": "2025-04-06T10:08:09Z",
-      "updatedAt": "2025-04-07T18:00:11Z",
+      "updatedAt": "2025-04-08T09:51:23Z",
       "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
       "baseRefName": "main",
       "baseRefOid": "fc4a3c46fa2148502dc109c4dd4e47ce06d60be0",
       "headRepository": "talmi/draft-bdmgct-spring-srv6-security",
       "headRefName": "impact-sec-details",
       "headRefOid": "95f0d54dddeeeead7dbabedc857aff4b20e4c347",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-04-08T09:51:23Z",
+      "mergedAt": "2025-04-08T09:51:23Z",
+      "mergedBy": "talmi",
+      "mergeCommit": {
+        "oid": "b46b0f11a2a5945de0eab9103de0c801c06b6aef"
+      },
       "comments": [],
       "reviews": [
         {
