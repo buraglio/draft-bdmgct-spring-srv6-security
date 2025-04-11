@@ -1016,8 +1016,8 @@ Acknowledgments
 
    The authors would like to acknowledge the valuable input and
    contributions from Zafar Ali, Andrew Alston, Dale Carder, Bruno
-   Decraene, Dhruv Dhody, Darren Dukes, Joel Halpern, Boris Hassanov,
-   Alvaro Retana, Eric Vyncke, and Russ White.
+   Decraene, Dhruv Dhody, Mike Dopheide, Darren Dukes, Joel Halpern,
+   Boris Hassanov, Alvaro Retana, Eric Vyncke, and Russ White.
 
 Authors' Addresses
 
