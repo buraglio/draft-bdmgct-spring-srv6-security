@@ -5,14 +5,14 @@
 Source Packet Routing in Networking                          N. Buraglio
 Internet-Draft                                   Energy Sciences Network
 Intended status: Standards Track                              T. Mizrahi
-Expires: 10 October 2025                                          Huawei
+Expires: 13 October 2025                                          Huawei
                                                                  T. Tong
                                                             China Unicom
                                                          L. M. Contreras
                                                               Telefonica
                                                                  F. Gont
                                                             SI6 Networks
-                                                            8 April 2025
+                                                           11 April 2025
 
 
               Segment Routing IPv6 Security Considerations
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 10 October 2025.
+   This Internet-Draft will expire on 13 October 2025.
 
 Copyright Notice
 
@@ -341,9 +341,9 @@ Table of Contents
 
    *  Confidentiality: as in communication integrity, packets forwarded
       through unintended paths may traverse nodes controlled by the
-      attacker.  Since eavesdropping to user data can be avoided by
+      attacker.  Since eavesdropping of user data can be avoided by
       using encryption in higher layers, it is not within the scope of
-      this document.  However, eavesdropping to a network that uses SRv6
+      this document.  However, eavesdropping of a network that uses SRv6
       allows the attacker to collect information about SR endpoint
       addresses, SR policies, and network topologies, is a specific form
       of reconnaissance
@@ -756,13 +756,13 @@ Table of Contents
    When an SRv6 packet is forwarded in the SRv6 domain, its destination
    address changes constantly, the real destination address is hidden.
    Security devices on SRv6 network may not learn the real destination
-   address and fail to take access control on some SRv6 traffic.
+   address and fail to perform access control on some SRv6 traffic.
 
    The security devices on SRv6 networks need to take care of SRv6
    packets.  However, the SRv6 packets usually use loopback address of
    the PE device as a source address.  As a result, the address
    information of SR packets may be asymmetric, resulting in improper
-   filter traffic problems, which affects the effectiveness of security
+   traffic filter problems, which affects the effectiveness of security
    devices.  For example, along the forwarding path in SRv6 network, the
    SR-aware firewall will check the association relationships of the
    bidirectional VPN traffic packets.  And it is able to retrieve the
@@ -770,36 +770,36 @@ Table of Contents
    When the <source, destination> tuple of the packet from PE1 to PE2 is
    <PE1-IP-ADDR, PE2-VPN-SID>, and the other direction is <PE2-IP-ADDR,
    PE1-VPN-SID>, the source address and destination address of the
-   forward and backward VPN traffic are regarded as different flow.
+   forward and backward VPN traffic are regarded as different flows.
    Eventually, the legal traffic may be blocked by the firewall.
 
    SRv6 is commonly used as a tunneling technology in operator networks.
    To provide VPN service in an SRv6 network, the ingress PE
    encapsulates the payload with an outer IPv6 header with the SRH
-   carrying the SR Policy segment List along with the VPN service SID.
+   carrying the SR Policy segment list along with the VPN service SID.
    The user traffic towards SRv6 provider backbone will be encapsulated
-   in SRv6 tunnel.  When constructing an SRv6 packet, the destination
+   an SRv6 tunnel.  When constructing an SRv6 packet, the destination
    address field of the SRv6 packet changes constantly and the source
    address field of the SRv6 packet is usually assigned using an address
    on the originating device, which may be a host or a network element
    depending on configuration.  This may affect the security equipment
    and middle boxes in the traffic path.  Because of the existence of
    the SRH, and the additional headers, security appliances, monitoring
-   systems, and middle boxes could react in different ways if do not
-   incorporate support for the supporting SRv6 mechanisms, such as the
-   IPv6 Segment Routing Header (SRH) [RFC8754].  Additionally,
+   systems, and middle boxes could react in different ways if they do
+   not incorporate support for the supporting SRv6 mechanisms, such as
+   the IPv6 Segment Routing Header (SRH) [RFC8754].  Additionally,
    implementation limitations in the processing of IPv6 packets with
    extension headers may result in SRv6 packets being dropped
    [RFC7872],[RFC9098].
 
 8.3.  Limited capability hardware
 
-   In some cases, access control lists capabilities are a resource
-   shared with other features across a given hardware platform.
-   Filtering capabilities should be considered along with other hardware
-   reliant functions such as VLAN scale, route table size, MAC address
-   table size, etc.  Filtering both at the control and data plane may or
-   may not require shared resources.  For example, some platforms may
+   In some cases, access control list capabilities are a resource shared
+   with other features across a given hardware platform.  Filtering
+   capabilities should be considered along with other hardware reliant
+   functions such as VLAN scale, route table size, MAC address table
+   size, etc.  Filtering both at the control and data plane may or may
+   not require shared resources.  For example, some platforms may
    require allocating resources from route table size in order to
    accommodate larger numbers of access lists.  Hardware and software
    configurations should be considered when designing the filtering
