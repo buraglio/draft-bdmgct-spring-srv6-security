@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-10T01:25:50.310996+00:00",
+  "timestamp": "2025-04-13T02:53:45.242180+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -1298,6 +1298,48 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 40,
+      "id": "PR_kwDOKVF77M6STKgS",
+      "title": "Copy Edits from Dop",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/40",
+      "state": "MERGED",
+      "author": "dopheide-esnet",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Just a few minor edits, please review for accuracy.  Overall everything looks really good.",
+      "createdAt": "2025-04-11T18:23:35Z",
+      "updatedAt": "2025-04-11T18:30:36Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "61ea795dd8574db9567ee7ef6020459a43b2d65f",
+      "headRepository": "dopheide-esnet/draft-bdmgct-spring-srv6-security",
+      "headRefName": "main",
+      "headRefOid": "89e742aa8e1e041e8f81b2e8f5ca1a1f3b1a2091",
+      "closedAt": "2025-04-11T18:30:36Z",
+      "mergedAt": "2025-04-11T18:30:36Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "dd1fe82c369251523d8fac54b73cd09d6c57d6ab"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKVF77M6klTDb",
+          "commit": {
+            "abbreviatedOid": "89e742a"
+          },
+          "author": "buraglio",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "Looks good, thanks for the read-through",
+          "createdAt": "2025-04-11T18:30:25Z",
+          "updatedAt": "2025-04-11T18:30:25Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
