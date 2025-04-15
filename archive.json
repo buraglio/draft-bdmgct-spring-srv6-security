@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-13T02:53:45.242180+00:00",
+  "timestamp": "2025-04-15T01:36:47.461782+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -1340,6 +1340,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 41,
+      "id": "PR_kwDOKVF77M6SdnbG",
+      "title": "Add SRv6 Sec Architecture discussion",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/41",
+      "state": "OPEN",
+      "author": "fgont",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "This adds the discussion of two topics, one of which we had discussed before:\r\n\r\n* HMAC TLV usage\r\n* Limited domains\r\n\r\n",
+      "createdAt": "2025-04-14T10:16:10Z",
+      "updatedAt": "2025-04-14T10:16:10Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "10a93efba292513d0c2be03b3f3de7396b3bcc5c",
+      "headRepository": "fgont/draft-bdmgct-spring-srv6-security",
+      "headRefName": "main",
+      "headRefOid": "d7dbe863ce7437c75bc7b3d6f32f1de5e9cc9cd7",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
