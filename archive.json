@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-15T01:36:47.461782+00:00",
+  "timestamp": "2025-04-17T01:27:09.134017+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -103,6 +103,22 @@
       "body": "Generally speaking, most of the \"generic\" security considerations for the control plane and management plane apply to SRv6 as well.\nBelow is a list of issues taken from SRv6-related documents that may be worth mentioning. Some of these issues are SRv6-specific, while others are generic (not SRv6-specific), and the latter are marked below with a [generic] tag.\n\nControl plane attacks\n=====================\n\n[draft-ietf-spring-srv6-security]\n- an attacker can advertise SIDs in order to manipulate the SR policies used in the network\n- [generic] Known IPv6 control plane attacks (e.g., overclaiming) are applicable to SRv6 as well.\n\n[draft-ietf-pce-segment-routing-policy-cp]\n- provide an eavesdropper with additional information about the SR Policy\n\n[RFC9259]\n- The O-flag may be set by an attacking node attempting a denial-of-service attack on the OAM process at the segment endpoint node.\n- An on-path attacker able to observe this OAM channel could conduct traffic analysis, or potentially eavesdropping (depending on the OAM configuration), of this telemetry for the entire SR domain from such a vantage point.\n- Once an HMAC is generated for a segment list with the O-flag set, it can be used for an arbitrary amount of traffic using that segment list with the O-flag set.\n\n[RFC8476]\n- Advertisement of an incorrect MSD value may have negative consequences.  If the value is smaller than supported, path computation may fail to compute a viable path.  If the value is larger than supported, an attempt to instantiate a path that can't be supported by the head-end (the node performing the SID imposition) may occur.\n\n\nControl plane mitigation methods\n================================\n\n[draft-ietf-idr-bgp-ls-sr-policy]\n- the SR Policy information advertised via BGP sessions is limited to nodes and/or controllers/applications in a secure manner within this trusted SR domain.\n- [generic] isolation of BGP-LS sessions from BGP sessions for other address-families\n\n[draft-ietf-pce-segment-routing-policy-cp]\n- [generic] As per [RFC8231], it is RECOMMENDED that these PCEP extensions can only be activated on authenticated and encrypted sessions across PCEs and PCCs belonging to the same administrative authority, using Transport Layer Security (TLS) [RFC8253] as per the recommendations and best current practices in [RFC9325].\n\n[RFC9513]\n- [generic] [RFC7166] describes an alternative and improved authentication mechanism to IPsec for OSPFv3.  The use of authentication is RECOMMENDED for OSPFv3 deployment.\n\n[RFC9259]\n- An implementation correctly implementing the rate limiting described in Section 2.1.1 is not susceptible to that denial-of-service attack.\n\n\nManagement plane attacks\n===================================\n[draft-ietf-lsr-isis-srv6-yang]\n[draft-ietf-lsr-ospf-srv6-yang]\n- [generic] There are a number of data nodes defined in this YANG module that are writable/creatable/deletable (i.e., config true, which is the default).  These data nodes may be considered sensitive or vulnerable in some network environments.  Write operations (e.g., edit-config) to these data nodes without proper protection can have a negative effect on network operations.\n\nManagement plane mitigation methods\n===================================\n\n[draft-ietf-lsr-isis-srv6-yang]\n[draft-ietf-lsr-ospf-srv6-yang]\n- [generic] The lowest NETCONF layer is the secure transport layer, and the mandatory-to-implement secure transport is Secure Shell (SSH) [RFC6242].  The lowest RESTCONF layer is HTTPS, and the mandatory-to-implement secure transport is TLS [RFC8446].\n- [generic] The Network Configuration Access Control Model (NACM) [RFC8341] provides the means to restrict access for particular NETCONF or RESTCONF users to a pre-configured subset of all available NETCONF or RESTCONF protocol operations and content.\n\n",
       "createdAt": "2025-02-12T05:56:57Z",
       "updatedAt": "2025-02-12T06:02:05Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 42,
+      "id": "I_kwDOKVF77M6y2Ta1",
+      "title": "re-arrange HMAC and limited domain sections",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/issues/42",
+      "state": "OPEN",
+      "author": "buraglio",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": " HMAC discussion in section 7.3 and limited domain discussion in section 7.1",
+      "createdAt": "2025-04-16T19:41:37Z",
+      "updatedAt": "2025-04-16T19:41:37Z",
       "closedAt": null,
       "comments": []
     }
@@ -1346,20 +1362,62 @@
       "id": "PR_kwDOKVF77M6SdnbG",
       "title": "Add SRv6 Sec Architecture discussion",
       "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/41",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "fgont",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "This adds the discussion of two topics, one of which we had discussed before:\r\n\r\n* HMAC TLV usage\r\n* Limited domains\r\n\r\n",
       "createdAt": "2025-04-14T10:16:10Z",
-      "updatedAt": "2025-04-14T10:16:10Z",
+      "updatedAt": "2025-04-16T17:07:23Z",
       "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
       "baseRefName": "main",
       "baseRefOid": "10a93efba292513d0c2be03b3f3de7396b3bcc5c",
       "headRepository": "fgont/draft-bdmgct-spring-srv6-security",
       "headRefName": "main",
       "headRefOid": "d7dbe863ce7437c75bc7b3d6f32f1de5e9cc9cd7",
+      "closedAt": "2025-04-16T17:07:23Z",
+      "mergedAt": "2025-04-16T17:07:23Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "811854d365100542f36cddb98e47dd195ce4eb5b"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKVF77M6lTIKu",
+          "commit": {
+            "abbreviatedOid": "d7dbe86"
+          },
+          "author": "buraglio",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "This is good content. I am going to merge these in and we can shuffle them into the HMAC discussion in section 7.3 and limited domain discussion in section 7.1",
+          "createdAt": "2025-04-16T17:07:00Z",
+          "updatedAt": "2025-04-16T17:07:00Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 43,
+      "id": "PR_kwDOKVF77M6S5ONl",
+      "title": "Re-factoring HMAC and trusted domain",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/43",
+      "state": "OPEN",
+      "author": "buraglio",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "re-factored some of the last PR for trusted-domain and HMAC",
+      "createdAt": "2025-04-16T20:24:19Z",
+      "updatedAt": "2025-04-16T20:24:19Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "811854d365100542f36cddb98e47dd195ce4eb5b",
+      "headRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "headRefName": "ndb-trusted-hmac-shuffle",
+      "headRefOid": "4b595affc5472417d2702dd05c6bff85f816d340",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
