@@ -1268,13 +1268,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
                     <p id="section-toc.1-1.7.2.1.2.1.1"><a href="#section-7.1.1" class="auto internal xref">7.1.1</a>.  <a href="#name-overview-5" class="internal xref">Overview</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1.2.2">
-                    <p id="section-toc.1-1.7.2.1.2.2.1"><a href="#section-7.1.2" class="auto internal xref">7.1.2</a>.  <a href="#name-srv6-fail-open-trusted-doma" class="internal xref">SRv6 Fail-Open Trusted Domains</a></p>
+                    <p id="section-toc.1-1.7.2.1.2.2.1"><a href="#section-7.1.2" class="auto internal xref">7.1.2</a>.  <a href="#name-srh-filtering" class="internal xref">SRH Filtering</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1.2.3">
-                    <p id="section-toc.1-1.7.2.1.2.3.1"><a href="#section-7.1.3" class="auto internal xref">7.1.3</a>.  <a href="#name-srh-filtering" class="internal xref">SRH Filtering</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1.2.4">
-                    <p id="section-toc.1-1.7.2.1.2.4.1"><a href="#section-7.1.4" class="auto internal xref">7.1.4</a>.  <a href="#name-address-range-filtering" class="internal xref">Address Range Filtering</a></p>
+                    <p id="section-toc.1-1.7.2.1.2.3.1"><a href="#section-7.1.3" class="auto internal xref">7.1.3</a>.  <a href="#name-address-range-filtering" class="internal xref">Address Range Filtering</a></p>
 </li>
                 </ul>
 </li>
@@ -1283,11 +1280,6 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3">
                 <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.  <a href="#name-hashed-message-authenticati" class="internal xref">Hashed Message Authentication Code (HMAC)</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3.2.1">
-                    <p id="section-toc.1-1.7.2.3.2.1.1"><a href="#section-7.3.1" class="auto internal xref">7.3.1</a>.  <a href="#name-packet-spoofing-and-tamperi" class="internal xref">Packet Spoofing and Tampering Protection</a></p>
-</li>
-                </ul>
 </li>
             </ul>
 </li>
@@ -1824,42 +1816,35 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
 </pre><a href="#section-7.1.1-2" class="pilcrow">¶</a>
 </div>
 <p id="section-7.1.1-3">Following the spirit of <span>[<a href="#RFC8402" class="cite xref">RFC8402</a>]</span>, the current document assumes that SRv6 is deployed within a trusted domain. Traffic <span class="bcp14">MUST</span> be filtered at the domain boundaries. Thus, most of the attacks described in this document are limited to within the domain (i.e., internal attackers).<a href="#section-7.1.1-3" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="fail-open">
-<section id="section-7.1.2">
-          <h4 id="name-srv6-fail-open-trusted-doma">
-<a href="#section-7.1.2" class="section-number selfRef">7.1.2. </a><a href="#name-srv6-fail-open-trusted-doma" class="section-name selfRef">SRv6 Fail-Open Trusted Domains</a>
-          </h4>
-<p id="section-7.1.2-1">SRv6 is commonly referred to as operating in a Trusted Domain [RFC8799]. However, there is currently no IETF consensus on the concept of "Trusted Domains" (the concept has been defined in [RFC8799], published as an Independent Submission). In the case of IPv6 SRH, the "Trusted Domain" is expected to be achieved via packet filtering. Such an approach has been commonly referred to as the concept of "fail-open", a state of which the attributes are frequently described as containing inherently more risk than fail-closed methodologies such as SR-MPLS. In the case of SRv6, the reliance of perfectly crafted filters on on all edges of the trusted domain, noting that if the filters are removed or adjusted in an erroneous manner, there is a demonstrable risk of inbound or outbound leaks. It is also important to note that some filtering implementations have limits on the size, complexity, or protocol support that can be applied, which may prevent the filter adjustments or creation required to properly secure the trusted domain for a new protocol such as SRv6.<a href="#section-7.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-7.1.2-2">Practically speaking, this means successfully enforcing a "Trusted Domain" may be operationally difficult and error-prone in practice, and that attacks that are expected to be unfeasible from outside the Trusted Domain may actually become feasible when any of the involved systems fails to enforce the filtering policy that is required to define the Trusted Domain.<a href="#section-7.1.2-2" class="pilcrow">¶</a></p>
+<p id="section-7.1.1-4">Such an approach has been commonly referred to as the concept of "fail-open", a state of which the attributes are frequently described as containing inherently more risk than fail-closed methodologies. The reliance of perfectly crafted filters on on all edges of the trusted domain, noting that if the filters are removed or adjusted in an erroneous manner, there is a demonstrable risk of inbound or outbound leaks. It is also important to note that some filtering implementations have limits on the size, complexity, or protocol support that can be applied, which may prevent the filter adjustments or creation required to properly secure the trusted domain for a new protocol such as SRv6.<a href="#section-7.1.1-4" class="pilcrow">¶</a></p>
+<p id="section-7.1.1-5">Practically speaking, this means successfully enforcing a "Trusted Domain" may be operationally difficult and error-prone in practice, and that attacks that are expected to be unfeasible from outside the Trusted Domain may actually become feasible when any of the involved systems fails to enforce the filtering policy that is required to define the Trusted Domain.<a href="#section-7.1.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="srh-filtering">
-<section id="section-7.1.3">
+<section id="section-7.1.2">
           <h4 id="name-srh-filtering">
-<a href="#section-7.1.3" class="section-number selfRef">7.1.3. </a><a href="#name-srh-filtering" class="section-name selfRef">SRH Filtering</a>
+<a href="#section-7.1.2" class="section-number selfRef">7.1.2. </a><a href="#name-srh-filtering" class="section-name selfRef">SRH Filtering</a>
           </h4>
-<p id="section-7.1.3-1">Filtering on presence of an SRH is possible but not useful for two reasons:
+<p id="section-7.1.2-1">Filtering on presence of an SRH is possible but not useful for two reasons:
 1. The SRH is optional for SID processing as described in <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span> section 3.1 and 4.1.
-2. A packet containing an SRH may not be destined to the SR domain, it may be simply transiting the domain.<a href="#section-7.1.3-1" class="pilcrow">¶</a></p>
-<p id="section-7.1.3-2">For these reasons SRH filtering is not a useful method of mitigation, and thus filtering can only be applied based on the address range, as described below.<a href="#section-7.1.3-2" class="pilcrow">¶</a></p>
+2. A packet containing an SRH may not be destined to the SR domain, it may be simply transiting the domain.<a href="#section-7.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-7.1.2-2">For these reasons SRH filtering is not a useful method of mitigation, and thus filtering can only be applied based on the address range, as described below.<a href="#section-7.1.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="address-range-filtering">
-<section id="section-7.1.4">
+<section id="section-7.1.3">
           <h4 id="name-address-range-filtering">
-<a href="#section-7.1.4" class="section-number selfRef">7.1.4. </a><a href="#name-address-range-filtering" class="section-name selfRef">Address Range Filtering</a>
+<a href="#section-7.1.3" class="section-number selfRef">7.1.3. </a><a href="#name-address-range-filtering" class="section-name selfRef">Address Range Filtering</a>
           </h4>
-<p id="section-7.1.4-1">The IPv6 destination address can be filtered at the SR ingress node and at all nodes implementing SRv6 SIDs within the SR domain in order to mitigate external attacks. Section 5.1 of <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span> describes this in detail, it's summarized here as:
+<p id="section-7.1.3-1">The IPv6 destination address can be filtered at the SR ingress node and at all nodes implementing SRv6 SIDs within the SR domain in order to mitigate external attacks. Section 5.1 of <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span> describes this in detail, it's summarized here as:
 1. At ingress nodes, any packet entering the SR domain and destined to a SID within the SR domain is dropped.
-2. At every SRv6 enabled node, any packet destined to a SID instantiated at the node from a source address outside the SR domain is dropped.<a href="#section-7.1.4-1" class="pilcrow">¶</a></p>
-<p id="section-7.1.4-2">In order to apply such a filtering mechanism the SR domain needs to have an infrastructure address range for SIDs, and an infrastructure address range for source addresses, that can be detected and enforced. Some examples of an infrastructure address range for SIDs are:
+2. At every SRv6 enabled node, any packet destined to a SID instantiated at the node from a source address outside the SR domain is dropped.<a href="#section-7.1.3-1" class="pilcrow">¶</a></p>
+<p id="section-7.1.3-2">In order to apply such a filtering mechanism the SR domain needs to have an infrastructure address range for SIDs, and an infrastructure address range for source addresses, that can be detected and enforced. Some examples of an infrastructure address range for SIDs are:
 1. ULA addresses
 2. The prefix defined in [RFC9602].
-3. GUA addresses<a href="#section-7.1.4-2" class="pilcrow">¶</a></p>
-<p id="section-7.1.4-3">Many operators reserve a /64 block for all loopback addresses and allocate /128 for each loopback interface. This simplifies the filtering of permitted source addresses.<a href="#section-7.1.4-3" class="pilcrow">¶</a></p>
-<p id="section-7.1.4-4">Failure to implement address range filtering at ingress nodes is mitigated with filtering at SRv6 enabled node. Failure to implement both filtering mechanisms could result in a "fail open" scenario, where some attacks by internal attackers described in this document may be launched by external attackers.<a href="#section-7.1.4-4" class="pilcrow">¶</a></p>
+3. GUA addresses<a href="#section-7.1.3-2" class="pilcrow">¶</a></p>
+<p id="section-7.1.3-3">Many operators reserve a /64 block for all loopback addresses and allocate /128 for each loopback interface. This simplifies the filtering of permitted source addresses.<a href="#section-7.1.3-3" class="pilcrow">¶</a></p>
+<p id="section-7.1.3-4">Failure to implement address range filtering at ingress nodes is mitigated with filtering at SRv6 enabled node. Failure to implement both filtering mechanisms could result in a "fail open" scenario, where some attacks by internal attackers described in this document may be launched by external attackers.<a href="#section-7.1.3-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1894,25 +1879,7 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
             <p id="section-7.3-4.4.1">An internal attacker who does not have access to the pre-shared key can capture legitimate packets, and later replay the SRH and HMAC from these recorded packets. This allows the attacker to insert the previously recorded SRH and HMAC into a newly injected packet. An on-path internal attacker can also replace the SRH of an in-transit packet with a different SRH that was previously captured.<a href="#section-7.3-4.4.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<div id="tamper-protection">
-<section id="section-7.3.1">
-          <h4 id="name-packet-spoofing-and-tamperi">
-<a href="#section-7.3.1" class="section-number selfRef">7.3.1. </a><a href="#name-packet-spoofing-and-tamperi" class="section-name selfRef">Packet Spoofing and Tampering Protection</a>
-          </h4>
-<p id="section-7.3.1-1">Spoofing and tampering protection for the IPv6 SRH is provided via the HMAC TLV (see Section "2.1.2. HMAC TLV" of <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span>). However, at least two considerations should be made:<a href="#section-7.3.1-1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-7.3.1-2.1">
-              <p id="section-7.3.1-2.1.1">The HMAC TLV is <span class="bcp14">OPTIONAL</span>.<a href="#section-7.3.1-2.1.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-7.3.1-2.2">
-              <p id="section-7.3.1-2.2.1">While it is presumed that unique keys will be employed by each participating node, in  scenarios where the
-network resorts to manual configuration of pre-shared keys, the same key might be reused by multiple systems
-as an (incorrect) short-cut to keeeping the problem of pre-shared key configuration manageable.<a href="#section-7.3.1-2.2.1" class="pilcrow">¶</a></p>
-</li>
-          </ul>
-<p id="section-7.3.1-3">This limits the extent to which HMAC TLV can be relied upon as a security mechanism that could readily mitigate threats associated with spoofing and tampering protection for the IPv6 SRH.<a href="#section-7.3.1-3" class="pilcrow">¶</a></p>
-</section>
-</div>
+<p id="section-7.3-5">These considerations limit the extent to which HMAC TLV can be relied upon as a security mechanism that could readily mitigate threats associated with spoofing and tampering protection for the IPv6 SRH.<a href="#section-7.3-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
