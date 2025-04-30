@@ -5,14 +5,14 @@
 Source Packet Routing in Networking                          N. Buraglio
 Internet-Draft                                   Energy Sciences Network
 Intended status: Standards Track                              T. Mizrahi
-Expires: 19 October 2025                                          Huawei
+Expires: 1 November 2025                                          Huawei
                                                                  T. Tong
                                                             China Unicom
                                                          L. M. Contreras
                                                               Telefonica
                                                                  F. Gont
                                                             SI6 Networks
-                                                           17 April 2025
+                                                           30 April 2025
 
 
               Segment Routing IPv6 Security Considerations
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 October 2025.
+   This Internet-Draft will expire on 1 November 2025.
 
 Copyright Notice
 
@@ -83,25 +83,25 @@ Table of Contents
      3.1.  Requirements Language
      3.2.  Terminology
    4.  Threat Terminology
-   5.  Impact
+   5.  Effect
    6.  Attacks
      6.1.  Attack Abstractions
      6.2.  Modification Attack
        6.2.1.  Overview
        6.2.2.  Scope
-       6.2.3.  Impact
+       6.2.3.  Effect
      6.3.  Passive Listening
        6.3.1.  Overview
        6.3.2.  Scope
-       6.3.3.  Impact
+       6.3.3.  Effect
      6.4.  Packet Insertion
        6.4.1.  Overview
        6.4.2.  Scope
-       6.4.3.  Impact
+       6.4.3.  Effect
      6.5.  Control and Management Plane Attacks
        6.5.1.  Overview
        6.5.2.  Scope
-       6.5.3.  Impact
+       6.5.3.  Effect
      6.6.  Other Attacks
      6.7.  Attacks - Summary
    7.  Mitigation Methods
@@ -278,19 +278,20 @@ Table of Contents
    different domain is considered an external attack in the context of
    the current document.
 
-5.  Impact
+5.  Effect
 
-   One of the important aspects of a threat analysis is the potential
-   impact of each threat.  SRv6 allows for the forwarding of IPv6
-   packets via predetermined SR policies, which determine the paths and
-   the processing of these packets.  An attack on SRv6 may cause packets
-   to traverse arbitrary paths and to be subject to arbitrary processing
-   by SR endpoints within an SR domain.  This may allow an attacker to
-   perform a number of attacks on the victim networks and hosts that
-   would be mostly unfeasible for a non-SRv6 environment.
+   One of the important aspects of threat analysis is assessing the
+   potential effect or outcome of each threat.  SRv6 allows for the
+   forwarding of IPv6 packets via predetermined SR policies, which
+   determine the paths and the processing of these packets.  An attack
+   on SRv6 may cause packets to traverse arbitrary paths and to be
+   subject to arbitrary processing by SR endpoints within an SR domain.
+   This may allow an attacker to perform a number of attacks on the
+   victim networks and hosts that would be mostly unfeasible for a non-
+   SRv6 environment.
 
    The threat model in [ANSI-Sec] classifies threats according to their
-   potential impact, defining six categories.  For each of these
+   potential effect, defining six categories.  For each of these
    categories we briefly discuss its applicability to SRv6 attacks.
 
    *  Unauthorized Access: an attack that results in unauthorized access
@@ -310,7 +311,7 @@ Table of Contents
       processing that the packet is subject to, thus compromising the
       integrity of the system.  Furthermore, an attack that compromises
       the control plane and/or the management plane is also a means of
-      impacting the system integrity.  Specific SRv6-targeted attack may
+      affecting the system integrity.  Specific SRv6-targeted attack may
       cause one or more of the following outcomes:
 
       -  Avoiding a specific node or path: when an SRv6 policy is
@@ -456,7 +457,7 @@ Table of Contents
    Section 7.1, the ability to implement SR modification attacks is
    limited to on-path internal attackers.
 
-6.2.3.  Impact
+6.2.3.  Effect
 
    SR modification attacks, including adding/removing an SRH, modifying
    the SID list and modifying the IPv6 DA, can have one or more of the
@@ -499,7 +500,7 @@ Table of Contents
    network in which SRv6-related information is leaked through the
    boundaries of an SR domain.
 
-6.3.3.  Impact
+6.3.3.  Effect
 
    While the information collected in a reconnaisance attack does not
    compromise the confidentiality of the user data, it allows an
@@ -524,9 +525,9 @@ Table of Contents
    If filtering is deployed at the domain boundaries (Section 7.1),
    insertion attacks can only be implemented by internal attackers.
 
-6.4.3.  Impact
+6.4.3.  Effect
 
-   The main impact of this attack is resource exhaustion which
+   The main effect of this attack is resource exhaustion, which
    compromises the availability of the network, as described in
    Section 6.2.3.
 
@@ -569,9 +570,9 @@ Table of Contents
    authentication and security mechanisms to validate the authenticity
    of information.
 
-6.5.3.  Impact
+6.5.3.  Effect
 
-   A compromised control plane or management plane can impact the
+   A compromised control plane or management plane can affect the
    network in various possible ways.  SR policies can be manipulated by
    the attacker to avoid specific paths or to prefer specific paths, as
    described in Section 6.2.3.  Alternatively, the attacker can
@@ -596,11 +597,11 @@ Table of Contents
 6.7.  Attacks - Summary
 
    The following table summarizes the attacks that were described in the
-   previous subsections, and the corresponding impact of each of the
-   attacks.  Details about the impact are described in Section 5.
+   previous subsections, and the corresponding effect of each of the
+   attacks.  Details about the effect are described in Section 5.
 
   +=============+==================+===================================+
-  | Attack      | Details          | Impact                            |
+  | Attack      | Details          | Effect                            |
   +=============+==================+===================================+
   |Modification |Modification of:  |* Unauthorized access              |
   |             |* SID list        |* Avoiding a specific node or path |
