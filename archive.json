@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-01T01:45:04.752565+00:00",
+  "timestamp": "2025-05-06T01:38:26.794328+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -134,9 +134,17 @@
       "labels": [],
       "body": "It looks like this short section does not really discuss limitations.\nI believe this text should be merged into the \"Trusted Domains and Filtering\" section.\n\n",
       "createdAt": "2025-04-30T08:36:53Z",
-      "updatedAt": "2025-04-30T08:36:53Z",
+      "updatedAt": "2025-05-04T11:33:27Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "talmi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Addressed in PR#49.",
+          "createdAt": "2025-05-04T11:33:25Z",
+          "updatedAt": "2025-05-04T11:33:25Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -1554,6 +1562,48 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 49,
+      "id": "PR_kwDOKVF77M6U2VKo",
+      "title": "Mitigation review and minor updates",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/49",
+      "state": "MERGED",
+      "author": "talmi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "- Minor rephrasing.\r\n- Merged \"Limitations in Filtering Capabilities\" into \"Trusted Domains and Filtering\" section.\r\n- Removed redundant text from \"Middlebox Filtering Issues\".",
+      "createdAt": "2025-05-04T11:32:55Z",
+      "updatedAt": "2025-05-05T17:04:49Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "a9d8c142ca8c87ba30a9e0bd5bb07ccf66e92976",
+      "headRepository": "talmi/draft-bdmgct-spring-srv6-security",
+      "headRefName": "mitigation-review",
+      "headRefOid": "974ef3ea2ac9b88313863c852e136dbc78ff1244",
+      "closedAt": "2025-05-05T17:04:49Z",
+      "mergedAt": "2025-05-05T17:04:49Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "851b8c8d246cc03cca3a7f8d013cea9a7032d71b"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKVF77M6n0MEX",
+          "commit": {
+            "abbreviatedOid": "974ef3e"
+          },
+          "author": "buraglio",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "These look great",
+          "createdAt": "2025-05-05T17:04:41Z",
+          "updatedAt": "2025-05-05T17:04:41Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
