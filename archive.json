@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-06T01:38:26.794328+00:00",
+  "timestamp": "2025-05-29T01:40:33.850063+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -1604,6 +1604,58 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 50,
+      "id": "PR_kwDOKVF77M6X9Qjo",
+      "title": "Internal attacker definition updated",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/50",
+      "state": "OPEN",
+      "author": "talmi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Internal attacker definition updated following comment on the SPRING interim meeting.",
+      "createdAt": "2025-05-28T12:38:38Z",
+      "updatedAt": "2025-05-28T12:38:39Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "851b8c8d246cc03cca3a7f8d013cea9a7032d71b",
+      "headRepository": "talmi/draft-bdmgct-spring-srv6-security",
+      "headRefName": "internal-def",
+      "headRefOid": "fb633ac4f31c0f51f88177d9b923ebb313937d9c",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 51,
+      "id": "PR_kwDOKVF77M6X9RB2",
+      "title": "Control and Management Plane Attack Revision",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/51",
+      "state": "OPEN",
+      "author": "talmi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Significantly revised control and management plane attacks.\r\n- Added more references.\r\n- Divided control plane attacks into three main categories.",
+      "createdAt": "2025-05-28T12:39:16Z",
+      "updatedAt": "2025-05-28T12:39:16Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "851b8c8d246cc03cca3a7f8d013cea9a7032d71b",
+      "headRepository": "talmi/draft-bdmgct-spring-srv6-security",
+      "headRefName": "cont-mgmt-attacks",
+      "headRefOid": "0e8d6df62e3e2b87f0e34fbc8d8221fb13e019ab",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
