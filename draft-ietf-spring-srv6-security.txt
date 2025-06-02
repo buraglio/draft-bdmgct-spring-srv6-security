@@ -86,24 +86,18 @@ Table of Contents
    5.  Effect
    6.  Attacks
      6.1.  Attack Abstractions
-     6.2.  Modification Attack
-       6.2.1.  Overview
-       6.2.2.  Scope
-       6.2.3.  Effect
-     6.3.  Passive Listening
-       6.3.1.  Overview
-       6.3.2.  Scope
-       6.3.3.  Effect
-     6.4.  Packet Insertion
+     6.2.  Data Plane Attacks
+       6.2.1.  Modification Attack
+       6.2.2.  Passive Listening
+       6.2.3.  Packet Insertion
+       6.2.4.  Other Attacks
+     6.3.  Control Plane Attacks
+       6.3.1.  Routing Protocol Attacks
+       6.3.2.  OAM Attacks
+       6.3.3.  Central Control Plane Attacks
+     6.4.  Management Plane Attacks
        6.4.1.  Overview
-       6.4.2.  Scope
-       6.4.3.  Effect
-     6.5.  Control and Management Plane Attacks
-       6.5.1.  Overview
-       6.5.2.  Scope
-       6.5.3.  Effect
-     6.6.  Other Attacks
-     6.7.  Attacks - Summary
+     6.5.  Attacks - Summary
    7.  Mitigation Methods
      7.1.  Trusted Domains and Filtering
        7.1.1.  Overview
@@ -213,7 +207,7 @@ Table of Contents
    This section introduces the threat taxonomy that is used in this
    document, based on terminology from the Internet threat model
    [RFC3552], as well as some concepts from [RFC9055], [RFC7384],
-   [RFC7835] and [RFC9416].  Details regarding inter-domain segment
+   [rfc7835] and [RFC9416].  Details regarding inter-domain segment
    routing (SR) are out of scope for this document.
 
    Internal vs. External:  An internal attacker in the context of SRv6
@@ -243,7 +237,7 @@ Table of Contents
    path attackers, such as attackers 4 and 5, can insert packets, and in
    some cases can passively listen to some traffic, such as multicast
    transmissions.  In this example a Path Computation Element as a
-   Central Controller (PCECC) [RFC9050] is used as part of the control
+   Central Controller (PCECC) [rfc9050] is used as part of the control
    plane.  Thus, attacker 3 is an internal on-path attacker in the
    control plane, as it is located along the path between the PCECC and
    SR endpoint 1.
@@ -408,9 +402,11 @@ Table of Contents
    all the fields of the IPv6 header and its extension headers, this
    document limits itself to the IPv6 header and the SRH.
 
-6.2.  Modification Attack
+6.2.  Data Plane Attacks
 
-6.2.1.  Overview
+6.2.1.  Modification Attack
+
+6.2.1.1.  Overview
 
    An on-path internal attacker can modify a packet while it is in
    transit in a way that directly affects the packet's segment list.
@@ -447,14 +443,14 @@ Table of Contents
    An on-path internal attacker can also modify, insert or delete other
    extension headers but these are outside the scope of this document.
 
-6.2.2.  Scope
+6.2.1.2.  Scope
 
    An SR modification attack can be performed by on-path attackers.  If
    filtering is deployed at the domain boundaries as described in
    Section 7.1, the ability to implement SR modification attacks is
    limited to on-path internal attackers.
 
-6.2.3.  Effect
+6.2.1.3.  Effect
 
    SR modification attacks, including adding/removing an SRH, modifying
    the SID list and modifying the IPv6 DA, can have one or more of the
@@ -477,16 +473,16 @@ Table of Contents
    Maliciously adding unnecessary TLV fields can cause further resource
    exhaustion.
 
-6.3.  Passive Listening
+6.2.2.  Passive Listening
 
-6.3.1.  Overview
+6.2.2.1.  Overview
 
    An on-path internal attacker can passively listen to packets and
    specifically listen to the SRv6-related information that is conveyed
    in the IPv6 header and the SRH.  This approach can be used for
    reconnaissance, i.e., for collecting segment lists.
 
-6.3.2.  Scope
+6.2.2.2.  Scope
 
    A reconnaisance attack is limited to on-path internal attackers.
 
@@ -497,22 +493,22 @@ Table of Contents
    network in which SRv6-related information is leaked through the
    boundaries of an SR domain.
 
-6.3.3.  Effect
+6.2.2.3.  Effect
 
    While the information collected in a reconnaisance attack does not
    compromise the confidentiality of the user data, it allows an
    attacker to gather information about the network which in turn can be
    used to enable other attacks.
 
-6.4.  Packet Insertion
+6.2.3.  Packet Insertion
 
-6.4.1.  Overview
+6.2.3.1.  Overview
 
    In a packet insertion attack packets are inserted (injected) into the
    network with a segment list.  The attack can be applied either by
    using synthetic packets or by replaying previously recorded packets.
 
-6.4.2.  Scope
+6.2.3.2.  Scope
 
    Packet insertion can be performed by either on-path or off-path
    attackers.  In the case of a replay attack, recording packets in-
@@ -522,64 +518,13 @@ Table of Contents
    If filtering is deployed at the domain boundaries (Section 7.1),
    insertion attacks can only be implemented by internal attackers.
 
-6.4.3.  Effect
+6.2.3.3.  Effect
 
    The main effect of this attack is resource exhaustion, which
    compromises the availability of the network, as described in
-   Section 6.2.3.
+   Section 6.2.1.3.
 
-6.5.  Control and Management Plane Attacks
-
-6.5.1.  Overview
-
-   Depending on the control plane protocols used in a network, it is
-   possible to use the control plane as a way of compromising the
-   network.  For example, an attacker can advertise SIDs in order to
-   manipulate the SR policies used in the network.  Known IPv6 control
-   plane attacks (e.g., overclaiming) are applicable to SRv6 as well.
-
-   A compromised management plane can also facilitate a wide range of
-   attacks, including manipulating the SR policies or compromising the
-   network availability.
-
-6.5.2.  Scope
-
-   The control plane and management plane may be either in-band or out-
-   of-band, and thus the on-path and off-path taxonomy of Section 4 is
-   not necessarily common between the data plane, control plane and
-   management plane.  As in the data plane, on-path attackers can be
-   implement a wide range of attacks in order to compromise the control
-   and/or management plane, including selectively removing legitimate
-   messages, replaying them or passively listening to them.  However,
-   while an on-path attacker in the data plane is potentially more
-   harmful than an off-path attacker, effective control and/or
-   management plane attacks can be implemented off-path rather than by
-   trying to intercept or modify traffic in-flight, for example by
-   exchanging malicious control plane messages with legitimate routers,
-   by spoofing an SDN (Software Defined Network) controller, or by
-   gaining access to an NMS (Network Management System).
-
-   SRv6 domain boundary filtering can be used for mitigating potential
-   control plane and management plane attacks from external attackers.
-   Segment routing does not define any specific security mechanisms in
-   existing control plane or management plane protocols.  However,
-   existing control plane and management plane protocols use
-   authentication and security mechanisms to validate the authenticity
-   of information.
-
-6.5.3.  Effect
-
-   A compromised control plane or management plane can affect the
-   network in various possible ways.  SR policies can be manipulated by
-   the attacker to avoid specific paths or to prefer specific paths, as
-   described in Section 6.2.3.  Alternatively, the attacker can
-   compromise the availability, either by defining SR policies that load
-   the network resources, as described in Section 6.2.3, or by
-   blackholing some or all of the SR policies.  A passive attacker can
-   use the control plane or management plane messages as a means for
-   recon, similarly to Section 6.2.3.
-
-6.6.  Other Attacks
+6.2.4.  Other Attacks
 
    Various attacks which are not specific to SRv6 can be used to
    compromise networks that deploy SRv6.  For example, spoofing is not
@@ -591,7 +536,170 @@ Table of Contents
    subject to any existing or emerging IPv6 vulnerabilities [RFC9099],
    however, this is out of scope for this document.
 
-6.7.  Attacks - Summary
+6.3.  Control Plane Attacks
+
+   ### Overview The SRv6 control plane leverages existing control plane
+   protocols, such as BGP, IS-IS, OSPF and PCE.  Consequently, any
+   security attacks that can potentially compromise these protocols are
+   also applicable to SRv6 deployments utilizing them.  Therefore, this
+   document does not provide an exhaustive list of the potential control
+   plane attacks.  Instead, it highlights key categories of attacks,
+   focusing on three primary areas: attacks targeting routing protocols,
+   centralized control plane infrastructures, and Operations,
+   Administration, and Maintenance (OAM) protocols.
+
+6.3.1.  Routing Protocol Attacks
+
+   #### Overview Generic threats applicable to routing protocols are
+   discussed in [RFC4593].  Similar to data plane attacks, the
+   abstractions outlined in Section 6.1 are also applicable to control
+   plane traffic.  These include passive eavesdropping, message
+   injection, replay, deletion, and modification.
+
+   Passive listening enables an attacker to intercept routing protocol
+   messages as they traverse the network.  This form of attack does not
+   alter the content of the messages but allows the adversary to analyze
+   routing information, infer network topology, and gather intelligence
+   on routing behavior.
+
+   Active attacks involve the unauthorized injection or alteration of
+   control plane messages.  Such attacks can compromise routing
+   integrity by introducing falsified information, modifying legitimate
+   routing data, or triggering incorrect forwarding decisions.  These
+   disruptions may result in denial-of-service conditions or traffic
+   misdirection.
+
+   For example, an attacker may advertise falsified SIDs to manipulate
+   SR policies.  Another example in the context of SRv6 is the
+   advertisement of an incorrect Maximum SID Depth (MSD) value
+   [RFC8476].  If the advertised MSD is lower than the actual
+   capability, path computation may fail to compute a viable path.
+   Conversely, if the value is higher than supported, an attempt to
+   instantiate a path that can't be supported by the head-end (the node
+   performing the SID imposition) may occur.
+
+6.3.1.1.  Scope
+
+   The location of an attacker in the network significantly affects the
+   scope of potential attacks.  Off-path attackers are generally limited
+   to injecting malicious routing messages, while on-path attackers can
+   perform a broader range of attacks, including active modification or
+   passive listening.
+
+6.3.1.2.  Effect
+
+   Attacks targeting the routing protocol can have diverse impacts on
+   network operation, including the aspects described in Section 5.
+   These impacts may include incorrect SR policies or the degradation of
+   network availability, potentially resulting in service disruption or
+   denial of service.
+
+6.3.2.  OAM Attacks
+
+   #### Overview Since SRv6 operates over an IPv6 infrastructure,
+   existing OAM protocols designed for IPv6 networks are applicable to
+   SRv6 as well.  Consequently, the security considerations associated
+   with conventional IPv6 OAM protocols are also relevant to SRv6
+   environments.  As noted in [RFC7276], successful attacks on OAM
+   protocols can mislead operators by simulating non-existent failures
+   or by concealing actual network issues.  SRv6-specific OAM aspects
+   are specified in [RFC9259].
+
+   The O-flag in the SRH serves as a marking bit in user packets to
+   trigger telemetry data collection and export at the segment
+   endpoints.  An attacker may exploit this mechanism by setting the
+   O-flag in transit packets, thereby overloading the control plane and
+   degrading system availability.  Additionally, an on-path attacker may
+   passively intercept OAM data exported to external analyzers,
+   potentially gaining unauthorized insight into network topology and
+   behavior.
+
+6.3.2.1.  Scope
+
+   Off-path attackers may attempt to degrade system availability by
+   injecting fabricated OAM messages or SRv6 packets with the O-bit set,
+   thereby triggering unnecessary telemetry processing.  They may also
+   probe SRv6 nodes to infer information about network state and
+   performance characteristics.
+
+   On-path attackers possess enhanced capabilities due to their position
+   within the traffic path.  These include passive interception of OAM
+   data, unauthorized modification of the O-bit in transit packets, and
+   tampering with legitimate OAM messages to mislead network monitoring
+   systems or conceal operational issues.
+
+6.3.2.2.  Effect
+
+   Attacks targeting OAM protocols may impact network availability or
+   facilitate unauthorized information gathering.  Such attacks can
+   disrupt normal operations or expose sensitive details about network
+   topology, performance, or state.
+
+6.3.3.  Central Control Plane Attacks
+
+   #### Overview Centralized control plane architectures, such as those
+   based on the Path Computation Element Communication Protocol (PCECC)
+   [RFC8283], inherently introduce a single point of failure.  This
+   centralization may present a security vulnerability, particularly
+   with respect to denial-of-service (DoS) attacks targeting the
+   controller.  Furthermore, the central controller becomes a focal
+   point for potential interception or manipulation of control messages
+   exchanged with individual Network Elements (NEs), thereby increasing
+   the risk of compromise to the overall network control infrastructure.
+
+6.3.3.1.  Scope
+
+   As with other control plane attacks, an off-path attacker may attempt
+   to inject forged control messages or impersonate a legitimate
+   controller.  On-path attackers, by virtue of their position within
+   the communication path, possess additional capabilities such as
+   passive interception of control traffic and in-transit modification
+   of messages exchanged between the controller and Network Elements
+   (NEs).
+
+6.3.3.2.  Effect
+
+   A successful attack may result in any of the adverse effects
+   described in Section 5, potentially impacting availability and
+   operational correctness.
+
+6.4.  Management Plane Attacks
+
+6.4.1.  Overview
+
+   Similar to the control plane, a compromised management plane can
+   enable a broad range of attacks, including unauthorized manipulation
+   of SR policies and disruption of network availability.  The specific
+   threats and their potential impact are influenced by the management
+   protocols in use.  As with centralized control systems, management
+   infrastructure may introduce a single point of failure, rendering it
+   susceptible to denial-of-service (DoS) attacks or making it a target
+   for eavesdropping and message tampering.
+
+   Management functionality is often defined using YANG data models,
+   such as those specified in [I-D.ietf-lsr-isis-srv6-yang] and
+   [I-D.ietf-lsr-ospf-srv6-yang].  As with any YANG module, data nodes
+   marked as writable, creatable, or deletable may be considered
+   sensitive in certain operational environments.  Unauthorized or
+   unprotected write operations (e.g., via edit-config) targeting these
+   nodes can adversely affect network operations.
+
+6.4.1.1.  Scope
+
+   As with control plane attacks, an off-path attacker may attempt to
+   inject forged management messages or impersonate a legitimate network
+   management system.  On-path attackers, due to their privileged
+   position within the communication path, have additional capabilities
+   such as passive interception of management traffic and unauthorized
+   modification of messages in transit.
+
+6.4.1.2.  Effect
+
+   A successful attack may result in any of the adverse effects
+   described in Section 5, potentially impacting availability and
+   operational correctness.
+
+6.5.  Attacks - Summary
 
    The following table summarizes the attacks that were described in the
    previous subsections, and the corresponding effect of each of the
@@ -699,7 +807,7 @@ Table of Contents
    have an infrastructure address range for SIDs, and an infrastructure
    address range for source addresses, that can be detected and
    enforced.  Some examples of an infrastructure address range for SIDs
-   are: 1.  ULA addresses 2.  The prefix defined in [RFC9602] 3.  GUA
+   are: 1.  ULA addresses 2.  The prefix defined in [rfc9602] 3.  GUA
    addresses
 
    Many operators reserve a /64 block for all loopback addresses and
@@ -733,8 +841,8 @@ Table of Contents
    key is used in the generation and verification of the HMAC.
 
    Using an HMAC in an SR domain can mitigate some of the SR
-   Modification Attacks (Section 6.2).  For example, the segment list is
-   protected by the HMAC.
+   Modification Attacks (Section 6.2.1).  For example, the segment list
+   is protected by the HMAC.
 
    The following aspects of the HMAC should be considered:
 
@@ -951,6 +1059,20 @@ Table of Contents
               "IPv6 Routing Header Security", 2007, <https://airbus-
               seclab.github.io/ipv6/IPv6_RH_security-csw07.pdf>.
 
+   [I-D.ietf-lsr-isis-srv6-yang]
+              Hu, Z., Ye, D., Qu, Y., Geng, X., and Q. Ma, "YANG Data
+              Model for IS-IS SRv6", Work in Progress, Internet-Draft,
+              draft-ietf-lsr-isis-srv6-yang-07, 2 March 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-lsr-
+              isis-srv6-yang-07>.
+
+   [I-D.ietf-lsr-ospf-srv6-yang]
+              Qu, Y., Hu, Z., Geng, X., Raza, S. K., and A. Lindem,
+              "YANG Data Model for OSPF SRv6", Work in Progress,
+              Internet-Draft, draft-ietf-lsr-ospf-srv6-yang-07, 2 March
+              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              lsr-ospf-srv6-yang-07>.
+
    [I-D.ietf-spring-srv6-srh-compression]
               Cheng, W., Filsfils, C., Li, Z., Decraene, B., and F.
               Clad, "Compressed SRv6 Segment List Encoding (CSID)", Work
@@ -969,14 +1091,29 @@ Table of Contents
               DOI 10.17487/RFC3552, July 2003,
               <https://www.rfc-editor.org/rfc/rfc3552>.
 
+   [RFC4593]  Barbir, A., Murphy, S., and Y. Yang, "Generic Threats to
+              Routing Protocols", RFC 4593, DOI 10.17487/RFC4593,
+              October 2006, <https://www.rfc-editor.org/rfc/rfc4593>.
+
    [RFC5095]  Abley, J., Savola, P., and G. Neville-Neil, "Deprecation
               of Type 0 Routing Headers in IPv6", RFC 5095,
               DOI 10.17487/RFC5095, December 2007,
               <https://www.rfc-editor.org/rfc/rfc5095>.
 
+   [RFC7276]  Mizrahi, T., Sprecher, N., Bellagamba, E., and Y.
+              Weingarten, "An Overview of Operations, Administration,
+              and Maintenance (OAM) Tools", RFC 7276,
+              DOI 10.17487/RFC7276, June 2014,
+              <https://www.rfc-editor.org/rfc/rfc7276>.
+
    [RFC7384]  Mizrahi, T., "Security Requirements of Time Protocols in
               Packet Switched Networks", RFC 7384, DOI 10.17487/RFC7384,
               October 2014, <https://www.rfc-editor.org/rfc/rfc7384>.
+
+   [rfc7835]  Saucez, D., Iannone, L., and O. Bonaventure, "Locator/ID
+              Separation Protocol (LISP) Threat Analysis", RFC 7835,
+              DOI 10.17487/RFC7835, April 2016,
+              <https://www.rfc-editor.org/rfc/rfc7835>.
 
    [RFC7855]  Previdi, S., Ed., Filsfils, C., Ed., Decraene, B.,
               Litkowski, S., Horneffer, M., and R. Shakir, "Source
@@ -995,6 +1132,24 @@ Table of Contents
               DOI 10.17487/RFC8200, July 2017,
               <https://www.rfc-editor.org/rfc/rfc8200>.
 
+   [RFC8283]  Farrel, A., Ed., Zhao, Q., Ed., Li, Z., and C. Zhou, "An
+              Architecture for Use of PCE and the PCE Communication
+              Protocol (PCEP) in a Network with Central Control",
+              RFC 8283, DOI 10.17487/RFC8283, December 2017,
+              <https://www.rfc-editor.org/rfc/rfc8283>.
+
+   [RFC8476]  Tantsura, J., Chunduri, U., Aldrin, S., and P. Psenak,
+              "Signaling Maximum SID Depth (MSD) Using OSPF", RFC 8476,
+              DOI 10.17487/RFC8476, December 2018,
+              <https://www.rfc-editor.org/rfc/rfc8476>.
+
+   [rfc9050]  Li, Z., Peng, S., Negi, M., Zhao, Q., and C. Zhou, "Path
+              Computation Element Communication Protocol (PCEP)
+              Procedures and Extensions for Using the PCE as a Central
+              Controller (PCECC) of LSPs", RFC 9050,
+              DOI 10.17487/RFC9050, July 2021,
+              <https://www.rfc-editor.org/rfc/rfc9050>.
+
    [RFC9055]  Grossman, E., Ed., Mizrahi, T., and A. Hacker,
               "Deterministic Networking (DetNet) Security
               Considerations", RFC 9055, DOI 10.17487/RFC9055, June
@@ -1010,6 +1165,12 @@ Table of Contents
               RFC 9099, DOI 10.17487/RFC9099, August 2021,
               <https://www.rfc-editor.org/rfc/rfc9099>.
 
+   [RFC9259]  Ali, Z., Filsfils, C., Matsushima, S., Voyer, D., and M.
+              Chen, "Operations, Administration, and Maintenance (OAM)
+              in Segment Routing over IPv6 (SRv6)", RFC 9259,
+              DOI 10.17487/RFC9259, June 2022,
+              <https://www.rfc-editor.org/rfc/rfc9259>.
+
    [RFC9288]  Gont, F. and W. Liu, "Recommendations on the Filtering of
               IPv6 Packets Containing IPv6 Extension Headers at Transit
               Routers", RFC 9288, DOI 10.17487/RFC9288, August 2022,
@@ -1019,6 +1180,11 @@ Table of Contents
               Transient Numeric Identifiers Employed in Network
               Protocols", BCP 72, RFC 9416, DOI 10.17487/RFC9416, July
               2023, <https://www.rfc-editor.org/rfc/rfc9416>.
+
+   [rfc9602]  Krishnan, S., "Segment Routing over IPv6 (SRv6) Segment
+              Identifiers in the IPv6 Addressing Architecture",
+              RFC 9602, DOI 10.17487/RFC9602, October 2024,
+              <https://www.rfc-editor.org/rfc/rfc9602>.
 
    [STRIDE]   "The STRIDE Threat Model", 2018,
               <https://msdn.microsoft.com/en-us/library/
