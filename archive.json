@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-29T01:40:33.850063+00:00",
+  "timestamp": "2025-06-03T01:42:07.031401+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -795,26 +795,40 @@
       "id": "PR_kwDOKVF77M5xi0iu",
       "title": "Modification to the threat model",
       "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/24",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "fernandogont",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "I've reorganized/re-ordered the text, and have included a new section. This is the rationale:\r\n\r\n* STRIDE is a model for finding threats. So it should guide us in that regard (note that RFC3552 is rather dated).\r\n\r\n* All threats in S-T-R-I-D-E are really relevant. The new section that I've added tries to elaborate on that.\r\n\r\n* This new section also calls out the issue that protection for tampering/spoofing relies an a feature (HMAC TLV) which is really optional.\r\n\r\n* I wouldn't focus on \"packet-based attacks\" for the threat model. -- yes, that can help the thought process. But when doing threat model ing, there more to analyze of SRV6 as a \"system\". And this things become more evident if one follows a structured model such as STRIDE.\r\n\r\n* In this edit, I've removed the dsicussion on the \"CIA\" triad. Mostly because is basic security terminology, but also because just the \"CIA\" triad does not help much to find threats as (otoh) e.g. STRIDE.\r\n\r\n* There were a number of things that were flagged as \"out of scope\". I believe unless we have a very good documented rationale for that, we should cover all angles.",
       "createdAt": "2024-06-05T11:55:53Z",
-      "updatedAt": "2024-06-05T11:55:53Z",
+      "updatedAt": "2025-06-02T21:09:57Z",
       "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
       "baseRefName": "main",
       "baseRefOid": "6f84171b758d52920ab6859232b8a7004e964da0",
       "headRepository": "fernandogont/draft-bdmgct-spring-srv6-security",
       "headRefName": "threat-model",
       "headRefOid": "28d3edc7b2a6d9b49502747b9f2fb0b199b76cbc",
-      "closedAt": null,
+      "closedAt": "2025-06-02T21:09:57Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOKVF77M6sQPWT",
+          "commit": {
+            "abbreviatedOid": "28d3edc"
+          },
+          "author": "buraglio",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-06-02T21:06:10Z",
+          "updatedAt": "2025-06-02T21:06:43Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 25,
@@ -1610,52 +1624,84 @@
       "id": "PR_kwDOKVF77M6X9Qjo",
       "title": "Internal attacker definition updated",
       "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/50",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "talmi",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Internal attacker definition updated following comment on the SPRING interim meeting.",
       "createdAt": "2025-05-28T12:38:38Z",
-      "updatedAt": "2025-05-28T12:38:39Z",
+      "updatedAt": "2025-06-02T21:07:39Z",
       "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
       "baseRefName": "main",
       "baseRefOid": "851b8c8d246cc03cca3a7f8d013cea9a7032d71b",
       "headRepository": "talmi/draft-bdmgct-spring-srv6-security",
       "headRefName": "internal-def",
       "headRefOid": "fb633ac4f31c0f51f88177d9b923ebb313937d9c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-06-02T21:07:39Z",
+      "mergedAt": "2025-06-02T21:07:39Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "98bba279c59a06320edce4cb3272a6465d25b590"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOKVF77M6sQP9S",
+          "commit": {
+            "abbreviatedOid": "fb633ac"
+          },
+          "author": "buraglio",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-06-02T21:07:34Z",
+          "updatedAt": "2025-06-02T21:07:34Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 51,
       "id": "PR_kwDOKVF77M6X9RB2",
       "title": "Control and Management Plane Attack Revision",
       "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/51",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "talmi",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Significantly revised control and management plane attacks.\r\n- Added more references.\r\n- Divided control plane attacks into three main categories.",
       "createdAt": "2025-05-28T12:39:16Z",
-      "updatedAt": "2025-05-28T12:39:16Z",
+      "updatedAt": "2025-06-02T21:09:13Z",
       "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
       "baseRefName": "main",
       "baseRefOid": "851b8c8d246cc03cca3a7f8d013cea9a7032d71b",
       "headRepository": "talmi/draft-bdmgct-spring-srv6-security",
       "headRefName": "cont-mgmt-attacks",
       "headRefOid": "0e8d6df62e3e2b87f0e34fbc8d8221fb13e019ab",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-06-02T21:09:13Z",
+      "mergedAt": "2025-06-02T21:09:13Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "82c1c3a9c96aaa0de91e42d505f6481b1fea1698"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOKVF77M6sQRIh",
+          "commit": {
+            "abbreviatedOid": "0e8d6df"
+          },
+          "author": "buraglio",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-06-02T21:09:05Z",
+          "updatedAt": "2025-06-02T21:09:05Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
