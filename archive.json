@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-03T01:42:07.031401+00:00",
+  "timestamp": "2025-06-12T01:41:46.310765+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -1699,6 +1699,48 @@
           "body": "",
           "createdAt": "2025-06-02T21:09:05Z",
           "updatedAt": "2025-06-02T21:09:05Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 52,
+      "id": "PR_kwDOKVF77M6Z-6HU",
+      "title": "Control and Management Plane Mitigations",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/52",
+      "state": "MERGED",
+      "author": "talmi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "- Added more text to the management plane attacks.\r\n- Updated the attack summary table.\r\n- Added subsection about control plane mitigations.\r\n- Added subsection about management plane mitigations.",
+      "createdAt": "2025-06-11T08:03:17Z",
+      "updatedAt": "2025-06-12T01:33:52Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "92d31d7813eec2cbb63d6c3b0ec7a5381d08066c",
+      "headRepository": "talmi/draft-bdmgct-spring-srv6-security",
+      "headRefName": "cont-mgmt-mitigations",
+      "headRefOid": "881b617c45289daf46563c7491fe7362490ffbb6",
+      "closedAt": "2025-06-12T01:33:52Z",
+      "mergedAt": "2025-06-12T01:33:52Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "1033b81b606ce2644c2032f56c06126694af4469"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKVF77M6t_eVv",
+          "commit": {
+            "abbreviatedOid": "881b617"
+          },
+          "author": "buraglio",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "These look great.",
+          "createdAt": "2025-06-12T01:33:45Z",
+          "updatedAt": "2025-06-12T01:33:45Z",
           "comments": []
         }
       ]
