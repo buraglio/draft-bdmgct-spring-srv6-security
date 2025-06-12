@@ -352,7 +352,7 @@ A successful attack may result in any of the adverse effects described in {{sec-
 ## Management Plane Attacks
 
 ### Overview
-Similar to the control plane, a compromised management plane can enable a broad range of attacks, including unauthorized manipulation of SR policies and disruption of network availability. The specific threats and their potential impact are influenced by the management protocols in use. 
+Similar to the control plane, a compromised management plane can enable a broad range of attacks, including unauthorized manipulation of SR policies and disruption of network availability. The specific threats and their potential impact are influenced by the management protocols in use.
 
 As with centralized control systems, a centralized management infrastructure may introduce a single point of failure, rendering it susceptible to denial-of-service (DoS) attacks or making it a target for eavesdropping and message tampering.
 
@@ -491,7 +491,7 @@ The control plane should be confined to a trusted administrative domain. As spec
 
 ## Management Plane Mitigation Methods
 
-Mitigating attacks on the management plane, much like in the control plane, depends on the specific protocols and interfaces employed. 
+Mitigating attacks on the management plane, much like in the control plane, depends on the specific protocols and interfaces employed.
 
 Management protocols such as NETCONF and RESTCONF are commonly used to configure and monitor SRv6-enabled devices. These protocols must be secured to prevent unauthorized access, configuration tampering, or information leakage.
 
