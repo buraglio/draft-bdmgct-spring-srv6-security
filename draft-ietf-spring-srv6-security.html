@@ -23,12 +23,12 @@
     google-i18n-address 3.1.1
     intervaltree 3.1.0
     Jinja2 3.1.6
-    lxml 5.3.0
+    lxml 5.3.1
     platformdirs 4.3.8
     pycountry 24.6.1
     PyYAML 6.0.2
     requests 2.32.3
-    setuptools 70.3.0
+    setuptools 80.9.0
     wcwidth 0.2.13
 -->
 <link href="draft-ietf-spring-srv6-security.xml" rel="alternate" type="application/rfc+xml">
@@ -1052,7 +1052,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Buraglio, et al.</td>
-<td class="center">Expires 4 December 2025</td>
+<td class="center">Expires 14 December 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1065,12 +1065,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-spring-srv6-security-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-06-02" class="published">2 June 2025</time>
+<time datetime="2025-06-12" class="published">12 June 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-12-04">4 December 2025</time></dd>
+<dd class="expires"><time datetime="2025-12-14">14 December 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1136,7 +1136,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 4 December 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 14 December 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1260,6 +1260,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3">
                 <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.  <a href="#name-hashed-message-authenticati" class="internal xref">Hashed Message Authentication Code (HMAC)</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.4">
+                <p id="section-toc.1-1.7.2.4.1"><a href="#section-7.4" class="auto internal xref">7.4</a>.  <a href="#name-control-plane-mitigation-me" class="internal xref">Control Plane Mitigation Methods</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.5">
+                <p id="section-toc.1-1.7.2.5.1"><a href="#section-7.5" class="auto internal xref">7.5</a>.  <a href="#name-management-plane-mitigation" class="internal xref">Management Plane Mitigation Methods</a></p>
 </li>
             </ul>
 </li>
@@ -1791,14 +1797,16 @@ Centralized control plane architectures, such as those based on the Path Computa
           <h4 id="name-overview-4">
 <a href="#section-6.4.1" class="section-number selfRef">6.4.1. </a><a href="#name-overview-4" class="section-name selfRef">Overview</a>
           </h4>
-<p id="section-6.4.1-1">Similar to the control plane, a compromised management plane can enable a broad range of attacks, including unauthorized manipulation of SR policies and disruption of network availability. The specific threats and their potential impact are influenced by the management protocols in use. As with centralized control systems, management infrastructure may introduce a single point of failure, rendering it susceptible to denial-of-service (DoS) attacks or making it a target for eavesdropping and message tampering.<a href="#section-6.4.1-1" class="pilcrow">¶</a></p>
-<p id="section-6.4.1-2">Management functionality is often defined using YANG data models, such as those specified in <span>[<a href="#I-D.ietf-lsr-isis-srv6-yang" class="cite xref">I-D.ietf-lsr-isis-srv6-yang</a>]</span> and <span>[<a href="#I-D.ietf-lsr-ospf-srv6-yang" class="cite xref">I-D.ietf-lsr-ospf-srv6-yang</a>]</span>. As with any YANG module, data nodes marked as writable, creatable, or deletable may be considered sensitive in certain operational environments. Unauthorized or unprotected write operations (e.g., via edit-config) targeting these nodes can adversely affect network operations.<a href="#section-6.4.1-2" class="pilcrow">¶</a></p>
+<p id="section-6.4.1-1">Similar to the control plane, a compromised management plane can enable a broad range of attacks, including unauthorized manipulation of SR policies and disruption of network availability. The specific threats and their potential impact are influenced by the management protocols in use.<a href="#section-6.4.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.4.1-2">As with centralized control systems, a centralized management infrastructure may introduce a single point of failure, rendering it susceptible to denial-of-service (DoS) attacks or making it a target for eavesdropping and message tampering.<a href="#section-6.4.1-2" class="pilcrow">¶</a></p>
+<p id="section-6.4.1-3">Unauthorized access in a network management system can enable attackers or unprivileged users to gain control over network devices and alter configurations. In SRv6-enabled environments, this can result in the manipulation of segment routing policies or cause denial-of-service (DoS) conditions by disrupting traffic or tampering with forwarding behavior.<a href="#section-6.4.1-3" class="pilcrow">¶</a></p>
+<p id="section-6.4.1-4">Management functionality is often defined using YANG data models, such as those specified in <span>[<a href="#I-D.ietf-lsr-isis-srv6-yang" class="cite xref">I-D.ietf-lsr-isis-srv6-yang</a>]</span> and <span>[<a href="#I-D.ietf-lsr-ospf-srv6-yang" class="cite xref">I-D.ietf-lsr-ospf-srv6-yang</a>]</span>. As with any YANG module, data nodes marked as writable, creatable, or deletable may be considered sensitive in certain operational environments. Unauthorized or unprotected write operations (e.g., via edit-config) targeting these nodes can adversely affect network operations. Some of the readable data nodes in a YANG module may also be considered sensitive or vulnerable in some network environments.<a href="#section-6.4.1-4" class="pilcrow">¶</a></p>
 <div id="scope-6">
 <section id="section-6.4.1.1">
             <h5 id="name-scope-7">
 <a href="#section-6.4.1.1" class="section-number selfRef">6.4.1.1. </a><a href="#name-scope-7" class="section-name selfRef">Scope</a>
             </h5>
-<p id="section-6.4.1.1-1">As with control plane attacks, an off-path attacker may attempt to inject forged management messages or impersonate a legitimate network management system. On-path attackers, due to their privileged position within the communication path, have additional capabilities such as passive interception of management traffic and unauthorized modification of messages in transit.<a href="#section-6.4.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.4.1.1-1">As with control plane attacks, an off-path attacker may attempt to inject forged management messages or impersonate a legitimate network management system. On-path attackers, due to their privileged position within the communication path, have additional capabilities such as passive interception of management traffic and unauthorized modification of messages in transit. An attacker with unauthorized access to a management system can cause significant damage, depending on the scope of the system and the strength of the access control mechanisms in place.<a href="#section-6.4.1.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="effect-5">
@@ -1842,13 +1850,21 @@ Centralized control plane architectures, such as those based on the Path Computa
 |insertion    |packets with a    |                                   |
 |             |segment list      |                                   |
 +-------------+------------------+-----------------------------------+
-|Control and  |Manipulate control|* Unauthorized access              |
-|management   |or management     |* Avoiding a specific node or path |
-|plane attacks|plane in order to |* Preferring a specific path       |
-|             |manipulate SRv6   |* Causing header modifications     |
-|             |functionality     |* Causing packets to be discarded  |
-|             |                  |* Resource exhaustion              |
-|             |                  |* Forwarding loops                 |
+|Control plane|* Routing protocol|                                   |
+|attacks      |  attacks         |                                   |
+|             |* OAM attacks     |                                   |
+|             |* Central control |                                   |
+|             |  plane attacks   |* Unauthorized access              |
+|             |                  |* Avoiding a specific node or path |
+|             |                  |* Preferring a specific path       |
++-------------+------------------+* Causing header modifications     |
+|Management   |* Centralized     |* Causing packets to be discarded  |
+|plane attacks|  management      |* Resource exhaustion              |
+|             |  attacks         |* Forwarding loops                 |
+|             |* Unauthorized    |                                   |
+|             |  access to the   |                                   |
+|             |  management      |                                   |
+|             |  system          |                                   |
 +-------------+------------------+-----------------------------------+
 
 </pre>
@@ -1953,6 +1969,30 @@ Centralized control plane architectures, such as those based on the Path Computa
 </li>
         </ul>
 <p id="section-7.3-5">These considerations limit the extent to which HMAC TLV can be relied upon as a security mechanism that could readily mitigate threats associated with spoofing and tampering protection for the IPv6 SRH.<a href="#section-7.3-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="control-plane-mitigation-methods">
+<section id="section-7.4">
+        <h3 id="name-control-plane-mitigation-me">
+<a href="#section-7.4" class="section-number selfRef">7.4. </a><a href="#name-control-plane-mitigation-me" class="section-name selfRef">Control Plane Mitigation Methods</a>
+        </h3>
+<p id="section-7.4-1">Mitigation strategies for control plane attacks depend heavily on the specific protocols in use. Since these protocols are not exclusive to SRv6, this section does not attempt to provide an exhaustive list of mitigation techniques. Instead, it is focused on considerations particularly relevant to SRv6 deployments.<a href="#section-7.4-1" class="pilcrow">¶</a></p>
+<p id="section-7.4-2">Routing protocols can employ authentication and/or encryption to protect against modification, injection, and replay attacks, as outlined in <span>[<a href="#RFC6518" class="cite xref">RFC6518</a>]</span>. These mechanisms are essential for maintaining the integrity and authenticity of control plane communications.<a href="#section-7.4-2" class="pilcrow">¶</a></p>
+<p id="section-7.4-3">In centralized SRv6 control plane architectures, such as those described in <span>[<a href="#I-D.ietf-pce-segment-routing-policy-cp" class="cite xref">I-D.ietf-pce-segment-routing-policy-cp</a>]</span>, it is <span class="bcp14">RECOMMENDED</span> that communication between PCEs and PCCs be secured using authenticated and encrypted sessions. This is typically achieved using Transport Layer Security (TLS), following the guidance in <span>[<a href="#RFC8253" class="cite xref">RFC8253</a>]</span> and best practices in <span>[<a href="#RFC9325" class="cite xref">RFC9325</a>]</span>.<a href="#section-7.4-3" class="pilcrow">¶</a></p>
+<p id="section-7.4-4">When the O-flag is used for Operations, Administration, and Maintenance (OAM) functions, as defined in <span>[<a href="#RFC9259" class="cite xref">RFC9259</a>]</span>, implementations should enforce rate limiting to mitigate potential denial-of-service (DoS) attacks triggered by excessive control plane signaling.<a href="#section-7.4-4" class="pilcrow">¶</a></p>
+<p id="section-7.4-5">The control plane should be confined to a trusted administrative domain. As specified in <span>[<a href="#I-D.ietf-idr-bgp-ls-sr-policy" class="cite xref">I-D.ietf-idr-bgp-ls-sr-policy</a>]</span>, SR Policy information advertised via BGP should be restricted to authorized nodes, controllers, and applications within this domain. Similarly, the use of the O-flag is assumed to occur only within such a trusted environment, where the risk of abuse is minimized.<a href="#section-7.4-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="management-plane-mitigation-methods">
+<section id="section-7.5">
+        <h3 id="name-management-plane-mitigation">
+<a href="#section-7.5" class="section-number selfRef">7.5. </a><a href="#name-management-plane-mitigation" class="section-name selfRef">Management Plane Mitigation Methods</a>
+        </h3>
+<p id="section-7.5-1">Mitigating attacks on the management plane, much like in the control plane, depends on the specific protocols and interfaces employed.<a href="#section-7.5-1" class="pilcrow">¶</a></p>
+<p id="section-7.5-2">Management protocols such as NETCONF and RESTCONF are commonly used to configure and monitor SRv6-enabled devices. These protocols must be secured to prevent unauthorized access, configuration tampering, or information leakage.<a href="#section-7.5-2" class="pilcrow">¶</a></p>
+<p id="section-7.5-3">The lowest NETCONF layer is the secure transport layer, and the mandatory-to-implement secure transport is Secure Shell (SSH) <span>[<a href="#RFC6242" class="cite xref">RFC6242</a>]</span>. The lowest RESTCONF layer is HTTPS, and the mandatory-to-implement secure transport is TLS <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>.<a href="#section-7.5-3" class="pilcrow">¶</a></p>
+<p id="section-7.5-4">The Network Configuration Access Control Model (NACM) <span>[<a href="#RFC8341" class="cite xref">RFC8341</a>]</span> provides the means to restrict access for particular NETCONF or RESTCONF users to a pre-configured subset of all available NETCONF or RESTCONF protocol operations and content.<a href="#section-7.5-4" class="pilcrow">¶</a></p>
+<p id="section-7.5-5">SRv6-specific YANG modules should be designed with the same security considerations applied to all YANG-based models. Writable nodes must be protected using access control mechanisms such as NACM and secured transport protocols like SSH or TLS to prevent unauthorized configuration changes, while readable nodes that expose sensitive operational data should be access-controlled and transmitted only over encrypted channels to mitigate the risk of information leakage.<a href="#section-7.5-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2128,6 +2168,10 @@ For example, some platforms may require allocating resources from route table si
         <dd>
 <span class="refTitle">"IPv6 Routing Header Security"</span>, <time datetime="2007" class="refDate">2007</time>, <span>&lt;<a href="https://airbus-seclab.github.io/ipv6/IPv6_RH_security-csw07.pdf">https://airbus-seclab.github.io/ipv6/IPv6_RH_security-csw07.pdf</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="I-D.ietf-idr-bgp-ls-sr-policy">[I-D.ietf-idr-bgp-ls-sr-policy]</dt>
+        <dd>
+<span class="refAuthor">Previdi, S.</span>, <span class="refAuthor">Talaulikar, K.</span>, <span class="refAuthor">Dong, J.</span>, <span class="refAuthor">Gredler, H.</span>, and <span class="refAuthor">J. Tantsura</span>, <span class="refTitle">"Advertisement of Segment Routing Policies using BGP Link-State"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-idr-bgp-ls-sr-policy-17</span>, <time datetime="2025-03-06" class="refDate">6 March 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-idr-bgp-ls-sr-policy-17">https://datatracker.ietf.org/doc/html/draft-ietf-idr-bgp-ls-sr-policy-17</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="I-D.ietf-lsr-isis-srv6-yang">[I-D.ietf-lsr-isis-srv6-yang]</dt>
         <dd>
 <span class="refAuthor">Hu, Z.</span>, <span class="refAuthor">Ye, D.</span>, <span class="refAuthor">Qu, Y.</span>, <span class="refAuthor">Geng, X.</span>, and <span class="refAuthor">Q. Ma</span>, <span class="refTitle">"YANG Data Model for IS-IS SRv6"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lsr-isis-srv6-yang-07</span>, <time datetime="2025-03-02" class="refDate">2 March 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lsr-isis-srv6-yang-07">https://datatracker.ietf.org/doc/html/draft-ietf-lsr-isis-srv6-yang-07</a>&gt;</span>. </dd>
@@ -2135,6 +2179,10 @@ For example, some platforms may require allocating resources from route table si
 <dt id="I-D.ietf-lsr-ospf-srv6-yang">[I-D.ietf-lsr-ospf-srv6-yang]</dt>
         <dd>
 <span class="refAuthor">Qu, Y.</span>, <span class="refAuthor">Hu, Z.</span>, <span class="refAuthor">Geng, X.</span>, <span class="refAuthor">Raza, S. K.</span>, and <span class="refAuthor">A. Lindem</span>, <span class="refTitle">"YANG Data Model for OSPF SRv6"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lsr-ospf-srv6-yang-07</span>, <time datetime="2025-03-02" class="refDate">2 March 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lsr-ospf-srv6-yang-07">https://datatracker.ietf.org/doc/html/draft-ietf-lsr-ospf-srv6-yang-07</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-pce-segment-routing-policy-cp">[I-D.ietf-pce-segment-routing-policy-cp]</dt>
+        <dd>
+<span class="refAuthor">Koldychev, M.</span>, <span class="refAuthor">Sivabalan, S.</span>, <span class="refAuthor">Sidor, S.</span>, <span class="refAuthor">Barth, C.</span>, <span class="refAuthor">Peng, S.</span>, and <span class="refAuthor">H. Bidgoli</span>, <span class="refTitle">"Path Computation Element Communication Protocol (PCEP) Extensions for Segment Routing (SR) Policy Candidate Paths"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-pce-segment-routing-policy-cp-27</span>, <time datetime="2025-04-04" class="refDate">4 April 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-pce-segment-routing-policy-cp-27">https://datatracker.ietf.org/doc/html/draft-ietf-pce-segment-routing-policy-cp-27</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-spring-srv6-srh-compression">[I-D.ietf-spring-srv6-srh-compression]</dt>
         <dd>
@@ -2155,6 +2203,14 @@ For example, some platforms may require allocating resources from route table si
 <dt id="RFC5095">[RFC5095]</dt>
         <dd>
 <span class="refAuthor">Abley, J.</span>, <span class="refAuthor">Savola, P.</span>, and <span class="refAuthor">G. Neville-Neil</span>, <span class="refTitle">"Deprecation of Type 0 Routing Headers in IPv6"</span>, <span class="seriesInfo">RFC 5095</span>, <span class="seriesInfo">DOI 10.17487/RFC5095</span>, <time datetime="2007-12" class="refDate">December 2007</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5095">https://www.rfc-editor.org/rfc/rfc5095</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6242">[RFC6242]</dt>
+        <dd>
+<span class="refAuthor">Wasserman, M.</span>, <span class="refTitle">"Using the NETCONF Protocol over Secure Shell (SSH)"</span>, <span class="seriesInfo">RFC 6242</span>, <span class="seriesInfo">DOI 10.17487/RFC6242</span>, <time datetime="2011-06" class="refDate">June 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6242">https://www.rfc-editor.org/rfc/rfc6242</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6518">[RFC6518]</dt>
+        <dd>
+<span class="refAuthor">Lebovitz, G.</span> and <span class="refAuthor">M. Bhatia</span>, <span class="refTitle">"Keying and Authentication for Routing Protocols (KARP) Design Guidelines"</span>, <span class="seriesInfo">RFC 6518</span>, <span class="seriesInfo">DOI 10.17487/RFC6518</span>, <time datetime="2012-02" class="refDate">February 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6518">https://www.rfc-editor.org/rfc/rfc6518</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC7276">[RFC7276]</dt>
         <dd>
@@ -2180,9 +2236,21 @@ For example, some platforms may require allocating resources from route table si
         <dd>
 <span class="refAuthor">Deering, S.</span> and <span class="refAuthor">R. Hinden</span>, <span class="refTitle">"Internet Protocol, Version 6 (IPv6) Specification"</span>, <span class="seriesInfo">STD 86</span>, <span class="seriesInfo">RFC 8200</span>, <span class="seriesInfo">DOI 10.17487/RFC8200</span>, <time datetime="2017-07" class="refDate">July 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8200">https://www.rfc-editor.org/rfc/rfc8200</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC8253">[RFC8253]</dt>
+        <dd>
+<span class="refAuthor">Lopez, D.</span>, <span class="refAuthor">Gonzalez de Dios, O.</span>, <span class="refAuthor">Wu, Q.</span>, and <span class="refAuthor">D. Dhody</span>, <span class="refTitle">"PCEPS: Usage of TLS to Provide a Secure Transport for the Path Computation Element Communication Protocol (PCEP)"</span>, <span class="seriesInfo">RFC 8253</span>, <span class="seriesInfo">DOI 10.17487/RFC8253</span>, <time datetime="2017-10" class="refDate">October 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8253">https://www.rfc-editor.org/rfc/rfc8253</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC8283">[RFC8283]</dt>
         <dd>
 <span class="refAuthor">Farrel, A., Ed.</span>, <span class="refAuthor">Zhao, Q., Ed.</span>, <span class="refAuthor">Li, Z.</span>, and <span class="refAuthor">C. Zhou</span>, <span class="refTitle">"An Architecture for Use of PCE and the PCE Communication Protocol (PCEP) in a Network with Central Control"</span>, <span class="seriesInfo">RFC 8283</span>, <span class="seriesInfo">DOI 10.17487/RFC8283</span>, <time datetime="2017-12" class="refDate">December 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8283">https://www.rfc-editor.org/rfc/rfc8283</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8341">[RFC8341]</dt>
+        <dd>
+<span class="refAuthor">Bierman, A.</span> and <span class="refAuthor">M. Bjorklund</span>, <span class="refTitle">"Network Configuration Access Control Model"</span>, <span class="seriesInfo">STD 91</span>, <span class="seriesInfo">RFC 8341</span>, <span class="seriesInfo">DOI 10.17487/RFC8341</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8341">https://www.rfc-editor.org/rfc/rfc8341</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8446">[RFC8446]</dt>
+        <dd>
+<span class="refAuthor">Rescorla, E.</span>, <span class="refTitle">"The Transport Layer Security (TLS) Protocol Version 1.3"</span>, <span class="seriesInfo">RFC 8446</span>, <span class="seriesInfo">DOI 10.17487/RFC8446</span>, <time datetime="2018-08" class="refDate">August 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8446">https://www.rfc-editor.org/rfc/rfc8446</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8476">[RFC8476]</dt>
         <dd>
@@ -2211,6 +2279,10 @@ For example, some platforms may require allocating resources from route table si
 <dt id="RFC9288">[RFC9288]</dt>
         <dd>
 <span class="refAuthor">Gont, F.</span> and <span class="refAuthor">W. Liu</span>, <span class="refTitle">"Recommendations on the Filtering of IPv6 Packets Containing IPv6 Extension Headers at Transit Routers"</span>, <span class="seriesInfo">RFC 9288</span>, <span class="seriesInfo">DOI 10.17487/RFC9288</span>, <time datetime="2022-08" class="refDate">August 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9288">https://www.rfc-editor.org/rfc/rfc9288</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9325">[RFC9325]</dt>
+        <dd>
+<span class="refAuthor">Sheffer, Y.</span>, <span class="refAuthor">Saint-Andre, P.</span>, and <span class="refAuthor">T. Fossati</span>, <span class="refTitle">"Recommendations for Secure Use of Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)"</span>, <span class="seriesInfo">BCP 195</span>, <span class="seriesInfo">RFC 9325</span>, <span class="seriesInfo">DOI 10.17487/RFC9325</span>, <time datetime="2022-11" class="refDate">November 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9325">https://www.rfc-editor.org/rfc/rfc9325</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9416">[RFC9416]</dt>
         <dd>
