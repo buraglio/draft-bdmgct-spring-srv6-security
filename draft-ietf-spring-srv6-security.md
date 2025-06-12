@@ -64,14 +64,20 @@ normative:
 informative:
   RFC3552:
   RFC4593:
+  RFC6518:
+  RFC6242:
+  RFC8446:
   RFC9055:
   RFC7384:
   RFC7276:
   RFC9416:
   RFC7855:
   RFC7872:
+  RFC8341:
+  RFC8253:
   RFC8476:
   RFC8283:
+  RFC9325:
   RFC9098:
   RFC5095:
   RFC9259:
@@ -84,6 +90,8 @@ informative:
   I-D.ietf-spring-srv6-srh-compression:
   I-D.ietf-lsr-ospf-srv6-yang:
   I-D.ietf-lsr-isis-srv6-yang:
+  I-D.ietf-pce-segment-routing-policy-cp:
+  I-D.ietf-idr-bgp-ls-sr-policy:
   IANAIPv6SPAR:
     target: https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml
     title: "IANA IPv6 Special-Purpose Address Registry"
@@ -344,12 +352,16 @@ A successful attack may result in any of the adverse effects described in {{sec-
 ## Management Plane Attacks
 
 ### Overview
-Similar to the control plane, a compromised management plane can enable a broad range of attacks, including unauthorized manipulation of SR policies and disruption of network availability. The specific threats and their potential impact are influenced by the management protocols in use. As with centralized control systems, management infrastructure may introduce a single point of failure, rendering it susceptible to denial-of-service (DoS) attacks or making it a target for eavesdropping and message tampering.
+Similar to the control plane, a compromised management plane can enable a broad range of attacks, including unauthorized manipulation of SR policies and disruption of network availability. The specific threats and their potential impact are influenced by the management protocols in use. 
 
-Management functionality is often defined using YANG data models, such as those specified in {{I-D.ietf-lsr-isis-srv6-yang}} and {{I-D.ietf-lsr-ospf-srv6-yang}}. As with any YANG module, data nodes marked as writable, creatable, or deletable may be considered sensitive in certain operational environments. Unauthorized or unprotected write operations (e.g., via edit-config) targeting these nodes can adversely affect network operations.
+As with centralized control systems, a centralized management infrastructure may introduce a single point of failure, rendering it susceptible to denial-of-service (DoS) attacks or making it a target for eavesdropping and message tampering.
+
+Unauthorized access in a network management system can enable attackers or unprivileged users to gain control over network devices and alter configurations. In SRv6-enabled environments, this can result in the manipulation of segment routing policies or cause denial-of-service (DoS) conditions by disrupting traffic or tampering with forwarding behavior.
+
+Management functionality is often defined using YANG data models, such as those specified in {{I-D.ietf-lsr-isis-srv6-yang}} and {{I-D.ietf-lsr-ospf-srv6-yang}}. As with any YANG module, data nodes marked as writable, creatable, or deletable may be considered sensitive in certain operational environments. Unauthorized or unprotected write operations (e.g., via edit-config) targeting these nodes can adversely affect network operations. Some of the readable data nodes in a YANG module may also be considered sensitive or vulnerable in some network environments.
 
 #### Scope
-As with control plane attacks, an off-path attacker may attempt to inject forged management messages or impersonate a legitimate network management system. On-path attackers, due to their privileged position within the communication path, have additional capabilities such as passive interception of management traffic and unauthorized modification of messages in transit.
+As with control plane attacks, an off-path attacker may attempt to inject forged management messages or impersonate a legitimate network management system. On-path attackers, due to their privileged position within the communication path, have additional capabilities such as passive interception of management traffic and unauthorized modification of messages in transit. An attacker with unauthorized access to a management system can cause significant damage, depending on the scope of the system and the strength of the access control mechanisms in place.
 
 #### Effect
 A successful attack may result in any of the adverse effects described in {{sec-effect}}, potentially impacting availability and operational correctness.
@@ -377,13 +389,21 @@ The following table summarizes the attacks that were described in the previous s
 |insertion    |packets with a    |                                   |
 |             |segment list      |                                   |
 +-------------+------------------+-----------------------------------+
-|Control and  |Manipulate control|* Unauthorized access              |
-|management   |or management     |* Avoiding a specific node or path |
-|plane attacks|plane in order to |* Preferring a specific path       |
-|             |manipulate SRv6   |* Causing header modifications     |
-|             |functionality     |* Causing packets to be discarded  |
-|             |                  |* Resource exhaustion              |
-|             |                  |* Forwarding loops                 |
+|Control plane|* Routing protocol|                                   |
+|attacks      |  attacks         |                                   |
+|             |* OAM attacks     |                                   |
+|             |* Central control |                                   |
+|             |  plane attacks   |* Unauthorized access              |
+|             |                  |* Avoiding a specific node or path |
+|             |                  |* Preferring a specific path       |
++-------------+------------------+* Causing header modifications     |
+|Management   |* Centralized     |* Causing packets to be discarded  |
+|plane attacks|  management      |* Resource exhaustion              |
+|             |  attacks         |* Forwarding loops                 |
+|             |* Unauthorized    |                                   |
+|             |  access to the   |                                   |
+|             |  management      |                                   |
+|             |  system          |                                   |
 +-------------+------------------+-----------------------------------+
 
 ~~~~~~~~~~~
@@ -456,6 +476,30 @@ The following aspects of the HMAC should be considered:
 - An internal attacker who does not have access to the pre-shared key can capture legitimate packets, and later replay the SRH and HMAC from these recorded packets. This allows the attacker to insert the previously recorded SRH and HMAC into a newly injected packet. An on-path internal attacker can also replace the SRH of an in-transit packet with a different SRH that was previously captured.
 
 These considerations limit the extent to which HMAC TLV can be relied upon as a security mechanism that could readily mitigate threats associated with spoofing and tampering protection for the IPv6 SRH.
+
+## Control Plane Mitigation Methods
+
+Mitigation strategies for control plane attacks depend heavily on the specific protocols in use. Since these protocols are not exclusive to SRv6, this section does not attempt to provide an exhaustive list of mitigation techniques. Instead, it is focused on considerations particularly relevant to SRv6 deployments.
+
+Routing protocols can employ authentication and/or encryption to protect against modification, injection, and replay attacks, as outlined in [RFC6518]. These mechanisms are essential for maintaining the integrity and authenticity of control plane communications.
+
+In centralized SRv6 control plane architectures, such as those described in {{I-D.ietf-pce-segment-routing-policy-cp}}, it is RECOMMENDED that communication between PCEs and PCCs be secured using authenticated and encrypted sessions. This is typically achieved using Transport Layer Security (TLS), following the guidance in [RFC8253] and best practices in [RFC9325].
+
+When the O-flag is used for Operations, Administration, and Maintenance (OAM) functions, as defined in [RFC9259], implementations should enforce rate limiting to mitigate potential denial-of-service (DoS) attacks triggered by excessive control plane signaling.
+
+The control plane should be confined to a trusted administrative domain. As specified in {{I-D.ietf-idr-bgp-ls-sr-policy}}, SR Policy information advertised via BGP should be restricted to authorized nodes, controllers, and applications within this domain. Similarly, the use of the O-flag is assumed to occur only within such a trusted environment, where the risk of abuse is minimized.
+
+## Management Plane Mitigation Methods
+
+Mitigating attacks on the management plane, much like in the control plane, depends on the specific protocols and interfaces employed. 
+
+Management protocols such as NETCONF and RESTCONF are commonly used to configure and monitor SRv6-enabled devices. These protocols must be secured to prevent unauthorized access, configuration tampering, or information leakage.
+
+The lowest NETCONF layer is the secure transport layer, and the mandatory-to-implement secure transport is Secure Shell (SSH) [RFC6242]. The lowest RESTCONF layer is HTTPS, and the mandatory-to-implement secure transport is TLS [RFC8446].
+
+The Network Configuration Access Control Model (NACM) [RFC8341] provides the means to restrict access for particular NETCONF or RESTCONF users to a pre-configured subset of all available NETCONF or RESTCONF protocol operations and content.
+
+SRv6-specific YANG modules should be designed with the same security considerations applied to all YANG-based models. Writable nodes must be protected using access control mechanisms such as NACM and secured transport protocols like SSH or TLS to prevent unauthorized configuration changes, while readable nodes that expose sensitive operational data should be access-controlled and transmitted only over encrypted channels to mitigate the risk of information leakage.
 
 # Implications on Existing Equipment
 
