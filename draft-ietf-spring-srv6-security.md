@@ -319,6 +319,9 @@ Active attacks involve the unauthorized injection or alteration of control plane
 
 For example, an attacker may advertise falsified SIDs to manipulate SR policies. Another example in the context of SRv6 is the advertisement of an incorrect Maximum SID Depth (MSD) value {{RFC8476}}. If the advertised MSD is lower than the actual capability, path computation may fail to compute a viable path. Conversely, if the value is higher than supported, an attempt to instantiate a path that can't be supported by the head-end (the node performing the SID imposition) may occur.
 
+An additional case could be the manipulation of backup paths {{RFC8355}}, where the attacker could alter the SIDs defining such backup path then directing traffic over suboptimal or compromised paths, enabling eavesdropping, traffic analysis, or selective denial of service, compromising the service integrity and confidentiality if traffic is diverted to unauthorized nodes or paths.
+
+Finally, in situations of interworking with other domains, as for BGP Egress Peer Engineering (BGP-EPE) {{RFC9087}} an attacker injecting malicious BGP-EPE policies may steer traffic through unauthorized peers or paths, facilitating interception, traffic analysis, or denial of service. Attackers gaining access to the BGP-EPE controller can manipulate SRv6 route selection and segment lists, compromising network integrity and confidentiality.
 #### Scope
 The location of an attacker in the network significantly affects the scope of potential attacks. Off-path attackers are generally limited to injecting malicious routing messages, while on-path attackers can perform a broader range of attacks, including active modification or passive listening.
 
