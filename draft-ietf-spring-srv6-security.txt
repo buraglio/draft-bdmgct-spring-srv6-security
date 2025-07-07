@@ -5,14 +5,14 @@
 Source Packet Routing in Networking                          N. Buraglio
 Internet-Draft                                   Energy Sciences Network
 Intended status: Standards Track                              T. Mizrahi
-Expires: 14 December 2025                                         Huawei
+Expires: 8 January 2026                                           Huawei
                                                                  T. Tong
                                                             China Unicom
                                                          L. M. Contreras
                                                               Telefonica
                                                                  F. Gont
                                                             SI6 Networks
-                                                            12 June 2025
+                                                             7 July 2025
 
 
               Segment Routing IPv6 Security Considerations
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 December 2025.
+   This Internet-Draft will expire on 8 January 2026.
 
 Copyright Notice
 
@@ -580,15 +580,27 @@ Table of Contents
    instantiate a path that can't be supported by the head-end (the node
    performing the SID imposition) may occur.
 
-6.3.1.1.  Scope
+   An additional case could be the manipulation of backup paths
+   [RFC8355], where the attacker could alter the SIDs defining such
+   backup path then directing traffic over suboptimal or compromised
+   paths, enabling eavesdropping, traffic analysis, or selective denial
+   of service, compromising the service integrity and confidentiality if
+   traffic is diverted to unauthorized nodes or paths.
 
-   The location of an attacker in the network significantly affects the
+   Finally, in situations of interworking with other domains, as for BGP
+   Egress Peer Engineering (BGP-EPE) [RFC9087] an attacker injecting
+   malicious BGP-EPE policies may steer traffic through unauthorized
+   peers or paths, facilitating interception, traffic analysis, or
+   denial of service.  Attackers gaining access to the BGP-EPE
+   controller can manipulate SRv6 route selection and segment lists,
+   compromising network integrity and confidentiality. #### Scope The
+   location of an attacker in the network significantly affects the
    scope of potential attacks.  Off-path attackers are generally limited
    to injecting malicious routing messages, while on-path attackers can
    perform a broader range of attacks, including active modification or
    passive listening.
 
-6.3.1.2.  Effect
+6.3.1.1.  Effect
 
    Attacks targeting the routing protocol can have diverse impacts on
    network operation, including the aspects described in Section 5.
@@ -1260,6 +1272,12 @@ Table of Contents
               DOI 10.17487/RFC8341, March 2018,
               <https://www.rfc-editor.org/rfc/rfc8341>.
 
+   [RFC8355]  Filsfils, C., Ed., Previdi, S., Ed., Decraene, B., and R.
+              Shakir, "Resiliency Use Cases in Source Packet Routing in
+              Networking (SPRING) Networks", RFC 8355,
+              DOI 10.17487/RFC8355, March 2018,
+              <https://www.rfc-editor.org/rfc/rfc8355>.
+
    [RFC8446]  Rescorla, E., "The Transport Layer Security (TLS) Protocol
               Version 1.3", RFC 8446, DOI 10.17487/RFC8446, August 2018,
               <https://www.rfc-editor.org/rfc/rfc8446>.
@@ -1280,6 +1298,11 @@ Table of Contents
               "Deterministic Networking (DetNet) Security
               Considerations", RFC 9055, DOI 10.17487/RFC9055, June
               2021, <https://www.rfc-editor.org/rfc/rfc9055>.
+
+   [RFC9087]  Filsfils, C., Ed., Previdi, S., Dawra, G., Ed., Aries, E.,
+              and D. Afanasiev, "Segment Routing Centralized BGP Egress
+              Peer Engineering", RFC 9087, DOI 10.17487/RFC9087, August
+              2021, <https://www.rfc-editor.org/rfc/rfc9087>.
 
    [RFC9098]  Gont, F., Hilliard, N., Doering, G., Kumari, W., Huston,
               G., and W. Liu, "Operational Implications of IPv6 Packets
