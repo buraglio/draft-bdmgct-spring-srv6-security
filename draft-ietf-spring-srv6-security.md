@@ -87,6 +87,8 @@ informative:
   rfc7835:
   rfc9050:
   rfc9602:
+  RFC9087:
+  RFC8355:
   I-D.ietf-spring-srv6-srh-compression:
   I-D.ietf-lsr-ospf-srv6-yang:
   I-D.ietf-lsr-isis-srv6-yang:
