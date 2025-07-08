@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-12T01:41:46.310765+00:00",
+  "timestamp": "2025-07-08T01:44:25.357082+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -1744,6 +1744,34 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 53,
+      "id": "PR_kwDOKVF77M6dzMl2",
+      "title": "Update draft-ietf-spring-srv6-security.md",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/53",
+      "state": "MERGED",
+      "author": "luismcontreras",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Text added for security considerations related to RFC8355 and RFC9087",
+      "createdAt": "2025-07-07T17:22:05Z",
+      "updatedAt": "2025-07-07T20:57:17Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "3167e93322cb720c59422359a80853cf0a3d4221",
+      "headRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "headRefName": "luismcontreras-patch-2",
+      "headRefOid": "4b04b820cdc7372c61543972a18cdfe10209368a",
+      "closedAt": "2025-07-07T20:57:17Z",
+      "mergedAt": "2025-07-07T20:57:17Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "c2456a5115ade27646bbc4be153aa566127c091b"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
