@@ -83,9 +83,9 @@ informative:
   RFC9288:
   RFC9099:
   RFC8200:
-  rfc7835:
-  rfc9050:
-  rfc9602:
+  RFC7835:
+  RFC9050:
+  RFC9602:
   RFC9087:
   RFC8355:
   I-D.ietf-spring-srv6-srh-compression:
