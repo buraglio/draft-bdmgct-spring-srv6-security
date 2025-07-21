@@ -5,14 +5,14 @@
 Source Packet Routing in Networking                          N. Buraglio
 Internet-Draft                                   Energy Sciences Network
 Intended status: Standards Track                              T. Mizrahi
-Expires: 8 January 2026                                           Huawei
+Expires: 22 January 2026                                          Huawei
                                                                  T. Tong
                                                             China Unicom
                                                          L. M. Contreras
                                                               Telefonica
                                                                  F. Gont
                                                             SI6 Networks
-                                                             7 July 2025
+                                                            21 July 2025
 
 
               Segment Routing IPv6 Security Considerations
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 January 2026.
+   This Internet-Draft will expire on 22 January 2026.
 
 Copyright Notice
 
@@ -209,7 +209,7 @@ Table of Contents
    This section introduces the threat taxonomy that is used in this
    document, based on terminology from the Internet threat model
    [RFC3552], as well as some concepts from [RFC9055], [RFC7384],
-   [rfc7835] and [RFC9416].  Details regarding inter-domain segment
+   [RFC7835] and [RFC9416].  Details regarding inter-domain segment
    routing (SR) are out of scope for this document.
 
    Internal vs. External:  An internal attacker in the context of SRv6
@@ -239,7 +239,7 @@ Table of Contents
    path attackers, such as attackers 4 and 5, can insert packets, and in
    some cases can passively listen to some traffic, such as multicast
    transmissions.  In this example a Path Computation Element as a
-   Central Controller (PCECC) [rfc9050] is used as part of the control
+   Central Controller (PCECC) [RFC9050] is used as part of the control
    plane.  Thus, attacker 3 is an internal on-path attacker in the
    control plane, as it is located along the path between the PCECC and
    SR endpoint 1.
@@ -843,7 +843,7 @@ Table of Contents
    have an infrastructure address range for SIDs, and an infrastructure
    address range for source addresses, that can be detected and
    enforced.  Some examples of an infrastructure address range for SIDs
-   are: 1.  ULA addresses 2.  The prefix defined in [rfc9602] 3.  GUA
+   are: 1.  ULA addresses 2.  The prefix defined in [RFC9602] 3.  GUA
    addresses
 
    Many operators reserve a /64 block for all loopback addresses and
@@ -1195,11 +1195,6 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-ietf-spring-
               srv6-srh-compression-23>.
 
-   [IANAIPv6SPAR]
-              "IANA IPv6 Special-Purpose Address Registry", n.d.,
-              <https://www.iana.org/assignments/iana-ipv6-special-
-              registry/iana-ipv6-special-registry.xhtml>.
-
    [RFC3552]  Rescorla, E. and B. Korver, "Guidelines for Writing RFC
               Text on Security Considerations", BCP 72, RFC 3552,
               DOI 10.17487/RFC3552, July 2003,
@@ -1233,16 +1228,10 @@ Table of Contents
               Packet Switched Networks", RFC 7384, DOI 10.17487/RFC7384,
               October 2014, <https://www.rfc-editor.org/rfc/rfc7384>.
 
-   [rfc7835]  Saucez, D., Iannone, L., and O. Bonaventure, "Locator/ID
+   [RFC7835]  Saucez, D., Iannone, L., and O. Bonaventure, "Locator/ID
               Separation Protocol (LISP) Threat Analysis", RFC 7835,
               DOI 10.17487/RFC7835, April 2016,
               <https://www.rfc-editor.org/rfc/rfc7835>.
-
-   [RFC7855]  Previdi, S., Ed., Filsfils, C., Ed., Decraene, B.,
-              Litkowski, S., Horneffer, M., and R. Shakir, "Source
-              Packet Routing in Networking (SPRING) Problem Statement
-              and Requirements", RFC 7855, DOI 10.17487/RFC7855, May
-              2016, <https://www.rfc-editor.org/rfc/rfc7855>.
 
    [RFC7872]  Gont, F., Linkova, J., Chown, T., and W. Liu,
               "Observations on the Dropping of Packets with IPv6
@@ -1287,7 +1276,7 @@ Table of Contents
               DOI 10.17487/RFC8476, December 2018,
               <https://www.rfc-editor.org/rfc/rfc8476>.
 
-   [rfc9050]  Li, Z., Peng, S., Negi, M., Zhao, Q., and C. Zhou, "Path
+   [RFC9050]  Li, Z., Peng, S., Negi, M., Zhao, Q., and C. Zhou, "Path
               Computation Element Communication Protocol (PCEP)
               Procedures and Extensions for Using the PCE as a Central
               Controller (PCECC) of LSPs", RFC 9050,
@@ -1336,14 +1325,10 @@ Table of Contents
               Protocols", BCP 72, RFC 9416, DOI 10.17487/RFC9416, July
               2023, <https://www.rfc-editor.org/rfc/rfc9416>.
 
-   [rfc9602]  Krishnan, S., "Segment Routing over IPv6 (SRv6) Segment
+   [RFC9602]  Krishnan, S., "Segment Routing over IPv6 (SRv6) Segment
               Identifiers in the IPv6 Addressing Architecture",
               RFC 9602, DOI 10.17487/RFC9602, October 2024,
               <https://www.rfc-editor.org/rfc/rfc9602>.
-
-   [STRIDE]   "The STRIDE Threat Model", 2018,
-              <https://msdn.microsoft.com/en-us/library/
-              ee823878(v=cs.20).aspx>.
 
 Acknowledgments
 
