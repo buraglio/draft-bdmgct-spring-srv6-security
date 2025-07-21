@@ -71,7 +71,6 @@ informative:
   RFC7384:
   RFC7276:
   RFC9416:
-  RFC7855:
   RFC7872:
   RFC8341:
   RFC8253:
@@ -94,13 +93,6 @@ informative:
   I-D.ietf-lsr-isis-srv6-yang:
   I-D.ietf-pce-segment-routing-policy-cp:
   I-D.ietf-idr-bgp-ls-sr-policy:
-  IANAIPv6SPAR:
-    target: https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml
-    title: "IANA IPv6 Special-Purpose Address Registry"
-  STRIDE:
-    title: The STRIDE Threat Model
-    target: https://msdn.microsoft.com/en-us/library/ee823878(v=cs.20).aspx
-    date: 2018
   ANSI-Sec:
     title: "Operations, Administration, Maintenance, and Provisioning Security Requirements for the Public Telecommunications Network: A Baseline of Security Requirements for the Management Plane"
     target: https://www.ieee802.org/1/ecsg-linksec/meetings/July03/3m150075.pdf
