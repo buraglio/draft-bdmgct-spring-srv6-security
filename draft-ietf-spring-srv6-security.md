@@ -87,6 +87,7 @@ informative:
   RFC9050:
   RFC9602:
   RFC9087:
+  RFC6291:
   RFC8355:
   I-D.ietf-spring-srv6-srh-compression:
   I-D.ietf-lsr-ospf-srv6-yang:
@@ -300,10 +301,12 @@ Various attacks which are not specific to SRv6 can be used to compromise network
 Because SRv6 is completely reliant on IPv6 for addressing, forwarding, and fundamental networking basics, it is potentially subject to any existing or emerging IPv6 vulnerabilities [RFC9099], however, this is out of scope for this document.
 
 ## Control Plane Attacks
+
 ### Overview
-The SRv6 control plane leverages existing control plane protocols, such as BGP, IS-IS, OSPF and PCE. Consequently, any security attacks that can potentially compromise these protocols are also applicable to SRv6 deployments utilizing them. Therefore, this document does not provide an exhaustive list of the potential control plane attacks. Instead, it highlights key categories of attacks, focusing on three primary areas: attacks targeting routing protocols, centralized control plane infrastructures, and Operations, Administration, and Maintenance (OAM) protocols.
+The SRv6 control plane leverages existing control plane protocols, such as BGP, IS-IS, OSPF and PCE. Consequently, any security attacks that can potentially compromise these protocols are also applicable to SRv6 deployments utilizing them. Therefore, this document does not provide an exhaustive list of the potential control plane attacks. Instead, it highlights key categories of attacks, focusing on three primary areas: attacks targeting routing protocols, centralized control plane infrastructures, and OAM protocols. In this document, the term OAM refers specifically to Operations, Administration, and Maintenance, in alignment with the definition provided in [RFC6291]. As such, it explicitly excludes management-related functions. Security considerations pertaining to the management plane are addressed in {{mgmt}}.
 
 ### Routing Protocol Attacks
+
 #### Overview
 Generic threats applicable to routing protocols are discussed in {{RFC4593}}. Similar to data plane attacks, the abstractions outlined in {{abstractions}} are also applicable to control plane traffic. These include passive eavesdropping, message injection, replay, deletion, and modification.
 
@@ -316,6 +319,7 @@ For example, an attacker may advertise falsified SIDs to manipulate SR policies.
 An additional case could be the manipulation of backup paths {{RFC8355}}, where the attacker could alter the SIDs defining such backup path then directing traffic over suboptimal or compromised paths, enabling eavesdropping, traffic analysis, or selective denial of service, compromising the service integrity and confidentiality if traffic is diverted to unauthorized nodes or paths.
 
 Finally, in situations of interworking with other domains, as for BGP Egress Peer Engineering (BGP-EPE) {{RFC9087}} an attacker injecting malicious BGP-EPE policies may steer traffic through unauthorized peers or paths, facilitating interception, traffic analysis, or denial of service. Attackers gaining access to the BGP-EPE controller can manipulate SRv6 route selection and segment lists, compromising network integrity and confidentiality.
+
 #### Scope
 The location of an attacker in the network significantly affects the scope of potential attacks. Off-path attackers are generally limited to injecting malicious routing messages, while on-path attackers can perform a broader range of attacks, including active modification or passive listening.
 
@@ -323,6 +327,7 @@ The location of an attacker in the network significantly affects the scope of po
 Attacks targeting the routing protocol can have diverse impacts on network operation, including the aspects described in {{sec-effect}}. These impacts may include incorrect SR policies or the degradation of network availability, potentially resulting in service disruption or denial of service.
 
 ### OAM Attacks
+
 #### Overview
 Since SRv6 operates over an IPv6 infrastructure, existing OAM protocols designed for IPv6 networks are applicable to SRv6 as well. Consequently, the security considerations associated with conventional IPv6 OAM protocols are also relevant to SRv6 environments. As noted in {{RFC7276}}, successful attacks on OAM protocols can mislead operators by simulating non-existent failures or by concealing actual network issues. SRv6-specific OAM aspects are specified in {{RFC9259}}.
 
@@ -337,6 +342,7 @@ On-path attackers possess enhanced capabilities due to their position within the
 Attacks targeting OAM protocols may impact network availability or facilitate unauthorized information gathering. Such attacks can disrupt normal operations or expose sensitive details about network topology, performance, or state.
 
 ### Central Control Plane Attacks
+
 #### Overview
 Centralized control plane architectures, such as those based on the Path Computation Element Communication Protocol (PCECC) {{RFC8283}}, inherently introduce a single point of failure. This centralization may present a security vulnerability, particularly with respect to denial-of-service (DoS) attacks targeting the controller. Furthermore, the central controller becomes a focal point for potential interception or manipulation of control messages exchanged with individual Network Elements (NEs), thereby increasing the risk of compromise to the overall network control infrastructure.
 
@@ -346,7 +352,7 @@ As with other control plane attacks, an off-path attacker may attempt to inject 
 #### Effect
 A successful attack may result in any of the adverse effects described in {{sec-effect}}, potentially impacting availability and operational correctness.
 
-## Management Plane Attacks
+## Management Plane Attacks {#mgmt}
 
 ### Overview
 Similar to the control plane, a compromised management plane can enable a broad range of attacks, including unauthorized manipulation of SR policies and disruption of network availability. The specific threats and their potential impact are influenced by the management protocols in use.
