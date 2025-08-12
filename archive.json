@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-08T01:44:25.357082+00:00",
+  "timestamp": "2025-08-12T01:42:21.927289+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -1770,6 +1770,32 @@
       "mergeCommit": {
         "oid": "c2456a5115ade27646bbc4be153aa566127c091b"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 54,
+      "id": "PR_kwDOKVF77M6i-V0F",
+      "title": "OAM clarification",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/54",
+      "state": "OPEN",
+      "author": "talmi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "- Added a clarification about the term OAM.\r\n- Fixed some header space issues.",
+      "createdAt": "2025-08-11T06:03:10Z",
+      "updatedAt": "2025-08-11T06:03:10Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "ffbce140e0cbea5587847fca58d81218e4178284",
+      "headRepository": "talmi/draft-bdmgct-spring-srv6-security",
+      "headRefName": "oam-note",
+      "headRefOid": "bb75b45d8f7cb398ef695bc217c402717e5fced1",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
