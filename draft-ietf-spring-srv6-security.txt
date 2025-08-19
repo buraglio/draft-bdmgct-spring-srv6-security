@@ -5,14 +5,14 @@
 Source Packet Routing in Networking                          N. Buraglio
 Internet-Draft                                   Energy Sciences Network
 Intended status: Standards Track                              T. Mizrahi
-Expires: 19 February 2026                                         Huawei
+Expires: 20 February 2026                                         Huawei
                                                                  T. Tong
                                                             China Unicom
                                                          L. M. Contreras
                                                               Telefonica
                                                                  F. Gont
                                                             SI6 Networks
-                                                          18 August 2025
+                                                          19 August 2025
 
 
               Segment Routing IPv6 Security Considerations
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 February 2026.
+   This Internet-Draft will expire on 20 February 2026.
 
 Copyright Notice
 
@@ -544,12 +544,12 @@ Table of Contents
 6.3.1.  Overview
 
    The SRv6 control plane leverages existing control plane protocols,
-   such as BGP, IS-IS, OSPF and PCE.  Consequently, any security attacks
-   that can potentially compromise these protocols are also applicable
-   to SRv6 deployments utilizing them.  Therefore, this document does
-   not provide an exhaustive list of the potential control plane
-   attacks.  Instead, it highlights key categories of attacks, focusing
-   on three primary areas: attacks targeting routing protocols,
+   such as BGP, IS-IS, OSPF and PCEP.  Consequently, any security
+   attacks that can potentially compromise these protocols are also
+   applicable to SRv6 deployments utilizing them.  Therefore, this
+   document does not provide an exhaustive list of the potential control
+   plane attacks.  Instead, it highlights key categories of attacks,
+   focusing on three primary areas: attacks targeting routing protocols,
    centralized control plane infrastructures, and OAM protocols.  In
    this document, the term OAM refers specifically to Operations,
    Administration, and Maintenance, in alignment with the definition
@@ -668,14 +668,15 @@ Table of Contents
 6.3.4.1.  Overview
 
    Centralized control plane architectures, such as those based on the
-   Path Computation Element Communication Protocol (PCECC) [RFC8283],
-   inherently introduce a single point of failure.  This centralization
-   may present a security vulnerability, particularly with respect to
-   denial-of-service (DoS) attacks targeting the controller.
-   Furthermore, the central controller becomes a focal point for
-   potential interception or manipulation of control messages exchanged
-   with individual Network Elements (NEs), thereby increasing the risk
-   of compromise to the overall network control infrastructure.
+   Path Computation Element (PCE) [RFC4655] and PCE as a Central
+   Controller (PCECC) [RFC8283], inherently introduce a single point of
+   failure.  This centralization may present a security vulnerability,
+   particularly with respect to denial-of-service (DoS) attacks
+   targeting the controller.  Furthermore, the central controller
+   becomes a focal point for potential interception or manipulation of
+   control messages exchanged with individual Network Elements (NEs),
+   thereby increasing the risk of compromise to the overall network
+   control infrastructure.
 
 6.3.4.2.  Scope
 
@@ -686,6 +687,12 @@ Table of Contents
    passive interception of control traffic and in-transit modification
    of messages exchanged between the controller and Network Elements
    (NEs).
+
+   For example, an attacker may manipulate SR policies instantiated via
+   the central controller (using protocols like PCEP or BGP) at the head
+   end, thereby altering both the paths of the SR policy and the traffic
+   steered over it.  Additionally, PCECC enables manipulation of SID
+   allocation and distribution.
 
 6.3.4.3.  Effect
 
@@ -1219,6 +1226,11 @@ Table of Contents
    [RFC4593]  Barbir, A., Murphy, S., and Y. Yang, "Generic Threats to
               Routing Protocols", RFC 4593, DOI 10.17487/RFC4593,
               October 2006, <https://www.rfc-editor.org/rfc/rfc4593>.
+
+   [RFC4655]  Farrel, A., Vasseur, J.-P., and J. Ash, "A Path
+              Computation Element (PCE)-Based Architecture", RFC 4655,
+              DOI 10.17487/RFC4655, August 2006,
+              <https://www.rfc-editor.org/rfc/rfc4655>.
 
    [RFC5095]  Abley, J., Savola, P., and G. Neville-Neil, "Deprecation
               of Type 0 Routing Headers in IPv6", RFC 5095,
