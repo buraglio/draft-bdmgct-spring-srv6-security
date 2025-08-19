@@ -64,6 +64,7 @@ normative:
 informative:
   RFC3552:
   RFC4593:
+  RFC4655:
   RFC6518:
   RFC6242:
   RFC8446:
@@ -303,7 +304,7 @@ Because SRv6 is completely reliant on IPv6 for addressing, forwarding, and funda
 ## Control Plane Attacks
 
 ### Overview
-The SRv6 control plane leverages existing control plane protocols, such as BGP, IS-IS, OSPF and PCE. Consequently, any security attacks that can potentially compromise these protocols are also applicable to SRv6 deployments utilizing them. Therefore, this document does not provide an exhaustive list of the potential control plane attacks. Instead, it highlights key categories of attacks, focusing on three primary areas: attacks targeting routing protocols, centralized control plane infrastructures, and OAM protocols. In this document, the term OAM refers specifically to Operations, Administration, and Maintenance, in alignment with the definition provided in [RFC6291]. As such, it explicitly excludes management-related functions. Security considerations pertaining to the management plane are addressed in {{mgmt}}.
+The SRv6 control plane leverages existing control plane protocols, such as BGP, IS-IS, OSPF and PCEP. Consequently, any security attacks that can potentially compromise these protocols are also applicable to SRv6 deployments utilizing them. Therefore, this document does not provide an exhaustive list of the potential control plane attacks. Instead, it highlights key categories of attacks, focusing on three primary areas: attacks targeting routing protocols, centralized control plane infrastructures, and OAM protocols. In this document, the term OAM refers specifically to Operations, Administration, and Maintenance, in alignment with the definition provided in [RFC6291]. As such, it explicitly excludes management-related functions. Security considerations pertaining to the management plane are addressed in {{mgmt}}.
 
 ### Routing Protocol Attacks
 
@@ -344,10 +345,12 @@ Attacks targeting OAM protocols may impact network availability or facilitate un
 ### Central Control Plane Attacks
 
 #### Overview
-Centralized control plane architectures, such as those based on the Path Computation Element Communication Protocol (PCECC) {{RFC8283}}, inherently introduce a single point of failure. This centralization may present a security vulnerability, particularly with respect to denial-of-service (DoS) attacks targeting the controller. Furthermore, the central controller becomes a focal point for potential interception or manipulation of control messages exchanged with individual Network Elements (NEs), thereby increasing the risk of compromise to the overall network control infrastructure.
+Centralized control plane architectures, such as those based on the Path Computation Element (PCE) {{RFC4655}} and PCE as a Central Controller (PCECC) {{RFC8283}}, inherently introduce a single point of failure. This centralization may present a security vulnerability, particularly with respect to denial-of-service (DoS) attacks targeting the controller. Furthermore, the central controller becomes a focal point for potential interception or manipulation of control messages exchanged with individual Network Elements (NEs), thereby increasing the risk of compromise to the overall network control infrastructure.
 
 #### Scope
 As with other control plane attacks, an off-path attacker may attempt to inject forged control messages or impersonate a legitimate controller. On-path attackers, by virtue of their position within the communication path, possess additional capabilities such as passive interception of control traffic and in-transit modification of messages exchanged between the controller and Network Elements (NEs).
+
+For example, an attacker may manipulate SR policies instantiated via the central controller (using protocols like PCEP or BGP) at the head end, thereby altering both the paths of the SR policy and the traffic steered over it. Additionally, PCECC enables manipulation of SID allocation and distribution.
 
 #### Effect
 A successful attack may result in any of the adverse effects described in {{sec-effect}}, potentially impacting availability and operational correctness.
