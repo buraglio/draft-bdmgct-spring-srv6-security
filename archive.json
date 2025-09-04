@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-21T01:36:59.913776+00:00",
+  "timestamp": "2025-09-04T01:22:45.643899+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -1856,6 +1856,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 56,
+      "id": "PR_kwDOKVF77M6mlPR1",
+      "title": "Internal review updates",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/56",
+      "state": "OPEN",
+      "author": "talmi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "- Updated the upper-layer checksum paragraph and moved it from \"Topics for Further Consideration\" to \"Middlebox Filtering Issues\".\r\n- \"Topics for Further Consideration\" section removed.\r\n- Various nits and typo fixes.",
+      "createdAt": "2025-09-03T06:34:35Z",
+      "updatedAt": "2025-09-03T06:34:35Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "90a1c8a0a85d05ba3ac9cbcdd984aa0c89310eb3",
+      "headRepository": "talmi/draft-bdmgct-spring-srv6-security",
+      "headRefName": "internal-review-updates",
+      "headRefOid": "922dcaf05908f680141ce5e312663f274b7fb3ab",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
