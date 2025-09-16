@@ -91,6 +91,7 @@ informative:
   RFC6291:
   RFC8355:
   RFC9800:
+  RFC4381:
   I-D.ietf-lsr-ospf-srv6-yang:
   I-D.ietf-lsr-isis-srv6-yang:
   I-D.ietf-pce-segment-routing-policy-cp:
