@@ -90,7 +90,7 @@ informative:
   RFC9087:
   RFC6291:
   RFC8355:
-  I-D.ietf-spring-srv6-srh-compression:
+  RFC9800:
   I-D.ietf-lsr-ospf-srv6-yang:
   I-D.ietf-lsr-isis-srv6-yang:
   I-D.ietf-pce-segment-routing-policy-cp:
@@ -118,12 +118,12 @@ segments that are processed at each hop along the signaled path. SRv6 is fundame
 Specifically, some primary properties of SRv6 that affect the security considerations are:
 
    *  SRv6 may use the SRH which is a type of Routing Extension Header defined by [RFC8754].
-      Security considerations of the SRH are discussed [RFC8754] section 7, and were based in part on security considerations of the deprecated routing header 0 as discussed in [RFC5095] section 5.
+      Security considerations of the SRH are discussed in [RFC8754] section 7, and were based in part on security considerations of the deprecated routing header 0 as discussed in [RFC5095] section 5.
 
    *  SRv6 uses the IPv6 data-plane, and therefore security considerations of IPv6 are applicable to SRv6 as well. Some of these considerations are discussed in Section 10 of [RFC8200] and in [RFC9099].
 
    *  While SRv6 uses what appear to be typical IPv6 addresses, the address space is processed differently by segment endpoints.
-      A typical IPv6 unicast address is comprised of a network prefix and host identifier.
+      A typical IPv6 unicast address is comprised of a network prefix and a host identifier.
       A typical SRv6 segment identifier (SID) is comprised of a locator, a function identifier, and optionally, function arguments.
       The locator must be routable, which enables both SRv6 capable and incapable devices to participate in forwarding, either as normal IPv6 unicast or SRv6 segment endpoints.
       The capability to operate in environments that may have gaps in SRv6 support allows the bridging of islands of SRv6 devices with standard IPv6 unicast routing.
@@ -245,8 +245,8 @@ An on-path internal attacker can modify a packet while it is in transit in a way
 
 A modification attack can be performed in one or more of the following ways:
 
-- SID list: the SRH can be manipulated by adding or removing SIDs, or by altering existing SIDs.
-- IPv6 Destination Address (DA): when an SRH exists that modifies the destination address (DA) of the IPv6 header affecting the active segment. However, DA modification can affect the SR policy even in the absence of an SRH. One example is modifying a DA which is used as a Binding SID [RFC8402]. Another example is modifying a DA which represents a compressed segment list {{I-D.ietf-spring-srv6-srh-compression}}. SRH compression allows encoding multiple compressed SIDs within a single 128-bit SID. Therefore, modifying the DA can affect one or more hops in the SR policy.
+- SID list: the SRH can be manipulated by adding or removing SIDs, or by modifying existing SIDs.
+- IPv6 Destination Address (DA): when an SRH is present modifying the destination address (DA) of the IPv6 header affects the active segment. However, DA modification can affect the SR policy even in the absence of an SRH. One example is modifying a DA which is used as a Binding SID [RFC8402]. Another example is modifying a DA which represents a compressed segment list {{RFC9800}}. SRH compression allows encoding multiple compressed SIDs within a single 128-bit SID, and thus modifying the DA can affect one or more hops in the SR policy.
 - Add/remove SRH: an attacker can insert or remove an SRH.
 - SRH TLV: adding, removing or modifying TLV fields in the SRH.
 
@@ -276,12 +276,12 @@ Maliciously adding unnecessary TLV fields can cause further resource exhaustion.
 An on-path internal attacker can passively listen to packets and specifically listen to the SRv6-related information that is conveyed in the IPv6 header and the SRH. This approach can be used for reconnaissance, i.e., for collecting segment lists.
 
 #### Scope
-A reconnaisance attack is limited to on-path internal attackers.
+A reconnaissance attack is limited to on-path internal attackers.
 
 If filtering is deployed at the domain boundaries ({{filtering}}), it prevents any leaks of explicit SRv6 routing information through the boundaries of the administrative domain. In this case, external attackers can only collect SRv6-related data in a malfunctioning network in which SRv6-related information is leaked through the boundaries of an SR domain.
 
 #### Effect
-While the information collected in a reconnaisance attack does not compromise the confidentiality of the user data, it allows an attacker to gather information about the network which in turn can be used to enable other attacks.
+While the information collected in a reconnaissance attack does not compromise the confidentiality of the user data, it allows an attacker to gather information about the network which in turn can be used to enable other attacks.
 
 ### Packet Insertion
 
@@ -364,7 +364,7 @@ As with centralized control systems, a centralized management infrastructure may
 
 Unauthorized access in a network management system can enable attackers or unprivileged users to gain control over network devices and alter configurations. In SRv6-enabled environments, this can result in the manipulation of segment routing policies or cause denial-of-service (DoS) conditions by disrupting traffic or tampering with forwarding behavior.
 
-Management functionality is often defined using YANG data models, such as those specified in {{I-D.ietf-lsr-isis-srv6-yang}} and {{I-D.ietf-lsr-ospf-srv6-yang}}. As with any YANG module, data nodes marked as writable, creatable, or deletable would be considered sensitive in certain operational environments. Unauthorized or unprotected write operations (e.g., via edit-config) targeting these nodes can adversely affect network operations. Some of the readable data nodes in a YANG module would also be considered sensitive or vulnerable in some network environments.
+Management functionality is often defined using YANG data models, such as those specified in {{RFC9020}}, {{I-D.ietf-lsr-isis-srv6-yang}} and {{I-D.ietf-lsr-ospf-srv6-yang}}. As with any YANG module, data nodes marked as writable, creatable, or deletable may be considered sensitive in certain operational environments. Unauthorized or unprotected write operations (e.g., via edit-config) targeting these nodes can adversely affect network operations. Some of the readable data nodes in a YANG module may also be considered sensitive or vulnerable in some network environments.
 
 #### Scope
 As with control plane attacks, an off-path attacker may attempt to inject forged management messages or impersonate a legitimate network management system. On-path attackers, due to their privileged position within the communication path, have additional capabilities such as passive interception of management traffic and unauthorized modification of messages in transit. An attacker with unauthorized access to a management system can cause significant damage, depending on the scope of the system and the strength of the access control mechanisms in place.
@@ -516,6 +516,8 @@ The security devices on SRv6 networks need to take care of SRv6 packets. However
 For example, along the forwarding path in SRv6 network, the SR-aware firewall will check the association relationships of the bidirectional VPN traffic packets. It is therefore able to retrieve the final destination of an SRv6 packet from the last entry in the SRH. When the <source, destination> tuple of the packet from PE1 (Provider Edge 1) to PE2 is <PE1-IP-ADDR, PE2-VPN-SID>, and the other direction is <PE2-IP-ADDR, PE1-VPN-SID>, the source address and destination address of the forward and backward traffic are regarded as different flows. Thus, legitimate traffic may be blocked by the firewall.
 
 Forwarding SRv6 traffic through devices that are not SRv6-aware might in some cases lead to unpredictable behavior. Because of the existence of the SRH, and the additional headers, security appliances, monitoring systems, and middle boxes could react in different ways if they do not incorporate support for the supporting SRv6 mechanisms, such as the IPv6 Segment Routing Header (SRH) [RFC8754]. Additionally, implementation limitations in the processing of IPv6 packets with extension headers may result in SRv6 packets being dropped [RFC7872],[RFC9098].
+
+Upper-layer checksum calculations rely on a pseudo-header that includes the IPv6 Destination Address. [RFC8200] specifies that when the Routing header is present the upper-layer checksum is computed by the originating node based on the IPv6 address of the last element of the Routing header.  When compressed segment lists {{RFC9800}} are used, the last element of the Routing header may be different than the Destination Address as received by the final destination. Furthermore, compressed segment lists can be used in the Destination Address without the presence of a Routing header, and in this case the IPv6 Destination address can be modified along the path. As defined in {{RFC9800}}, the Destination Address used in the upper-layer checksum calculation is the address as expected to be received by the ultimate destination. As a result, some existing middleboxes which verify the upper-layer checksum might miscalculate the checksum.
 
 ## Limited capability hardware
 
