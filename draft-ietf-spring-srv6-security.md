@@ -533,45 +533,6 @@ The security considerations of SRv6 are presented throughout this document.
 
 This document has no IANA actions.
 
-# Topics for Further Consideration
-
-This section lists topics that will be discussed further before deciding whether they need to be included in this document, as well as some placeholders for items that need further work.
-
-- The following references may be used in the future: [RFC9256] [RFC8986]
-- SRH compression
-- Spoofing
-- Path enumeration
-- host to host scenario involving a WAN and/or a data center fabric.
-- Terms that may be used in a future version: Locator Block, FRR, uSID
-- L4 checksum: [RFC8200] specifies that when the Routing header is present the L4 checksum is computed by the originating node based on the IPv6 address of the last element of the Routing header.  When compressed segment lists {{RFC9800}} are used, the last element of the Routing header may be different than the Destination Address as received by the final destination. Furthermore, compressed segment lists can be used in the Destination Address without the presence of a Routing header. In this case the IPv6 Destination address can be modified along the path. As a result, some existing middleboxes which verify the L4 checksum might miscalculate the checksum. This issue is currently under discussion in the SPRING WG.
-- Segment Routing Header figure: the SRv6 Segment Routing Header (SRH) is defined in [RFC8754].
-
-~~~~~~~~~~~
-     0                   1                   2                   3
-     0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    | Next Header   |  Hdr Ext Len  | Routing Type  | Segments Left |
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |  Last Entry   |     Flags     |              Tag              |
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |                                                               |
-    |            Segment List[0] (128 bits IPv6 address)            |
-    |                                                               |
-    |                                                               |
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |                                                               |
-    |                                                               |
-                                  ...
-    |                                                               |
-    |                                                               |
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |                                                               |
-    |            Segment List[n] (128 bits IPv6 address)            |
-    |                                                               |
-    |                                                               |
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-~~~~~~~~~~~
-
 --- back
 
 # Acknowledgments
