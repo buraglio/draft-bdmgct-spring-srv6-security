@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-14T01:36:47.083282+00:00",
+  "timestamp": "2025-09-18T01:23:03.323983+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -1862,52 +1862,84 @@
       "id": "PR_kwDOKVF77M6mlPR1",
       "title": "Internal review updates",
       "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/56",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "talmi",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "- Updated the upper-layer checksum paragraph and moved it from \"Topics for Further Consideration\" to \"Middlebox Filtering Issues\".\r\n- \"Topics for Further Consideration\" section removed.\r\n- Various nits and typo fixes.",
       "createdAt": "2025-09-03T06:34:35Z",
-      "updatedAt": "2025-09-03T06:34:35Z",
+      "updatedAt": "2025-09-16T17:16:43Z",
       "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
       "baseRefName": "main",
       "baseRefOid": "90a1c8a0a85d05ba3ac9cbcdd984aa0c89310eb3",
       "headRepository": "talmi/draft-bdmgct-spring-srv6-security",
       "headRefName": "internal-review-updates",
       "headRefOid": "922dcaf05908f680141ce5e312663f274b7fb3ab",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-09-16T17:16:42Z",
+      "mergedAt": "2025-09-16T17:16:42Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "8774d37d961bef580c179abc6e300295153fff1b"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOKVF77M7AlKqk",
+          "commit": {
+            "abbreviatedOid": "922dcaf"
+          },
+          "author": "buraglio",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "Looks great!",
+          "createdAt": "2025-09-16T17:16:28Z",
+          "updatedAt": "2025-09-16T17:16:28Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 57,
       "id": "PR_kwDOKVF77M6oS-DX",
       "title": "docs(readability): Improve the readability of the draft itself",
       "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/57",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "samoehlert",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "I focused on run on sentences, repeated phrasing, and clarity.",
       "createdAt": "2025-09-12T17:45:57Z",
-      "updatedAt": "2025-09-12T18:41:21Z",
+      "updatedAt": "2025-09-16T17:38:44Z",
       "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
       "baseRefName": "main",
-      "baseRefOid": "90a1c8a0a85d05ba3ac9cbcdd984aa0c89310eb3",
+      "baseRefOid": "8774d37d961bef580c179abc6e300295153fff1b",
       "headRepository": "samoehlert/draft-bdmgct-spring-srv6-security",
       "headRefName": "main",
-      "headRefOid": "9203523610f1e05928b289d935fb71b077e18d64",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "52a86b464020013b03dcca692f98e5a2012ae3f7",
+      "closedAt": "2025-09-16T17:38:44Z",
+      "mergedAt": "2025-09-16T17:38:44Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "330a2419fb5f25695eac369043ce6cb9fc611328"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOKVF77M7AlMMA",
+          "commit": {
+            "abbreviatedOid": "9203523"
+          },
+          "author": "buraglio",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "Good readability changes, thanks.",
+          "createdAt": "2025-09-16T17:18:29Z",
+          "updatedAt": "2025-09-16T17:18:29Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
