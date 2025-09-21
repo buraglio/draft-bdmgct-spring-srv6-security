@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-18T01:23:03.323983+00:00",
+  "timestamp": "2025-09-21T01:39:14.580826+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -1940,6 +1940,42 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 58,
+      "id": "PR_kwDOKVF77M6pTHDG",
+      "title": "remove topics for further investigation section",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/58",
+      "state": "MERGED",
+      "author": "buraglio",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-18T13:48:54Z",
+      "updatedAt": "2025-09-18T13:50:57Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "a8b72ec28179f5a3cc5a13de637635dc3d29117a",
+      "headRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "headRefName": "07-cleanup",
+      "headRefOid": "a9e04a2a494412a5146c3b7f3b3a577f7e864bd0",
+      "closedAt": "2025-09-18T13:50:57Z",
+      "mergedAt": "2025-09-18T13:50:57Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "5a14b0018b5895d369e869f2c7518b7e6e78e1e6"
+      },
+      "comments": [
+        {
+          "author": "buraglio",
+          "authorAssociation": "OWNER",
+          "body": "Missed this conflict in the last two PRs. ",
+          "createdAt": "2025-09-18T13:49:17Z",
+          "updatedAt": "2025-09-18T13:49:17Z"
+        }
+      ],
+      "reviews": []
     }
   ]
 }
