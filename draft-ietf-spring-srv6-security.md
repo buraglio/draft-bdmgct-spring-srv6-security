@@ -455,9 +455,11 @@ The IPv6 destination address can be filtered at the SR ingress node and at all n
 2. At every SRv6 enabled node, any packet destined to a SID instantiated at the node from a source address outside the SR domain is dropped.
 
 In order to apply such a filtering mechanism the SR domain needs to have an infrastructure address range for SIDs and an infrastructure address range for source addresses that can be detected and enforced. Some examples of an infrastructure address range for SIDs are:
-1. ULA addresses
-2. The prefix defined in [RFC9602]
-3. GUA addresses
+- The prefix defined in [RFC9602]
+- ULA addresses
+- GUA addresses
+
+As stated in the security considerations section of [RFC9602], the usage of the prefix allocated by [RFC9602] improves security by making it more simple to filter traffic at the edge of the SR Domains. It is important to note that [RFC9602] allocates and makes a dedicated prefix available for SRv6 SIDs for use inside of an trusted SRv6 domain. Use of other prefixes for this purpose will result in further security considerations such as potential SID pool route leakage or more complicated filtering requirements, increasing the liklihood of human or configuration error.
 
 Many operators reserve a /64 block for all loopback addresses and allocate /128 for each loopback interface. This simplifies the filtering of permitted source addresses.
 
