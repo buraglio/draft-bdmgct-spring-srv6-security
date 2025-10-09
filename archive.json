@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-21T01:39:14.580826+00:00",
+  "timestamp": "2025-10-09T01:24:50.921793+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -1975,6 +1975,34 @@
           "updatedAt": "2025-09-18T13:49:17Z"
         }
       ],
+      "reviews": []
+    },
+    {
+      "number": 59,
+      "id": "PR_kwDOKVF77M6sxlgM",
+      "title": "Address Tom Hill's comment on SID construction",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/59",
+      "state": "OPEN",
+      "author": "buraglio",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "talmi"
+      ],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-10-08T20:37:38Z",
+      "updatedAt": "2025-10-08T20:37:38Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "5a14b0018b5895d369e869f2c7518b7e6e78e1e6",
+      "headRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "headRefName": "nb-oct-2025",
+      "headRefOid": "b9dda87cbaec649f6348ffced38454cb035deba0",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
       "reviews": []
     }
   ]
