@@ -5,14 +5,14 @@
 Source Packet Routing in Networking                          N. Buraglio
 Internet-Draft                                   Energy Sciences Network
 Intended status: Standards Track                              T. Mizrahi
-Expires: 22 March 2026                                            Huawei
+Expires: 23 April 2026                                            Huawei
                                                                  T. Tong
                                                             China Unicom
                                                          L. M. Contreras
                                                               Telefonica
                                                                  F. Gont
                                                             SI6 Networks
-                                                       18 September 2025
+                                                         20 October 2025
 
 
               Segment Routing IPv6 Security Considerations
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 March 2026.
+   This Internet-Draft will expire on 23 April 2026.
 
 Copyright Notice
 
@@ -866,8 +866,18 @@ Table of Contents
    In order to apply such a filtering mechanism the SR domain needs to
    have an infrastructure address range for SIDs and an infrastructure
    address range for source addresses that can be detected and enforced.
-   Some examples of an infrastructure address range for SIDs are: 1.
-   ULA addresses 2.  The prefix defined in [RFC9602] 3.  GUA addresses
+   Some examples of an infrastructure address range for SIDs are: - The
+   prefix defined in [RFC9602] - ULA addresses - GUA addresses
+
+   As stated in the security considerations section of [RFC9602], the
+   usage of the prefix allocated by [RFC9602] improves security by
+   making it more simple to filter traffic at the edge of the SR
+   Domains.  It is important to note that [RFC9602] allocates and makes
+   a dedicated prefix available for SRv6 SIDs for use inside of an
+   trusted SRv6 domain.  Use of other prefixes for this purpose will
+   result in further security considerations such as potential SID pool
+   route leakage or more complicated filtering requirements, increasing
+   the liklihood of human or configuration error.
 
    Many operators reserve a /64 block for all loopback addresses and
    allocate /128 for each loopback interface.  This simplifies the
