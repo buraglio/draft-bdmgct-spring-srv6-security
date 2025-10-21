@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-09T01:24:50.921793+00:00",
+  "timestamp": "2025-10-21T01:36:32.749307+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -1982,7 +1982,7 @@
       "id": "PR_kwDOKVF77M6sxlgM",
       "title": "Address Tom Hill's comment on SID construction",
       "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/59",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "buraglio",
       "authorAssociation": "OWNER",
       "assignees": [
@@ -1991,17 +1991,19 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-10-08T20:37:38Z",
-      "updatedAt": "2025-10-08T20:37:38Z",
+      "updatedAt": "2025-10-20T00:26:05Z",
       "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
       "baseRefName": "main",
       "baseRefOid": "5a14b0018b5895d369e869f2c7518b7e6e78e1e6",
       "headRepository": "buraglio/draft-bdmgct-spring-srv6-security",
       "headRefName": "nb-oct-2025",
       "headRefOid": "b9dda87cbaec649f6348ffced38454cb035deba0",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-10-20T00:26:05Z",
+      "mergedAt": "2025-10-20T00:26:04Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "b3c27e865ef42c3773922984d1c82d0498e8ec89"
+      },
       "comments": [],
       "reviews": []
     }
