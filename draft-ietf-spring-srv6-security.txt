@@ -5,14 +5,14 @@
 Source Packet Routing in Networking                          N. Buraglio
 Internet-Draft                                   Energy Sciences Network
 Intended status: Standards Track                              T. Mizrahi
-Expires: 23 April 2026                                            Huawei
+Expires: 10 May 2026                                              Huawei
                                                                  T. Tong
                                                             China Unicom
                                                          L. M. Contreras
                                                               Telefonica
                                                                  F. Gont
                                                             SI6 Networks
-                                                         20 October 2025
+                                                         6 November 2025
 
 
               Segment Routing IPv6 Security Considerations
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 April 2026.
+   This Internet-Draft will expire on 10 May 2026.
 
 Copyright Notice
 
@@ -836,7 +836,9 @@ Table of Contents
    and that attacks that are expected to be unfeasible from outside the
    trusted domain may actually become feasible when any of the involved
    systems fails to enforce the filtering policy that is required to
-   define the Trusted Domain.
+   define the Trusted Domain.  Further, a trusted domain exists as a
+   construct of a given organization and may have a demarcation defined
+   by policy rather than technological boundaries.
 
 7.1.2.  SRH Filtering
 
@@ -1332,8 +1334,8 @@ Acknowledgments
    The authors would like to acknowledge the valuable input and
    contributions from Zafar Ali, Andrew Alston, Dale Carder, Bruno
    Decraene, Dhruv Dhody, Mike Dopheide, Darren Dukes, Joel Halpern,
-   Boris Hassanov, Sam Oehlert, Alvaro Retana, Eric Vyncke, and Russ
-   White.
+   Boris Hassanov, Tom Hill, Sam Oehlert, Alvaro Retana, Eric Vyncke,
+   and Russ White.
 
 Authors' Addresses
 
