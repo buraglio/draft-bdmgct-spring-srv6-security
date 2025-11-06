@@ -438,7 +438,7 @@ Following the spirit of [RFC8402], the current document assumes that SRv6 is dep
 
 Such an approach has been commonly referred to as the concept of "fail-open", a state of which the attributes are frequently described as containing inherently more risk than fail-closed methodologies. The reliance of perfectly crafted filters on on all edges of the trusted domain pose a demonstrable risk of inbound or outbound leaks if the filters are removed or adjusted in an erroneous manner. It is also important to note that some filtering implementations have limits on the size, complexity, or protocol support that can be applied, which may prevent the filter adjustments or creation required to properly secure the trusted domain for a new protocol such as SRv6.
 
-Practically speaking, this means successfully enforcing a "Trusted Domain" may be operationally difficult and error-prone in practice, and that attacks that are expected to be unfeasible from outside the trusted domain may actually become feasible when any of the involved systems fails to enforce the filtering policy that is required to define the Trusted Domain.
+Practically speaking, this means successfully enforcing a "Trusted Domain" may be operationally difficult and error-prone in practice, and that attacks that are expected to be unfeasible from outside the trusted domain may actually become feasible when any of the involved systems fails to enforce the filtering policy that is required to define the Trusted Domain. Further, a trusted domain exists as a construct of a given organization and may have a demarcation defined by policy rather than technological boundaries.
 
 ### SRH Filtering
 
@@ -540,4 +540,4 @@ This document has no IANA actions.
 # Acknowledgments
 {:numbered="false"}
 
-The authors would like to acknowledge the valuable input and contributions from Zafar Ali, Andrew Alston, Dale Carder, Bruno Decraene, Dhruv Dhody, Mike Dopheide, Darren Dukes, Joel Halpern, Boris Hassanov, Sam Oehlert, Alvaro Retana, Eric Vyncke, and Russ White.
+The authors would like to acknowledge the valuable input and contributions from Zafar Ali, Andrew Alston, Dale Carder, Bruno Decraene, Dhruv Dhody, Mike Dopheide, Darren Dukes, Joel Halpern, Boris Hassanov, Tom Hill, Sam Oehlert, Alvaro Retana, Eric Vyncke, and Russ White.
