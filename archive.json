@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-21T01:36:32.749307+00:00",
+  "timestamp": "2025-11-09T01:42:07.765539+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -2004,6 +2004,68 @@
       "mergeCommit": {
         "oid": "b3c27e865ef42c3773922984d1c82d0498e8ec89"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 60,
+      "id": "PR_kwDOKVF77M6xx4Gm",
+      "title": "Add trust domain sentence, ack tom hill",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/60",
+      "state": "MERGED",
+      "author": "buraglio",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-11-06T01:43:51Z",
+      "updatedAt": "2025-11-06T14:33:43Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "b3c27e865ef42c3773922984d1c82d0498e8ec89",
+      "headRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "headRefName": "ndb-trust-admin-domain",
+      "headRefOid": "084f76bc1ef53a69fbccd0d76f5c869dae4bda6b",
+      "closedAt": "2025-11-06T14:33:42Z",
+      "mergedAt": "2025-11-06T14:33:42Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "7bb639242e1581e76a5c1db86bfe6332fefda732"
+      },
+      "comments": [
+        {
+          "author": "talmi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Looks good to me.",
+          "createdAt": "2025-11-06T11:12:41Z",
+          "updatedAt": "2025-11-06T11:12:41Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 61,
+      "id": "PR_kwDOKVF77M6yKa_g",
+      "title": "Add input from Linda, Suresh",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/61",
+      "state": "OPEN",
+      "author": "buraglio",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-11-07T15:27:06Z",
+      "updatedAt": "2025-11-07T15:27:06Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "7bb639242e1581e76a5c1db86bfe6332fefda732",
+      "headRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "headRefName": "ndb-trust-admin-domain",
+      "headRefOid": "a50f1182728253c6d0300edb2a7e5ee2e84f7fdc",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
