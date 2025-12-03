@@ -5,14 +5,14 @@
 Source Packet Routing in Networking                          N. Buraglio
 Internet-Draft                                   Energy Sciences Network
 Intended status: Standards Track                              T. Mizrahi
-Expires: 10 May 2026                                              Huawei
+Expires: 6 June 2026                                              Huawei
                                                                  T. Tong
                                                             China Unicom
                                                          L. M. Contreras
                                                               Telefonica
                                                                  F. Gont
                                                             SI6 Networks
-                                                         6 November 2025
+                                                         3 December 2025
 
 
               Segment Routing IPv6 Security Considerations
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 10 May 2026.
+   This Internet-Draft will expire on 6 June 2026.
 
 Copyright Notice
 
@@ -813,11 +813,11 @@ Table of Contents
     trusted domain is important.  Such practices are discussed in
     [RFC4381] and are applicable to both SR-MPLS and SRv6.
 
-   Following the spirit of [RFC8402], the current document assumes that
-   SRv6 is deployed within a trusted domain.  Traffic MUST be filtered
-   at the domain boundaries.  Thus, most of the attacks described in
-   this document are limited to within the domain (i.e., internal
-   attackers).
+   Following the direction of [RFC8402], the current document assumes
+   that SRv6 is deployed within a trusted domain and that the traffic is
+   filtered at the domain boundaries.  Traffic MUST be filtered at the
+   domain boundaries.  Thus, most of the attacks described in this
+   document are limited to within the domain (i.e., internal attackers).
 
    Such an approach has been commonly referred to as the concept of
    "fail-open", a state of which the attributes are frequently described
@@ -836,9 +836,7 @@ Table of Contents
    and that attacks that are expected to be unfeasible from outside the
    trusted domain may actually become feasible when any of the involved
    systems fails to enforce the filtering policy that is required to
-   define the Trusted Domain.  Further, a trusted domain exists as a
-   construct of a given organization and may have a demarcation defined
-   by policy rather than technological boundaries.
+   define the Trusted Domain.
 
 7.1.2.  SRH Filtering
 
@@ -940,6 +938,10 @@ Table of Contents
       packet.  An on-path internal attacker can also replace the SRH of
       an in-transit packet with a different SRH that was previously
       captured.
+
+   *  In cases where this an SRH carries policy sementics, care should
+      be taken to understand the implications of malformed SRH, Invalid
+      TLVs, and authentification failures.
 
    These considerations limit the extent to which HMAC TLV can be relied
    upon as a security mechanism that could readily mitigate threats
@@ -1333,9 +1335,9 @@ Acknowledgments
 
    The authors would like to acknowledge the valuable input and
    contributions from Zafar Ali, Andrew Alston, Dale Carder, Bruno
-   Decraene, Dhruv Dhody, Mike Dopheide, Darren Dukes, Joel Halpern,
-   Boris Hassanov, Tom Hill, Sam Oehlert, Alvaro Retana, Eric Vyncke,
-   and Russ White.
+   Decraene, Dhruv Dhody, Mike Dopheide, Darren Dukes, Linda Dunbar,
+   Joel Halpern, Boris Hassanov, Tom Hill, Suresh Krishnan, Sam Oehlert,
+   Alvaro Retana, Eric Vyncke, and Russ White.
 
 Authors' Addresses
 
