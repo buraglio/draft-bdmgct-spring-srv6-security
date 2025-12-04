@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-09T01:42:07.765539+00:00",
+  "timestamp": "2025-12-04T01:43:03.374978+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -2048,24 +2048,26 @@
       "id": "PR_kwDOKVF77M6yKa_g",
       "title": "Add input from Linda, Suresh",
       "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/61",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "buraglio",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-11-07T15:27:06Z",
-      "updatedAt": "2025-11-07T15:27:06Z",
+      "updatedAt": "2025-12-03T23:39:20Z",
       "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
       "baseRefName": "main",
       "baseRefOid": "7bb639242e1581e76a5c1db86bfe6332fefda732",
       "headRepository": "buraglio/draft-bdmgct-spring-srv6-security",
       "headRefName": "ndb-trust-admin-domain",
       "headRefOid": "a50f1182728253c6d0300edb2a7e5ee2e84f7fdc",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-12-03T23:39:20Z",
+      "mergedAt": "2025-12-03T23:39:19Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "31b4868f6bb067966802b1fdbe775c1fb10f0f58"
+      },
       "comments": [],
       "reviews": []
     }
