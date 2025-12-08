@@ -434,7 +434,7 @@ As specified in [RFC8402]:
    [RFC4381] and are applicable to both SR-MPLS and SRv6.
 ~~~~~~~~~~~
 
-Following the direction of [RFC8402], the current document assumes that SRv6 is deployed within a trusted domain and that the traffic is filtered at the domain boundaries. Traffic MUST be filtered at the domain boundaries. Thus, most of the attacks described in this document are limited to within the domain (i.e., internal attackers).
+Following the direction of [RFC8402], the current document assumes that SRv6 is a trusted domain and that the traffic is filtered at the domain boundaries. Traffic MUST be filtered at the domain boundaries. Thus, most of the attacks described in this document are limited to within the domain (i.e., internal attackers).
 
 Such an approach has been commonly referred to as the concept of "fail-open", a state of which the attributes are frequently described as containing inherently more risk than fail-closed methodologies. The reliance of perfectly crafted filters on on all edges of the trusted domain pose a demonstrable risk of inbound or outbound leaks if the filters are removed or adjusted in an erroneous manner. It is also important to note that some filtering implementations have limits on the size, complexity, or protocol support that can be applied, which may prevent the filter adjustments or creation required to properly secure the trusted domain for a new protocol such as SRv6.
 
@@ -450,7 +450,7 @@ For these reasons SRH filtering is not necessarily a useful method of mitigation
 
 ### Address Range Filtering
 
-The IPv6 destination address can be filtered at the SR ingress node and at all nodes implementing SRv6 SIDs within the SR domain in order to mitigate external attacks. Section 5.1 of [RFC8754] describes this in detail and a summary is presented here:
+The IPv6 destination address can be filtered at the external interface of the SR ingress node of the SRv6 domain and at all nodes implementing SRv6 SIDs within the SR domain in order to mitigate external attacks. Section 5.1 of [RFC8754] describes this in detail and a summary is presented here:
 1. At ingress nodes, any packet entering the SR domain and destined to a SID within the SR domain is dropped.
 2. At every SRv6 enabled node, any packet destined to a SID instantiated at the node from a source address outside the SR domain is dropped.
 
@@ -480,7 +480,7 @@ Using an HMAC in an SR domain can mitigate some of the SR Modification Attacks (
 The following aspects of the HMAC should be considered:
 
 - The HMAC TLV is OPTIONAL.
-- While it is presumed that unique keys will be employed by each participating node, in scenarios where the network resorts to manual configuration of pre-shared keys, the same key might be reused by multiple systems as an incorrect shortcut to keeping the problem of pre-shared key configuration manageable.
+- While it is presumed that unique keys will be employed by each participating node, in scenarios where the network resorts to manual configuration of pre-shared keys, the same key might be reused by multiple nodes of an SRv6 domain as an incorrect shortcut to keeping the problem of pre-shared key configuration manageable. This key should not be the same key for different trusted domains, including those existing on the same node.
 - When the HMAC is used there is a distinction between an attacker who becomes internal by having physical access, for example by plugging into an active port of a network device, and an attacker who has full access to a legitimate network node, including for example encryption keys if the network is encrypted. The latter type of attacker is an internal attacker who can perform any of the attacks that were described in the previous section as relevant to internal attackers.
 - An internal attacker who does not have access to the pre-shared key can capture legitimate packets, and later replay the SRH and HMAC from these recorded packets. This allows the attacker to insert the previously recorded SRH and HMAC into a newly injected packet. An on-path internal attacker can also replace the SRH of an in-transit packet with a different SRH that was previously captured.
 - In cases where this an SRH carries policy sementics, care should be taken to understand the implications of malformed SRH, Invalid TLVs, and authentification failures.
