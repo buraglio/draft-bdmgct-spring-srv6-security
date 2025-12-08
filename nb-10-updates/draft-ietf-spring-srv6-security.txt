@@ -5,14 +5,14 @@
 Source Packet Routing in Networking                          N. Buraglio
 Internet-Draft                                   Energy Sciences Network
 Intended status: Standards Track                              T. Mizrahi
-Expires: 11 May 2026                                              Huawei
+Expires: 11 June 2026                                             Huawei
                                                                  T. Tong
                                                             China Unicom
                                                          L. M. Contreras
                                                               Telefonica
                                                                  F. Gont
                                                             SI6 Networks
-                                                         7 November 2025
+                                                         8 December 2025
 
 
               Segment Routing IPv6 Security Considerations
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 May 2026.
+   This Internet-Draft will expire on 11 June 2026.
 
 Copyright Notice
 
@@ -814,10 +814,10 @@ Table of Contents
     [RFC4381] and are applicable to both SR-MPLS and SRv6.
 
    Following the direction of [RFC8402], the current document assumes
-   that SRv6 is deployed within a trusted domain and that the traffic is
-   filtered at the domain boundaries.  Traffic MUST be filtered at the
-   domain boundaries.  Thus, most of the attacks described in this
-   document are limited to within the domain (i.e., internal attackers).
+   that SRv6 is a trusted domain and that the traffic is filtered at the
+   domain boundaries.  Traffic MUST be filtered at the domain
+   boundaries.  Thus, most of the attacks described in this document are
+   limited to within the domain (i.e., internal attackers).
 
    Such an approach has been commonly referred to as the concept of
    "fail-open", a state of which the attributes are frequently described
@@ -854,14 +854,15 @@ Table of Contents
 
 7.1.3.  Address Range Filtering
 
-   The IPv6 destination address can be filtered at the SR ingress node
-   and at all nodes implementing SRv6 SIDs within the SR domain in order
-   to mitigate external attacks.  Section 5.1 of [RFC8754] describes
-   this in detail and a summary is presented here: 1.  At ingress nodes,
-   any packet entering the SR domain and destined to a SID within the SR
-   domain is dropped. 2.  At every SRv6 enabled node, any packet
-   destined to a SID instantiated at the node from a source address
-   outside the SR domain is dropped.
+   The IPv6 destination address can be filtered at the external
+   interface of the SR ingress node of the SRv6 domain and at all nodes
+   implementing SRv6 SIDs within the SR domain in order to mitigate
+   external attacks.  Section 5.1 of [RFC8754] describes this in detail
+   and a summary is presented here: 1.  At ingress nodes, any packet
+   entering the SR domain and destined to a SID within the SR domain is
+   dropped. 2.  At every SRv6 enabled node, any packet destined to a SID
+   instantiated at the node from a source address outside the SR domain
+   is dropped.
 
    In order to apply such a filtering mechanism the SR domain needs to
    have an infrastructure address range for SIDs and an infrastructure
@@ -919,8 +920,10 @@ Table of Contents
    *  While it is presumed that unique keys will be employed by each
       participating node, in scenarios where the network resorts to
       manual configuration of pre-shared keys, the same key might be
-      reused by multiple systems as an incorrect shortcut to keeping the
-      problem of pre-shared key configuration manageable.
+      reused by multiple nodes of an SRv6 domain as an incorrect
+      shortcut to keeping the problem of pre-shared key configuration
+      manageable.  This key should not be the same key for different
+      trusted domains, including those existing on the same node.
 
    *  When the HMAC is used there is a distinction between an attacker
       who becomes internal by having physical access, for example by
