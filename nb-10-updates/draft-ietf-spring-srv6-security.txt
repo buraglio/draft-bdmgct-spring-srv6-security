@@ -5,14 +5,14 @@
 Source Packet Routing in Networking                          N. Buraglio
 Internet-Draft                                   Energy Sciences Network
 Intended status: Standards Track                              T. Mizrahi
-Expires: 11 June 2026                                             Huawei
+Expires: 12 June 2026                                             Huawei
                                                                  T. Tong
                                                             China Unicom
                                                          L. M. Contreras
                                                               Telefonica
                                                                  F. Gont
                                                             SI6 Networks
-                                                         8 December 2025
+                                                         9 December 2025
 
 
               Segment Routing IPv6 Security Considerations
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 June 2026.
+   This Internet-Draft will expire on 12 June 2026.
 
 Copyright Notice
 
@@ -901,7 +901,9 @@ Table of Contents
    encapsulation.  Encapsulation of packets at the SR ingress node and
    decapsulation at the SR egress node mitigates the ability of external
    attackers to attack the domain and also allows for encapsulation of
-   both IPv4 and IPv6 packets.
+   both IPv4 and IPv6 packets.  Practices outlined in Section 5 of
+   [RFC8754] should be followed to ensure exclusivity of use for any
+   prefix configured for use within the given trusted domain.
 
 7.3.  Hashed Message Authentication Code (HMAC)
 
@@ -934,13 +936,13 @@ Table of Contents
       the attacks that were described in the previous section as
       relevant to internal attackers.
 
-   *  An internal attacker who does not have access to the pre-shared
-      key can capture legitimate packets, and later replay the SRH and
-      HMAC from these recorded packets.  This allows the attacker to
-      insert the previously recorded SRH and HMAC into a newly injected
-      packet.  An on-path internal attacker can also replace the SRH of
-      an in-transit packet with a different SRH that was previously
-      captured.
+   *  For the lifetime of the pre-shared key validity, an internal
+      attacker who does not have access to the pre-shared key can
+      capture legitimate packets, and later replay the SRH and HMAC from
+      these recorded packets.  This allows the attacker to insert the
+      previously recorded SRH and HMAC into a newly injected packet.  An
+      on-path internal attacker can also replace the SRH of an in-
+      transit packet with a different SRH that was previously captured.
 
    *  In cases where this an SRH carries policy sementics, care should
       be taken to understand the implications of malformed SRH, Invalid

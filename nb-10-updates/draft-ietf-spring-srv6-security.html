@@ -1051,7 +1051,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Buraglio, et al.</td>
-<td class="center">Expires 11 June 2026</td>
+<td class="center">Expires 12 June 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1064,12 +1064,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-spring-srv6-security-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-12-08" class="published">8 December 2025</time>
+<time datetime="2025-12-09" class="published">9 December 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-06-11">11 June 2026</time></dd>
+<dd class="expires"><time datetime="2026-06-12">12 June 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1135,7 +1135,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 11 June 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 12 June 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1970,7 +1970,7 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
         <h3 id="name-encapsulation-of-packets">
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-encapsulation-of-packets" class="section-name selfRef">Encapsulation of Packets</a>
         </h3>
-<p id="section-7.2-1">Packets steered in an SR domain are often contained in an IPv6 encapsulation. Encapsulation of packets at the SR ingress node and decapsulation at the SR egress node mitigates the ability of external attackers to attack the domain and also allows for encapsulation of both IPv4 and IPv6 packets.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
+<p id="section-7.2-1">Packets steered in an SR domain are often contained in an IPv6 encapsulation. Encapsulation of packets at the SR ingress node and decapsulation at the SR egress node mitigates the ability of external attackers to attack the domain and also allows for encapsulation of both IPv4 and IPv6 packets. Practices outlined in Section 5 of <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span> should be followed to ensure exclusivity of use for any prefix configured for use within the given trusted domain.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="hmac">
@@ -1992,7 +1992,7 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
             <p id="section-7.3-4.3.1">When the HMAC is used there is a distinction between an attacker who becomes internal by having physical access, for example by plugging into an active port of a network device, and an attacker who has full access to a legitimate network node, including for example encryption keys if the network is encrypted. The latter type of attacker is an internal attacker who can perform any of the attacks that were described in the previous section as relevant to internal attackers.<a href="#section-7.3-4.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-7.3-4.4">
-            <p id="section-7.3-4.4.1">An internal attacker who does not have access to the pre-shared key can capture legitimate packets, and later replay the SRH and HMAC from these recorded packets. This allows the attacker to insert the previously recorded SRH and HMAC into a newly injected packet. An on-path internal attacker can also replace the SRH of an in-transit packet with a different SRH that was previously captured.<a href="#section-7.3-4.4.1" class="pilcrow">¶</a></p>
+            <p id="section-7.3-4.4.1">For the lifetime of the pre-shared key validity, an internal attacker who does not have access to the pre-shared key can capture legitimate packets, and later replay the SRH and HMAC from these recorded packets. This allows the attacker to insert the previously recorded SRH and HMAC into a newly injected packet. An on-path internal attacker can also replace the SRH of an in-transit packet with a different SRH that was previously captured.<a href="#section-7.3-4.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-7.3-4.5">
             <p id="section-7.3-4.5.1">In cases where this an SRH carries policy sementics, care should be taken to understand the implications of malformed SRH, Invalid TLVs, and authentification failures.<a href="#section-7.3-4.5.1" class="pilcrow">¶</a></p>
