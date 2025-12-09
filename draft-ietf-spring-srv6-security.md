@@ -469,7 +469,7 @@ Filtering on prefixes has been shown to be useful, specifically [RFC8754]'s desc
 
 ## Encapsulation of Packets
 
-Packets steered in an SR domain are often contained in an IPv6 encapsulation. Encapsulation of packets at the SR ingress node and decapsulation at the SR egress node mitigates the ability of external attackers to attack the domain and also allows for encapsulation of both IPv4 and IPv6 packets.
+Packets steered in an SR domain are often contained in an IPv6 encapsulation. Encapsulation of packets at the SR ingress node and decapsulation at the SR egress node mitigates the ability of external attackers to attack the domain and also allows for encapsulation of both IPv4 and IPv6 packets. Practices outlined in Section 5 of [RFC8754] should be followed to ensure exclusivity of use for any prefix configured for use within the given trusted domain.
 
 ## Hashed Message Authentication Code (HMAC) {#hmac}
 
@@ -482,7 +482,7 @@ The following aspects of the HMAC should be considered:
 - The HMAC TLV is OPTIONAL.
 - While it is presumed that unique keys will be employed by each participating node, in scenarios where the network resorts to manual configuration of pre-shared keys, the same key might be reused by multiple nodes of an SRv6 domain as an incorrect shortcut to keeping the problem of pre-shared key configuration manageable. This key should not be the same key for different trusted domains, including those existing on the same node.
 - When the HMAC is used there is a distinction between an attacker who becomes internal by having physical access, for example by plugging into an active port of a network device, and an attacker who has full access to a legitimate network node, including for example encryption keys if the network is encrypted. The latter type of attacker is an internal attacker who can perform any of the attacks that were described in the previous section as relevant to internal attackers.
-- An internal attacker who does not have access to the pre-shared key can capture legitimate packets, and later replay the SRH and HMAC from these recorded packets. This allows the attacker to insert the previously recorded SRH and HMAC into a newly injected packet. An on-path internal attacker can also replace the SRH of an in-transit packet with a different SRH that was previously captured.
+- For the lifetime of the pre-shared key validity, an internal attacker who does not have access to the pre-shared key can capture legitimate packets, and later replay the SRH and HMAC from these recorded packets. This allows the attacker to insert the previously recorded SRH and HMAC into a newly injected packet. An on-path internal attacker can also replace the SRH of an in-transit packet with a different SRH that was previously captured.
 - In cases where this an SRH carries policy sementics, care should be taken to understand the implications of malformed SRH, Invalid TLVs, and authentification failures.
 
 These considerations limit the extent to which HMAC TLV can be relied upon as a security mechanism that could readily mitigate threats associated with spoofing and tampering protection for the IPv6 SRH.
