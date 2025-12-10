@@ -469,7 +469,7 @@ Filtering on prefixes has been shown to be useful, specifically [RFC8754]'s desc
 
 ## Encapsulation of Packets
 
-Packets steered in an SR domain are often contained in an IPv6 encapsulation. Encapsulation of packets at the SR ingress node and decapsulation at the SR egress node mitigates the ability of external attackers to attack the domain and also allows for encapsulation of both IPv4 and IPv6 packets. Practices outlined in Section 5 of [RFC8754] should be followed to ensure exclusivity of use for any prefix configured for use within the given trusted domain.
+Packets steered in an SR domain are often contained in an IPv6 encapsulation. Encapsulation of packets at the SR ingress node and decapsulation at the SR egress node followed by the forwarding of the inner packet outside the SR domain with no lookup on the inner IP packet mitigates the ability of external attackers to attack the domain, and allows for encapsulation of both IPv4 and IPv6 packets. Additionally, practices outlined in Section 5 of [RFC8754] should be followed to ensure exclusivity of use for any prefix configured for use within the given trusted domain.
 
 ## Hashed Message Authentication Code (HMAC) {#hmac}
 
