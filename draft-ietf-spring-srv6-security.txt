@@ -4,15 +4,15 @@
 
 Source Packet Routing in Networking                          N. Buraglio
 Internet-Draft                                   Energy Sciences Network
-Intended status: Standards Track                              T. Mizrahi
-Expires: 6 June 2026                                              Huawei
+Intended status: Informational                                T. Mizrahi
+Expires: 16 July 2026                                             Huawei
                                                                  T. Tong
                                                             China Unicom
                                                          L. M. Contreras
                                                               Telefonica
                                                                  F. Gont
                                                             SI6 Networks
-                                                         3 December 2025
+                                                         12 January 2026
 
 
               Segment Routing IPv6 Security Considerations
@@ -59,11 +59,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 June 2026.
+   This Internet-Draft will expire on 16 July 2026.
 
 Copyright Notice
 
-   Copyright (c) 2025 IETF Trust and the persons identified as the
+   Copyright (c) 2026 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -109,7 +109,7 @@ Table of Contents
      7.4.  Control Plane Mitigation Methods
      7.5.  Management Plane Mitigation Methods
    8.  Implications on Existing Equipment
-     8.1.  Middlebox Filtering Issues
+     8.1.  Middle Box Filtering Issues
      8.2.  Limited capability hardware
    9.  Security Considerations
    10. IANA Considerations
@@ -122,22 +122,22 @@ Table of Contents
 1.  Introduction
 
    Segment Routing (SR) [RFC8402] utilizing an IPv6 data plane is a
-   source routing model that leverages an IPv6 underlay and an IPv6
-   extension header called the Segment Routing Header (SRH) [RFC8754].
-   This header is used to signal and control the forwarding and path of
-   packets by imposing an ordered list of segments that are processed at
-   each hop along the signaled path.  SRv6 is fundamentally bound to the
-   IPv6 protocol and introduces the aforementioned new extension header.
-   There are security considerations which must be noted or addressed in
-   order to operate an SRv6 network in a reliable and secure manner.
-   Specifically, some primary properties of SRv6 that affect the
-   security considerations are:
+   source routing model that leverages an IPv6 underlay.  It uses an
+   IPv6 extension header called the Segment Routing Header (SRH)
+   [RFC8754].  This header is used to signal and control the forwarding
+   and path of packets by imposing an ordered list of segments that are
+   processed at each hop along the signaled path.  SRv6 is fundamentally
+   bound to the IPv6 protocol and introduces the aforementioned new
+   extension header.  There are security considerations which must be
+   noted or addressed in order to operate an SRv6 network in a reliable
+   and secure manner.  Specifically, some primary properties of SRv6
+   that affect the security considerations are:
 
    *  SRv6 may use the SRH which is a type of Routing Extension Header
       defined by [RFC8754].  Security considerations of the SRH are
-      discussed in [RFC8754] section 7, and were based in part on
+      discussed in Section 7 of [RFC8754], and were based in part on
       security considerations of the deprecated routing header 0 as
-      discussed in [RFC5095] section 5.
+      discussed in Section 5 of [RFC5095].
 
    *  SRv6 uses the IPv6 data-plane, and therefore security
       considerations of IPv6 are applicable to SRv6 as well.  Some of
@@ -164,21 +164,21 @@ Table of Contents
    The following IETF RFCs were selected for security assessment as part
    of this effort:
 
-   *  [RFC8402] : "Segment Routing Architecture"
+   *  [RFC8402] : Segment Routing Architecture
 
-   *  [RFC8754] : "IPv6 Segment Routing Header (SRH)"
+   *  [RFC8754] : IPv6 Segment Routing Header (SRH)
 
-   *  [RFC8986] : "Segment Routing over IPv6 (SRv6) Network Programming"
+   *  [RFC8986] : Segment Routing over IPv6 (SRv6) Network Programming
 
-   *  [RFC9020] : "YANG Data Model for Segment Routing"
+   *  [RFC9020] : YANG Data Model for Segment Routing
 
-   *  [RFC9256] : "Segment Routing Policy Architecture"
+   *  [RFC9256] : Segment Routing Policy Architecture
 
-   *  [RFC9491] : "Integration of the Network Service Header (NSH) and
-      Segment Routing for Service Function Chaining (SFC)"
+   *  [RFC9491] : Integration of the Network Service Header (NSH) and
+      Segment Routing for Service Function Chaining (SFC)
 
-   *  [RFC9524] : "Segment Routing Replication for Multipoint Service
-      Delivery"
+   *  [RFC9524] : Segment Routing Replication for Multipoint Service
+      Delivery
 
    We note that SRv6 is under active development and, as such, the above
    documents might not cover all protocols employed in an SRv6
@@ -210,7 +210,7 @@ Table of Contents
    This section introduces the threat taxonomy that is used in this
    document.  This taxonomy is based on terminology from the Internet
    threat model [RFC3552], as well as some concepts from [RFC9055],
-   [RFC7384], [RFC7835] and [RFC9416].  Details regarding inter-domain
+   [RFC7384], [RFC7835], and [RFC9416].  Details regarding inter-domain
    segment routing (SR) are out of scope for this document.
 
    Internal vs. External:  An internal attacker in the context of SRv6
@@ -305,8 +305,8 @@ Table of Contents
       processing that the packet is subject to, thus compromising the
       integrity of the system.  Furthermore, an attack that compromises
       the control plane and/or the management plane is also a means of
-      affecting the system integrity.  Specific SRv6-targeted attack may
-      cause one or more of the following outcomes:
+      affecting the system integrity.  A specific SRv6-targeted attack
+      may cause one or more of the following outcomes:
 
       -  Avoiding a specific node or path: when an SRv6 policy is
          manipulated, specific nodes or paths may be bypassed, for
@@ -319,8 +319,8 @@ Table of Contents
          acceleration.  Alternatively, an attacker can divert traffic to
          be forwarded through a specific node that the attacker has
          access to, which facilitates more complex on-path attacks such
-         as passive listening, recon and various man-in-the-middle
-         attacks.
+         as passive listening, reconnaissance, and various man-in-the-
+         middle attacks.
 
       -  Causing header modifications: SRv6 network programming
          determines the SR endpoint behavior, including potential header
@@ -422,7 +422,7 @@ Table of Contents
    *  SID list: the SRH can be manipulated by adding or removing SIDs,
       or by modifying existing SIDs.
 
-   *  IPv6 Destination Address (DA): when an SRH is present modifying
+   *  IPv6 Destination Address (DA): when an SRH is present, modifying
       the destination address (DA) of the IPv6 header affects the active
       segment.  However, DA modification can affect the SR policy even
       in the absence of an SRH.  One example is modifying a DA which is
@@ -436,13 +436,12 @@ Table of Contents
 
    *  SRH TLV: adding, removing or modifying TLV fields in the SRH.
 
-   It is noted that the SR modification attack is performed by an on-
-   path attacker who has access to packets in transit, and thus can
-   implement these attacks directly.  However, SR modification is
-   relatively easy to implement and requires low processing resources by
-   an attacker, while it facilitates more complex on-path attacks by
-   redirecting the traffic to another node that the attacker has access
-   to with more processing resources.
+   The SR modification attack is performed by an on-path attacker who
+   has access to packets in transit and can implement these attacks
+   directly.  SR modification is relatively easy to implement and
+   requires low processing resources.  However, it facilitates more
+   complex on-path attacks by redirecting traffic to another node that
+   the attacker has access to with more processing resources.
 
    An on-path internal attacker can also modify, insert, or delete other
    extension headers but these are outside the scope of this document.
@@ -587,7 +586,7 @@ Table of Contents
    [RFC8476].  If the advertised MSD is lower than the actual
    capability, path computation may fail to compute a viable path.
    Conversely, if the value is higher than supported, an attempt to
-   instantiate a path that can't be supported by the head-end (the node
+   instantiate a path that cannot be supported by the head-end (the node
    performing the SID imposition) may occur.
 
    An additional case could be the manipulation of backup paths
@@ -814,22 +813,20 @@ Table of Contents
     [RFC4381] and are applicable to both SR-MPLS and SRv6.
 
    Following the direction of [RFC8402], the current document assumes
-   that SRv6 is deployed within a trusted domain and that the traffic is
-   filtered at the domain boundaries.  Traffic MUST be filtered at the
-   domain boundaries.  Thus, most of the attacks described in this
-   document are limited to within the domain (i.e., internal attackers).
+   that SRv6 is a trusted domain and that the traffic is filtered at the
+   domain boundaries.  Traffic MUST be filtered at the domain
+   boundaries.  Thus, most of the attacks described in this document are
+   limited to within the domain (i.e., internal attackers).
 
-   Such an approach has been commonly referred to as the concept of
-   "fail-open", a state of which the attributes are frequently described
-   as containing inherently more risk than fail-closed methodologies.
-   The reliance of perfectly crafted filters on on all edges of the
-   trusted domain pose a demonstrable risk of inbound or outbound leaks
-   if the filters are removed or adjusted in an erroneous manner.  It is
-   also important to note that some filtering implementations have
-   limits on the size, complexity, or protocol support that can be
-   applied, which may prevent the filter adjustments or creation
-   required to properly secure the trusted domain for a new protocol
-   such as SRv6.
+   Such an approach is commonly referred to as "fail-open", which
+   inherently contains more risk than fail-closed methodologies.
+   Relying on perfectly crafted filters on all edges of the trusted
+   domain poses a demonstrable risk of inbound or outbound leaks if the
+   filters are removed or adjusted erroneously.  It is also important to
+   note that some filtering implementations have limits on the size,
+   complexity, or protocol support that can be applied, which may
+   prevent the filter adjustments or creation required to properly
+   secure the trusted domain for a new protocol such as SRv6.
 
    Practically speaking, this means successfully enforcing a "Trusted
    Domain" may be operationally difficult and error-prone in practice,
@@ -854,14 +851,15 @@ Table of Contents
 
 7.1.3.  Address Range Filtering
 
-   The IPv6 destination address can be filtered at the SR ingress node
-   and at all nodes implementing SRv6 SIDs within the SR domain in order
-   to mitigate external attacks.  Section 5.1 of [RFC8754] describes
-   this in detail and a summary is presented here: 1.  At ingress nodes,
-   any packet entering the SR domain and destined to a SID within the SR
-   domain is dropped. 2.  At every SRv6 enabled node, any packet
-   destined to a SID instantiated at the node from a source address
-   outside the SR domain is dropped.
+   The IPv6 destination address can be filtered at the external
+   interface of the SR ingress node of the SRv6 domain and at all nodes
+   implementing SRv6 SIDs within the SR domain in order to mitigate
+   external attacks.  Section 5.1 of [RFC8754] describes this in detail
+   and a summary is presented here: 1.  At ingress nodes, any packet
+   entering the SR domain and destined to a SID within the SR domain is
+   dropped. 2.  At every SRv6 enabled node, any packet destined to a SID
+   instantiated at the node from a source address outside the SR domain
+   is dropped.
 
    In order to apply such a filtering mechanism the SR domain needs to
    have an infrastructure address range for SIDs and an infrastructure
@@ -873,11 +871,11 @@ Table of Contents
    usage of the prefix allocated by [RFC9602] improves security by
    making it more simple to filter traffic at the edge of the SR
    Domains.  It is important to note that [RFC9602] allocates and makes
-   a dedicated prefix available for SRv6 SIDs for use inside of an
-   trusted SRv6 domain.  Use of other prefixes for this purpose will
-   result in further security considerations such as potential SID pool
-   route leakage or more complicated filtering requirements, increasing
-   the liklihood of human or configuration error.
+   a dedicated prefix available for SRv6 SIDs for use inside a trusted
+   SRv6 domain.  Use of other prefixes for this purpose will result in
+   further security considerations such as potential SID pool route
+   leakage or more complicated filtering requirements, increasing the
+   likelihood of human or configuration error.
 
    Many operators reserve a /64 block for all loopback addresses and
    allocate /128 for each loopback interface.  This simplifies the
@@ -896,11 +894,18 @@ Table of Contents
 
 7.2.  Encapsulation of Packets
 
-   Packets steered in an SR domain are often contained in an IPv6
-   encapsulation.  Encapsulation of packets at the SR ingress node and
-   decapsulation at the SR egress node mitigates the ability of external
-   attackers to attack the domain and also allows for encapsulation of
-   both IPv4 and IPv6 packets.
+   Packets steered within an SR domain are typically encapsulated using
+   IPv6.  Encapsulation at the SR ingress node, followed by
+   decapsulation at the SR egress node and forwarding of the inner
+   packet without lookup, provides two key benefits:
+
+   *  Mitigates external attacker capabilities against the domain
+
+   *  Supports encapsulation of both IPv4 and IPv6 packets
+
+   Practices outlined in Section 5 of [RFC8754] should be followed to
+   ensure exclusivity of use for any prefix configured within the
+   trusted domain.
 
 7.3.  Hashed Message Authentication Code (HMAC)
 
@@ -917,10 +922,12 @@ Table of Contents
    *  The HMAC TLV is OPTIONAL.
 
    *  While it is presumed that unique keys will be employed by each
-      participating node, in scenarios where the network resorts to
-      manual configuration of pre-shared keys, the same key might be
-      reused by multiple systems as an incorrect shortcut to keeping the
-      problem of pre-shared key configuration manageable.
+      participating node, manual configuration of pre-shared keys may
+      lead to key reuse.  In such scenarios, the same key might be
+      reused by multiple nodes of an SRv6 domain as an incorrect
+      shortcut to keep pre-shared key configuration manageable.  This
+      key should not be the same key for different trusted domains,
+      including those existing on the same node.
 
    *  When the HMAC is used there is a distinction between an attacker
       who becomes internal by having physical access, for example by
@@ -931,17 +938,17 @@ Table of Contents
       the attacks that were described in the previous section as
       relevant to internal attackers.
 
-   *  An internal attacker who does not have access to the pre-shared
-      key can capture legitimate packets, and later replay the SRH and
-      HMAC from these recorded packets.  This allows the attacker to
-      insert the previously recorded SRH and HMAC into a newly injected
-      packet.  An on-path internal attacker can also replace the SRH of
-      an in-transit packet with a different SRH that was previously
-      captured.
+   *  For the lifetime of the pre-shared key validity, an internal
+      attacker who does not have access to the pre-shared key can
+      capture legitimate packets, and later replay the SRH and HMAC from
+      these recorded packets.  This allows the attacker to insert the
+      previously recorded SRH and HMAC into a newly injected packet.  An
+      on-path internal attacker can also replace the SRH of an in-
+      transit packet with a different SRH that was previously captured.
 
-   *  In cases where this an SRH carries policy sementics, care should
-      be taken to understand the implications of malformed SRH, Invalid
-      TLVs, and authentification failures.
+   *  In cases where an SRH carries policy semantics, care should be
+      taken to understand the implications of malformed SRH, invalid
+      TLVs, and authentication failures.
 
    These considerations limit the extent to which HMAC TLV can be relied
    upon as a security mechanism that could readily mitigate threats
@@ -1010,7 +1017,7 @@ Table of Contents
 
 8.  Implications on Existing Equipment
 
-8.1.  Middlebox Filtering Issues
+8.1.  Middle Box Filtering Issues
 
    When an SRv6 packet is forwarded in the SRv6 domain, its destination
    address changes constantly and the real destination address is
@@ -1036,14 +1043,12 @@ Table of Contents
    may be blocked by the firewall.
 
    Forwarding SRv6 traffic through devices that are not SRv6-aware might
-   in some cases lead to unpredictable behavior.  Because of the
-   existence of the SRH, and the additional headers, security
-   appliances, monitoring systems, and middle boxes could react in
-   different ways if they do not incorporate support for the supporting
-   SRv6 mechanisms, such as the IPv6 Segment Routing Header (SRH)
-   [RFC8754].  Additionally, implementation limitations in the
-   processing of IPv6 packets with extension headers may result in SRv6
-   packets being dropped [RFC7872],[RFC9098].
+   in some cases lead to unpredictable behavior.  Security appliances,
+   monitoring systems, and middle boxes could react in different ways if
+   they lack support for SRv6 mechanisms, such as the Segment Routing
+   Header (SRH) [RFC8754].  Additionally, implementation limitations in
+   the processing of IPv6 packets with extension headers may result in
+   SRv6 packets being dropped [RFC7872],[RFC9098].
 
    Upper-layer checksum calculations rely on a pseudo-header that
    includes the IPv6 Destination Address.  [RFC8200] specifies that when
