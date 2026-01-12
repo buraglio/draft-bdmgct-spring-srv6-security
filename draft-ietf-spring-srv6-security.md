@@ -1,7 +1,7 @@
 ---
 title: "Segment Routing IPv6 Security Considerations"
 abbrev: "Segment Routing IPv6 Security Considerations"
-category: inf
+category: info
 pi: [toc, sortrefs, symrefs]
 
 docname: draft-ietf-spring-srv6-security-latest
