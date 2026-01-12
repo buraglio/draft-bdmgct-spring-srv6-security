@@ -21,12 +21,12 @@
     Python 3.12.12
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
-    intervaltree 3.1.0
+    intervaltree 3.2.1
     Jinja2 3.1.6
-    lxml 5.3.1
-    platformdirs 4.5.0
+    lxml 6.0.2
+    platformdirs 4.5.1
     pycountry 24.6.1
-    PyYAML 6.0.2
+    PyYAML 6.0.3
     requests 2.32.5
     wcwidth 0.2.14
 -->
@@ -1047,11 +1047,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">Segment Routing IPv6 Security Considerat</td>
-<td class="right">December 2025</td>
+<td class="right">January 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Buraglio, et al.</td>
-<td class="center">Expires 13 June 2026</td>
+<td class="center">Expires 16 July 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1064,12 +1064,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-spring-srv6-security-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-12-10" class="published">10 December 2025</time>
+<time datetime="2026-01-12" class="published">12 January 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
-<dd class="intended-status">Standards Track</dd>
+<dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-06-13">13 June 2026</time></dd>
+<dd class="expires"><time datetime="2026-07-16">16 July 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1135,7 +1135,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 13 June 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 16 July 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1144,7 +1144,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
         </h2>
 <p id="section-boilerplate.2-1">
-            Copyright (c) 2025 IETF Trust and the persons identified as the
+            Copyright (c) 2026 IETF Trust and the persons identified as the
             document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
@@ -1275,7 +1275,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-implications-on-existing-eq" class="internal xref">Implications on Existing Equipment</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
-                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.  <a href="#name-middlebox-filtering-issues" class="internal xref">Middlebox Filtering Issues</a></p>
+                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.  <a href="#name-middle-box-filtering-issues" class="internal xref">Middle Box Filtering Issues</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
                 <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="auto internal xref">8.2</a>.  <a href="#name-limited-capability-hardware" class="internal xref">Limited capability hardware</a></p>
@@ -1314,14 +1314,13 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">Segment Routing (SR) <span>[<a href="#RFC8402" class="cite xref">RFC8402</a>]</span> utilizing an IPv6 data plane is a source routing model that leverages an IPv6 underlay
-and an IPv6 extension header called the Segment Routing Header (SRH) <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span>. This header is used to signal and control the forwarding and path of packets by imposing an ordered list of
+<p id="section-1-1">Segment Routing (SR) <span>[<a href="#RFC8402" class="cite xref">RFC8402</a>]</span> utilizing an IPv6 data plane is a source routing model that leverages an IPv6 underlay. It uses an IPv6 extension header called the Segment Routing Header (SRH) <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span>. This header is used to signal and control the forwarding and path of packets by imposing an ordered list of
 segments that are processed at each hop along the signaled path. SRv6 is fundamentally bound to the IPv6 protocol and introduces the aforementioned new extension header. There are security considerations which must be noted or addressed in order to operate an SRv6 network in a reliable and secure manner.
 Specifically, some primary properties of SRv6 that affect the security considerations are:<a href="#section-1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1-2.1">
           <p id="section-1-2.1.1">SRv6 may use the SRH which is a type of Routing Extension Header defined by <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span>.
-Security considerations of the SRH are discussed in <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span> section 7, and were based in part on security considerations of the deprecated routing header 0 as discussed in <span>[<a href="#RFC5095" class="cite xref">RFC5095</a>]</span> section 5.<a href="#section-1-2.1.1" class="pilcrow">¶</a></p>
+Security considerations of the SRH are discussed in Section 7 of <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span>, and were based in part on security considerations of the deprecated routing header 0 as discussed in Section 5 of <span>[<a href="#RFC5095" class="cite xref">RFC5095</a>]</span>.<a href="#section-1-2.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-1-2.2">
           <p id="section-1-2.2.1">SRv6 uses the IPv6 data-plane, and therefore security considerations of IPv6 are applicable to SRv6 as well. Some of these considerations are discussed in Section 10 of <span>[<a href="#RFC8200" class="cite xref">RFC8200</a>]</span> and in <span>[<a href="#RFC9099" class="cite xref">RFC9099</a>]</span>.<a href="#section-1-2.2.1" class="pilcrow">¶</a></p>
@@ -1345,25 +1344,25 @@ The capability to operate in environments that may have gaps in SRv6 support all
 <p id="section-2-1">The following IETF RFCs were selected for security assessment as part of this effort:<a href="#section-2-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-2-2.1">
-          <p id="section-2-2.1.1"><span>[<a href="#RFC8402" class="cite xref">RFC8402</a>]</span> : "Segment Routing Architecture"<a href="#section-2-2.1.1" class="pilcrow">¶</a></p>
+          <p id="section-2-2.1.1"><span>[<a href="#RFC8402" class="cite xref">RFC8402</a>]</span> : Segment Routing Architecture<a href="#section-2-2.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-2-2.2">
-          <p id="section-2-2.2.1"><span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span> : "IPv6 Segment Routing Header (SRH)"<a href="#section-2-2.2.1" class="pilcrow">¶</a></p>
+          <p id="section-2-2.2.1"><span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span> : IPv6 Segment Routing Header (SRH)<a href="#section-2-2.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-2-2.3">
-          <p id="section-2-2.3.1"><span>[<a href="#RFC8986" class="cite xref">RFC8986</a>]</span> : "Segment Routing over IPv6 (SRv6) Network Programming"<a href="#section-2-2.3.1" class="pilcrow">¶</a></p>
+          <p id="section-2-2.3.1"><span>[<a href="#RFC8986" class="cite xref">RFC8986</a>]</span> : Segment Routing over IPv6 (SRv6) Network Programming<a href="#section-2-2.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-2-2.4">
-          <p id="section-2-2.4.1"><span>[<a href="#RFC9020" class="cite xref">RFC9020</a>]</span> : "YANG Data Model for Segment Routing"<a href="#section-2-2.4.1" class="pilcrow">¶</a></p>
+          <p id="section-2-2.4.1"><span>[<a href="#RFC9020" class="cite xref">RFC9020</a>]</span> : YANG Data Model for Segment Routing<a href="#section-2-2.4.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-2-2.5">
-          <p id="section-2-2.5.1"><span>[<a href="#RFC9256" class="cite xref">RFC9256</a>]</span> : "Segment Routing Policy Architecture"<a href="#section-2-2.5.1" class="pilcrow">¶</a></p>
+          <p id="section-2-2.5.1"><span>[<a href="#RFC9256" class="cite xref">RFC9256</a>]</span> : Segment Routing Policy Architecture<a href="#section-2-2.5.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-2-2.6">
-          <p id="section-2-2.6.1"><span>[<a href="#RFC9491" class="cite xref">RFC9491</a>]</span> : "Integration of the Network Service Header (NSH) and Segment Routing for Service Function Chaining (SFC)"<a href="#section-2-2.6.1" class="pilcrow">¶</a></p>
+          <p id="section-2-2.6.1"><span>[<a href="#RFC9491" class="cite xref">RFC9491</a>]</span> : Integration of the Network Service Header (NSH) and Segment Routing for Service Function Chaining (SFC)<a href="#section-2-2.6.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-2-2.7">
-          <p id="section-2-2.7.1"><span>[<a href="#RFC9524" class="cite xref">RFC9524</a>]</span> : "Segment Routing Replication for Multipoint Service Delivery"<a href="#section-2-2.7.1" class="pilcrow">¶</a></p>
+          <p id="section-2-2.7.1"><span>[<a href="#RFC9524" class="cite xref">RFC9524</a>]</span> : Segment Routing Replication for Multipoint Service Delivery<a href="#section-2-2.7.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="section-2-3">We note that SRv6 is under active development and, as such, the above documents might not cover all protocols employed in an SRv6 deployment.<a href="#section-2-3" class="pilcrow">¶</a></p>
@@ -1413,7 +1412,7 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
       <h2 id="name-threat-terminology">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-threat-terminology" class="section-name selfRef">Threat Terminology</a>
       </h2>
-<p id="section-4-1">This section introduces the threat taxonomy that is used in this document. This taxonomy is based on terminology from the Internet threat model <span>[<a href="#RFC3552" class="cite xref">RFC3552</a>]</span>, as well as some concepts from <span>[<a href="#RFC9055" class="cite xref">RFC9055</a>]</span>, <span>[<a href="#RFC7384" class="cite xref">RFC7384</a>]</span>, <span>[<a href="#RFC7835" class="cite xref">RFC7835</a>]</span> and <span>[<a href="#RFC9416" class="cite xref">RFC9416</a>]</span>. Details regarding inter-domain segment routing (SR) are out of scope for this document.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">This section introduces the threat taxonomy that is used in this document. This taxonomy is based on terminology from the Internet threat model <span>[<a href="#RFC3552" class="cite xref">RFC3552</a>]</span>, as well as some concepts from <span>[<a href="#RFC9055" class="cite xref">RFC9055</a>]</span>, <span>[<a href="#RFC7384" class="cite xref">RFC7384</a>]</span>, <span>[<a href="#RFC7835" class="cite xref">RFC7835</a>]</span>, and <span>[<a href="#RFC9416" class="cite xref">RFC9416</a>]</span>. Details regarding inter-domain segment routing (SR) are out of scope for this document.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-4-2">
         <dt id="section-4-2.1">Internal vs. External:</dt>
         <dd style="margin-left: 1.5em" id="section-4-2.2">
@@ -1477,13 +1476,13 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
           <p id="section-5-3.2.1">Masquerade: various attacks that result in spoofing or masquerading are possible in IPv6 networks. However, these attacks are not specific to SRv6, and are therefore not within the scope of this document.<a href="#section-5-3.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-5-3.3">
-          <p id="section-5-3.3.1">System Integrity: attacks on SRv6 can manipulate the path and the processing that the packet is subject to, thus compromising the integrity of the system. Furthermore, an attack that compromises the control plane and/or the management plane is also a means of affecting the system integrity. Specific SRv6-targeted attack may cause one or more of the following outcomes:<a href="#section-5-3.3.1" class="pilcrow">¶</a></p>
+          <p id="section-5-3.3.1">System Integrity: attacks on SRv6 can manipulate the path and the processing that the packet is subject to, thus compromising the integrity of the system. Furthermore, an attack that compromises the control plane and/or the management plane is also a means of affecting the system integrity. A specific SRv6-targeted attack may cause one or more of the following outcomes:<a href="#section-5-3.3.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5-3.3.2.1">
               <p id="section-5-3.3.2.1.1">Avoiding a specific node or path: when an SRv6 policy is manipulated, specific nodes or paths may be bypassed, for example in order to avoid the billing service or circumvent access controls and security filters.<a href="#section-5-3.3.2.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-5-3.3.2.2">
-              <p id="section-5-3.3.2.2.1">Preferring a specific path: packets can be manipulated so that they are diverted to a specific path. This can result in allowing various unauthorized services such as traffic acceleration. Alternatively, an attacker can divert traffic to be forwarded through a specific node that the attacker has access to, which facilitates more complex on-path attacks such as passive listening, recon and various man-in-the-middle attacks.<a href="#section-5-3.3.2.2.1" class="pilcrow">¶</a></p>
+              <p id="section-5-3.3.2.2.1">Preferring a specific path: packets can be manipulated so that they are diverted to a specific path. This can result in allowing various unauthorized services such as traffic acceleration. Alternatively, an attacker can divert traffic to be forwarded through a specific node that the attacker has access to, which facilitates more complex on-path attacks such as passive listening, reconnaissance, and various man-in-the-middle attacks.<a href="#section-5-3.3.2.2.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-5-3.3.2.3">
               <p id="section-5-3.3.2.3.1">Causing header modifications: SRv6 network programming determines the SR endpoint behavior, including potential header modifications. Thus, one of the potential outcomes of an attack is unwanted header modifications.<a href="#section-5-3.3.2.3.1" class="pilcrow">¶</a></p>
@@ -1567,7 +1566,7 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
                 <p id="section-6.2.1.1-3.1.1">SID list: the SRH can be manipulated by adding or removing SIDs, or by modifying existing SIDs.<a href="#section-6.2.1.1-3.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-6.2.1.1-3.2">
-                <p id="section-6.2.1.1-3.2.1">IPv6 Destination Address (DA): when an SRH is present modifying the destination address (DA) of the IPv6 header affects the active segment. However, DA modification can affect the SR policy even in the absence of an SRH. One example is modifying a DA which is used as a Binding SID <span>[<a href="#RFC8402" class="cite xref">RFC8402</a>]</span>. Another example is modifying a DA which represents a compressed segment list <span>[<a href="#RFC9800" class="cite xref">RFC9800</a>]</span>. SRH compression allows encoding multiple compressed SIDs within a single 128-bit SID, and thus modifying the DA can affect one or more hops in the SR policy.<a href="#section-6.2.1.1-3.2.1" class="pilcrow">¶</a></p>
+                <p id="section-6.2.1.1-3.2.1">IPv6 Destination Address (DA): when an SRH is present, modifying the destination address (DA) of the IPv6 header affects the active segment. However, DA modification can affect the SR policy even in the absence of an SRH. One example is modifying a DA which is used as a Binding SID <span>[<a href="#RFC8402" class="cite xref">RFC8402</a>]</span>. Another example is modifying a DA which represents a compressed segment list <span>[<a href="#RFC9800" class="cite xref">RFC9800</a>]</span>. SRH compression allows encoding multiple compressed SIDs within a single 128-bit SID, and thus modifying the DA can affect one or more hops in the SR policy.<a href="#section-6.2.1.1-3.2.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-6.2.1.1-3.3">
                 <p id="section-6.2.1.1-3.3.1">Add/remove SRH: an attacker can insert or remove an SRH.<a href="#section-6.2.1.1-3.3.1" class="pilcrow">¶</a></p>
@@ -1576,7 +1575,7 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
                 <p id="section-6.2.1.1-3.4.1">SRH TLV: adding, removing or modifying TLV fields in the SRH.<a href="#section-6.2.1.1-3.4.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
-<p id="section-6.2.1.1-4">It is noted that the SR modification attack is performed by an on-path attacker who has access to packets in transit, and thus can implement these attacks directly. However, SR modification is relatively easy to implement and requires low processing resources by an attacker, while it facilitates more complex on-path attacks by redirecting the traffic to another node that the attacker has access to with more processing resources.<a href="#section-6.2.1.1-4" class="pilcrow">¶</a></p>
+<p id="section-6.2.1.1-4">The SR modification attack is performed by an on-path attacker who has access to packets in transit and can implement these attacks directly. SR modification is relatively easy to implement and requires low processing resources. However, it facilitates more complex on-path attacks by redirecting traffic to another node that the attacker has access to with more processing resources.<a href="#section-6.2.1.1-4" class="pilcrow">¶</a></p>
 <p id="section-6.2.1.1-5">An on-path internal attacker can also modify, insert, or delete other extension headers but these are outside the scope of this document.<a href="#section-6.2.1.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1723,7 +1722,7 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
 <p id="section-6.3.2.1-1">Generic threats applicable to routing protocols are discussed in <span>[<a href="#RFC4593" class="cite xref">RFC4593</a>]</span>. Similar to data plane attacks, the abstractions outlined in <a href="#abstractions" class="auto internal xref">Section 6.1</a> are also applicable to control plane traffic. These include passive eavesdropping, message injection, replay, deletion, and modification.<a href="#section-6.3.2.1-1" class="pilcrow">¶</a></p>
 <p id="section-6.3.2.1-2">Passive listening enables an attacker to intercept routing protocol messages as they traverse the network. This form of attack does not alter the content of the messages but allows the adversary to analyze routing information, infer network topology, and gather intelligence on routing behavior.<a href="#section-6.3.2.1-2" class="pilcrow">¶</a></p>
 <p id="section-6.3.2.1-3">Active attacks involve the unauthorized injection or alteration of control plane messages. Such attacks can compromise routing integrity by introducing falsified information, modifying legitimate routing data, or triggering incorrect forwarding decisions. These disruptions may result in denial-of-service conditions or traffic misdirection.<a href="#section-6.3.2.1-3" class="pilcrow">¶</a></p>
-<p id="section-6.3.2.1-4">For example, an attacker may advertise falsified SIDs to manipulate SR policies. Another example in the context of SRv6 is the advertisement of an incorrect Maximum SID Depth (MSD) value <span>[<a href="#RFC8476" class="cite xref">RFC8476</a>]</span>. If the advertised MSD is lower than the actual capability, path computation may fail to compute a viable path. Conversely, if the value is higher than supported, an attempt to instantiate a path that can't be supported by the head-end (the node performing the SID imposition) may occur.<a href="#section-6.3.2.1-4" class="pilcrow">¶</a></p>
+<p id="section-6.3.2.1-4">For example, an attacker may advertise falsified SIDs to manipulate SR policies. Another example in the context of SRv6 is the advertisement of an incorrect Maximum SID Depth (MSD) value <span>[<a href="#RFC8476" class="cite xref">RFC8476</a>]</span>. If the advertised MSD is lower than the actual capability, path computation may fail to compute a viable path. Conversely, if the value is higher than supported, an attempt to instantiate a path that cannot be supported by the head-end (the node performing the SID imposition) may occur.<a href="#section-6.3.2.1-4" class="pilcrow">¶</a></p>
 <p id="section-6.3.2.1-5">An additional case could be the manipulation of backup paths <span>[<a href="#RFC8355" class="cite xref">RFC8355</a>]</span>, where the attacker could alter the SIDs defining such backup path then directing traffic over suboptimal or compromised paths, enabling eavesdropping, traffic analysis, or selective denial of service, compromising the service integrity and confidentiality if traffic is diverted to unauthorized nodes or paths.<a href="#section-6.3.2.1-5" class="pilcrow">¶</a></p>
 <p id="section-6.3.2.1-6">Finally, in situations of interworking with other domains, as for BGP Egress Peer Engineering (BGP-EPE) <span>[<a href="#RFC9087" class="cite xref">RFC9087</a>]</span> an attacker injecting malicious BGP-EPE policies may steer traffic through unauthorized peers or paths. This facilitates interception, traffic analysis, or denial of service. Attackers gaining access to the BGP-EPE controller can manipulate SRv6 route selection and segment lists, compromising network integrity and confidentiality.<a href="#section-6.3.2.1-6" class="pilcrow">¶</a></p>
 </section>
@@ -1930,7 +1929,7 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
 </pre><a href="#section-7.1.1-2" class="pilcrow">¶</a>
 </div>
 <p id="section-7.1.1-3">Following the direction of <span>[<a href="#RFC8402" class="cite xref">RFC8402</a>]</span>, the current document assumes that SRv6 is a trusted domain and that the traffic is filtered at the domain boundaries. Traffic <span class="bcp14">MUST</span> be filtered at the domain boundaries. Thus, most of the attacks described in this document are limited to within the domain (i.e., internal attackers).<a href="#section-7.1.1-3" class="pilcrow">¶</a></p>
-<p id="section-7.1.1-4">Such an approach has been commonly referred to as the concept of "fail-open", a state of which the attributes are frequently described as containing inherently more risk than fail-closed methodologies. The reliance of perfectly crafted filters on on all edges of the trusted domain pose a demonstrable risk of inbound or outbound leaks if the filters are removed or adjusted in an erroneous manner. It is also important to note that some filtering implementations have limits on the size, complexity, or protocol support that can be applied, which may prevent the filter adjustments or creation required to properly secure the trusted domain for a new protocol such as SRv6.<a href="#section-7.1.1-4" class="pilcrow">¶</a></p>
+<p id="section-7.1.1-4">Such an approach is commonly referred to as "fail-open", which inherently contains more risk than fail-closed methodologies. Relying on perfectly crafted filters on all edges of the trusted domain poses a demonstrable risk of inbound or outbound leaks if the filters are removed or adjusted erroneously. It is also important to note that some filtering implementations have limits on the size, complexity, or protocol support that can be applied, which may prevent the filter adjustments or creation required to properly secure the trusted domain for a new protocol such as SRv6.<a href="#section-7.1.1-4" class="pilcrow">¶</a></p>
 <p id="section-7.1.1-5">Practically speaking, this means successfully enforcing a "Trusted Domain" may be operationally difficult and error-prone in practice, and that attacks that are expected to be unfeasible from outside the trusted domain may actually become feasible when any of the involved systems fails to enforce the filtering policy that is required to define the Trusted Domain.<a href="#section-7.1.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1957,7 +1956,7 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
 - The prefix defined in <span>[<a href="#RFC9602" class="cite xref">RFC9602</a>]</span>
 - ULA addresses
 - GUA addresses<a href="#section-7.1.3-2" class="pilcrow">¶</a></p>
-<p id="section-7.1.3-3">As stated in the security considerations section of <span>[<a href="#RFC9602" class="cite xref">RFC9602</a>]</span>, the usage of the prefix allocated by <span>[<a href="#RFC9602" class="cite xref">RFC9602</a>]</span> improves security by making it more simple to filter traffic at the edge of the SR Domains. It is important to note that <span>[<a href="#RFC9602" class="cite xref">RFC9602</a>]</span> allocates and makes a dedicated prefix available for SRv6 SIDs for use inside of an trusted SRv6 domain. Use of other prefixes for this purpose will result in further security considerations such as potential SID pool route leakage or more complicated filtering requirements, increasing the liklihood of human or configuration error.<a href="#section-7.1.3-3" class="pilcrow">¶</a></p>
+<p id="section-7.1.3-3">As stated in the security considerations section of <span>[<a href="#RFC9602" class="cite xref">RFC9602</a>]</span>, the usage of the prefix allocated by <span>[<a href="#RFC9602" class="cite xref">RFC9602</a>]</span> improves security by making it more simple to filter traffic at the edge of the SR Domains. It is important to note that <span>[<a href="#RFC9602" class="cite xref">RFC9602</a>]</span> allocates and makes a dedicated prefix available for SRv6 SIDs for use inside a trusted SRv6 domain. Use of other prefixes for this purpose will result in further security considerations such as potential SID pool route leakage or more complicated filtering requirements, increasing the likelihood of human or configuration error.<a href="#section-7.1.3-3" class="pilcrow">¶</a></p>
 <p id="section-7.1.3-4">Many operators reserve a /64 block for all loopback addresses and allocate /128 for each loopback interface. This simplifies the filtering of permitted source addresses.<a href="#section-7.1.3-4" class="pilcrow">¶</a></p>
 <p id="section-7.1.3-5">Failure to implement address range filtering at ingress nodes is mitigated with filtering at SRv6 enabled nodes. Failure to implement both filtering mechanisms could result in a "fail open" scenario, where some attacks by internal attackers described in this document may be launched by external attackers.<a href="#section-7.1.3-5" class="pilcrow">¶</a></p>
 <p id="section-7.1.3-6">Filtering on prefixes has been shown to be useful, specifically <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span>'s description of packet filtering. There are no known limitations with filtering on infrastructure addresses, and <span>[<a href="#RFC9099" class="cite xref">RFC9099</a>]</span> expands on the concept with control plane filtering.<a href="#section-7.1.3-6" class="pilcrow">¶</a></p>
@@ -1970,7 +1969,16 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
         <h3 id="name-encapsulation-of-packets">
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-encapsulation-of-packets" class="section-name selfRef">Encapsulation of Packets</a>
         </h3>
-<p id="section-7.2-1">Packets steered in an SR domain are often contained in an IPv6 encapsulation. Encapsulation of packets at the SR ingress node and decapsulation at the SR egress node followed by the forwarding of the inner packet outside the SR domain with no lookup on the inner IP packet mitigates the ability of external attackers to attack the domain, and allows for encapsulation of both IPv4 and IPv6 packets. Additionally, practices outlined in Section 5 of <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span> should be followed to ensure exclusivity of use for any prefix configured for use within the given trusted domain.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
+<p id="section-7.2-1">Packets steered within an SR domain are typically encapsulated using IPv6. Encapsulation at the SR ingress node, followed by decapsulation at the SR egress node and forwarding of the inner packet without lookup, provides two key benefits:<a href="#section-7.2-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-7.2-2.1">
+            <p id="section-7.2-2.1.1">Mitigates external attacker capabilities against the domain<a href="#section-7.2-2.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-7.2-2.2">
+            <p id="section-7.2-2.2.1">Supports encapsulation of both IPv4 and IPv6 packets<a href="#section-7.2-2.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-7.2-3">Practices outlined in Section 5 of <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span> should be followed to ensure exclusivity of use for any prefix configured within the trusted domain.<a href="#section-7.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="hmac">
@@ -1986,7 +1994,7 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
             <p id="section-7.3-4.1.1">The HMAC TLV is <span class="bcp14">OPTIONAL</span>.<a href="#section-7.3-4.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-7.3-4.2">
-            <p id="section-7.3-4.2.1">While it is presumed that unique keys will be employed by each participating node, in scenarios where the network resorts to manual configuration of pre-shared keys, the same key might be reused by multiple nodes of an SRv6 domain as an incorrect shortcut to keeping the problem of pre-shared key configuration manageable. This key should not be the same key for different trusted domains, including those existing on the same node.<a href="#section-7.3-4.2.1" class="pilcrow">¶</a></p>
+            <p id="section-7.3-4.2.1">While it is presumed that unique keys will be employed by each participating node, manual configuration of pre-shared keys may lead to key reuse. In such scenarios, the same key might be reused by multiple nodes of an SRv6 domain as an incorrect shortcut to keep pre-shared key configuration manageable. This key should not be the same key for different trusted domains, including those existing on the same node.<a href="#section-7.3-4.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-7.3-4.3">
             <p id="section-7.3-4.3.1">When the HMAC is used there is a distinction between an attacker who becomes internal by having physical access, for example by plugging into an active port of a network device, and an attacker who has full access to a legitimate network node, including for example encryption keys if the network is encrypted. The latter type of attacker is an internal attacker who can perform any of the attacks that were described in the previous section as relevant to internal attackers.<a href="#section-7.3-4.3.1" class="pilcrow">¶</a></p>
@@ -1995,7 +2003,7 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
             <p id="section-7.3-4.4.1">For the lifetime of the pre-shared key validity, an internal attacker who does not have access to the pre-shared key can capture legitimate packets, and later replay the SRH and HMAC from these recorded packets. This allows the attacker to insert the previously recorded SRH and HMAC into a newly injected packet. An on-path internal attacker can also replace the SRH of an in-transit packet with a different SRH that was previously captured.<a href="#section-7.3-4.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-7.3-4.5">
-            <p id="section-7.3-4.5.1">In cases where this an SRH carries policy sementics, care should be taken to understand the implications of malformed SRH, Invalid TLVs, and authentification failures.<a href="#section-7.3-4.5.1" class="pilcrow">¶</a></p>
+            <p id="section-7.3-4.5.1">In cases where an SRH carries policy semantics, care should be taken to understand the implications of malformed SRH, invalid TLVs, and authentication failures.<a href="#section-7.3-4.5.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-7.3-5">These considerations limit the extent to which HMAC TLV can be relied upon as a security mechanism that could readily mitigate threats associated with spoofing and tampering protection for the IPv6 SRH.<a href="#section-7.3-5" class="pilcrow">¶</a></p>
@@ -2032,15 +2040,15 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
       <h2 id="name-implications-on-existing-eq">
 <a href="#section-8" class="section-number selfRef">8. </a><a href="#name-implications-on-existing-eq" class="section-name selfRef">Implications on Existing Equipment</a>
       </h2>
-<div id="middlebox-filtering-issues">
+<div id="middle-box-filtering-issues">
 <section id="section-8.1">
-        <h3 id="name-middlebox-filtering-issues">
-<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-middlebox-filtering-issues" class="section-name selfRef">Middlebox Filtering Issues</a>
+        <h3 id="name-middle-box-filtering-issues">
+<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-middle-box-filtering-issues" class="section-name selfRef">Middle Box Filtering Issues</a>
         </h3>
 <p id="section-8.1-1">When an SRv6 packet is forwarded in the SRv6 domain, its destination address changes constantly and the real destination address is hidden. Security devices on SRv6 network may not learn the real destination address and fail to perform access control on some SRv6 traffic.<a href="#section-8.1-1" class="pilcrow">¶</a></p>
 <p id="section-8.1-2">The security devices on SRv6 networks need to take care of SRv6 packets. However, SRv6 packets are often encapsulated by an SR ingress device with an IPv6 encapsulation that has the loopback address of the SR ingress device as a source address. As a result, the address information of SR packets may be asymmetric, resulting in improper traffic filter problems, which affects the effectiveness of security devices.
 For example, along the forwarding path in SRv6 network, the SR-aware firewall will check the association relationships of the bidirectional VPN traffic packets. It is therefore able to retrieve the final destination of an SRv6 packet from the last entry in the SRH. When the &lt;source, destination&gt; tuple of the packet from PE1 (Provider Edge 1) to PE2 is &lt;PE1-IP-ADDR, PE2-VPN-SID&gt;, and the other direction is &lt;PE2-IP-ADDR, PE1-VPN-SID&gt;, the source address and destination address of the forward and backward traffic are regarded as different flows. Thus, legitimate traffic may be blocked by the firewall.<a href="#section-8.1-2" class="pilcrow">¶</a></p>
-<p id="section-8.1-3">Forwarding SRv6 traffic through devices that are not SRv6-aware might in some cases lead to unpredictable behavior. Because of the existence of the SRH, and the additional headers, security appliances, monitoring systems, and middle boxes could react in different ways if they do not incorporate support for the supporting SRv6 mechanisms, such as the IPv6 Segment Routing Header (SRH) <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span>. Additionally, implementation limitations in the processing of IPv6 packets with extension headers may result in SRv6 packets being dropped <span>[<a href="#RFC7872" class="cite xref">RFC7872</a>]</span>,<span>[<a href="#RFC9098" class="cite xref">RFC9098</a>]</span>.<a href="#section-8.1-3" class="pilcrow">¶</a></p>
+<p id="section-8.1-3">Forwarding SRv6 traffic through devices that are not SRv6-aware might in some cases lead to unpredictable behavior. Security appliances, monitoring systems, and middle boxes could react in different ways if they lack support for SRv6 mechanisms, such as the Segment Routing Header (SRH) <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span>. Additionally, implementation limitations in the processing of IPv6 packets with extension headers may result in SRv6 packets being dropped <span>[<a href="#RFC7872" class="cite xref">RFC7872</a>]</span>,<span>[<a href="#RFC9098" class="cite xref">RFC9098</a>]</span>.<a href="#section-8.1-3" class="pilcrow">¶</a></p>
 <p id="section-8.1-4">Upper-layer checksum calculations rely on a pseudo-header that includes the IPv6 Destination Address. <span>[<a href="#RFC8200" class="cite xref">RFC8200</a>]</span> specifies that when the Routing header is present the upper-layer checksum is computed by the originating node based on the IPv6 address of the last element of the Routing header.  When compressed segment lists <span>[<a href="#RFC9800" class="cite xref">RFC9800</a>]</span> are used, the last element of the Routing header may be different than the Destination Address as received by the final destination. Furthermore, compressed segment lists can be used in the Destination Address without the presence of a Routing header, and in this case the IPv6 Destination address can be modified along the path. As defined in <span>[<a href="#RFC9800" class="cite xref">RFC9800</a>]</span>, the Destination Address used in the upper-layer checksum calculation is the address as expected to be received by the ultimate destination. As a result, some existing middleboxes which verify the upper-layer checksum might miscalculate the checksum.<a href="#section-8.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
