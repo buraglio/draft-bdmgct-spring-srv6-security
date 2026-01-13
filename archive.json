@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-12-04T01:43:03.374978+00:00",
+  "timestamp": "2026-01-13T01:46:18.814201+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -2067,6 +2067,34 @@
       "mergedBy": "buraglio",
       "mergeCommit": {
         "oid": "31b4868f6bb067966802b1fdbe775c1fb10f0f58"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 62,
+      "id": "PR_kwDOKVF77M68xCpa",
+      "title": "Nb 10 updates",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/62",
+      "state": "MERGED",
+      "author": "buraglio",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "updates for readibility, change status",
+      "createdAt": "2026-01-12T18:59:04Z",
+      "updatedAt": "2026-01-12T19:15:55Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "31b4868f6bb067966802b1fdbe775c1fb10f0f58",
+      "headRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "headRefName": "nb-10-updates",
+      "headRefOid": "bc3262e3576df3b38c426aff3a74d279ebc42b68",
+      "closedAt": "2026-01-12T19:15:55Z",
+      "mergedAt": "2026-01-12T19:15:55Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "b596d1ecfa90cf9078ab58b310030faa71565ec5"
       },
       "comments": [],
       "reviews": []
