@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-01-13T01:46:18.814201+00:00",
+  "timestamp": "2026-01-29T02:05:59.364115+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -2096,6 +2096,35 @@
       "mergeCommit": {
         "oid": "b596d1ecfa90cf9078ab58b310030faa71565ec5"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 63,
+      "id": "PR_kwDOKVF77M6__MsQ",
+      "title": "Add RFC 9800 to normative, scope",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/63",
+      "state": "OPEN",
+      "author": "buraglio",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "talmi",
+        "luismcontreras"
+      ],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-01-28T23:49:48Z",
+      "updatedAt": "2026-01-28T23:56:40Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "b596d1ecfa90cf9078ab58b310030faa71565ec5",
+      "headRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "headRefName": "ndb-11-update",
+      "headRefOid": "c045ae6622965c7069edbf5af1e3bfc7527aa69e",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
