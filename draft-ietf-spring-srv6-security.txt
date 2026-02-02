@@ -5,14 +5,14 @@
 Source Packet Routing in Networking                          N. Buraglio
 Internet-Draft                                   Energy Sciences Network
 Intended status: Informational                                T. Mizrahi
-Expires: 16 July 2026                                             Huawei
+Expires: 6 August 2026                                            Huawei
                                                                  T. Tong
                                                             China Unicom
                                                          L. M. Contreras
                                                               Telefonica
                                                                  F. Gont
                                                             SI6 Networks
-                                                         12 January 2026
+                                                         2 February 2026
 
 
               Segment Routing IPv6 Security Considerations
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 July 2026.
+   This Internet-Draft will expire on 6 August 2026.
 
 Copyright Notice
 
@@ -179,6 +179,8 @@ Table of Contents
 
    *  [RFC9524] : Segment Routing Replication for Multipoint Service
       Delivery
+
+   *  [RFC9800] : Compressed SRv6 Segment List Encoding
 
    We note that SRv6 is under active development and, as such, the above
    documents might not cover all protocols employed in an SRv6
@@ -1137,6 +1139,11 @@ Table of Contents
               Service Delivery", RFC 9524, DOI 10.17487/RFC9524,
               February 2024, <https://www.rfc-editor.org/rfc/rfc9524>.
 
+   [RFC9800]  Cheng, W., Ed., Filsfils, C., Li, Z., Decraene, B., and F.
+              Clad, Ed., "Compressed SRv6 Segment List Encoding",
+              RFC 9800, DOI 10.17487/RFC9800, June 2025,
+              <https://www.rfc-editor.org/rfc/rfc9800>.
+
 11.2.  Informative References
 
    [ANSI-Sec] "Operations, Administration, Maintenance, and Provisioning
@@ -1330,11 +1337,6 @@ Table of Contents
               Identifiers in the IPv6 Addressing Architecture",
               RFC 9602, DOI 10.17487/RFC9602, October 2024,
               <https://www.rfc-editor.org/rfc/rfc9602>.
-
-   [RFC9800]  Cheng, W., Ed., Filsfils, C., Li, Z., Decraene, B., and F.
-              Clad, Ed., "Compressed SRv6 Segment List Encoding",
-              RFC 9800, DOI 10.17487/RFC9800, June 2025,
-              <https://www.rfc-editor.org/rfc/rfc9800>.
 
 Acknowledgments
 
