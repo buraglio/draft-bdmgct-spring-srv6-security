@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-19T02:24:17.825530+00:00",
+  "timestamp": "2026-03-22T02:24:28.135762+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -2158,13 +2158,13 @@
       "labels": [],
       "body": "Comments based on SECDIR review:\r\nhttps://datatracker.ietf.org/doc/review-ietf-spring-srv6-security-11-secdir-early-huitema-2026-02-14/\r\n\r\nMain changes:\r\n- Passive Listening: added the text \"Passive eavesdropping can also impact end\u2011user privacy. Observable SRH fields (e.g., the Segment List and SRH TLVs) may enable correlation of flows and tracking of users, endpoints, or services.\"\r\n- Address Range Filtering: added the text \"This practice helps prevent the use of SRH and SID information to track individual users or reveal communication patterns outside the trusted domain.\"",
       "createdAt": "2026-03-18T13:29:37Z",
-      "updatedAt": "2026-03-18T13:29:37Z",
+      "updatedAt": "2026-03-19T07:03:49Z",
       "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
       "baseRefName": "main",
       "baseRefOid": "839c9f5df7582c8f8a1ef00e067d1fee15d55284",
       "headRepository": "talmi/draft-bdmgct-spring-srv6-security",
       "headRefName": "privacy-issues",
-      "headRefOid": "de95b05b790fd4a5784504d3ecae682b1f44b547",
+      "headRefOid": "b2a5016b11343b46a716acd6983818613703ee3e",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
