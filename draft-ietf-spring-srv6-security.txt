@@ -1087,12 +1087,15 @@ Table of Contents
 
 8.2.  Limited capability hardware
 
-   In some cases, access control list capabilities are a resource shared
-   with other features across a given hardware platform.  Filtering
-   capabilities should be considered along with other hardware reliant
-   functions such as VLAN scale, route table size, MAC address table
-   size, etc.  Filtering both at the control and data plane may or may
-   not require shared resources.  For example, some platforms may
+   In some cases, access-control list (ACL) capacity is a scarce and
+   potentially shared hardware resource (e.g., TCAM/ACL tables).
+   Depending on the scale of the network, SRH filtering can consume a
+   non-trivial portion of these resources.  Since filtering resources
+   can be shared with other features across a given hardware platform,
+   filtering capabilities should be considered along with other hardware
+   reliant functions such as VLAN scale, route table size, MAC address
+   table size, etc.  Filtering both at the control and data plane may or
+   may not require shared resources.  For example, some platforms may
    require allocating resources from route table size in order to
    accommodate larger numbers of access lists.  Hardware and software
    configurations should be considered when designing the filtering
