@@ -89,7 +89,7 @@ Table of Contents
      6.2.  Data Plane Attacks
        6.2.1.  Modification Attack
        6.2.2.  Passive Listening
-       6.2.3.  Packet Insertion
+       6.2.3.  Packet Insertion and Replaying
        6.2.4.  Other Attacks
      6.3.  Control Plane Attacks
        6.3.1.  Overview
@@ -247,7 +247,7 @@ Table of Contents
    control plane, as it is located along the path between the PCECC and
    SR endpoint 1.
 
-  1.on-path   2.on-path   3.mgmt.  PCE as a Central  4.off-path 5.off-path
+  1.on-path   2.on-path   3.cont.  PCE as a Central  4.off-path 5.off-path
   external    internal    plane    Controller        internal   external
   attacker    attacker    on-path  (PCECC)           attacker   attacker
        |            |           |        |            |          |
@@ -281,22 +281,21 @@ Table of Contents
    forwarding of IPv6 packets via predetermined SR policies, which
    determine the paths and the processing of these packets.  An attack
    on SRv6 may cause packets to traverse arbitrary paths and to be
-   subject to arbitrary processing by SR endpoints within an SR domain.
-   This may allow an attacker to perform a number of attacks on the
-   victim networks and hosts that would be mostly unfeasible for a non-
-   SRv6 environment.
+   subject to arbitrary processing by SR endpoints and transit routers
+   within an SR domain.  This may allow an attacker to perform a number
+   of attacks on the victim networks and hosts that would be mostly
+   unfeasible for a non-SRv6 environment.
 
-   The threat model in [ANSI-Sec] classifies threats according to their
+   The threat model in [ITU-Sec] classifies threats according to their
    potential effect, defining six categories.  For each of these
    categories we briefly discuss its applicability to SRv6 attacks.
 
-   *  Unauthorized Access: an attack that results in unauthorized access
-      might be achieved by having an attacker leverage SRv6 to
-      circumvent security controls as a result of security devices that
-      are unable to enforce security policies for SRv6.  For example,
-      this can occur if packets are directed through paths where packet
-      filtering policies are not enforced, or if some security policies
-      are not enforced in the presence of IPv6 Extension Headers.
+   *  Unauthorized Access: an attacker may leverage SRv6 to circumvent
+      security controls when security devices fail to enforce SRv6
+      policies.  For example, this can occur if packets are directed
+      through paths where packet filtering policies are not enforced, or
+      if some security policies are not enforced in the presence of IPv6
+      Extension Headers.
 
    *  Masquerade: various attacks that result in spoofing or
       masquerading are possible in IPv6 networks.  However, these
@@ -370,8 +369,12 @@ Table of Contents
          to be forwarded to a point in the network where it can no
          longer be forwarded, causing the packet to be discarded.
 
-   Section 6 discusses specific implementations of these attacks, and
-   possible mitigations are discussed in Section 7.
+   Note that the categories in this section are effects-based and
+   intentionally not mutually exclusive; for example, "circumvent access
+   controls and security filters" also falls under Unauthorized Access,
+   but is listed here to emphasize the system integrity impact of path/
+   policy manipulation.  Section 6 discusses specific implementations of
+   these attacks, and possible mitigations are discussed in Section 7.
 
 6.  Attacks
 
@@ -505,11 +508,7 @@ Table of Contents
    attacker to gather information about the network which in turn can be
    used to enable other attacks.
 
-   Passive eavesdropping can also impact end-user privacy.  Observable
-   SRH fields (e.g., the Segment List and SRH TLVs) may enable
-   correlation of flows and tracking of users, endpoints, or services.
-
-6.2.3.  Packet Insertion
+6.2.3.  Packet Insertion and Replaying
 
 6.2.3.1.  Overview
 
@@ -798,13 +797,13 @@ Table of Contents
   |             |  system          |                                   |
   +-------------+------------------+-----------------------------------+
 
-                         Figure 2: Attack Summary
+                       Figure 2: Summary of Attacks
 
 7.  Mitigation Methods
 
-   This section presents methods that can be used to mitigate the
-   threats and issues that were presented in previous sections.  This
-   section does not introduce new security solutions or protocols.
+   This section presents methods for mitigating the threats and issues
+   that were presented in previous sections.  This section does not
+   introduce new security solutions or protocols.
 
 7.1.  Trusted Domains and Filtering
 
@@ -1167,12 +1166,6 @@ Table of Contents
 
 11.2.  Informative References
 
-   [ANSI-Sec] "Operations, Administration, Maintenance, and Provisioning
-              Security Requirements for the Public Telecommunications
-              Network: A Baseline of Security Requirements for the
-              Management Plane", 2003, <https://www.ieee802.org/1/ecsg-
-              linksec/meetings/July03/3m150075.pdf>.
-
    [CanSecWest2007]
               "IPv6 Routing Header Security", 2007, <https://airbus-
               seclab.github.io/ipv6/IPv6_RH_security-csw07.pdf>.
@@ -1207,6 +1200,9 @@ Table of Contents
               Internet-Draft, draft-ietf-pce-segment-routing-policy-cp-
               27, 4 April 2025, <https://datatracker.ietf.org/doc/html/
               draft-ietf-pce-segment-routing-policy-cp-27>.
+
+   [ITU-Sec]  "ITU-T M.3016.1, Security for the management plane:
+              Security requirements", 2005.
 
    [RFC3552]  Rescorla, E. and B. Korver, "Guidelines for Writing RFC
               Text on Security Considerations", BCP 72, RFC 3552,
