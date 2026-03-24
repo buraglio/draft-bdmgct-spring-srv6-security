@@ -5,14 +5,14 @@
 Source Packet Routing in Networking                          N. Buraglio
 Internet-Draft                                   Energy Sciences Network
 Intended status: Informational                                T. Mizrahi
-Expires: 6 August 2026                                            Huawei
+Expires: 25 September 2026                                        Huawei
                                                                  T. Tong
                                                             China Unicom
                                                          L. M. Contreras
                                                               Telefonica
                                                                  F. Gont
                                                             SI6 Networks
-                                                         2 February 2026
+                                                           24 March 2026
 
 
               Segment Routing IPv6 Security Considerations
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 August 2026.
+   This Internet-Draft will expire on 25 September 2026.
 
 Copyright Notice
 
@@ -505,6 +505,10 @@ Table of Contents
    attacker to gather information about the network which in turn can be
    used to enable other attacks.
 
+   Passive eavesdropping can also impact end-user privacy.  Observable
+   SRH fields (e.g., the Segment List and SRH TLVs) may enable
+   correlation of flows and tracking of users, endpoints, or services.
+
 6.2.3.  Packet Insertion
 
 6.2.3.1.  Overview
@@ -843,10 +847,13 @@ Table of Contents
    generally, [RFC9288] provides recommendations on the filtering of
    IPv6 packets containing IPv6 extension headers at transit routers.
    However, filtering based on the presence of an SRH is not necessarily
-   useful for two reasons: 1.  The SRH is optional for SID processing as
-   described in [RFC8754] section 3.1 and 4.1. 2.  A packet containing
-   an SRH may not be destined to the SR domain, it may be simply
-   transiting the domain.
+   useful for two reasons:
+
+   1.  The SRH is optional for SID processing as described in [RFC8754]
+       section 3.1 and 4.1.
+
+   2.  A packet containing an SRH may not be destined to the SR domain,
+       it may be simply transiting the domain.
 
    For these reasons SRH filtering is not necessarily a useful method of
    mitigation.
@@ -857,17 +864,28 @@ Table of Contents
    interface of the SR ingress node of the SRv6 domain and at all nodes
    implementing SRv6 SIDs within the SR domain in order to mitigate
    external attacks.  Section 5.1 of [RFC8754] describes this in detail
-   and a summary is presented here: 1.  At ingress nodes, any packet
-   entering the SR domain and destined to a SID within the SR domain is
-   dropped. 2.  At every SRv6 enabled node, any packet destined to a SID
-   instantiated at the node from a source address outside the SR domain
-   is dropped.
+   and a summary is presented here:
+
+   1.  At ingress nodes, any packet entering the SR domain and destined
+       to a SID within the SR domain is dropped.
+
+   2.  At every SRv6 enabled node, any packet destined to a SID
+       instantiated at the node from a source address outside the SR
+       domain is dropped.
 
    In order to apply such a filtering mechanism the SR domain needs to
    have an infrastructure address range for SIDs and an infrastructure
    address range for source addresses that can be detected and enforced.
-   Some examples of an infrastructure address range for SIDs are: - The
-   prefix defined in [RFC9602] - ULA addresses - GUA addresses
+   This practice helps prevent the use of SRH and SID information to
+   track individual users or reveal communication patterns outside the
+   trusted domain.  Some examples of an infrastructure address range for
+   SIDs are:
+
+   *  The prefix defined in [RFC9602]
+
+   *  ULA addresses
+
+   *  GUA addresses
 
    As stated in the security considerations section of [RFC9602], the
    usage of the prefix allocated by [RFC9602] improves security by
@@ -1167,16 +1185,16 @@ Table of Contents
    [I-D.ietf-lsr-isis-srv6-yang]
               Hu, Z., Ye, D., Qu, Y., Geng, X., and Q. Ma, "YANG Data
               Model for IS-IS SRv6", Work in Progress, Internet-Draft,
-              draft-ietf-lsr-isis-srv6-yang-08, 2 September 2025,
+              draft-ietf-lsr-isis-srv6-yang-09, 26 February 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-lsr-
-              isis-srv6-yang-08>.
+              isis-srv6-yang-09>.
 
    [I-D.ietf-lsr-ospf-srv6-yang]
               Qu, Y., Hu, Z., Geng, X., Raza, S. K., and A. Lindem,
               "YANG Data Model for OSPF SRv6", Work in Progress,
-              Internet-Draft, draft-ietf-lsr-ospf-srv6-yang-08, 2
-              September 2025, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-lsr-ospf-srv6-yang-08>.
+              Internet-Draft, draft-ietf-lsr-ospf-srv6-yang-09, 26
+              February 2026, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-lsr-ospf-srv6-yang-09>.
 
    [I-D.ietf-pce-segment-routing-policy-cp]
               Koldychev, M., Sivabalan, S., Sidor, S., Barth, C., Peng,

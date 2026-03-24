@@ -13,22 +13,22 @@
 <meta content="
        SRv6 is a traffic engineering, encapsulation and steering mechanism utilizing IPv6 addresses to identify segments in a pre-defined policy. This document discusses security considerations in SRv6 networks, including the potential threats and the possible mitigation methods. The document does not define any new security protocols or extensions to existing protocols. 
     " name="description">
-<meta content="xml2rfc 3.31.0" name="generator">
+<meta content="xml2rfc 3.32.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ietf-spring-srv6-security-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.31.0
+  xml2rfc 3.32.0
     Python 3.12.12
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.0.2
-    platformdirs 4.5.1
+    platformdirs 4.9.4
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.32.5
-    wcwidth 0.3.0
+    wcwidth 0.6.0
 -->
 <link href="draft-ietf-spring-srv6-security.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -169,7 +169,7 @@
   font-weight: 400;
   font-display: swap;
   src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin-ext.woff2') format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 @font-face {
   font-family: 'Oxygen Mono';
@@ -177,7 +177,8 @@
   font-weight: 400;
   font-display: swap;
   src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 }
 
 @font-face {
@@ -1048,11 +1049,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">Segment Routing IPv6 Security Considerat</td>
-<td class="right">February 2026</td>
+<td class="right">March 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Buraglio, et al.</td>
-<td class="center">Expires 6 August 2026</td>
+<td class="center">Expires 25 September 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1065,12 +1066,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-spring-srv6-security-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-02-02" class="published">2 February 2026</time>
+<time datetime="2026-03-24" class="published">24 March 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-08-06">6 August 2026</time></dd>
+<dd class="expires"><time datetime="2026-09-25">25 September 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1136,7 +1137,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 6 August 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 25 September 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1653,6 +1654,7 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
 <a href="#section-6.2.2.3" class="section-number selfRef">6.2.2.3. </a><a href="#name-effect-3" class="section-name selfRef">Effect</a>
             </h5>
 <p id="section-6.2.2.3-1">While the information collected in a reconnaissance attack does not compromise the confidentiality of the user data, it allows an attacker to gather information about the network which in turn can be used to enable other attacks.<a href="#section-6.2.2.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.2.2.3-2">Passive eavesdropping can also impact end‑user privacy. Observable SRH fields (e.g., the Segment List and SRH TLVs) may enable correlation of flows and tracking of users, endpoints, or services.<a href="#section-6.2.2.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1942,10 +1944,16 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
           <h4 id="name-srh-filtering">
 <a href="#section-7.1.2" class="section-number selfRef">7.1.2. </a><a href="#name-srh-filtering" class="section-name selfRef">SRH Filtering</a>
           </h4>
-<p id="section-7.1.2-1">Filtering can be performed based on the presence of an SRH. More generally, <span>[<a href="#RFC9288" class="cite xref">RFC9288</a>]</span> provides recommendations on the filtering of IPv6 packets containing IPv6 extension headers at transit routers. However, filtering based on the presence of an SRH is not necessarily useful for two reasons:
-1. The SRH is optional for SID processing as described in <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span> section 3.1 and 4.1.
-2. A packet containing an SRH may not be destined to the SR domain, it may be simply transiting the domain.<a href="#section-7.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-7.1.2-2">For these reasons SRH filtering is not necessarily a useful method of mitigation.<a href="#section-7.1.2-2" class="pilcrow">¶</a></p>
+<p id="section-7.1.2-1">Filtering can be performed based on the presence of an SRH. More generally, <span>[<a href="#RFC9288" class="cite xref">RFC9288</a>]</span> provides recommendations on the filtering of IPv6 packets containing IPv6 extension headers at transit routers. However, filtering based on the presence of an SRH is not necessarily useful for two reasons:<a href="#section-7.1.2-1" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-7.1.2-2">
+<li id="section-7.1.2-2.1">
+              <p id="section-7.1.2-2.1.1">The SRH is optional for SID processing as described in <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span> section 3.1 and 4.1.<a href="#section-7.1.2-2.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li id="section-7.1.2-2.2">
+              <p id="section-7.1.2-2.2.1">A packet containing an SRH may not be destined to the SR domain, it may be simply transiting the domain.<a href="#section-7.1.2-2.2.1" class="pilcrow">¶</a></p>
+</li>
+          </ol>
+<p id="section-7.1.2-3">For these reasons SRH filtering is not necessarily a useful method of mitigation.<a href="#section-7.1.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="address-range-filtering">
@@ -1953,17 +1961,31 @@ appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">�
           <h4 id="name-address-range-filtering">
 <a href="#section-7.1.3" class="section-number selfRef">7.1.3. </a><a href="#name-address-range-filtering" class="section-name selfRef">Address Range Filtering</a>
           </h4>
-<p id="section-7.1.3-1">The IPv6 destination address can be filtered at the external interface of the SR ingress node of the SRv6 domain and at all nodes implementing SRv6 SIDs within the SR domain in order to mitigate external attacks. Section 5.1 of <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span> describes this in detail and a summary is presented here:
-1. At ingress nodes, any packet entering the SR domain and destined to a SID within the SR domain is dropped.
-2. At every SRv6 enabled node, any packet destined to a SID instantiated at the node from a source address outside the SR domain is dropped.<a href="#section-7.1.3-1" class="pilcrow">¶</a></p>
-<p id="section-7.1.3-2">In order to apply such a filtering mechanism the SR domain needs to have an infrastructure address range for SIDs and an infrastructure address range for source addresses that can be detected and enforced. Some examples of an infrastructure address range for SIDs are:
-- The prefix defined in <span>[<a href="#RFC9602" class="cite xref">RFC9602</a>]</span>
-- ULA addresses
-- GUA addresses<a href="#section-7.1.3-2" class="pilcrow">¶</a></p>
-<p id="section-7.1.3-3">As stated in the security considerations section of <span>[<a href="#RFC9602" class="cite xref">RFC9602</a>]</span>, the usage of the prefix allocated by <span>[<a href="#RFC9602" class="cite xref">RFC9602</a>]</span> improves security by making it more simple to filter traffic at the edge of the SR Domains. It is important to note that <span>[<a href="#RFC9602" class="cite xref">RFC9602</a>]</span> allocates and makes a dedicated prefix available for SRv6 SIDs for use inside a trusted SRv6 domain. Use of other prefixes for this purpose will result in further security considerations such as potential SID pool route leakage or more complicated filtering requirements, increasing the likelihood of human or configuration error.<a href="#section-7.1.3-3" class="pilcrow">¶</a></p>
-<p id="section-7.1.3-4">Many operators reserve a /64 block for all loopback addresses and allocate /128 for each loopback interface. This simplifies the filtering of permitted source addresses.<a href="#section-7.1.3-4" class="pilcrow">¶</a></p>
-<p id="section-7.1.3-5">Failure to implement address range filtering at ingress nodes is mitigated with filtering at SRv6 enabled nodes. Failure to implement both filtering mechanisms could result in a "fail open" scenario, where some attacks by internal attackers described in this document may be launched by external attackers.<a href="#section-7.1.3-5" class="pilcrow">¶</a></p>
-<p id="section-7.1.3-6">Filtering on prefixes has been shown to be useful, specifically <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span>'s description of packet filtering. There are no known limitations with filtering on infrastructure addresses, and <span>[<a href="#RFC9099" class="cite xref">RFC9099</a>]</span> expands on the concept with control plane filtering.<a href="#section-7.1.3-6" class="pilcrow">¶</a></p>
+<p id="section-7.1.3-1">The IPv6 destination address can be filtered at the external interface of the SR ingress node of the SRv6 domain and at all nodes implementing SRv6 SIDs within the SR domain in order to mitigate external attacks. Section 5.1 of <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span> describes this in detail and a summary is presented here:<a href="#section-7.1.3-1" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-7.1.3-2">
+<li id="section-7.1.3-2.1">
+              <p id="section-7.1.3-2.1.1">At ingress nodes, any packet entering the SR domain and destined to a SID within the SR domain is dropped.<a href="#section-7.1.3-2.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li id="section-7.1.3-2.2">
+              <p id="section-7.1.3-2.2.1">At every SRv6 enabled node, any packet destined to a SID instantiated at the node from a source address outside the SR domain is dropped.<a href="#section-7.1.3-2.2.1" class="pilcrow">¶</a></p>
+</li>
+          </ol>
+<p id="section-7.1.3-3">In order to apply such a filtering mechanism the SR domain needs to have an infrastructure address range for SIDs and an infrastructure address range for source addresses that can be detected and enforced. This practice helps prevent the use of SRH and SID information to track individual users or reveal communication patterns outside the trusted domain. Some examples of an infrastructure address range for SIDs are:<a href="#section-7.1.3-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-7.1.3-4.1">
+              <p id="section-7.1.3-4.1.1">The prefix defined in <span>[<a href="#RFC9602" class="cite xref">RFC9602</a>]</span><a href="#section-7.1.3-4.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-7.1.3-4.2">
+              <p id="section-7.1.3-4.2.1">ULA addresses<a href="#section-7.1.3-4.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-7.1.3-4.3">
+              <p id="section-7.1.3-4.3.1">GUA addresses<a href="#section-7.1.3-4.3.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<p id="section-7.1.3-5">As stated in the security considerations section of <span>[<a href="#RFC9602" class="cite xref">RFC9602</a>]</span>, the usage of the prefix allocated by <span>[<a href="#RFC9602" class="cite xref">RFC9602</a>]</span> improves security by making it more simple to filter traffic at the edge of the SR Domains. It is important to note that <span>[<a href="#RFC9602" class="cite xref">RFC9602</a>]</span> allocates and makes a dedicated prefix available for SRv6 SIDs for use inside a trusted SRv6 domain. Use of other prefixes for this purpose will result in further security considerations such as potential SID pool route leakage or more complicated filtering requirements, increasing the likelihood of human or configuration error.<a href="#section-7.1.3-5" class="pilcrow">¶</a></p>
+<p id="section-7.1.3-6">Many operators reserve a /64 block for all loopback addresses and allocate /128 for each loopback interface. This simplifies the filtering of permitted source addresses.<a href="#section-7.1.3-6" class="pilcrow">¶</a></p>
+<p id="section-7.1.3-7">Failure to implement address range filtering at ingress nodes is mitigated with filtering at SRv6 enabled nodes. Failure to implement both filtering mechanisms could result in a "fail open" scenario, where some attacks by internal attackers described in this document may be launched by external attackers.<a href="#section-7.1.3-7" class="pilcrow">¶</a></p>
+<p id="section-7.1.3-8">Filtering on prefixes has been shown to be useful, specifically <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span>'s description of packet filtering. There are no known limitations with filtering on infrastructure addresses, and <span>[<a href="#RFC9099" class="cite xref">RFC9099</a>]</span> expands on the concept with control plane filtering.<a href="#section-7.1.3-8" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2157,11 +2179,11 @@ For example, some platforms may require allocating resources from route table si
 <dd class="break"></dd>
 <dt id="I-D.ietf-lsr-isis-srv6-yang">[I-D.ietf-lsr-isis-srv6-yang]</dt>
         <dd>
-<span class="refAuthor">Hu, Z.</span>, <span class="refAuthor">Ye, D.</span>, <span class="refAuthor">Qu, Y.</span>, <span class="refAuthor">Geng, X.</span>, and <span class="refAuthor">Q. Ma</span>, <span class="refTitle">"YANG Data Model for IS-IS SRv6"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lsr-isis-srv6-yang-08</span>, <time datetime="2025-09-02" class="refDate">2 September 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lsr-isis-srv6-yang-08">https://datatracker.ietf.org/doc/html/draft-ietf-lsr-isis-srv6-yang-08</a>&gt;</span>. </dd>
+<span class="refAuthor">Hu, Z.</span>, <span class="refAuthor">Ye, D.</span>, <span class="refAuthor">Qu, Y.</span>, <span class="refAuthor">Geng, X.</span>, and <span class="refAuthor">Q. Ma</span>, <span class="refTitle">"YANG Data Model for IS-IS SRv6"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lsr-isis-srv6-yang-09</span>, <time datetime="2026-02-26" class="refDate">26 February 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lsr-isis-srv6-yang-09">https://datatracker.ietf.org/doc/html/draft-ietf-lsr-isis-srv6-yang-09</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-lsr-ospf-srv6-yang">[I-D.ietf-lsr-ospf-srv6-yang]</dt>
         <dd>
-<span class="refAuthor">Qu, Y.</span>, <span class="refAuthor">Hu, Z.</span>, <span class="refAuthor">Geng, X.</span>, <span class="refAuthor">Raza, S. K.</span>, and <span class="refAuthor">A. Lindem</span>, <span class="refTitle">"YANG Data Model for OSPF SRv6"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lsr-ospf-srv6-yang-08</span>, <time datetime="2025-09-02" class="refDate">2 September 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lsr-ospf-srv6-yang-08">https://datatracker.ietf.org/doc/html/draft-ietf-lsr-ospf-srv6-yang-08</a>&gt;</span>. </dd>
+<span class="refAuthor">Qu, Y.</span>, <span class="refAuthor">Hu, Z.</span>, <span class="refAuthor">Geng, X.</span>, <span class="refAuthor">Raza, S. K.</span>, and <span class="refAuthor">A. Lindem</span>, <span class="refTitle">"YANG Data Model for OSPF SRv6"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lsr-ospf-srv6-yang-09</span>, <time datetime="2026-02-26" class="refDate">26 February 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lsr-ospf-srv6-yang-09">https://datatracker.ietf.org/doc/html/draft-ietf-lsr-ospf-srv6-yang-09</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-pce-segment-routing-policy-cp">[I-D.ietf-pce-segment-routing-policy-cp]</dt>
         <dd>
