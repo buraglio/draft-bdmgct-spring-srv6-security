@@ -5,14 +5,14 @@
 Source Packet Routing in Networking                          N. Buraglio
 Internet-Draft                                   Energy Sciences Network
 Intended status: Informational                                T. Mizrahi
-Expires: 25 September 2026                                        Huawei
+Expires: 26 September 2026                                        Huawei
                                                                  T. Tong
                                                             China Unicom
                                                          L. M. Contreras
                                                               Telefonica
                                                                  F. Gont
                                                             SI6 Networks
-                                                           24 March 2026
+                                                           25 March 2026
 
 
               Segment Routing IPv6 Security Considerations
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 September 2026.
+   This Internet-Draft will expire on 26 September 2026.
 
 Copyright Notice
 
@@ -507,6 +507,10 @@ Table of Contents
    compromise the confidentiality of the user data, it allows an
    attacker to gather information about the network which in turn can be
    used to enable other attacks.
+
+   Passive eavesdropping can also impact end-user privacy.  Observable
+   SRH fields (e.g., the Segment List and SRH TLVs) may enable
+   correlation of flows and tracking of users, endpoints, or services.
 
 6.2.3.  Packet Insertion and Replaying
 
