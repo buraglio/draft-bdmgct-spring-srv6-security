@@ -212,8 +212,7 @@ Table of Contents
    This section introduces the threat taxonomy that is used in this
    document.  This taxonomy is based on terminology from the Internet
    threat model [RFC3552], as well as some concepts from [RFC9055],
-   [RFC7384], [RFC7835], and [RFC9416].  Details regarding inter-domain
-   segment routing (SR) are out of scope for this document.
+   [RFC7384], [RFC7835], and [RFC9416].
 
    Internal vs. External:  An internal attacker in the context of SRv6
       is an attacker who is located within an SR domain.  Specifically,
@@ -267,12 +266,26 @@ Table of Contents
 
                    Figure 1: Threat Model Taxonomy
 
-   As defined in [RFC8402], SR operates within a "trusted domain".
-   Therefore, in the current threat model the SR domain defines the
-   boundary that distinguishes internal from external threats.
-   Specifically, an attack on one domain that is invoked from within a
-   different domain is considered an external attack in the context of
-   the current document.
+   This document uses the term "SR domain" as defined in [RFC8402]: "the
+   set of nodes participating in the source-based routing model...".  By
+   default, [RFC8402] assumes operation "within a trusted domain" with
+   traffic filtered at the domain boundaries, as further discussed in
+   Section 7.1.  In this document, unless stated otherwise, the boundary
+   that distinguishes internal from external attackers is the boundary
+   of the SR domain, and the term trusted domain denotes an SR domain
+   for which the boundary-filtering assumption of [RFC8402] is in force.
+   Note that the trusted domain is a logical/operational construct, not
+   a physical boundary.  Thus, hosts and servers on the same physical
+   network are not part of the trusted domain unless explicitly brought
+   under its controls.
+
+   Inter-SR-domain scenarios are out of scope, including cases where
+   multiple SR instances exist under the same administrative entity but
+   are logically or operationally distinct; such cases are treated as
+   separate SR domains for the purposes of this draft.  Specifically, an
+   attack on one domain that is invoked from within a different domain
+   is considered an external attack in the context of the current
+   document.
 
 5.  Effect
 
@@ -821,11 +834,12 @@ Table of Contents
     trusted domain is important.  Such practices are discussed in
     [RFC4381] and are applicable to both SR-MPLS and SRv6.
 
-   Following the direction of [RFC8402], the current document assumes
-   that SRv6 is a trusted domain and that the traffic is filtered at the
-   domain boundaries.  Traffic MUST be filtered at the domain
-   boundaries.  Thus, most of the attacks described in this document are
-   limited to within the domain (i.e., internal attackers).
+   Following the direction of [RFC8402], and as discussed in Section 4,
+   the current document assumes that SRv6 is a trusted domain and that
+   the traffic is filtered at the domain boundaries.  Traffic MUST be
+   filtered at the domain boundaries.  Thus, most of the attacks
+   described in this document are limited to within the domain (i.e.,
+   internal attackers).
 
    Such an approach is commonly referred to as "fail-open", which
    inherently contains more risk than fail-closed methodologies.
