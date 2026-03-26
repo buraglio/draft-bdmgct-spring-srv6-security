@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-22T02:24:28.135762+00:00",
+  "timestamp": "2026-03-26T02:29:10.751856+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -2151,24 +2151,26 @@
       "id": "PR_kwDOKVF77M7Li1QI",
       "title": "Privacy issues",
       "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/64",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "talmi",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Comments based on SECDIR review:\r\nhttps://datatracker.ietf.org/doc/review-ietf-spring-srv6-security-11-secdir-early-huitema-2026-02-14/\r\n\r\nMain changes:\r\n- Passive Listening: added the text \"Passive eavesdropping can also impact end\u2011user privacy. Observable SRH fields (e.g., the Segment List and SRH TLVs) may enable correlation of flows and tracking of users, endpoints, or services.\"\r\n- Address Range Filtering: added the text \"This practice helps prevent the use of SRH and SID information to track individual users or reveal communication patterns outside the trusted domain.\"",
       "createdAt": "2026-03-18T13:29:37Z",
-      "updatedAt": "2026-03-19T07:03:49Z",
+      "updatedAt": "2026-03-24T09:19:56Z",
       "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
       "baseRefName": "main",
       "baseRefOid": "839c9f5df7582c8f8a1ef00e067d1fee15d55284",
       "headRepository": "talmi/draft-bdmgct-spring-srv6-security",
       "headRefName": "privacy-issues",
       "headRefOid": "b2a5016b11343b46a716acd6983818613703ee3e",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-03-24T09:19:56Z",
+      "mergedAt": "2026-03-24T09:19:56Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "802863a7837cf934941dfcd92bd4d2781d41d239"
+      },
       "comments": [],
       "reviews": []
     },
@@ -2177,24 +2179,26 @@
       "id": "PR_kwDOKVF77M7Li2iu",
       "title": "Resource issue",
       "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/65",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "talmi",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Limited capability hardware: rephrased based on RTGDIR review:\r\n\r\nhttps://datatracker.ietf.org/doc/review-ietf-spring-srv6-security-11-rtgdir-early-alston-2026-03-02/",
       "createdAt": "2026-03-18T13:30:39Z",
-      "updatedAt": "2026-03-18T13:30:39Z",
+      "updatedAt": "2026-03-24T09:21:49Z",
       "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
       "baseRefName": "main",
       "baseRefOid": "839c9f5df7582c8f8a1ef00e067d1fee15d55284",
       "headRepository": "talmi/draft-bdmgct-spring-srv6-security",
       "headRefName": "resource-issue",
       "headRefOid": "0ea2efb56dab938b658c08a29a4c3901d70b3fd7",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-03-24T09:21:49Z",
+      "mergedAt": "2026-03-24T09:21:49Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "e9054618a1a2393052134addd4027d558b9ef169"
+      },
       "comments": [],
       "reviews": []
     },
@@ -2203,24 +2207,26 @@
       "id": "PR_kwDOKVF77M7Li3Ba",
       "title": "OPSDIR Review Nits",
       "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/66",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "talmi",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "The nits and minor issues from the OPSDIR review are addressed in this commit. Major issues will be addressed in different commits. OPSDIR review:\r\nhttps://datatracker.ietf.org/doc/review-ietf-spring-srv6-security-11-opsdir-early-combes-2026-02-24/\r\n\r\nSummary of changes:\r\n- Fixed the figure \"Threat Model Taxonomy\": fixed attacker 3 to control plane.\r\n- Changed reference from ANSI document to ITU-T document.\r\n- Changed \"arbitrary processing by SR endpoints\" to \"arbitrary processing by SR endpoints and transit routers\"\r\n- Effect section: added the comment: \"Note that the categories in this section are effects\u2011based and intentionally not mutually exclusive; for example, \"circumvent access controls and security filters\" also falls under Unauthorized Access, but is listed here to emphasize the system integrity impact of path/policy manipulation.\"\r\n- Title \"Packet Insertion\" was modified to \"Packet Insertion and Replaying\"\r\n- Table title changed from \"Attack Summary\" to \"Summary of Attacks\"\r\n- Changed \"methods that can be used to mitigate\" to \"methods for mitigating\"",
       "createdAt": "2026-03-18T13:31:01Z",
-      "updatedAt": "2026-03-18T13:31:01Z",
+      "updatedAt": "2026-03-24T09:30:36Z",
       "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
       "baseRefName": "main",
-      "baseRefOid": "839c9f5df7582c8f8a1ef00e067d1fee15d55284",
+      "baseRefOid": "e9054618a1a2393052134addd4027d558b9ef169",
       "headRepository": "talmi/draft-bdmgct-spring-srv6-security",
       "headRefName": "opsdir-review-nits",
-      "headRefOid": "07034e78270a8bf73c969a9a5ca2e334bc6ec86f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "a1d8060b12d023f4d30e115e8b91d222d3c3dcb5",
+      "closedAt": "2026-03-24T09:30:36Z",
+      "mergedAt": "2026-03-24T09:30:36Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "91ceb153ec77ec295c2f3afefdc7382fe6893205"
+      },
       "comments": [],
       "reviews": []
     },
@@ -2229,26 +2235,125 @@
       "id": "PR_kwDOKVF77M7Li3WG",
       "title": "INTDIR Review Comments",
       "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/67",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "talmi",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This commit addresses most comments from INTDIR review. Major comments related to trusted domain/SR domain will be addressed separately. INTDIR review:\r\nhttps://datatracker.ietf.org/doc/review-ietf-spring-srv6-security-11-intdir-early-fressancourt-2026-02-25/\r\n\r\nSummary of changes:\r\n- \"SRH Filtering\" - added comment about encapsulating packets.\r\n- Changed \"secured\" to \"The integrity of the SRH can be protected by\".\r\n- Added the following sentence regarding O-flag: \"Furthermore, if the HMAC TLV is used, it provides integrity protection of the O-flag as described in {{hmac}}.\"\r\n- \"Middle Box Filtering Issues\": Changed first sentence to \"When an SRv6 packet is forwarded in the SRv6 domain, its IPv6 destination address is modified in each segment and the final destination address is not available in the IPv6 header.\"\r\n- \"Middle Box Filtering Issues\": added the sentence \"Consistent with Section 3.5.2.4 of [RFC9288], operators should avoid dropping packets that carry the SRH (Routing Type 4) within an SR domain and instead deploy filtering policies at transit routers that preserve SRv6 forwarding semantics.\"",
       "createdAt": "2026-03-18T13:31:15Z",
-      "updatedAt": "2026-03-18T13:31:15Z",
+      "updatedAt": "2026-03-24T09:40:28Z",
       "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
       "baseRefName": "main",
       "baseRefOid": "839c9f5df7582c8f8a1ef00e067d1fee15d55284",
       "headRepository": "talmi/draft-bdmgct-spring-srv6-security",
       "headRefName": "int-dir-comments",
       "headRefOid": "c7a62e62ddaabb6595cf3be5795a8e76ce3feabc",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-03-24T09:40:28Z",
+      "mergedAt": "2026-03-24T09:40:28Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "5db6899268a2358d9a8c017799cd95c3c2e0cfbe"
+      },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 69,
+      "id": "PR_kwDOKVF77M7NOxrq",
+      "title": "Privacy fix",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/69",
+      "state": "MERGED",
+      "author": "talmi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Comment based on SECDIR review:\r\nhttps://datatracker.ietf.org/doc/review-ietf-spring-srv6-security-11-secdir-early-huitema-2026-02-14/\r\n\r\nChange:\r\n\r\nPassive Listening: added the text \"Passive eavesdropping can also impact end\u2011user privacy. Observable SRH fields (e.g., the Segment List and SRH TLVs) may enable correlation of flows and tracking of users, endpoints, or services.\"",
+      "createdAt": "2026-03-25T06:02:27Z",
+      "updatedAt": "2026-03-25T20:05:28Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "9ef9b5e1c9f8a5faf6d2384982ff550fb1e1b574",
+      "headRepository": "talmi/draft-bdmgct-spring-srv6-security",
+      "headRefName": "privacy-fix",
+      "headRefOid": "d70411cf0aef7888c67decb2e87115133693e92a",
+      "closedAt": "2026-03-25T20:05:28Z",
+      "mergedAt": "2026-03-25T20:05:28Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "a23ee5cd0ce90a77c5f6eed26b8bb8d917b1b71d"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 70,
+      "id": "PR_kwDOKVF77M7NP8w_",
+      "title": "Domain term",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/70",
+      "state": "MERGED",
+      "author": "talmi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "A first shot at refining the domain term.",
+      "createdAt": "2026-03-25T07:27:24Z",
+      "updatedAt": "2026-03-25T20:10:17Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "9ef9b5e1c9f8a5faf6d2384982ff550fb1e1b574",
+      "headRepository": "talmi/draft-bdmgct-spring-srv6-security",
+      "headRefName": "domain-term",
+      "headRefOid": "465789d52e1d0e53a95480dc26a5aeb21242feba",
+      "closedAt": "2026-03-25T20:10:17Z",
+      "mergedAt": "2026-03-25T20:10:17Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "165ed8ab99c48b06b05c02298bf49d22763a296b"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKVF77M7u_PTg",
+          "commit": {
+            "abbreviatedOid": "462c5cf"
+          },
+          "author": "buraglio",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-25T20:09:10Z",
+          "updatedAt": "2026-03-25T20:09:10Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\nThis section introduces the threat taxonomy that is used in this document. This taxonomy is based on terminology from the Internet threat model [RFC3552], as well as some concepts from [RFC9055], [RFC7384], [RFC7835], and [RFC9416].\n```",
+              "createdAt": "2026-03-25T20:09:10Z",
+              "updatedAt": "2026-03-25T20:09:10Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKVF77M7u_Pe-",
+          "commit": {
+            "abbreviatedOid": "465789d"
+          },
+          "author": "buraglio",
+          "authorAssociation": "OWNER",
+          "state": "CHANGES_REQUESTED",
+          "body": "well written. ",
+          "createdAt": "2026-03-25T20:09:19Z",
+          "updatedAt": "2026-03-25T20:09:55Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Fix whitespace ",
+              "createdAt": "2026-03-25T20:09:19Z",
+              "updatedAt": "2026-03-25T20:09:55Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
