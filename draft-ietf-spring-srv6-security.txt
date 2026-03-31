@@ -5,14 +5,14 @@
 Source Packet Routing in Networking                          N. Buraglio
 Internet-Draft                                   Energy Sciences Network
 Intended status: Informational                                T. Mizrahi
-Expires: 26 September 2026                                        Huawei
+Expires: 2 October 2026                                           Huawei
                                                                  T. Tong
                                                             China Unicom
                                                          L. M. Contreras
                                                               Telefonica
                                                                  F. Gont
                                                             SI6 Networks
-                                                           25 March 2026
+                                                           31 March 2026
 
 
               Segment Routing IPv6 Security Considerations
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 September 2026.
+   This Internet-Draft will expire on 2 October 2026.
 
 Copyright Notice
 
@@ -108,7 +108,8 @@ Table of Contents
      7.3.  Hashed Message Authentication Code (HMAC)
      7.4.  Control Plane Mitigation Methods
      7.5.  Management Plane Mitigation Methods
-   8.  Implications on Existing Equipment
+     7.6.  Mitigations - Summary
+   8.  Operational and Filtering Considerations
      8.1.  Middle Box Filtering Issues
      8.2.  Limited capability hardware
    9.  Security Considerations
@@ -311,9 +312,9 @@ Table of Contents
       Extension Headers.
 
    *  Masquerade: various attacks that result in spoofing or
-      masquerading are possible in IPv6 networks.  However, these
-      attacks are not specific to SRv6, and are therefore not within the
-      scope of this document.
+      masquerading are possible in IPv6 networks (e.g., [RFC9099]).
+      However, these attacks are not specific to SRv6, and are therefore
+      not within the scope of this document.
 
    *  System Integrity: attacks on SRv6 can manipulate the path and the
       processing that the packet is subject to, thus compromising the
@@ -337,9 +338,9 @@ Table of Contents
          middle attacks.
 
       -  Causing header modifications: SRv6 network programming
-         determines the SR endpoint behavior, including potential header
-         modifications.  Thus, one of the potential outcomes of an
-         attack is unwanted header modifications.
+         [RFC8986] determines the SR endpoint behavior, including
+         potential header modifications.  Thus, one of the potential
+         outcomes of an attack is unwanted header modifications.
 
    *  Communication Integrity: SRv6 attacks may cause packets to be
       forwarded through paths that the attacker controls, which may
@@ -830,26 +831,29 @@ Table of Contents
 
     By default, SR operates within a trusted domain.  Traffic MUST be
     filtered at the domain boundaries.
+
     The use of best practices to reduce the risk of tampering within the
     trusted domain is important.  Such practices are discussed in
     [RFC4381] and are applicable to both SR-MPLS and SRv6.
 
    Following the direction of [RFC8402], and as discussed in Section 4,
    the current document assumes that SRv6 is a trusted domain and that
-   the traffic is filtered at the domain boundaries.  Traffic MUST be
-   filtered at the domain boundaries.  Thus, most of the attacks
-   described in this document are limited to within the domain (i.e.,
-   internal attackers).
+   the traffic is filtered at the domain boundaries.  Filtering at SR
+   ingress nodes is intended to mitigate modification and insertion
+   attacks, while filtering at SR egress nodes is intended to mitigate
+   outbound leaks.  Thus, most of the attacks described in this document
+   are limited to within the domain (i.e., internal attackers).
 
-   Such an approach is commonly referred to as "fail-open", which
-   inherently contains more risk than fail-closed methodologies.
-   Relying on perfectly crafted filters on all edges of the trusted
-   domain poses a demonstrable risk of inbound or outbound leaks if the
-   filters are removed or adjusted erroneously.  It is also important to
-   note that some filtering implementations have limits on the size,
-   complexity, or protocol support that can be applied, which may
-   prevent the filter adjustments or creation required to properly
-   secure the trusted domain for a new protocol such as SRv6.
+   It should be noted that relying on perfectly crafted filters on all
+   edges of the trusted domain poses a demonstrable risk of inbound or
+   outbound leaks if the filters are removed or adjusted erroneously.
+   It is also important to note that some filtering implementations have
+   limits on the size, complexity, or protocol support that can be
+   applied, which may prevent the filter adjustments or creation
+   required to properly secure the trusted domain for a new protocol
+   such as SRv6.  Such an approach is commonly referred to as "fail-
+   open", which inherently contains more risk than fail-closed
+   methodologies.
 
    Practically speaking, this means successfully enforcing a "Trusted
    Domain" may be operationally difficult and error-prone in practice,
@@ -870,9 +874,13 @@ Table of Contents
        section 3.1 and 4.1.
 
    2.  A packet containing an SRH may not be destined to the SR domain,
-       it may be simply transiting the domain.  This scenario is
+       as it may be simply transiting the domain.  This scenario is
        mitigated by encapsulating packets on the domain boundary, as
-       discussed in Section 7.2.
+       discussed in Section 7.2.  While inter-SR-domain scenarios are a
+       violation of the trust model described above, the operational
+       practices recommended here aim to preserve interoperability and
+       avoid blanket behaviors that would break SR when adjacent
+       networks follow different practices.
 
    For these reasons SRH filtering is not necessarily a useful method of
    mitigation.
@@ -959,7 +967,7 @@ Table of Contents
 
    The following aspects of the HMAC should be considered:
 
-   *  The HMAC TLV is OPTIONAL.
+   *  The HMAC TLV is optional [RFC8754].
 
    *  While it is presumed that unique keys will be employed by each
       participating node, manual configuration of pre-shared keys may
@@ -1010,7 +1018,7 @@ Table of Contents
 
    In centralized SRv6 control plane architectures, such as those
    described in [I-D.ietf-pce-segment-routing-policy-cp], it is
-   RECOMMENDED that communication between PCEs and PCCs be secured using
+   recommended that communication between PCEs and PCCs be secured using
    authenticated and encrypted sessions.  This is typically achieved
    using Transport Layer Security (TLS), following the guidance in
    [RFC8253] and best practices in [RFC9325].
@@ -1034,10 +1042,10 @@ Table of Contents
    Mitigating attacks on the management plane, much like in the control
    plane, depends on the specific protocols and interfaces employed.
 
-   Management protocols such as NETCONF and RESTCONF are commonly used
-   to configure and monitor SRv6-enabled devices.  These protocols must
-   be secured to prevent unauthorized access, configuration tampering,
-   or information leakage.
+   Management protocols such as NETCONF [RFC6241] and RESTCONF [RFC8040]
+   are commonly used to configure and monitor SRv6-enabled devices.
+   These protocols must be secured to prevent unauthorized access,
+   configuration tampering, or information leakage.
 
    The lowest NETCONF layer is the secure transport layer, and the
    mandatory-to-implement secure transport is Secure Shell (SSH)
@@ -1057,15 +1065,41 @@ Table of Contents
    operational data should be access-controlled and transmitted only
    over encrypted channels to mitigate the risk of information leakage.
 
-8.  Implications on Existing Equipment
+7.6.  Mitigations - Summary
+
+   The following table summarizes the possible mitigation methods for
+   each of the attacks that were described in the previous section.
+
+  +===============================+====================================+
+  | Attacks                       | Mitigation Methods                 |
+  +===============================+====================================+
+  | Modification attack (6.2.1)   | Trusted domains and filtering (7.1)|
+  |                               | Encapsulation of packets (7.2)     |
+  |                               | HMAC (7.3)                         |
+  +-------------------------------+------------------------------------+
+  | Passive listening (6.2.2)     | Trusted domains and filtering (7.1)|
+  |                               | Encapsulation of packets (7.2)     |
+  +-------------------------------+------------------------------------+
+  | Packet insertion and          | Trusted domains and filtering (7.1)|
+  | replaying (6.2.3)             | Encapsulation of packets (7.2)     |
+  |                               | HMAC (7.3)                         |
+  +-------------------------------+------------------------------------+
+  | Control plane attacks (6.3)   | Control plane mitigations (7.4)    |
+  +-------------------------------+------------------------------------+
+  | Management plane attacks (6.4)| Management plane mitigations (7.5) |
+  +-------------------------------+------------------------------------+
+
+     Figure 3: Summary of Mitigation Methods for each of the Attacks
+
+8.  Operational and Filtering Considerations
 
 8.1.  Middle Box Filtering Issues
 
    When an SRv6 packet is forwarded in the SRv6 domain, its IPv6
    destination address is modified in each segment and the final
    destination address is not available in the IPv6 header.  Security
-   devices on SRv6 network may not learn the real destination address
-   and fail to perform access control on some SRv6 traffic.
+   devices on SRv6 networks may not learn the real destination address
+   and incorrectly perform access control on some SRv6 traffic.
 
    The security devices on SRv6 networks need to take care of SRv6
    packets.  However, SRv6 packets are often encapsulated by an SR
@@ -1254,6 +1288,11 @@ Table of Contents
               DOI 10.17487/RFC5095, December 2007,
               <https://www.rfc-editor.org/rfc/rfc5095>.
 
+   [RFC6241]  Enns, R., Ed., Bjorklund, M., Ed., Schoenwaelder, J., Ed.,
+              and A. Bierman, Ed., "Network Configuration Protocol
+              (NETCONF)", RFC 6241, DOI 10.17487/RFC6241, June 2011,
+              <https://www.rfc-editor.org/rfc/rfc6241>.
+
    [RFC6242]  Wasserman, M., "Using the NETCONF Protocol over Secure
               Shell (SSH)", RFC 6242, DOI 10.17487/RFC6242, June 2011,
               <https://www.rfc-editor.org/rfc/rfc6242>.
@@ -1289,6 +1328,10 @@ Table of Contents
               Extension Headers in the Real World", RFC 7872,
               DOI 10.17487/RFC7872, June 2016,
               <https://www.rfc-editor.org/rfc/rfc7872>.
+
+   [RFC8040]  Bierman, A., Bjorklund, M., and K. Watsen, "RESTCONF
+              Protocol", RFC 8040, DOI 10.17487/RFC8040, January 2017,
+              <https://www.rfc-editor.org/rfc/rfc8040>.
 
    [RFC8200]  Deering, S. and R. Hinden, "Internet Protocol, Version 6
               (IPv6) Specification", STD 86, RFC 8200,
