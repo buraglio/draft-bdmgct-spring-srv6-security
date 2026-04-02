@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-26T02:29:10.751856+00:00",
+  "timestamp": "2026-04-02T02:27:12.317231+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -2354,6 +2354,34 @@
           ]
         }
       ]
+    },
+    {
+      "number": 71,
+      "id": "PR_kwDOKVF77M7O1zHr",
+      "title": "Chair review fixes",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/71",
+      "state": "MERGED",
+      "author": "talmi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Updates based on chair review (Alvaro):\r\nhttps://mailarchive.ietf.org/arch/msg/spring/LhhwRECjTwfb9Ao3uQ49kGFHB7o/\r\n\r\n- Removed one instance of the sentence \"Traffic MUST be filtered at the domain boundaries.\", which previously appeared twice in Section 7.1.1\r\n- \"it is RECOMMENDED that communication between PCEs and PCCs be secured using authenticated and encrypted sessions\" - replaced by lower case recommended\r\n- Added \" (e.g., [RFC9099])\" in the context of spoofing.\r\n- Added [RFC8986] in the context of programming.\r\n- Sentence \"Such an approach is commonly referred to as \"fail-open\", which inherently contains more risk than fail-closed methodologies.\" was moved to end of paragraph.\r\n- \"The HMAC TLV is OPTIONAL\" - changed to lower case optional.\r\n- Section title \"Implications on Existing Equipment\" changed to \"Operational and Filtering Considerations\".\r\n- \"fail to perform\" changed to \"incorrectly perform\".\r\n- Mitigation table added.\r\n\r\n\r\nBased on OPSDIR review thread suggestions (Tal, Joel): https://mailarchive.ietf.org/arch/msg/spring/djeseZhy7AEeyEUtYGsrE5-00MY/\r\n\r\nNEW:\r\nFiltering at SR ingress nodes is intended to mitigate modification and insertion attacks, while filtering at SR egress nodes is intended to mitigate outbound leaks.\r\n\r\nOLD:\r\nA packet containing an SRH may not be destined to the SR domain... NEW:\r\nA packet containing an SRH may not be destined to the SR domain, as it may be simply transiting the domain. This scenario is mitigated by encapsulating packets on the domain boundary, as discussed in {{encap}}. While inter-SR-domain scenarios are a violation of the trust model described above, the operational practices recommended here aim to preserve interoperability and avoid blanket behaviors that would break SR when adjacent networks follow different practices.",
+      "createdAt": "2026-03-31T06:13:38Z",
+      "updatedAt": "2026-03-31T19:13:14Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "165ed8ab99c48b06b05c02298bf49d22763a296b",
+      "headRepository": "talmi/draft-bdmgct-spring-srv6-security",
+      "headRefName": "chair-review",
+      "headRefOid": "601a78917032cecb806b21aa6e6480fae9661b28",
+      "closedAt": "2026-03-31T19:13:14Z",
+      "mergedAt": "2026-03-31T19:13:14Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "0229214ffae675d018efba833ca039a5051f54e2"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
