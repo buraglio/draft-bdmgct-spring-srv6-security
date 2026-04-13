@@ -452,7 +452,7 @@ Practically speaking, this means successfully enforcing a "Trusted Domain" may b
 Filtering can be performed based on the presence of an SRH. More generally, {{RFC9288}} provides recommendations on the filtering of IPv6 packets containing IPv6 extension headers at transit routers. However, filtering based on the presence of an SRH is not necessarily useful for two reasons:
 
 1. The SRH is optional for SID processing as described in [RFC8754] section 3.1 and 4.1.
-2. A packet containing an SRH may not be destined to the SR domain, as it may be simply transiting the domain. This scenario is mitigated by encapsulating packets on the domain boundary, as discussed in {{encap}}. While inter-SR-domain scenarios are a violation of the trust model described above, the operational practices recommended here aim to preserve interoperability and avoid blanket behaviors that would break SR when adjacent networks follow different practices.
+2. A packet containing an SRH may not be destined to the SR domain, as it may be simply transiting the domain. Therefore, filtering solely based on the presence of an SRH, at either SR ingress or SR egress, is not necessarily recommended. Instead, this scenario is mitigated by encapsulating packets on the domain boundary, as discussed in {{encap}}. While inter-SR-domain scenarios are a violation of the trust model described above, the operational practices recommended here aim to preserve interoperability and avoid blanket behaviors that would break SR when adjacent networks follow different practices.
 
 For these reasons SRH filtering is not necessarily a useful method of mitigation.
 
