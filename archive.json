@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-04-02T02:27:12.317231+00:00",
+  "timestamp": "2026-04-14T02:39:32.132595+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -2379,6 +2379,34 @@
       "mergedBy": "buraglio",
       "mergeCommit": {
         "oid": "0229214ffae675d018efba833ca039a5051f54e2"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 72,
+      "id": "PR_kwDOKVF77M7RwVKZ",
+      "title": "Rephrase SRH filtering recommendation",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/72",
+      "state": "MERGED",
+      "author": "talmi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Clarify the limitations of filtering based on SRH presence, based on opsdir review:\r\n\r\nhttps://mailarchive.ietf.org/arch/msg/spring/AHvuYk3aGniLuoifP99Rn3Cia8g/",
+      "createdAt": "2026-04-12T09:53:39Z",
+      "updatedAt": "2026-04-13T20:21:54Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "073c564432c5119db7ac2ccf8d38d87210c91e89",
+      "headRepository": "talmi/draft-bdmgct-spring-srv6-security",
+      "headRefName": "opsdir-minor",
+      "headRefOid": "ac390b214c40bfd51e8bff092099f8ca82f951d4",
+      "closedAt": "2026-04-13T20:21:54Z",
+      "mergedAt": "2026-04-13T20:21:54Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "1e6d1b36b6ca5adfe0500b8967baf5270e792759"
       },
       "comments": [],
       "reviews": []
