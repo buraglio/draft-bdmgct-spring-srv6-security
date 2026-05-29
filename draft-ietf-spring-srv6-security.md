@@ -105,6 +105,10 @@ informative:
     title: IPv6 Routing Header Security
     target: https://airbus-seclab.github.io/ipv6/IPv6_RH_security-csw07.pdf
     date: 2007
+  MACsec: 
+    title: "IEEE Standard for Local and metropolitan area networks–Media Access Control (MAC) Security"
+    date: 2018
+    target: https://1.ieee802.org/security/802-1ae/
 
 --- abstract
 
@@ -144,7 +148,7 @@ The following IETF RFCs were selected for security assessment as part of this ef
    * [RFC9524] : Segment Routing Replication for Multipoint Service Delivery
    * [RFC9800] : Compressed SRv6 Segment List Encoding
 
-We note that SRv6 is under active development and, as such, the above documents might not cover all protocols employed in an SRv6 deployment.
+Inter-Domain Segment Routing scenarios are out of scope for this document as are existing and future protocol specific IPv6 vulnerabilities. Additionally, we note that SRv6 is under active development and, as such, the above documents might not cover all protocols employed in an SRv6 deployment.
 
 # Conventions and Definitions
 
@@ -161,6 +165,8 @@ We note that SRv6 is under active development and, as such, the above documents 
 - SRH: Segment Routing Header [RFC8754]
 
 - SRv6: Segment Routing over IPv6 [RFC8402]
+
+- MACsec: MAC Security [MACsec]
 
 # Threat Terminology {#threat}
 
@@ -220,7 +226,7 @@ The threat model in [ITU-Sec] classifies threats according to their potential ef
 - Communication Integrity: SRv6 attacks may cause packets to be forwarded through paths that the attacker controls, which may facilitate other attacks that compromise the integrity of user data. Integrity protection of user data, which is implemented in higher layers, avoids these aspects, and therefore communication integrity is not within the scope of this document.
 - Confidentiality: as in communication integrity, packets forwarded through unintended paths may traverse nodes controlled by the attacker. Since eavesdropping of user data can be avoided by using encryption in higher layers, it is not within the scope of this document. However, eavesdropping of a network that uses SRv6 is a specific form of reconnaissance. This reconnaissance allows the attacker to collect information about SR endpoint addresses, SR policies, and network topologies.
 - Denial of Service: the availability aspects of SRv6 include the ability of attackers to leverage SRv6 as a means for compromising the performance of a network or for causing Denial of Service (DoS), including:
-  - Resource exhaustion: compromising the availability of the system can be achieved by sending SRv6-enabled packets to/through victim nodes in a way that results in a negative performance impact of the victim systems (e.g., [RFC9098]). For example, network programming can be used in some cases to manipulate segment endpoints to perform unnecessary functions that consume processing resources. Resource exhaustion may in severe cases cause Denial of Service (DoS).
+  - Resource exhaustion: compromising the availability of the system can be achieved by sending SRv6-enabled packets to/through victim nodes in a way that results in a negative performance impact of the victim systems (e.g., [RFC9098]). For example, network programming can be used in some cases to manipulate segment endpoints to perform unnecessary functions that consume processing resources, or cause drops of time sensitive packets which can cause too late packets which are considered invalid resulting in those packets being considered invalid. Resource exhaustion may in severe cases cause Denial of Service (DoS). 
   - Forwarding loops: an attacker might achieve attack amplification by increasing the number hops that each packet is forwarded through and thus increase the load on the network. For instance, a set of SIDs can be inserted in a way that creates a forwarding loop ([RFC8402], [RFC5095], [CanSecWest2007]) and thus loads the nodes along the loop.
   - Causing packets to be discarded: an attacker may cause a packet to be forwarded to a point in the network where it can no longer be forwarded, causing the packet to be discarded.
 
@@ -526,6 +532,10 @@ The Network Configuration Access Control Model (NACM) [RFC8341] provides the mea
 
 SRv6-specific YANG modules should be designed with the same security considerations applied to all YANG-based models. Writable nodes must be protected using access control mechanisms such as NACM and secured transport protocols like SSH or TLS to prevent unauthorized configuration changes. Readable nodes that expose sensitive operational data should be access-controlled and transmitted only over encrypted channels to mitigate the risk of information leakage.
 
+## Layer 2 Mitigation
+
+In some circumstances it may be possible to mitigate passive listening and packet insertion by leveraging [MACsec] to encrypt traffic at the media access control (MAC) layer by using encryption between two connected devices. This methodology prevents unauthorized access to traffic over a given point to point path by encrypting and authenticating data in flight at Layer 2 of the OSI model. Much like the encryption mechanisms noted for protocol communication and management access, this level of protection can provide integrity and authenticity to all higher layer communications over a given layer 2 path. 
+
 ## Mitigations - Summary
 The following table summarizes the possible mitigation methods for each of the attacks that were described in the previous section.
 
@@ -536,19 +546,23 @@ The following table summarizes the possible mitigation methods for each of the a
 | Modification attack (6.2.1)   | Trusted domains and filtering (7.1)|
 |                               | Encapsulation of packets (7.2)     |
 |                               | HMAC (7.3)                         |
+|                               | MACsec (7.6)                       |
 +-------------------------------+------------------------------------+
 | Passive listening (6.2.2)     | Trusted domains and filtering (7.1)|
 |                               | Encapsulation of packets (7.2)     |
+|                               | MACsec (7.6)                       |
 +-------------------------------+------------------------------------+
 | Packet insertion and          | Trusted domains and filtering (7.1)|
 | replaying (6.2.3)             | Encapsulation of packets (7.2)     |
 |                               | HMAC (7.3)                         |
+|                               | MACsec (7.6)                       |
 +-------------------------------+------------------------------------+
 | Control plane attacks (6.3)   | Control plane mitigations (7.4)    |
+|                               | MACsec (7.6)                       |
 +-------------------------------+------------------------------------+
 | Management plane attacks (6.4)| Management plane mitigations (7.5) |
+|                               | MACsec (7.6)                       |
 +-------------------------------+------------------------------------+
-
 ~~~~~~~~~~~
 {: #mitigation-table title="Summary of Mitigation Methods for each of the Attacks"}
 
@@ -581,4 +595,4 @@ This document has no IANA actions.
 # Acknowledgments
 {:numbered="false"}
 
-The authors would like to acknowledge the valuable input and contributions from Zafar Ali, Andrew Alston, Dale Carder, Bruno Decraene, Dhruv Dhody, Mike Dopheide, Darren Dukes, Linda Dunbar, Joel Halpern, Boris Hassanov, Tom Hill, Suresh Krishnan, Sam Oehlert, Alvaro Retana, Eric Vyncke, and Russ White.
+The authors would like to acknowledge the valuable input and contributions from Zafar Ali, Andrew Alston, Dale Carder, Weiqiang Cheng, Bruno Decraene, Dhruv Dhody, Mike Dopheide, Darren Dukes, Linda Dunbar, Joel Halpern, Boris Hassanov, Tom Hill, Suresh Krishnan, Sam Öehlert, Alvaro Retana, Andrew Stone, Bala'zs Vargas, Eric Vyncke, and Russ White.
