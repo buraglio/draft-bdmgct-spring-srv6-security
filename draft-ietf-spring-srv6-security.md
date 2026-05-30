@@ -105,7 +105,7 @@ informative:
     title: IPv6 Routing Header Security
     target: https://airbus-seclab.github.io/ipv6/IPv6_RH_security-csw07.pdf
     date: 2007
-  MACsec: 
+  MACsec:
     title: "IEEE Standard for Local and metropolitan area networks–Media Access Control (MAC) Security"
     date: 2018
     target: https://1.ieee802.org/security/802-1ae/
@@ -534,7 +534,7 @@ SRv6-specific YANG modules should be designed with the same security considerati
 
 ## Layer 2 Mitigation
 
-In some circumstances it may be possible to mitigate passive listening and packet insertion by leveraging [MACsec] to encrypt traffic at the media access control (MAC) layer by using encryption between two connected devices. This methodology prevents unauthorized access to traffic over a given point to point path by encrypting and authenticating data in flight/DOS at Layer 2 of the OSI model. Much like the encryption mechanisms noted for protocol communication and management access, this level of protection can provide integrity and authenticity to all higher layer communications over a given layer 2 path. 
+In some circumstances it may be possible to mitigate passive listening and packet insertion by leveraging [MACsec] to encrypt traffic at the media access control (MAC) layer by using encryption between two connected devices. This methodology prevents unauthorized access to traffic over a given point to point path by encrypting and authenticating data in flight/DOS at Layer 2 of the OSI model. Much like the encryption mechanisms noted for protocol communication and management access, this level of protection can provide integrity and authenticity to all higher layer communications over a given layer 2 path.
 
 ## Mitigations - Summary
 The following table summarizes the possible mitigation methods for each of the attacks that were described in the previous section.
