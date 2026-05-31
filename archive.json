@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-04-14T02:39:32.132595+00:00",
+  "timestamp": "2026-05-31T03:56:54.747694+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -2408,6 +2408,32 @@
       "mergeCommit": {
         "oid": "1e6d1b36b6ca5adfe0500b8967baf5270e792759"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 73,
+      "id": "PR_kwDOKVF77M7g1Xb0",
+      "title": "Add WGLC comments",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/73",
+      "state": "OPEN",
+      "author": "buraglio",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-05-29T23:08:33Z",
+      "updatedAt": "2026-05-30T15:17:40Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "1e6d1b36b6ca5adfe0500b8967baf5270e792759",
+      "headRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "headRefName": "ndb-12-update",
+      "headRefOid": "800338068c83e7f4bfde86975ea316b1196eab82",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
