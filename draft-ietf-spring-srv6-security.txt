@@ -5,14 +5,14 @@
 Source Packet Routing in Networking                          N. Buraglio
 Internet-Draft                                   Energy Sciences Network
 Intended status: Informational                                T. Mizrahi
-Expires: 15 October 2026                                          Huawei
+Expires: 25 December 2026                                         Huawei
                                                                  T. Tong
                                                             China Unicom
                                                          L. M. Contreras
                                                               Telefonica
                                                                  F. Gont
                                                             SI6 Networks
-                                                           13 April 2026
+                                                            23 June 2026
 
 
               Segment Routing IPv6 Security Considerations
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 October 2026.
+   This Internet-Draft will expire on 25 December 2026.
 
 Copyright Notice
 
@@ -279,6 +279,11 @@ Table of Contents
    a physical boundary.  Thus, hosts and servers on the same physical
    network are not part of the trusted domain unless explicitly brought
    under its controls.
+
+   In cases where cryptographic security mechanisms are deployed within
+   or beneath the SRv6 data-plane (e.g., MACsec [MACsec] or the SRH HMAC
+   [RFC8754]), an attacker is considered external to the SRv6 domain if
+   they lack access to the corresponding cryptographic keys.
 
    Inter-SR-domain scenarios are out of scope, including cases where
    multiple SR instances exist under the same administrative entity but
@@ -1265,6 +1270,10 @@ Table of Contents
 
    [ITU-Sec]  "ITU-T M.3016.1, Security for the management plane:
               Security requirements", 2005.
+
+   [MACsec]   "IEEE Standard for Local and metropolitan area
+              networks–Media Access Control (MAC) Security", 2018,
+              <https://1.ieee802.org/security/802-1ae/>.
 
    [RFC3552]  Rescorla, E. and B. Korver, "Guidelines for Writing RFC
               Text on Security Considerations", BCP 72, RFC 3552,
