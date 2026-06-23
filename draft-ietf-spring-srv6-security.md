@@ -105,7 +105,7 @@ informative:
     title: IPv6 Routing Header Security
     target: https://airbus-seclab.github.io/ipv6/IPv6_RH_security-csw07.pdf
     date: 2007
-  MACsec: 
+  MACsec:
     title: "IEEE Standard for Local and metropolitan area networks–Media Access Control (MAC) Security"
     date: 2018
     target: https://1.ieee802.org/security/802-1ae/
