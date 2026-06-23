@@ -105,6 +105,10 @@ informative:
     title: IPv6 Routing Header Security
     target: https://airbus-seclab.github.io/ipv6/IPv6_RH_security-csw07.pdf
     date: 2007
+  MACsec: 
+    title: "IEEE Standard for Local and metropolitan area networks–Media Access Control (MAC) Security"
+    date: 2018
+    target: https://1.ieee802.org/security/802-1ae/
 
 --- abstract
 
@@ -202,6 +206,8 @@ The following figure depicts an example of an SR domain with five attacker types
 {: #threat-figure title="Threat Model Taxonomy"}
 
 This document uses the term "SR domain" as defined in [RFC8402]: "the set of nodes participating in the source-based routing model...". By default, [RFC8402] assumes operation "within a trusted domain" with traffic filtered at the domain boundaries, as further discussed in {{filtering}}. In this document, unless stated otherwise, the boundary that distinguishes internal from external attackers is the boundary of the SR domain, and the term trusted domain denotes an SR domain for which the boundary‑filtering assumption of [RFC8402] is in force. Note that the trusted domain is a logical/operational construct, not a physical boundary. Thus, hosts and servers on the same physical network are not part of the trusted domain unless explicitly brought under its controls.
+
+In cases where cryptographic security mechanisms are deployed within or beneath the SRv6 data-plane (e.g., MACsec [MACsec] or the SRH HMAC [RFC8754]), an attacker is considered external to the SRv6 domain if they lack access to the corresponding cryptographic keys.
 
 Inter‑SR‑domain scenarios are out of scope, including cases where multiple SR instances exist under the same administrative entity but are logically or operationally distinct; such cases are treated as separate SR domains for the purposes of this draft. Specifically, an attack on one domain that is invoked from within a different domain is considered an external attack in the context of the current document.
 
