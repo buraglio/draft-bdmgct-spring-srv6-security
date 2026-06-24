@@ -94,9 +94,9 @@ informative:
   RFC4381:
   RFC6241:
   RFC8040:
+  RFC9862:
   I-D.ietf-lsr-ospf-srv6-yang:
   I-D.ietf-lsr-isis-srv6-yang:
-  I-D.ietf-pce-segment-routing-policy-cp:
   I-D.ietf-idr-bgp-ls-sr-policy:
   ITU-Sec:
     title: "ITU-T M.3016.1, Security for the management plane: Security requirements"
@@ -118,8 +118,9 @@ SRv6 is a traffic engineering, encapsulation and steering mechanism utilizing IP
 
 # Introduction
 
-Segment Routing (SR) [RFC8402] utilizing an IPv6 data plane is a source routing model that leverages an IPv6 underlay. It uses an IPv6 extension header called the Segment Routing Header (SRH) [RFC8754]. This header is used to signal and control the forwarding and path of packets by imposing an ordered list of
-segments that are processed at each hop along the signaled path. SRv6 is fundamentally bound to the IPv6 protocol and introduces the aforementioned new extension header. There are security considerations which must be noted or addressed in order to operate an SRv6 network in a reliable and secure manner.
+Segment Routing (SR) [RFC8402] utilizing an IPv6 data plane is a source routing model that leverages an IPv6 underlay. It uses an IPv6 extension header called the Segment Routing Header (SRH) [RFC8754]. This header is used to signal and control the forwarding and path of packets by imposing an ordered list of segments that are processed at each addressed node along the path.
+SRv6 is fundamentally bound to the IPv6 protocol and introduces the aforementioned new extension header. There are security considerations which must be noted or addressed in order to operate an SRv6 network in a reliable and secure manner.
+
 Specifically, some primary properties of SRv6 that affect the security considerations are:
 
    *  SRv6 may use the SRH which is a type of Routing Extension Header defined by [RFC8754].
@@ -148,7 +149,7 @@ The following IETF RFCs were selected for security assessment as part of this ef
    * [RFC9524] : Segment Routing Replication for Multipoint Service Delivery
    * [RFC9800] : Compressed SRv6 Segment List Encoding
 
-We note that SRv6 is under active development and, as such, the above documents might not cover all protocols employed in an SRv6 deployment.
+Inter-Domain Segment Routing scenarios are out of scope for this document as are existing and future protocol specific IPv6 vulnerabilities. Additionally, we note that SRv6 is under active development and, as such, the above documents might not cover all protocols employed in an SRv6 deployment.
 
 # Conventions and Definitions
 
@@ -165,6 +166,8 @@ We note that SRv6 is under active development and, as such, the above documents 
 - SRH: Segment Routing Header [RFC8754]
 
 - SRv6: Segment Routing over IPv6 [RFC8402]
+
+- MACsec: MAC Security [MACsec]
 
 # Threat Terminology {#threat}
 
@@ -244,8 +247,7 @@ Packet manipulation and processing attacks can be implemented by performing a se
 - Packet deletion: by intercepting and removing packets from the network, an attacker prevents these packets from reaching their destination. Selective removal of packets may, in some cases, cause more severe damage than random packet loss.
 - Packet modification: the attacker modifies packets during transit.
 
-This section describes attacks that are based on packet manipulation and processing, as well as attacks performed by other means. While it is possible for packet manipulation and processing attacks against all the fields of the IPv6 header and its extension headers, this document limits itself to the IPv6 header and the SRH.
-
+This section describes attacks that are based on packet manipulation and processing, as well as attacks performed by other means. While packet manipulation and processing attacks are possible against all the fields of the IPv6 header and its extension headers, this document limits itself to attacks on the IPv6 header and the SRH.
 ## Data Plane Attacks
 
 ### Modification Attack {#modification}
@@ -260,7 +262,7 @@ A modification attack can be performed in one or more of the following ways:
 - Add/remove SRH: an attacker can insert or remove an SRH.
 - SRH TLV: adding, removing or modifying TLV fields in the SRH.
 
-The SR modification attack is performed by an on-path attacker who has access to packets in transit and can implement these attacks directly. SR modification is relatively easy to implement and requires low processing resources. However, it facilitates more complex on-path attacks by redirecting traffic to another node that the attacker has access to with more processing resources.
+The SR modification attack is performed by an on-path attacker who has access to packets in transit and can implement these attacks directly. SR modification is relatively easy to implement and requires low processing resources. However, it facilitates more complex on-path attacks by redirecting traffic to another node, with more processing resources, that the attacker has access to.
 
 An on-path internal attacker can also modify, insert, or delete other extension headers but these are outside the scope of this document.
 
@@ -357,7 +359,7 @@ Attacks targeting OAM protocols may impact network availability or facilitate un
 ### Central Control Plane Attacks
 
 #### Overview
-Centralized control plane architectures, such as those based on the Path Computation Element (PCE) {{RFC4655}} and PCE as a Central Controller (PCECC) {{RFC8283}}, inherently introduce a single point of failure. This centralization may present a security vulnerability, particularly with respect to denial-of-service (DoS) attacks targeting the controller. Furthermore, the central controller becomes a focal point for potential interception or manipulation of control messages exchanged with individual Network Elements (NEs), thereby increasing the risk of compromise to the overall network control infrastructure.
+Centralized control plane architectures, such as those based on the Path Computation Element (PCE) [RFC4655] and PCE as a Central Controller (PCECC) [RFC8283], inherently introduce a focal point for attacks against the controller, such as denial-of-service (DoS), or attacks against one or many network element(s) under control of the PCE/PCCC in an SR domain, thereby increasing the risk of compromise to the overall network control infrastructure.
 
 #### Scope
 As with other control plane attacks, an off-path attacker may attempt to inject forged control messages or impersonate a legitimate controller. On-path attackers, by virtue of their position within the communication path, possess additional capabilities such as passive interception of control traffic and in-transit modification of messages exchanged between the controller and Network Elements (NEs).
@@ -514,7 +516,7 @@ Mitigation strategies for control plane attacks depend heavily on the specific p
 
 Routing protocols can employ authentication and/or encryption to protect against modification, injection, and replay attacks, as outlined in [RFC6518]. These mechanisms are essential for maintaining the integrity and authenticity of control plane communications.
 
-In centralized SRv6 control plane architectures, such as those described in {{I-D.ietf-pce-segment-routing-policy-cp}}, it is recommended that communication between PCEs and PCCs be secured using authenticated and encrypted sessions. This is typically achieved using Transport Layer Security (TLS), following the guidance in [RFC8253] and best practices in [RFC9325].
+In centralized SRv6 control plane architectures, such as those described in {{RFC9862}}, it is recommended that communication between PCEs and PCCs be secured using authenticated and encrypted sessions. This is typically achieved using Transport Layer Security (TLS), following the guidance in [RFC8253] and best practices in [RFC9325].
 
 When the O-flag is used for Operations, Administration, and Maintenance (OAM) functions, as defined in [RFC9259], implementations should enforce rate limiting to mitigate potential denial-of-service (DoS) attacks triggered by excessive control plane signaling. Furthermore, if the HMAC TLV is used, it provides integrity protection of the O-flag as described in {{hmac}}.
 
@@ -532,6 +534,10 @@ The Network Configuration Access Control Model (NACM) [RFC8341] provides the mea
 
 SRv6-specific YANG modules should be designed with the same security considerations applied to all YANG-based models. Writable nodes must be protected using access control mechanisms such as NACM and secured transport protocols like SSH or TLS to prevent unauthorized configuration changes. Readable nodes that expose sensitive operational data should be access-controlled and transmitted only over encrypted channels to mitigate the risk of information leakage.
 
+## Layer 2 Mitigation
+
+In some circumstances it may be possible to mitigate passive listening and packet insertion by leveraging [MACsec] to encrypt traffic at the media access control (MAC) layer by using encryption between two connected devices. This methodology prevents unauthorized access to traffic over a given point to point path by encrypting and authenticating data in flight/DOS at Layer 2 of the OSI model. Much like the encryption mechanisms noted for protocol communication and management access, this level of protection can provide integrity and authenticity to all higher layer communications over a given layer 2 path.
+
 ## Mitigations - Summary
 The following table summarizes the possible mitigation methods for each of the attacks that were described in the previous section.
 
@@ -542,19 +548,23 @@ The following table summarizes the possible mitigation methods for each of the a
 | Modification attack (6.2.1)   | Trusted domains and filtering (7.1)|
 |                               | Encapsulation of packets (7.2)     |
 |                               | HMAC (7.3)                         |
+|                               | MACsec (7.6)                       |
 +-------------------------------+------------------------------------+
 | Passive listening (6.2.2)     | Trusted domains and filtering (7.1)|
 |                               | Encapsulation of packets (7.2)     |
+|                               | MACsec (7.6)                       |
 +-------------------------------+------------------------------------+
 | Packet insertion and          | Trusted domains and filtering (7.1)|
 | replaying (6.2.3)             | Encapsulation of packets (7.2)     |
 |                               | HMAC (7.3)                         |
+|                               | MACsec (7.6)                       |
 +-------------------------------+------------------------------------+
 | Control plane attacks (6.3)   | Control plane mitigations (7.4)    |
+|                               | MACsec (7.6)                       |
 +-------------------------------+------------------------------------+
 | Management plane attacks (6.4)| Management plane mitigations (7.5) |
+|                               | MACsec (7.6)                       |
 +-------------------------------+------------------------------------+
-
 ~~~~~~~~~~~
 {: #mitigation-table title="Summary of Mitigation Methods for each of the Attacks"}
 
@@ -563,7 +573,7 @@ The following table summarizes the possible mitigation methods for each of the a
 ## Middle Box Filtering Issues
 When an SRv6 packet is forwarded in the SRv6 domain, its IPv6 destination address is modified in each segment and the final destination address is not available in the IPv6 header. Security devices on SRv6 networks may not learn the real destination address and incorrectly perform access control on some SRv6 traffic.
 
-The security devices on SRv6 networks need to take care of SRv6 packets. However, SRv6 packets are often encapsulated by an SR ingress device with an IPv6 encapsulation that has the loopback address of the SR ingress device as a source address. As a result, the address information of SR packets may be asymmetric, resulting in improper traffic filter problems, which affects the effectiveness of security devices.
+The security devices operating in SRv6 enabled networks need to understand and have the capability to process SRv6 packets. However, SRv6 packets are often encapsulated by an SR ingress device with an IPv6 encapsulation that has the loopback address of the SR ingress device as a source address. As a result, the address information of SR packets may be asymmetric, resulting in improper traffic filter problems, which affects the effectiveness of security devices.
 For example, along the forwarding path in SRv6 network, the SR-aware firewall will check the association relationships of the bidirectional VPN traffic packets. It is therefore able to retrieve the final destination of an SRv6 packet from the last entry in the SRH. When the <source, destination> tuple of the packet from PE1 (Provider Edge 1) to PE2 is <PE1-IP-ADDR, PE2-VPN-SID>, and the other direction is <PE2-IP-ADDR, PE1-VPN-SID>, the source address and destination address of the forward and backward traffic are regarded as different flows. Thus, legitimate traffic may be blocked by the firewall. Consistent with Section 3.5.2.4 of [RFC9288], operators should avoid dropping packets that carry the SRH (Routing Type 4) within an SR domain and instead deploy filtering policies at transit routers that preserve SRv6 forwarding semantics.
 
 Forwarding SRv6 traffic through devices that are not SRv6-aware might in some cases lead to unpredictable behavior. Security appliances, monitoring systems, and middle boxes could react in different ways if they lack support for SRv6 mechanisms, such as the Segment Routing Header (SRH) [RFC8754]. Additionally, implementation limitations in the processing of IPv6 packets with extension headers may result in SRv6 packets being dropped [RFC7872],[RFC9098].
@@ -587,4 +597,4 @@ This document has no IANA actions.
 # Acknowledgments
 {:numbered="false"}
 
-The authors would like to acknowledge the valuable input and contributions from Zafar Ali, Andrew Alston, Dale Carder, Bruno Decraene, Dhruv Dhody, Mike Dopheide, Darren Dukes, Linda Dunbar, Joel Halpern, Boris Hassanov, Tom Hill, Suresh Krishnan, Sam Oehlert, Alvaro Retana, Eric Vyncke, and Russ White.
+The authors would like to acknowledge the valuable input and contributions from Zafar Ali, Andrew Alston, Dale Carder, Weiqiang Cheng, Bruno Decraene, Dhruv Dhody, Mike Dopheide, Darren Dukes, Linda Dunbar, Joel Halpern, Boris Hassanov, Tom Hill, Suresh Krishnan, Sam Öehlert, Alvaro Retana, Andrew Stone, Bala'zs Vargas, Eric Vyncke, and Russ White.
