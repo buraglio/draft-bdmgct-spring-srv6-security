@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-06-04T04:06:25.317911+00:00",
+  "timestamp": "2026-06-25T03:38:24.500292+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -2416,24 +2416,26 @@
       "id": "PR_kwDOKVF77M7g1Xb0",
       "title": "Add WGLC comments",
       "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/73",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "buraglio",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-05-29T23:08:33Z",
-      "updatedAt": "2026-05-30T15:17:40Z",
+      "updatedAt": "2026-06-24T23:09:01Z",
       "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
       "baseRefName": "main",
       "baseRefOid": "1e6d1b36b6ca5adfe0500b8967baf5270e792759",
       "headRepository": "buraglio/draft-bdmgct-spring-srv6-security",
       "headRefName": "ndb-12-update",
-      "headRefOid": "800338068c83e7f4bfde86975ea316b1196eab82",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "6938edbfc1c7328827036a03d61b6e9dfa214d35",
+      "closedAt": "2026-06-24T23:09:01Z",
+      "mergedAt": "2026-06-24T23:09:01Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "d8fbb5c9b1d1592f57c5b05fe5222f5c2d279cf2"
+      },
       "comments": [],
       "reviews": []
     },
@@ -2442,26 +2444,42 @@
       "id": "PR_kwDOKVF77M7iF7Pn",
       "title": "Added text about MACsec",
       "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/74",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "talmi",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Added MACsec security standard reference and clarified external attacker definition in SRv6 context. In response to this comment by Balazs:\r\nhttps://mailarchive.ietf.org/arch/msg/spring/ddrdwYvK4oJRSJQDKcTBqLDS7nI/",
       "createdAt": "2026-06-03T06:14:59Z",
-      "updatedAt": "2026-06-03T06:14:59Z",
+      "updatedAt": "2026-06-23T17:17:44Z",
       "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
       "baseRefName": "main",
       "baseRefOid": "1e6d1b36b6ca5adfe0500b8967baf5270e792759",
       "headRepository": "talmi/draft-bdmgct-spring-srv6-security",
       "headRefName": "macsec-update",
       "headRefOid": "5d6aaa6ddda8ccfa1c5a83f1d5733aaf4d4251e2",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-06-23T17:17:43Z",
+      "mergedAt": "2026-06-23T17:17:43Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "4e0b17d8fa4bc17ead7417fd3bd209ca561929ec"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOKVF77M8AAAABD4g-_A",
+          "commit": {
+            "abbreviatedOid": "5d6aaa6"
+          },
+          "author": "buraglio",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-06-23T17:17:36Z",
+          "updatedAt": "2026-06-23T17:17:36Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
