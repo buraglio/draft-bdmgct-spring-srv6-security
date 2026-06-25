@@ -5,14 +5,14 @@
 Source Packet Routing in Networking                          N. Buraglio
 Internet-Draft                                   Energy Sciences Network
 Intended status: Informational                                T. Mizrahi
-Expires: 26 December 2026                                         Huawei
+Expires: 27 December 2026                                         Huawei
                                                                  T. Tong
                                                             China Unicom
                                                          L. M. Contreras
                                                               Telefonica
                                                                  F. Gont
                                                             SI6 Networks
-                                                            24 June 2026
+                                                            25 June 2026
 
 
               Segment Routing IPv6 Security Considerations
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 December 2026.
+   This Internet-Draft will expire on 27 December 2026.
 
 Copyright Notice
 
@@ -291,13 +291,12 @@ Table of Contents
    [RFC8754]), an attacker is considered external to the SRv6 domain if
    they lack access to the corresponding cryptographic keys.
 
-   Inter-SR-domain scenarios are out of scope, including cases where
-   multiple SR instances exist under the same administrative entity but
-   are logically or operationally distinct; such cases are treated as
-   separate SR domains for the purposes of this draft.  Specifically, an
-   attack on one domain that is invoked from within a different domain
-   is considered an external attack in the context of the current
-   document.
+   SRv6 deployments that exceed their trusted domain (per [RFC8402],
+   Section 8) including cases where multiple SR instances exist under
+   the same administrative entity, but are logically or operationally
+   distinct, are out of the scope of this document.  Where an attack
+   originates from within a different trusted domain it is considered an
+   external attack in the context of this document.
 
 5.  Effect
 
