@@ -212,7 +212,7 @@ This document uses the term "SR domain" as defined in [RFC8402]: "the set of nod
 
 In cases where cryptographic security mechanisms are deployed within or beneath the SRv6 data-plane (e.g., MACsec [MACsec] or the SRH HMAC [RFC8754]), an attacker is considered external to the SRv6 domain if they lack access to the corresponding cryptographic keys.
 
-Inter‑SR‑domain scenarios are out of scope, including cases where multiple SR instances exist under the same administrative entity but are logically or operationally distinct; such cases are treated as separate SR domains for the purposes of this draft. Specifically, an attack on one domain that is invoked from within a different domain is considered an external attack in the context of the current document.
+SRv6 deployments that exceed their trusted domain (per [RFC8402], Section 8) including cases where multiple SR instances exist under the same administrative entity, but are logically or operationally distinct, are out of the scope of this document. Where an attack originates from within a different trusted domain it is considered an external attack in the context of this document.
 
 # Effect {#sec-effect}
 
