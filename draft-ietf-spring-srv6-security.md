@@ -248,6 +248,7 @@ Packet manipulation and processing attacks can be implemented by performing a se
 - Packet modification: the attacker modifies packets during transit.
 
 This section describes attacks that are based on packet manipulation and processing, as well as attacks performed by other means. While packet manipulation and processing attacks are possible against all the fields of the IPv6 header and its extension headers, this document limits itself to attacks on the IPv6 header and the SRH.
+
 ## Data Plane Attacks
 
 ### Modification Attack {#modification}
@@ -331,7 +332,7 @@ Active attacks involve the unauthorized injection or alteration of control plane
 
 For example, an attacker may advertise falsified SIDs to manipulate SR policies. Another example in the context of SRv6 is the advertisement of an incorrect Maximum SID Depth (MSD) value {{RFC8476}}. If the advertised MSD is lower than the actual capability, path computation may fail to compute a viable path. Conversely, if the value is higher than supported, an attempt to instantiate a path that cannot be supported by the head-end (the node performing the SID imposition) may occur.
 
-An additional case could be the manipulation of backup paths {{RFC8355}}, where the attacker could alter the SIDs defining such backup path then directing traffic over suboptimal or compromised paths, enabling eavesdropping, traffic analysis, or selective denial of service, compromising the service integrity and confidentiality if traffic is diverted to unauthorized nodes or paths.
+An additional case could be the manipulation of backup paths {{RFC8355}}, where the attacker could alter the SIDs defining such backup path, then directing traffic over suboptimal or compromised paths, enabling eavesdropping, traffic analysis, or selective denial of service, compromising the service integrity and confidentiality if traffic is diverted to unauthorized nodes or paths.
 
 Finally, in situations of interworking with other domains, as for BGP Egress Peer Engineering (BGP-EPE) {{RFC9087}} an attacker injecting malicious BGP-EPE policies may steer traffic through unauthorized peers or paths. This facilitates interception, traffic analysis, or denial of service. Attackers gaining access to the BGP-EPE controller can manipulate SRv6 route selection and segment lists, compromising network integrity and confidentiality.
 
@@ -487,12 +488,9 @@ Filtering on prefixes has been shown to be useful, specifically [RFC8754]'s desc
 
 ## Encapsulation of Packets {#encap}
 
-Packets steered within an SR domain are typically encapsulated using IPv6. Encapsulation at the SR ingress node, followed by decapsulation at the SR egress node and forwarding of the inner packet without lookup, provides two key benefits:
-
-- Mitigates external attacker capabilities against the domain
-- Supports encapsulation of both IPv4 and IPv6 packets
-
-Practices outlined in Section 5 of [RFC8754] should be followed to ensure exclusivity of use for any prefix configured within the trusted domain.
+In SRv6 deployments, an operator may steer traffic using IPv6-in-IPv6 encapsulation, imposing a new outer IPv6 header and SRH at the SR ingress node rather than processing SRH/SIDs on packets received directly from untrusted-facing interfaces.This is a specific case of the trusted-domain filtering discussed in Section 7.1: because the outer header and SRH are always originated by a trusted node, forwarding decisions within the domain never depend on header fields supplied by an untrusted source. Decapsulating and forwarding the inner packet without a second lookup at the SR egress node also prevents internal SR-domain information such as segment lists, SIDs, and/or TLVs from being exposed beyond the domain boundary.
+As discussed in Section 7.1.2, this practice also addresses the case of a packet carrying an SRH while only transiting rather than terminating within the domain. Encapsulation does not by itself protect against an attacker capable of injecting packets that satisfy the domain's boundary-filtering criteria (Section 7.1.3); it is complementary to, but not a substitute for, boundary filtering.
+Practices outlined in Section 5 of [RFC8754] describe this deployment model, including the address-range exclusivity assumptions its security properties depend on.
 
 ## Hashed Message Authentication Code (HMAC) {#hmac}
 
@@ -507,6 +505,7 @@ The following aspects of the HMAC should be considered:
 - When the HMAC is used there is a distinction between an attacker who becomes internal by having physical access, for example by plugging into an active port of a network device, and an attacker who has full access to a legitimate network node, including for example encryption keys if the network is encrypted. The latter type of attacker is an internal attacker who can perform any of the attacks that were described in the previous section as relevant to internal attackers.
 - For the lifetime of the pre-shared key validity, an internal attacker who does not have access to the pre-shared key can capture legitimate packets, and later replay the SRH and HMAC from these recorded packets. This allows the attacker to insert the previously recorded SRH and HMAC into a newly injected packet. An on-path internal attacker can also replace the SRH of an in-transit packet with a different SRH that was previously captured.
 - In cases where an SRH carries policy semantics, care should be taken to understand the implications of malformed SRH, invalid TLVs, and authentication failures.
+- An HMAC TLV as defined in section 2.1.2 of [RFC8754] covers Source Address, Last Entry, flags, and the segment list, excluding Segments Left. This could be used by an on-path attacker without the HMAC key to tamper with Segments Left alone, potentially redirecting which segment in an otherwise HMAC-valid list gets treated as active without invalidating the HMAC.
 
 These considerations limit the extent to which HMAC TLV can be relied upon as a security mechanism that could readily mitigate threats associated with spoofing and tampering protection for the IPv6 SRH.
 
@@ -570,13 +569,13 @@ The following table summarizes the possible mitigation methods for each of the a
 
 # Operational and Filtering Considerations
 
-## Middle Box Filtering Issues
+## MiddleBox Filtering Issues
 When an SRv6 packet is forwarded in the SRv6 domain, its IPv6 destination address is modified in each segment and the final destination address is not available in the IPv6 header. Security devices on SRv6 networks may not learn the real destination address and incorrectly perform access control on some SRv6 traffic.
 
 The security devices operating in SRv6 enabled networks need to understand and have the capability to process SRv6 packets. However, SRv6 packets are often encapsulated by an SR ingress device with an IPv6 encapsulation that has the loopback address of the SR ingress device as a source address. As a result, the address information of SR packets may be asymmetric, resulting in improper traffic filter problems, which affects the effectiveness of security devices.
 For example, along the forwarding path in SRv6 network, the SR-aware firewall will check the association relationships of the bidirectional VPN traffic packets. It is therefore able to retrieve the final destination of an SRv6 packet from the last entry in the SRH. When the <source, destination> tuple of the packet from PE1 (Provider Edge 1) to PE2 is <PE1-IP-ADDR, PE2-VPN-SID>, and the other direction is <PE2-IP-ADDR, PE1-VPN-SID>, the source address and destination address of the forward and backward traffic are regarded as different flows. Thus, legitimate traffic may be blocked by the firewall. Consistent with Section 3.5.2.4 of [RFC9288], operators should avoid dropping packets that carry the SRH (Routing Type 4) within an SR domain and instead deploy filtering policies at transit routers that preserve SRv6 forwarding semantics.
 
-Forwarding SRv6 traffic through devices that are not SRv6-aware might in some cases lead to unpredictable behavior. Security appliances, monitoring systems, and middle boxes could react in different ways if they lack support for SRv6 mechanisms, such as the Segment Routing Header (SRH) [RFC8754]. Additionally, implementation limitations in the processing of IPv6 packets with extension headers may result in SRv6 packets being dropped [RFC7872],[RFC9098].
+Forwarding SRv6 traffic through devices that are not SRv6-aware might in some cases lead to unpredictable behavior. Security appliances, monitoring systems, and middleboxes could react in different ways if they lack support for SRv6 mechanisms, such as the Segment Routing Header (SRH) [RFC8754]. Additionally, implementation limitations in the processing of IPv6 packets with extension headers may result in SRv6 packets being dropped [RFC7872],[RFC9098].
 
 Upper-layer checksum calculations rely on a pseudo-header that includes the IPv6 Destination Address. [RFC8200] specifies that when the Routing header is present the upper-layer checksum is computed by the originating node based on the IPv6 address of the last element of the Routing header.  When compressed segment lists {{RFC9800}} are used, the last element of the Routing header may be different than the Destination Address as received by the final destination. Furthermore, compressed segment lists can be used in the Destination Address without the presence of a Routing header, and in this case the IPv6 Destination address can be modified along the path. As defined in {{RFC9800}}, the Destination Address used in the upper-layer checksum calculation is the address as expected to be received by the ultimate destination. As a result, some existing middleboxes which verify the upper-layer checksum might miscalculate the checksum.
 
