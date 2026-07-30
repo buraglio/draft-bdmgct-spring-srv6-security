@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-06-25T03:38:24.500292+00:00",
+  "timestamp": "2026-07-30T02:26:06.044191+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -2480,6 +2480,34 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 75,
+      "id": "PR_kwDOKVF77M73jpt6",
+      "title": "Adjustments per Tom Hill",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/75",
+      "state": "MERGED",
+      "author": "buraglio",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-07-28T16:31:41Z",
+      "updatedAt": "2026-07-28T16:33:57Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "93dc9a28de131b4e29482ac3c9efb349c41127be",
+      "headRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "headRefName": "ndb-14-update",
+      "headRefOid": "df2774380cfc07c8b93f3291fdb66124dc86ba55",
+      "closedAt": "2026-07-28T16:33:57Z",
+      "mergedAt": "2026-07-28T16:33:57Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "089acee2ddb0698fe2b6bf33da12848519d74076"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
