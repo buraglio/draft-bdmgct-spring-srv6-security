@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-07-30T02:26:06.044191+00:00",
+  "timestamp": "2026-08-20T01:14:00.551437+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -2506,6 +2506,32 @@
       "mergeCommit": {
         "oid": "089acee2ddb0698fe2b6bf33da12848519d74076"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 76,
+      "id": "PR_kwDOKVF77M8AAAABAURYOg",
+      "title": "Update to address chair findings:",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/76",
+      "state": "OPEN",
+      "author": "buraglio",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "- You still have the RFC2119 boilerplate, but there are no keywords used in the text (except for quotes), so we can delete it.\r\n\r\n- The draft reference draft-ietf-idr-bgp-ls-sr-policy is stale. It was replaced by rfc9857.\r\n\r\n- RFC 8446 is obsolete and has been replaced by: RFC9846",
+      "createdAt": "2026-08-19T17:50:46Z",
+      "updatedAt": "2026-08-19T17:50:46Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "089acee2ddb0698fe2b6bf33da12848519d74076",
+      "headRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "headRefName": "ndb-17-updates",
+      "headRefOid": "9de9e6590266743eaf5821e8af7301e5362f6c28",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
