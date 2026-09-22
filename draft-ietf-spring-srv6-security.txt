@@ -79,8 +79,7 @@ Table of Contents
 
    1.  Introduction
    2.  Scope of this Document
-   3.  Conventions and Definitions
-     3.1.  Terminology
+   3.  Terminology
    4.  Threat Terminology
    5.  Effect
    6.  Attacks
@@ -107,7 +106,7 @@ Table of Contents
      7.3.  Hashed Message Authentication Code (HMAC)
      7.4.  Control Plane Mitigation Methods
      7.5.  Management Plane Mitigation Methods
-     7.6.  Layer 2 Mitigation
+     7.6.  Layer 2 Mitigation (MACsec)
      7.7.  Mitigations - Summary
    8.  Operational and Filtering Considerations
      8.1.  MiddleBox Filtering Issues
@@ -191,9 +190,7 @@ Table of Contents
    development and, as such, the above documents might not cover all
    protocols employed in an SRv6 deployment.
 
-3.  Conventions and Definitions
-
-3.1.  Terminology
+3.  Terminology
 
    *  HMAC TLV: Hashed Message Authentication Code Type Length Value
       [RFC8754]
@@ -245,7 +242,7 @@ Table of Contents
    control plane, as it is located along the path between the PCECC and
    SR endpoint 1.
 
-  1.on-path   2.on-path   3.cont.  PCE as a Central  4.off-path 5.off-path
+  1.on-path   2.on-path   3.control PCE as a Central  4.off-path 5.off-path
   external    internal    plane    Controller        internal   external
   attacker    attacker    on-path  (PCECC)           attacker   attacker
        |            |           |        |            |          |
@@ -1081,18 +1078,19 @@ Table of Contents
    operational data should be access-controlled and transmitted only
    over encrypted channels to mitigate the risk of information leakage.
 
-7.6.  Layer 2 Mitigation
+7.6.  Layer 2 Mitigation (MACsec)
 
    In some circumstances it may be possible to mitigate passive
    listening and packet insertion by leveraging [MACsec] to encrypt
    traffic at the media access control (MAC) layer by using encryption
    between two connected devices.  This methodology prevents
    unauthorized access to traffic over a given point to point path by
-   encrypting and authenticating data in flight/DOS at Layer 2 of the
-   OSI model.  Much like the encryption mechanisms noted for protocol
-   communication and management access, this level of protection can
-   provide integrity and authenticity to all higher layer communications
-   over a given layer 2 path.
+   encrypting and authenticating data in transit at Layer 2, which
+   prevents passive interception and mitigates packet-insertion DoS from
+   unauthorized on-path nodes.  Much like the encryption mechanisms
+   noted for protocol communication and management access, this level of
+   protection can provide integrity and authenticity to all higher layer
+   communications over a given layer 2 path.
 
 7.7.  Mitigations - Summary
 
