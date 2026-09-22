@@ -13,23 +13,23 @@
 <meta content="
        SRv6 is a traffic engineering, encapsulation and steering mechanism utilizing IPv6 addresses to identify segments in a pre-defined policy. This document discusses security considerations in SRv6 networks, including the potential threats and the possible mitigation methods. The document does not define any new security protocols or extensions to existing protocols. 
     " name="description">
-<meta content="xml2rfc 3.34.0" name="generator">
+<meta content="xml2rfc 3.34.1" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ietf-spring-srv6-security-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.34.0
-    Python 3.14.5
-    ConfigArgParse 1.7.5
+  xml2rfc 3.34.1
+    Python 3.14.7
+    ConfigArgParse 1.7.7
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.1.1
     natsort 8.4.0
-    platformdirs 4.10.1
+    platformdirs 4.11.10
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
-    wcwidth 0.8.2
+    wcwidth 0.8.4
 -->
 <link href="draft-ietf-spring-srv6-security.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -65,7 +65,6 @@
   src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin-ext.woff2') format('woff2');
   unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
-
 @font-face {
   font-family: 'Lora';
   font-style: italic;
@@ -114,7 +113,6 @@
   src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-
 @font-face {
   font-family: 'Lora';
   font-style: normal;
@@ -179,7 +177,6 @@
   font-display: swap;
   src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
 }
 
 @font-face {
@@ -1048,11 +1045,11 @@ svg {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">Segment Routing IPv6 Security Considerat</td>
-<td class="right">July 2026</td>
+<td class="right">September 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Buraglio, et al.</td>
-<td class="center">Expires 29 January 2027</td>
+<td class="center">Expires 26 March 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1065,12 +1062,12 @@ svg {
 <dd class="internet-draft">draft-ietf-spring-srv6-security-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-07-28" class="published">28 July 2026</time>
+<time datetime="2026-09-22" class="published">22 September 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-01-29">29 January 2027</time></dd>
+<dd class="expires"><time datetime="2027-03-26">26 March 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1136,7 +1133,7 @@ svg {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 29 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 26 March 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1175,10 +1172,7 @@ svg {
             <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-conventions-and-definitions" class="internal xref">Conventions and Definitions</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
-                <p id="section-toc.1-1.3.2.1.1" class="keepWithNext"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-requirements-language" class="internal xref">Requirements Language</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
-                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-terminology" class="internal xref">Terminology</a></p>
+                <p id="section-toc.1-1.3.2.1.1" class="keepWithNext"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-terminology" class="internal xref">Terminology</a></p>
 </li>
             </ul>
 </li>
@@ -1383,37 +1377,26 @@ The capability to operate in environments that may have gaps in SRv6 support all
       <h2 id="name-conventions-and-definitions">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-conventions-and-definitions" class="section-name selfRef">Conventions and Definitions</a>
       </h2>
-<div id="requirements-language">
-<section id="section-3.1">
-        <h3 id="name-requirements-language">
-<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-requirements-language" class="section-name selfRef">Requirements Language</a>
-        </h3>
-<p id="section-3.1-1">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
-"<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
-described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
-appear in all capitals, as shown here.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
-</section>
-</div>
 <div id="terminology">
-<section id="section-3.2">
+<section id="section-3.1">
         <h3 id="name-terminology">
-<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-terminology" class="section-name selfRef">Terminology</a>
+<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-terminology" class="section-name selfRef">Terminology</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="section-3.2-1.1">
-            <p id="section-3.2-1.1.1">HMAC TLV: Hashed Message Authentication Code Type Length Value <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span><a href="#section-3.2-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-3.1-1.1">
+            <p id="section-3.1-1.1.1">HMAC TLV: Hashed Message Authentication Code Type Length Value <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span><a href="#section-3.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-3.2-1.2">
-            <p id="section-3.2-1.2.1">SID: Segment Identifier <span>[<a href="#RFC8402" class="cite xref">RFC8402</a>]</span><a href="#section-3.2-1.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-3.1-1.2">
+            <p id="section-3.1-1.2.1">SID: Segment Identifier <span>[<a href="#RFC8402" class="cite xref">RFC8402</a>]</span><a href="#section-3.1-1.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-3.2-1.3">
-            <p id="section-3.2-1.3.1">SRH: Segment Routing Header <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span><a href="#section-3.2-1.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-3.1-1.3">
+            <p id="section-3.1-1.3.1">SRH: Segment Routing Header <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span><a href="#section-3.1-1.3.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-3.2-1.4">
-            <p id="section-3.2-1.4.1">SRv6: Segment Routing over IPv6 <span>[<a href="#RFC8402" class="cite xref">RFC8402</a>]</span><a href="#section-3.2-1.4.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-3.1-1.4">
+            <p id="section-3.1-1.4.1">SRv6: Segment Routing over IPv6 <span>[<a href="#RFC8402" class="cite xref">RFC8402</a>]</span><a href="#section-3.1-1.4.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-3.2-1.5">
-            <p id="section-3.2-1.5.1">MACsec: MAC Security <span>[<a href="#MACsec" class="cite xref">MACsec</a>]</span><a href="#section-3.2-1.5.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-3.1-1.5">
+            <p id="section-3.1-1.5.1">MACsec: MAC Security <span>[<a href="#MACsec" class="cite xref">MACsec</a>]</span><a href="#section-3.1-1.5.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
@@ -1962,10 +1945,11 @@ ingress nodes is intended to mitigate modification and insertion attacks, while 
               <p id="section-7.1.2-2.1.1">The SRH is optional for SID processing as described in <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span> section 3.1 and 4.1.<a href="#section-7.1.2-2.1.1" class="pilcrow">¶</a></p>
 </li>
             <li id="section-7.1.2-2.2">
-              <p id="section-7.1.2-2.2.1">A packet containing an SRH may not be destined to the SR domain, as it may be simply transiting the domain. Therefore, filtering solely based on the presence of an SRH, at either SR ingress or SR egress, is not necessarily recommended. Instead, this scenario is mitigated by encapsulating packets on the domain boundary, as discussed in <a href="#encap" class="auto internal xref">Section 7.2</a>. While inter-SR-domain scenarios are a violation of the trust model described above, the operational practices recommended here aim to preserve interoperability and avoid blanket behaviors that would break SR when adjacent networks follow different practices.<a href="#section-7.1.2-2.2.1" class="pilcrow">¶</a></p>
+              <p id="section-7.1.2-2.2.1">A packet containing an SRH may not be destined to the SR domain, as it may be simply transiting the domain.<a href="#section-7.1.2-2.2.1" class="pilcrow">¶</a></p>
 </li>
           </ol>
-<p id="section-7.1.2-3">For these reasons SRH filtering is not necessarily a useful method of mitigation.<a href="#section-7.1.2-3" class="pilcrow">¶</a></p>
+<p id="section-7.1.2-3">Therefore, filtering solely based on the presence of an SRH, at either SR ingress or SR egress, is not necessarily recommended. Instead, this scenario is mitigated by encapsulating packets on the domain boundary, as discussed in <a href="#encap" class="auto internal xref">Section 7.2</a>. While inter-SR-domain scenarios are a violation of the trust model described above, the operational practices recommended here aim to preserve interoperability and avoid blanket behaviors that would break SR when adjacent networks follow different practices.<a href="#section-7.1.2-3" class="pilcrow">¶</a></p>
+<p id="section-7.1.2-4">For these reasons SRH filtering is not necessarily a useful method of mitigation.<a href="#section-7.1.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="address-range-filtering">
@@ -2052,7 +2036,7 @@ Practices outlined in Section 5 of <span>[<a href="#RFC8754" class="cite xref">
 <p id="section-7.4-2">Routing protocols can employ authentication and/or encryption to protect against modification, injection, and replay attacks, as outlined in <span>[<a href="#RFC6518" class="cite xref">RFC6518</a>]</span>. These mechanisms are essential for maintaining the integrity and authenticity of control plane communications.<a href="#section-7.4-2" class="pilcrow">¶</a></p>
 <p id="section-7.4-3">In centralized SRv6 control plane architectures, such as those described in <span>[<a href="#RFC9862" class="cite xref">RFC9862</a>]</span>, it is recommended that communication between PCEs and PCCs be secured using authenticated and encrypted sessions. This is typically achieved using Transport Layer Security (TLS), following the guidance in <span>[<a href="#RFC8253" class="cite xref">RFC8253</a>]</span> and best practices in <span>[<a href="#RFC9325" class="cite xref">RFC9325</a>]</span>.<a href="#section-7.4-3" class="pilcrow">¶</a></p>
 <p id="section-7.4-4">When the O-flag is used for Operations, Administration, and Maintenance (OAM) functions, as defined in <span>[<a href="#RFC9259" class="cite xref">RFC9259</a>]</span>, implementations should enforce rate limiting to mitigate potential denial-of-service (DoS) attacks triggered by excessive control plane signaling. Furthermore, if the HMAC TLV is used, it provides integrity protection of the O-flag as described in <a href="#hmac" class="auto internal xref">Section 7.3</a>.<a href="#section-7.4-4" class="pilcrow">¶</a></p>
-<p id="section-7.4-5">The control plane should be confined to a trusted administrative domain. As specified in <span>[<a href="#I-D.ietf-idr-bgp-ls-sr-policy" class="cite xref">I-D.ietf-idr-bgp-ls-sr-policy</a>]</span>, SR Policy information advertised via BGP should be restricted to authorized nodes, controllers, and applications within this domain. Similarly, the use of the O-flag is assumed to occur only within such a trusted environment, where the risk of abuse is minimized.<a href="#section-7.4-5" class="pilcrow">¶</a></p>
+<p id="section-7.4-5">The control plane should be confined to a trusted administrative domain. As specified in <span>[<a href="#RFC9857" class="cite xref">RFC9857</a>]</span>, SR Policy information advertised via BGP should be restricted to authorized nodes, controllers, and applications within this domain. Similarly, the use of the O-flag is assumed to occur only within such a trusted environment, where the risk of abuse is minimized.<a href="#section-7.4-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="management-plane-mitigation-methods">
@@ -2062,7 +2046,7 @@ Practices outlined in Section 5 of <span>[<a href="#RFC8754" class="cite xref">
         </h3>
 <p id="section-7.5-1">Mitigating attacks on the management plane, much like in the control plane, depends on the specific protocols and interfaces employed.<a href="#section-7.5-1" class="pilcrow">¶</a></p>
 <p id="section-7.5-2">Management protocols such as NETCONF <span>[<a href="#RFC6241" class="cite xref">RFC6241</a>]</span> and RESTCONF <span>[<a href="#RFC8040" class="cite xref">RFC8040</a>]</span> are commonly used to configure and monitor SRv6-enabled devices. These protocols must be secured to prevent unauthorized access, configuration tampering, or information leakage.<a href="#section-7.5-2" class="pilcrow">¶</a></p>
-<p id="section-7.5-3">The lowest NETCONF layer is the secure transport layer, and the mandatory-to-implement secure transport is Secure Shell (SSH) <span>[<a href="#RFC6242" class="cite xref">RFC6242</a>]</span>. The lowest RESTCONF layer is HTTPS, and the mandatory-to-implement secure transport is TLS <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>.<a href="#section-7.5-3" class="pilcrow">¶</a></p>
+<p id="section-7.5-3">The lowest NETCONF layer is the secure transport layer, and the mandatory-to-implement secure transport is Secure Shell (SSH) <span>[<a href="#RFC6242" class="cite xref">RFC6242</a>]</span>. The lowest RESTCONF layer is HTTPS, and the mandatory-to-implement secure transport is TLS <span>[<a href="#RFC9846" class="cite xref">RFC9846</a>]</span>.<a href="#section-7.5-3" class="pilcrow">¶</a></p>
 <p id="section-7.5-4">The Network Configuration Access Control Model (NACM) <span>[<a href="#RFC8341" class="cite xref">RFC8341</a>]</span> provides the means to restrict access for particular NETCONF or RESTCONF users to a pre-configured subset of all available NETCONF or RESTCONF protocol operations and content.<a href="#section-7.5-4" class="pilcrow">¶</a></p>
 <p id="section-7.5-5">SRv6-specific YANG modules should be designed with the same security considerations applied to all YANG-based models. Writable nodes must be protected using access control mechanisms such as NACM and secured transport protocols like SSH or TLS to prevent unauthorized configuration changes. Readable nodes that expose sensitive operational data should be access-controlled and transmitted only over encrypted channels to mitigate the risk of information leakage.<a href="#section-7.5-5" class="pilcrow">¶</a></p>
 </section>
@@ -2172,14 +2156,6 @@ For example, along the forwarding path in SRv6 network, the SR-aware firewall wi
 <a href="#section-11.1" class="section-number selfRef">11.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
-<dt id="RFC2119">[RFC2119]</dt>
-        <dd>
-<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC8174">[RFC8174]</dt>
-        <dd>
-<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="RFC8402">[RFC8402]</dt>
         <dd>
 <span class="refAuthor">Filsfils, C., Ed.</span>, <span class="refAuthor">Previdi, S., Ed.</span>, <span class="refAuthor">Ginsberg, L.</span>, <span class="refAuthor">Decraene, B.</span>, <span class="refAuthor">Litkowski, S.</span>, and <span class="refAuthor">R. Shakir</span>, <span class="refTitle">"Segment Routing Architecture"</span>, <span class="seriesInfo">RFC 8402</span>, <span class="seriesInfo">DOI 10.17487/RFC8402</span>, <time datetime="2018-07" class="refDate">July 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8402">https://www.rfc-editor.org/rfc/rfc8402</a>&gt;</span>. </dd>
@@ -2225,17 +2201,13 @@ For example, along the forwarding path in SRv6 network, the SR-aware firewall wi
         <dd>
 <span class="refTitle">"IPv6 Routing Header Security"</span>, <time datetime="2007" class="refDate">2007</time>, <span>&lt;<a href="https://airbus-seclab.github.io/ipv6/IPv6_RH_security-csw07.pdf">https://airbus-seclab.github.io/ipv6/IPv6_RH_security-csw07.pdf</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="I-D.ietf-idr-bgp-ls-sr-policy">[I-D.ietf-idr-bgp-ls-sr-policy]</dt>
-        <dd>
-<span class="refAuthor">Previdi, S.</span>, <span class="refAuthor">Talaulikar, K.</span>, <span class="refAuthor">Dong, J.</span>, <span class="refAuthor">Gredler, H.</span>, and <span class="refAuthor">J. Tantsura</span>, <span class="refTitle">"Advertisement of Segment Routing Policies using BGP Link-State"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-idr-bgp-ls-sr-policy-17</span>, <time datetime="2025-03-06" class="refDate">6 March 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-idr-bgp-ls-sr-policy-17">https://datatracker.ietf.org/doc/html/draft-ietf-idr-bgp-ls-sr-policy-17</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="I-D.ietf-lsr-isis-srv6-yang">[I-D.ietf-lsr-isis-srv6-yang]</dt>
         <dd>
-<span class="refAuthor">Hu, Z.</span>, <span class="refAuthor">Ye, D.</span>, <span class="refAuthor">Qu, Y.</span>, <span class="refAuthor">Geng, X.</span>, and <span class="refAuthor">Q. Ma</span>, <span class="refTitle">"YANG Data Model for IS-IS SRv6"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lsr-isis-srv6-yang-09</span>, <time datetime="2026-02-26" class="refDate">26 February 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lsr-isis-srv6-yang-09">https://datatracker.ietf.org/doc/html/draft-ietf-lsr-isis-srv6-yang-09</a>&gt;</span>. </dd>
+<span class="refAuthor">Hu, Z.</span>, <span class="refAuthor">Ye, D.</span>, <span class="refAuthor">Qu, Y.</span>, <span class="refAuthor">Geng, X.</span>, and <span class="refAuthor">Q. Ma</span>, <span class="refTitle">"YANG Data Model for IS-IS SRv6"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lsr-isis-srv6-yang-10</span>, <time datetime="2026-08-30" class="refDate">30 August 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lsr-isis-srv6-yang-10">https://datatracker.ietf.org/doc/html/draft-ietf-lsr-isis-srv6-yang-10</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-lsr-ospf-srv6-yang">[I-D.ietf-lsr-ospf-srv6-yang]</dt>
         <dd>
-<span class="refAuthor">Qu, Y.</span>, <span class="refAuthor">Hu, Z.</span>, <span class="refAuthor">Geng, X.</span>, <span class="refAuthor">Raza, S. K.</span>, and <span class="refAuthor">A. Lindem</span>, <span class="refTitle">"YANG Data Model for OSPF SRv6"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lsr-ospf-srv6-yang-09</span>, <time datetime="2026-02-26" class="refDate">26 February 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lsr-ospf-srv6-yang-09">https://datatracker.ietf.org/doc/html/draft-ietf-lsr-ospf-srv6-yang-09</a>&gt;</span>. </dd>
+<span class="refAuthor">Qu, Y.</span>, <span class="refAuthor">Hu, Z.</span>, <span class="refAuthor">Geng, X.</span>, <span class="refAuthor">Raza, S. K.</span>, and <span class="refAuthor">A. Lindem</span>, <span class="refTitle">"YANG Data Model for OSPF SRv6"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lsr-ospf-srv6-yang-10</span>, <time datetime="2026-09-01" class="refDate">1 September 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lsr-ospf-srv6-yang-10">https://datatracker.ietf.org/doc/html/draft-ietf-lsr-ospf-srv6-yang-10</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="ITU-Sec">[ITU-Sec]</dt>
         <dd>
@@ -2321,10 +2293,6 @@ For example, along the forwarding path in SRv6 network, the SR-aware firewall wi
         <dd>
 <span class="refAuthor">Filsfils, C., Ed.</span>, <span class="refAuthor">Previdi, S., Ed.</span>, <span class="refAuthor">Decraene, B.</span>, and <span class="refAuthor">R. Shakir</span>, <span class="refTitle">"Resiliency Use Cases in Source Packet Routing in Networking (SPRING) Networks"</span>, <span class="seriesInfo">RFC 8355</span>, <span class="seriesInfo">DOI 10.17487/RFC8355</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8355">https://www.rfc-editor.org/rfc/rfc8355</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC8446">[RFC8446]</dt>
-        <dd>
-<span class="refAuthor">Rescorla, E.</span>, <span class="refTitle">"The Transport Layer Security (TLS) Protocol Version 1.3"</span>, <span class="seriesInfo">RFC 8446</span>, <span class="seriesInfo">DOI 10.17487/RFC8446</span>, <time datetime="2018-08" class="refDate">August 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8446">https://www.rfc-editor.org/rfc/rfc8446</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="RFC8476">[RFC8476]</dt>
         <dd>
 <span class="refAuthor">Tantsura, J.</span>, <span class="refAuthor">Chunduri, U.</span>, <span class="refAuthor">Aldrin, S.</span>, and <span class="refAuthor">P. Psenak</span>, <span class="refTitle">"Signaling Maximum SID Depth (MSD) Using OSPF"</span>, <span class="seriesInfo">RFC 8476</span>, <span class="seriesInfo">DOI 10.17487/RFC8476</span>, <time datetime="2018-12" class="refDate">December 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8476">https://www.rfc-editor.org/rfc/rfc8476</a>&gt;</span>. </dd>
@@ -2368,6 +2336,14 @@ For example, along the forwarding path in SRv6 network, the SR-aware firewall wi
 <dt id="RFC9602">[RFC9602]</dt>
         <dd>
 <span class="refAuthor">Krishnan, S.</span>, <span class="refTitle">"Segment Routing over IPv6 (SRv6) Segment Identifiers in the IPv6 Addressing Architecture"</span>, <span class="seriesInfo">RFC 9602</span>, <span class="seriesInfo">DOI 10.17487/RFC9602</span>, <time datetime="2024-10" class="refDate">October 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9602">https://www.rfc-editor.org/rfc/rfc9602</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9846">[RFC9846]</dt>
+        <dd>
+<span class="refAuthor">Rescorla, E.</span>, <span class="refTitle">"The Transport Layer Security (TLS) Protocol Version 1.3"</span>, <span class="seriesInfo">RFC 9846</span>, <span class="seriesInfo">DOI 10.17487/RFC9846</span>, <time datetime="2026-07" class="refDate">July 2026</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9846">https://www.rfc-editor.org/rfc/rfc9846</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9857">[RFC9857]</dt>
+        <dd>
+<span class="refAuthor">Previdi, S.</span>, <span class="refAuthor">Talaulikar, K., Ed.</span>, <span class="refAuthor">Dong, J.</span>, <span class="refAuthor">Gredler, H.</span>, and <span class="refAuthor">J. Tantsura</span>, <span class="refTitle">"Advertisement of Segment Routing Policies Using BGP - Link State"</span>, <span class="seriesInfo">RFC 9857</span>, <span class="seriesInfo">DOI 10.17487/RFC9857</span>, <time datetime="2025-10" class="refDate">October 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9857">https://www.rfc-editor.org/rfc/rfc9857</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9862">[RFC9862]</dt>
       <dd>
