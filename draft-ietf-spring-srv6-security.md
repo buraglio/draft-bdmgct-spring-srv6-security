@@ -52,7 +52,6 @@ author:
 
 
 normative:
-  RFC2119:
   RFC8402:
   RFC8754:
   RFC8986:
@@ -68,7 +67,7 @@ informative:
   RFC4655:
   RFC6518:
   RFC6242:
-  RFC8446:
+  RFC9846:
   RFC9055:
   RFC7384:
   RFC7276:
@@ -95,9 +94,9 @@ informative:
   RFC6241:
   RFC8040:
   RFC9862:
+  RFC9857:
   I-D.ietf-lsr-ospf-srv6-yang:
   I-D.ietf-lsr-isis-srv6-yang:
-  I-D.ietf-idr-bgp-ls-sr-policy:
   ITU-Sec:
     title: "ITU-T M.3016.1, Security for the management plane: Security requirements"
     date: 2005
@@ -152,10 +151,6 @@ The following IETF RFCs were selected for security assessment as part of this ef
 Inter-Domain Segment Routing scenarios are out of scope for this document as are existing and future protocol specific IPv6 vulnerabilities. Additionally, we note that SRv6 is under active development and, as such, the above documents might not cover all protocols employed in an SRv6 deployment.
 
 # Conventions and Definitions
-
-## Requirements Language
-
-{::boilerplate bcp14-tagged}
 
 ## Terminology
 
@@ -461,7 +456,9 @@ Practically speaking, this means successfully enforcing a "Trusted Domain" may b
 Filtering can be performed based on the presence of an SRH. More generally, {{RFC9288}} provides recommendations on the filtering of IPv6 packets containing IPv6 extension headers at transit routers. However, filtering based on the presence of an SRH is not necessarily useful for two reasons:
 
 1. The SRH is optional for SID processing as described in [RFC8754] section 3.1 and 4.1.
-2. A packet containing an SRH may not be destined to the SR domain, as it may be simply transiting the domain. Therefore, filtering solely based on the presence of an SRH, at either SR ingress or SR egress, is not necessarily recommended. Instead, this scenario is mitigated by encapsulating packets on the domain boundary, as discussed in {{encap}}. While inter-SR-domain scenarios are a violation of the trust model described above, the operational practices recommended here aim to preserve interoperability and avoid blanket behaviors that would break SR when adjacent networks follow different practices.
+2. A packet containing an SRH may not be destined to the SR domain, as it may be simply transiting the domain.
+
+Therefore, filtering solely based on the presence of an SRH, at either SR ingress or SR egress, is not necessarily recommended. Instead, this scenario is mitigated by encapsulating packets on the domain boundary, as discussed in {{encap}}. While inter-SR-domain scenarios are a violation of the trust model described above, the operational practices recommended here aim to preserve interoperability and avoid blanket behaviors that would break SR when adjacent networks follow different practices.
 
 For these reasons SRH filtering is not necessarily a useful method of mitigation.
 
@@ -519,7 +516,7 @@ In centralized SRv6 control plane architectures, such as those described in {{RF
 
 When the O-flag is used for Operations, Administration, and Maintenance (OAM) functions, as defined in [RFC9259], implementations should enforce rate limiting to mitigate potential denial-of-service (DoS) attacks triggered by excessive control plane signaling. Furthermore, if the HMAC TLV is used, it provides integrity protection of the O-flag as described in {{hmac}}.
 
-The control plane should be confined to a trusted administrative domain. As specified in {{I-D.ietf-idr-bgp-ls-sr-policy}}, SR Policy information advertised via BGP should be restricted to authorized nodes, controllers, and applications within this domain. Similarly, the use of the O-flag is assumed to occur only within such a trusted environment, where the risk of abuse is minimized.
+The control plane should be confined to a trusted administrative domain. As specified in [RFC9857], SR Policy information advertised via BGP should be restricted to authorized nodes, controllers, and applications within this domain. Similarly, the use of the O-flag is assumed to occur only within such a trusted environment, where the risk of abuse is minimized.
 
 ## Management Plane Mitigation Methods
 
@@ -527,7 +524,7 @@ Mitigating attacks on the management plane, much like in the control plane, depe
 
 Management protocols such as NETCONF [RFC6241] and RESTCONF [RFC8040] are commonly used to configure and monitor SRv6-enabled devices. These protocols must be secured to prevent unauthorized access, configuration tampering, or information leakage.
 
-The lowest NETCONF layer is the secure transport layer, and the mandatory-to-implement secure transport is Secure Shell (SSH) [RFC6242]. The lowest RESTCONF layer is HTTPS, and the mandatory-to-implement secure transport is TLS [RFC8446].
+The lowest NETCONF layer is the secure transport layer, and the mandatory-to-implement secure transport is Secure Shell (SSH) [RFC6242]. The lowest RESTCONF layer is HTTPS, and the mandatory-to-implement secure transport is TLS [RFC9846].
 
 The Network Configuration Access Control Model (NACM) [RFC8341] provides the means to restrict access for particular NETCONF or RESTCONF users to a pre-configured subset of all available NETCONF or RESTCONF protocol operations and content.
 
