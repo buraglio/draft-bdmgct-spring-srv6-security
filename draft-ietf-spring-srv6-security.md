@@ -150,9 +150,7 @@ The following IETF RFCs were selected for security assessment as part of this ef
 
 Inter-Domain Segment Routing scenarios are out of scope for this document as are existing and future protocol specific IPv6 vulnerabilities. Additionally, we note that SRv6 is under active development and, as such, the above documents might not cover all protocols employed in an SRv6 deployment.
 
-# Conventions and Definitions
-
-## Terminology
+# Terminology
 
 - HMAC TLV: Hashed Message Authentication Code Type Length Value [RFC8754]
 
@@ -183,7 +181,7 @@ Data plane vs. control plane vs. Management plane:
 The following figure depicts an example of an SR domain with five attacker types, labeled 1-5. As an example, attacker 2 is located along the path between the SR ingress node and SR endpoint 1, and is therefore an on-path attacker both in the data plane and in the control plane. Thus, attacker 2 can listen, insert, delete, modify or replay data plane and/or control plane packets in transit. Off-path attackers, such as attackers 4 and 5, can insert packets, and in some cases can passively listen to some traffic, such as multicast transmissions. In this example a Path Computation Element as a Central Controller (PCECC) [RFC9050] is used as part of the control plane. Thus, attacker 3 is an internal on-path attacker in the control plane, as it is located along the path between the PCECC and SR endpoint 1.
 
 ~~~~~~~~~~~
-  1.on-path   2.on-path   3.cont.  PCE as a Central  4.off-path 5.off-path
+  1.on-path   2.on-path   3.control PCE as a Central  4.off-path 5.off-path
   external    internal    plane    Controller        internal   external
   attacker    attacker    on-path  (PCECC)           attacker   attacker
        |            |           |        |            |          |
@@ -530,9 +528,9 @@ The Network Configuration Access Control Model (NACM) [RFC8341] provides the mea
 
 SRv6-specific YANG modules should be designed with the same security considerations applied to all YANG-based models. Writable nodes must be protected using access control mechanisms such as NACM and secured transport protocols like SSH or TLS to prevent unauthorized configuration changes. Readable nodes that expose sensitive operational data should be access-controlled and transmitted only over encrypted channels to mitigate the risk of information leakage.
 
-## Layer 2 Mitigation
+## Layer 2 Mitigation (MACsec)
 
-In some circumstances it may be possible to mitigate passive listening and packet insertion by leveraging [MACsec] to encrypt traffic at the media access control (MAC) layer by using encryption between two connected devices. This methodology prevents unauthorized access to traffic over a given point to point path by encrypting and authenticating data in flight/DOS at Layer 2 of the OSI model. Much like the encryption mechanisms noted for protocol communication and management access, this level of protection can provide integrity and authenticity to all higher layer communications over a given layer 2 path.
+In some circumstances it may be possible to mitigate passive listening and packet insertion by leveraging [MACsec] to encrypt traffic at the media access control (MAC) layer by using encryption between two connected devices. This methodology prevents unauthorized access to traffic over a given point to point path by encrypting and authenticating data in transit at Layer 2, which prevents passive interception and mitigates packet-insertion DoS from unauthorized on-path nodes. Much like the encryption mechanisms noted for protocol communication and management access, this level of protection can provide integrity and authenticity to all higher layer communications over a given layer 2 path.
 
 ## Mitigations - Summary
 The following table summarizes the possible mitigation methods for each of the attacks that were described in the previous section.
