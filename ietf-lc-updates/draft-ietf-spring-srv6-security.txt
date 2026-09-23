@@ -5,14 +5,14 @@
 Source Packet Routing in Networking                          N. Buraglio
 Internet-Draft                                   Energy Sciences Network
 Intended status: Informational                                T. Mizrahi
-Expires: 26 March 2027                                            Huawei
+Expires: 27 March 2027                                            Huawei
                                                                  T. Tong
                                                             China Unicom
                                                          L. M. Contreras
                                                               Telefonica
                                                                  F. Gont
                                                             SI6 Networks
-                                                       22 September 2026
+                                                       23 September 2026
 
 
               Segment Routing IPv6 Security Considerations
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 March 2027.
+   This Internet-Draft will expire on 27 March 2027.
 
 Copyright Notice
 
@@ -1090,7 +1090,9 @@ Table of Contents
    unauthorized on-path nodes.  Much like the encryption mechanisms
    noted for protocol communication and management access, this level of
    protection can provide integrity and authenticity to all higher layer
-   communications over a given layer 2 path.
+   communications over a given layer 2 path but comes with operational
+   trade-offs and added complexity.  Additionally, there are design
+   scenarios where this is impractical or otherwise not possible.
 
 7.7.  Mitigations - Summary
 
