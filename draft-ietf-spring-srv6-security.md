@@ -528,7 +528,7 @@ The Network Configuration Access Control Model (NACM) [RFC8341] provides the mea
 
 SRv6-specific YANG modules should be designed with the same security considerations applied to all YANG-based models. Writable nodes must be protected using access control mechanisms such as NACM and secured transport protocols like SSH or TLS to prevent unauthorized configuration changes. Readable nodes that expose sensitive operational data should be access-controlled and transmitted only over encrypted channels to mitigate the risk of information leakage.
 
-## Layer 2 Mitigation (MACsec)
+## Layer 2 Mitigation
 
 In some circumstances it may be possible to mitigate passive listening and packet insertion by leveraging [MACsec] to encrypt traffic at the media access control (MAC) layer by using encryption between two connected devices. This methodology prevents unauthorized access to traffic over a given point to point path by encrypting and authenticating data in transit at Layer 2, which prevents passive interception and mitigates packet-insertion DoS from unauthorized on-path nodes. Much like the encryption mechanisms noted for protocol communication and management access, this level of protection can provide integrity and authenticity to all higher layer communications over a given layer 2 path but comes with operational trade-offs and
 added complexity. Additionally, there are design scenarios where this is impractical or otherwise not possible.
