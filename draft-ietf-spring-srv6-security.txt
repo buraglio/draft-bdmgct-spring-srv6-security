@@ -106,7 +106,7 @@ Table of Contents
      7.3.  Hashed Message Authentication Code (HMAC)
      7.4.  Control Plane Mitigation Methods
      7.5.  Management Plane Mitigation Methods
-     7.6.  Layer 2 Mitigation (MACsec)
+     7.6.  Layer 2 Mitigation
      7.7.  Mitigations - Summary
    8.  Operational and Filtering Considerations
      8.1.  MiddleBox Filtering Issues
@@ -1078,7 +1078,7 @@ Table of Contents
    operational data should be access-controlled and transmitted only
    over encrypted channels to mitigate the risk of information leakage.
 
-7.6.  Layer 2 Mitigation (MACsec)
+7.6.  Layer 2 Mitigation
 
    In some circumstances it may be possible to mitigate passive
    listening and packet insertion by leveraging [MACsec] to encrypt

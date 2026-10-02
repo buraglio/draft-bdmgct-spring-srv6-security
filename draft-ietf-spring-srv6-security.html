@@ -1260,7 +1260,7 @@ svg {
                 <p id="section-toc.1-1.7.2.5.1"><a href="#section-7.5" class="auto internal xref">7.5</a>.  <a href="#name-management-plane-mitigation" class="internal xref">Management Plane Mitigation Methods</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.6">
-                <p id="section-toc.1-1.7.2.6.1"><a href="#section-7.6" class="auto internal xref">7.6</a>.  <a href="#name-layer-2-mitigation-macsec" class="internal xref">Layer 2 Mitigation (MACsec)</a></p>
+                <p id="section-toc.1-1.7.2.6.1"><a href="#section-7.6" class="auto internal xref">7.6</a>.  <a href="#name-layer-2-mitigation" class="internal xref">Layer 2 Mitigation</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.7">
                 <p id="section-toc.1-1.7.2.7.1"><a href="#section-7.7" class="auto internal xref">7.7</a>.  <a href="#name-mitigations-summary" class="internal xref">Mitigations - Summary</a></p>
@@ -2039,10 +2039,10 @@ Practices outlined in Section 5 of <span>[<a href="#RFC8754" class="cite xref">
 <p id="section-7.5-5">SRv6-specific YANG modules should be designed with the same security considerations applied to all YANG-based models. Writable nodes must be protected using access control mechanisms such as NACM and secured transport protocols like SSH or TLS to prevent unauthorized configuration changes. Readable nodes that expose sensitive operational data should be access-controlled and transmitted only over encrypted channels to mitigate the risk of information leakage.<a href="#section-7.5-5" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="layer-2-mitigation-macsec">
+<div id="layer-2-mitigation">
 <section id="section-7.6">
-        <h3 id="name-layer-2-mitigation-macsec">
-<a href="#section-7.6" class="section-number selfRef">7.6. </a><a href="#name-layer-2-mitigation-macsec" class="section-name selfRef">Layer 2 Mitigation (MACsec)</a>
+        <h3 id="name-layer-2-mitigation">
+<a href="#section-7.6" class="section-number selfRef">7.6. </a><a href="#name-layer-2-mitigation" class="section-name selfRef">Layer 2 Mitigation</a>
         </h3>
 <p id="section-7.6-1">In some circumstances it may be possible to mitigate passive listening and packet insertion by leveraging <span>[<a href="#MACsec" class="cite xref">MACsec</a>]</span> to encrypt traffic at the media access control (MAC) layer by using encryption between two connected devices. This methodology prevents unauthorized access to traffic over a given point to point path by encrypting and authenticating data in transit at Layer 2, which prevents passive interception and mitigates packet-insertion DoS from unauthorized on-path nodes. Much like the encryption mechanisms noted for protocol communication and management access, this level of protection can provide integrity and authenticity to all higher layer communications over a given layer 2 path but comes with operational trade-offs and
 added complexity. Additionally, there are design scenarios where this is impractical or otherwise not possible.<a href="#section-7.6-1" class="pilcrow">¶</a></p>
