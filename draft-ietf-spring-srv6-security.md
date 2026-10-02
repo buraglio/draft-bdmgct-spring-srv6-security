@@ -530,7 +530,8 @@ SRv6-specific YANG modules should be designed with the same security considerati
 
 ## Layer 2 Mitigation (MACsec)
 
-In some circumstances it may be possible to mitigate passive listening and packet insertion by leveraging [MACsec] to encrypt traffic at the media access control (MAC) layer by using encryption between two connected devices. This methodology prevents unauthorized access to traffic over a given point to point path by encrypting and authenticating data in transit at Layer 2, which prevents passive interception and mitigates packet-insertion DoS from unauthorized on-path nodes. Much like the encryption mechanisms noted for protocol communication and management access, this level of protection can provide integrity and authenticity to all higher layer communications over a given layer 2 path.
+In some circumstances it may be possible to mitigate passive listening and packet insertion by leveraging [MACsec] to encrypt traffic at the media access control (MAC) layer by using encryption between two connected devices. This methodology prevents unauthorized access to traffic over a given point to point path by encrypting and authenticating data in transit at Layer 2, which prevents passive interception and mitigates packet-insertion DoS from unauthorized on-path nodes. Much like the encryption mechanisms noted for protocol communication and management access, this level of protection can provide integrity and authenticity to all higher layer communications over a given layer 2 path but comes with operational trade-offs and
+added complexity. Additionally, there are design scenarios where this is impractical or otherwise not possible.
 
 ## Mitigations - Summary
 The following table summarizes the possible mitigation methods for each of the attacks that were described in the previous section.
