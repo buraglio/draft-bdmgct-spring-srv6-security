@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-09-24T03:31:17.166827+00:00",
+  "timestamp": "2026-10-04T04:40:53.143259+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -2561,6 +2561,34 @@
       "mergedBy": "buraglio",
       "mergeCommit": {
         "oid": "237740c540a736c19500b48cee46111a253e436c"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 78,
+      "id": "PR_kwDOKVF77M8AAAABGWEg7g",
+      "title": "Address opsdir comments",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/78",
+      "state": "MERGED",
+      "author": "buraglio",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-10-02T19:50:00Z",
+      "updatedAt": "2026-10-02T19:50:09Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "237740c540a736c19500b48cee46111a253e436c",
+      "headRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "headRefName": "ietf-lc-updates",
+      "headRefOid": "87307b0362e3d68a0e8d5f93a01559e038bf2978",
+      "closedAt": "2026-10-02T19:50:09Z",
+      "mergedAt": "2026-10-02T19:50:09Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "3929eb2d8662ae0ea71bbd92add2b54df43215a9"
       },
       "comments": [],
       "reviews": []
