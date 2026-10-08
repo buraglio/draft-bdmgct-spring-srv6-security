@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-04T04:40:53.143259+00:00",
+  "timestamp": "2026-10-08T04:53:21.691169+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -2592,6 +2592,48 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 79,
+      "id": "PR_kwDOKVF77M8AAAABHISVhQ",
+      "title": "Some few edit suggestiosn from Med's IESG Review",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/79",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-10-07T13:33:57Z",
+      "updatedAt": "2026-10-07T13:42:40Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "016d934c6d6f45f1d8d68d47ba2a2bbb1125b7d2",
+      "headRepository": "boucadair/draft-bdmgct-spring-srv6-security",
+      "headRefName": "patch-1",
+      "headRefOid": "d61c8fc15a4806c910c8d315dd085ae8ae45afd3",
+      "closedAt": "2026-10-07T13:42:40Z",
+      "mergedAt": "2026-10-07T13:42:40Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "0aef24e21ddcdf72ab645d5a12df1ca9c1956010"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKVF77M8AAAABRHCpPw",
+          "commit": {
+            "abbreviatedOid": "d61c8fc"
+          },
+          "author": "buraglio",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "Excellent fixes, PR much appreciated!",
+          "createdAt": "2026-10-07T13:42:31Z",
+          "updatedAt": "2026-10-07T13:42:31Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
