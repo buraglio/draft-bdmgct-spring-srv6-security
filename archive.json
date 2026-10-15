@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-13T05:47:18.805369+00:00",
+  "timestamp": "2026-10-15T03:32:08.251400+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -2640,24 +2640,26 @@
       "id": "PR_kwDOKVF77M8AAAABICiC_Q",
       "title": "Address DISCUSS from IESG, address comments.",
       "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/80",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "buraglio",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-10-12T20:13:29Z",
-      "updatedAt": "2026-10-12T20:13:29Z",
+      "updatedAt": "2026-10-14T13:55:17Z",
       "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
       "baseRefName": "main",
       "baseRefOid": "0aef24e21ddcdf72ab645d5a12df1ca9c1956010",
       "headRepository": "buraglio/draft-bdmgct-spring-srv6-security",
       "headRefName": "ndb-iesg-discuss-01",
       "headRefOid": "c12c48c7a4bc187a3dd7dea1d0d30f0a4b181913",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-10-14T13:55:17Z",
+      "mergedAt": "2026-10-14T13:55:17Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "262344e3220b6dd34a7d398a0858514d7bfa371c"
+      },
       "comments": [],
       "reviews": []
     }
