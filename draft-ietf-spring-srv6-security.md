@@ -55,10 +55,6 @@ normative:
   RFC8402:
   RFC8754:
   RFC8986:
-  RFC9020:
-  RFC9256:
-  RFC9491:
-  RFC9524:
   RFC9800:
 
 informative:
@@ -104,6 +100,11 @@ informative:
   I-D.ietf-lsr-ospf-srv6-yang:
   I-D.ietf-lsr-isis-srv6-yang:
   I-D.ietf-spring-srv6-yang-base:
+  I-D.ietf-srv6ops-srv6addressing:
+  RFC9020:
+  RFC9256:
+  RFC9491:
+  RFC9524:
   RFC2003:
   RFC2827:
   RFC3704:
@@ -111,6 +112,9 @@ informative:
   RFC9252:
   RFC9830:
   RFC9855:
+  RFC9907:
+  RFC4252:
+  RFC9000:
   ITU-Sec:
     title: "ITU-T M.3016.1, Security for the management plane: Security requirements"
     date: 2005
@@ -131,7 +135,7 @@ Segment Routing over IPv6 (SRv6) is the instantiation of Segment Routing on the 
 
 # Introduction
 
-Segment Routing (SR) [RFC8402] utilizing an IPv6 data plane is a source routing model that leverages an IPv6 underlay. It uses an IPv6 extension header called the Segment Routing Header (SRH) [RFC8754]. This header is used to signal and control the forwarding path of packets by imposing an ordered list of segments that are processed at each addressed node along the path.
+Segment Routing (SR) [RFC8402] utilizing an IPv6 data plane is a source routing model that leverages an IPv6 underlay. It may use an IPv6 extension header called the Segment Routing Header (SRH) [RFC8754], though the SRH is not required in all SRv6 forwarding scenarios. This header is used to signal and control the forwarding path of packets by imposing an ordered list of segments that are processed at each addressed node along the path.
 There are security considerations which must be noted or addressed in order to operate an SRv6 network in a reliable and secure manner.
 
 Specifically, some primary properties of SRv6 that affect the security considerations are:
@@ -160,8 +164,11 @@ The following IETF RFCs were selected for security assessment as part of this ef
    * [RFC9491] : Integration of the Network Service Header (NSH) and Segment Routing for Service Function Chaining (SFC)
    * [RFC9524] : Segment Routing Replication for Multipoint Service Delivery
    * [RFC9800] : Compressed SRv6 Segment List Encoding
+   * [RFC9602] : Segment Routing over IPv6 (SRv6) Segment Identifiers in the IPv6 Addressing Architecture
 
 Inter-Domain Segment Routing scenarios are out of scope for this document as are existing and future protocol specific IPv6 vulnerabilities. Additionally, SRv6 is under active development and, as such, the above documents might not cover all protocols employed in an SRv6 deployment.
+
+The threats specific to NSH/SRv6 interworking [RFC9491] and SRv6 multicast replication [RFC9524] — including replication-segment loops and ICMPv6 storm amplification — fall within the modification, insertion, and denial-of-service categories described in {{attacks}}, and are subject to the same domain-boundary filtering and encapsulation mitigations described in {{mitigations}}.
 
 # Terminology
 
@@ -179,7 +186,7 @@ The document uses the following:
 
 - MACsec: MAC Security [MACsec]
 
-# Threat Terminology {#threat}
+# Threat Taxonomy {#threat}
 
 This section introduces the threat taxonomy that is used in this document. This taxonomy is based on terminology from the Internet threat model [RFC3552], as well as some concepts from [RFC9055], [RFC7384], [RFC7835], and [RFC9416].
 
@@ -266,7 +273,7 @@ This section describes attacks that are based on packet manipulation and process
 ### Modification Attack {#modification}
 
 #### Overview
-An on-path internal attacker can modify a packet while it is in transit in a way that directly affects the packet's segment list.
+An on-path internal attacker can modify a packet while it is in transit in a way that directly affects the packet's segment list. Note that adding an SRH or SRH TLV to a packet in transit may be constrained by the path MTU, which limits the practical feasibility of such on-path modifications.
 
 A modification attack can be performed in one or more of the following ways:
 
@@ -359,7 +366,7 @@ Attacks targeting the routing protocol can have diverse impacts on network opera
 #### Overview
 Since SRv6 operates over an IPv6 infrastructure, existing OAM protocols designed for IPv6 networks are applicable to SRv6 as well. Consequently, the security considerations associated with conventional IPv6 OAM protocols are also relevant to SRv6 environments. As noted in {{RFC7276}}, successful attacks on OAM protocols can mislead operators by simulating non-existent failures or by concealing actual network issues. SRv6-specific OAM aspects are specified in {{RFC9259}}.
 
-The O-flag in the SRH serves as a marking bit in user packets to trigger telemetry data collection and export at the segment endpoints. An attacker may exploit this mechanism by setting the O-flag in transit packets, thereby overloading the control plane and degrading system availability. Additionally, an on-path attacker may passively intercept OAM data exported to external analyzers, potentially gaining unauthorized insight into network topology and behavior.
+The O-flag in the SRH as specified in {{RFC9259}} serves as a marking bit in user packets to trigger telemetry data collection and export at the segment endpoints. An attacker may exploit this mechanism by setting the O-flag in transit packets, thereby overloading the control plane and degrading system availability. Additionally, an on-path attacker may passively intercept OAM data exported to external analyzers, potentially gaining unauthorized insight into network topology and behavior.
 
 #### Scope
 Off-path attackers may attempt to degrade system availability by injecting fabricated OAM messages or SRv6 packets with the O-flag set, thereby triggering unnecessary telemetry processing. They may also probe SRv6 nodes to infer information about network state and performance characteristics.
@@ -492,7 +499,7 @@ In order to apply such a filtering mechanism the SR domain needs to have an addr
 
 As stated in the security considerations section of [RFC9602], the usage of the prefix allocated by [RFC9602] improves security by making it simpler to filter traffic at the edge of the SR Domains. It is important to note that [RFC9602] allocates and makes a dedicated prefix available for SRv6 SIDs for use inside a trusted SRv6 domain. Use of other prefixes for this purpose will result in further security considerations such as potential SID pool route leakage or more complicated filtering requirements, increasing the likelihood of human or configuration error.
 
-Many operators reserve a /64 block for all loopback addresses and allocate /128 for each loopback interface. This simplifies the filtering of permitted source addresses.
+Many operators reserve a /64 block for all loopback addresses and allocate /128 for each loopback interface. This simplifies the filtering of permitted source addresses. Alternatively, loopback addresses can be allocated from each node's locator [I-D.ietf-srv6ops-srv6addressing], in which case the permitted source addresses are covered by the SID address range. A hierarchical addressing plan whose locators summarize at domain and area boundaries [I-D.ietf-srv6ops-srv6addressing] keeps the filters to a few stable prefixes.
 
 As in other IP networks, filtering at SRv6 enabled nodes complements address range filtering at ingress nodes, and it relies on the ingress source address validation that IP networks deploy against spoofing (BCP 38 [RFC2827] and BCP 84 [RFC3704]). Failure to implement these filtering mechanisms could result in a "fail open" scenario, where some attacks by internal attackers described in this document may be launched by external attackers.
 
