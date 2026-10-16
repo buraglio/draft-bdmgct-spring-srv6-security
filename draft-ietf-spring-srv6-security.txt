@@ -1368,11 +1368,6 @@ Table of Contents
               Authentication Protocol", RFC 4252, DOI 10.17487/RFC4252,
               January 2006, <https://www.rfc-editor.org/rfc/rfc4252>.
 
-   [RFC4381]  Behringer, M., "Analysis of the Security of BGP/MPLS IP
-              Virtual Private Networks (VPNs)", RFC 4381,
-              DOI 10.17487/RFC4381, February 2006,
-              <https://www.rfc-editor.org/rfc/rfc4381>.
-
    [RFC4593]  Barbir, A., Murphy, S., and Y. Yang, "Generic Threats to
               Routing Protocols", RFC 4593, DOI 10.17487/RFC4593,
               October 2006, <https://www.rfc-editor.org/rfc/rfc4593>.
@@ -1396,10 +1391,6 @@ Table of Contents
               and A. Bierman, Ed., "Network Configuration Protocol
               (NETCONF)", RFC 6241, DOI 10.17487/RFC6241, June 2011,
               <https://www.rfc-editor.org/rfc/rfc6241>.
-
-   [RFC6242]  Wasserman, M., "Using the NETCONF Protocol over Secure
-              Shell (SSH)", RFC 6242, DOI 10.17487/RFC6242, June 2011,
-              <https://www.rfc-editor.org/rfc/rfc6242>.
 
    [RFC6291]  Andersson, L., van Helvoort, H., Bonica, R., Romascanu,
               D., and S. Mansfield, "Guidelines for the Use of the "OAM"
@@ -1494,13 +1485,6 @@ Table of Contents
               Tantsura, "YANG Data Model for Segment Routing", RFC 9020,
               DOI 10.17487/RFC9020, May 2021,
               <https://www.rfc-editor.org/rfc/rfc9020>.
-
-   [RFC9050]  Li, Z., Peng, S., Negi, M., Zhao, Q., and C. Zhou, "Path
-              Computation Element Communication Protocol (PCEP)
-              Procedures and Extensions for Using the PCE as a Central
-              Controller (PCECC) of LSPs", RFC 9050,
-              DOI 10.17487/RFC9050, July 2021,
-              <https://www.rfc-editor.org/rfc/rfc9050>.
 
    [RFC9055]  Grossman, E., Ed., Mizrahi, T., and A. Hacker,
               "Deterministic Networking (DetNet) Security
