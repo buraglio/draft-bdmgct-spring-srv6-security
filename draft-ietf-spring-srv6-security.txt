@@ -5,14 +5,14 @@
 Source Packet Routing in Networking                          N. Buraglio
 Internet-Draft                                   Energy Sciences Network
 Intended status: Informational                                T. Mizrahi
-Expires: 17 April 2027                                            Huawei
+Expires: 19 April 2027                                            Huawei
                                                                  T. Tong
                                                             China Unicom
                                                          L. M. Contreras
                                                               Telefonica
                                                                  F. Gont
                                                             SI6 Networks
-                                                         14 October 2026
+                                                         16 October 2026
 
 
         Segment Routing over IPv6 (SRv6) Security Considerations
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 April 2027.
+   This Internet-Draft will expire on 19 April 2027.
 
 Copyright Notice
 
@@ -80,7 +80,7 @@ Table of Contents
    1.  Introduction
    2.  Scope of this Document
    3.  Terminology
-   4.  Threat Terminology
+   4.  Threat Taxonomy
    5.  Effect
    6.  Attacks
      6.1.  Attack Abstractions
@@ -122,9 +122,10 @@ Table of Contents
 1.  Introduction
 
    Segment Routing (SR) [RFC8402] utilizing an IPv6 data plane is a
-   source routing model that leverages an IPv6 underlay.  It uses an
+   source routing model that leverages an IPv6 underlay.  It may use an
    IPv6 extension header called the Segment Routing Header (SRH)
-   [RFC8754].  This header is used to signal and control the forwarding
+   [RFC8754], though the SRH is not required in all SRv6 forwarding
+   scenarios.  This header is used to signal and control the forwarding
    path of packets by imposing an ordered list of segments that are
    processed at each addressed node along the path.  There are security
    considerations which must be noted or addressed in order to operate
@@ -184,11 +185,21 @@ Table of Contents
 
    *  [RFC9800] : Compressed SRv6 Segment List Encoding
 
+   *  [RFC9602] : Segment Routing over IPv6 (SRv6) Segment Identifiers
+      in the IPv6 Addressing Architecture
+
    Inter-Domain Segment Routing scenarios are out of scope for this
    document as are existing and future protocol specific IPv6
    vulnerabilities.  Additionally, SRv6 is under active development and,
    as such, the above documents might not cover all protocols employed
    in an SRv6 deployment.
+
+   The threats specific to NSH/SRv6 interworking [RFC9491] and SRv6
+   multicast replication [RFC9524] — including replication-segment loops
+   and ICMPv6 storm amplification — fall within the modification,
+   insertion, and denial-of-service categories described in Section 6,
+   and are subject to the same domain-boundary filtering and
+   encapsulation mitigations described in Section 7.
 
 3.  Terminology
 
@@ -208,7 +219,7 @@ Table of Contents
 
    *  MACsec: MAC Security [MACsec]
 
-4.  Threat Terminology
+4.  Threat Taxonomy
 
    This section introduces the threat taxonomy that is used in this
    document.  This taxonomy is based on terminology from the Internet
@@ -447,6 +458,9 @@ Table of Contents
 
    An on-path internal attacker can modify a packet while it is in
    transit in a way that directly affects the packet's segment list.
+   Note that adding an SRH or SRH TLV to a packet in transit may be
+   constrained by the path MTU, which limits the practical feasibility
+   of such on-path modifications.
 
    A modification attack can be performed in one or more of the
    following ways:
@@ -683,14 +697,14 @@ Table of Contents
    or by concealing actual network issues.  SRv6-specific OAM aspects
    are specified in [RFC9259].
 
-   The O-flag in the SRH serves as a marking bit in user packets to
-   trigger telemetry data collection and export at the segment
-   endpoints.  An attacker may exploit this mechanism by setting the
-   O-flag in transit packets, thereby overloading the control plane and
-   degrading system availability.  Additionally, an on-path attacker may
-   passively intercept OAM data exported to external analyzers,
-   potentially gaining unauthorized insight into network topology and
-   behavior.
+   The O-flag in the SRH as specified in [RFC9259] serves as a marking
+   bit in user packets to trigger telemetry data collection and export
+   at the segment endpoints.  An attacker may exploit this mechanism by
+   setting the O-flag in transit packets, thereby overloading the
+   control plane and degrading system availability.  Additionally, an
+   on-path attacker may passively intercept OAM data exported to
+   external analyzers, potentially gaining unauthorized insight into
+   network topology and behavior.
 
 6.3.3.2.  Scope
 
@@ -967,7 +981,13 @@ Table of Contents
 
    Many operators reserve a /64 block for all loopback addresses and
    allocate /128 for each loopback interface.  This simplifies the
-   filtering of permitted source addresses.
+   filtering of permitted source addresses.  Alternatively, loopback
+   addresses can be allocated from each node's locator
+   [I-D.ietf-srv6ops-srv6addressing], in which case the permitted source
+   addresses are covered by the SID address range.  A hierarchical
+   addressing plan whose locators summarize at domain and area
+   boundaries [I-D.ietf-srv6ops-srv6addressing] keeps the filters to a
+   few stable prefixes.
 
    As in other IP networks, filtering at SRv6 enabled nodes complements
    address range filtering at ingress nodes, and it relies on the
@@ -1274,27 +1294,6 @@ Table of Contents
               DOI 10.17487/RFC8986, February 2021,
               <https://www.rfc-editor.org/rfc/rfc8986>.
 
-   [RFC9020]  Litkowski, S., Qu, Y., Lindem, A., Sarkar, P., and J.
-              Tantsura, "YANG Data Model for Segment Routing", RFC 9020,
-              DOI 10.17487/RFC9020, May 2021,
-              <https://www.rfc-editor.org/rfc/rfc9020>.
-
-   [RFC9256]  Filsfils, C., Talaulikar, K., Ed., Voyer, D., Bogdanov,
-              A., and P. Mattes, "Segment Routing Policy Architecture",
-              RFC 9256, DOI 10.17487/RFC9256, July 2022,
-              <https://www.rfc-editor.org/rfc/rfc9256>.
-
-   [RFC9491]  Guichard, J., Ed. and J. Tantsura, Ed., "Integration of
-              the Network Service Header (NSH) and Segment Routing for
-              Service Function Chaining (SFC)", RFC 9491,
-              DOI 10.17487/RFC9491, November 2023,
-              <https://www.rfc-editor.org/rfc/rfc9491>.
-
-   [RFC9524]  Voyer, D., Ed., Filsfils, C., Parekh, R., Bidgoli, H., and
-              Z. Zhang, "Segment Routing Replication for Multipoint
-              Service Delivery", RFC 9524, DOI 10.17487/RFC9524,
-              February 2024, <https://www.rfc-editor.org/rfc/rfc9524>.
-
    [RFC9800]  Cheng, W., Ed., Filsfils, C., Li, Z., Decraene, B., and F.
               Clad, Ed., "Compressed SRv6 Segment List Encoding",
               RFC 9800, DOI 10.17487/RFC9800, June 2025,
@@ -1327,6 +1326,14 @@ Table of Contents
               May 2026, <https://datatracker.ietf.org/doc/html/draft-
               ietf-spring-srv6-yang-base-02>.
 
+   [I-D.ietf-srv6ops-srv6addressing]
+              Horn, J., Morris, N., Horneffer, M., Hassen, C., Li, S.,
+              and X. Xiao, "Addressing Recommendations for SRv6", Work
+              in Progress, Internet-Draft, draft-ietf-srv6ops-
+              srv6addressing-00, 20 August 2026,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-srv6ops-
+              srv6addressing-00>.
+
    [ITU-Sec]  "ITU-T M.3016.1, Security for the management plane:
               Security requirements", 2005.
 
@@ -1356,6 +1363,10 @@ Table of Contents
               "Encapsulating MPLS in IP or Generic Routing Encapsulation
               (GRE)", RFC 4023, DOI 10.17487/RFC4023, March 2005,
               <https://www.rfc-editor.org/rfc/rfc4023>.
+
+   [RFC4252]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Authentication Protocol", RFC 4252, DOI 10.17487/RFC4252,
+              January 2006, <https://www.rfc-editor.org/rfc/rfc4252>.
 
    [RFC4381]  Behringer, M., "Analysis of the Security of BGP/MPLS IP
               Virtual Private Networks (VPNs)", RFC 4381,
@@ -1474,6 +1485,16 @@ Table of Contents
               RFC 8926, DOI 10.17487/RFC8926, November 2020,
               <https://www.rfc-editor.org/rfc/rfc8926>.
 
+   [RFC9000]  Iyengar, J., Ed. and M. Thomson, Ed., "QUIC: A UDP-Based
+              Multiplexed and Secure Transport", RFC 9000,
+              DOI 10.17487/RFC9000, May 2021,
+              <https://www.rfc-editor.org/rfc/rfc9000>.
+
+   [RFC9020]  Litkowski, S., Qu, Y., Lindem, A., Sarkar, P., and J.
+              Tantsura, "YANG Data Model for Segment Routing", RFC 9020,
+              DOI 10.17487/RFC9020, May 2021,
+              <https://www.rfc-editor.org/rfc/rfc9020>.
+
    [RFC9050]  Li, Z., Peng, S., Negi, M., Zhao, Q., and C. Zhou, "Path
               Computation Element Communication Protocol (PCEP)
               Procedures and Extensions for Using the PCE as a Central
@@ -1507,6 +1528,11 @@ Table of Contents
               DOI 10.17487/RFC9252, July 2022,
               <https://www.rfc-editor.org/rfc/rfc9252>.
 
+   [RFC9256]  Filsfils, C., Talaulikar, K., Ed., Voyer, D., Bogdanov,
+              A., and P. Mattes, "Segment Routing Policy Architecture",
+              RFC 9256, DOI 10.17487/RFC9256, July 2022,
+              <https://www.rfc-editor.org/rfc/rfc9256>.
+
    [RFC9259]  Ali, Z., Filsfils, C., Matsushima, S., Voyer, D., and M.
               Chen, "Operations, Administration, and Maintenance (OAM)
               in Segment Routing over IPv6 (SRv6)", RFC 9259,
@@ -1534,10 +1560,21 @@ Table of Contents
               Protocols", BCP 72, RFC 9416, DOI 10.17487/RFC9416, July
               2023, <https://www.rfc-editor.org/rfc/rfc9416>.
 
+   [RFC9491]  Guichard, J., Ed. and J. Tantsura, Ed., "Integration of
+              the Network Service Header (NSH) and Segment Routing for
+              Service Function Chaining (SFC)", RFC 9491,
+              DOI 10.17487/RFC9491, November 2023,
+              <https://www.rfc-editor.org/rfc/rfc9491>.
+
    [RFC9513]  Li, Z., Hu, Z., Talaulikar, K., Ed., and P. Psenak,
               "OSPFv3 Extensions for Segment Routing over IPv6 (SRv6)",
               RFC 9513, DOI 10.17487/RFC9513, December 2023,
               <https://www.rfc-editor.org/rfc/rfc9513>.
+
+   [RFC9524]  Voyer, D., Ed., Filsfils, C., Parekh, R., Bidgoli, H., and
+              Z. Zhang, "Segment Routing Replication for Multipoint
+              Service Delivery", RFC 9524, DOI 10.17487/RFC9524,
+              February 2024, <https://www.rfc-editor.org/rfc/rfc9524>.
 
    [RFC9602]  Krishnan, S., "Segment Routing over IPv6 (SRv6) Segment
               Identifiers in the IPv6 Addressing Architecture",
