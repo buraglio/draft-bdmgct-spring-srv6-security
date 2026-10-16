@@ -1,6 +1,6 @@
 ---
 title: "Segment Routing over IPv6 (SRv6) Security Considerations"
-abbrev: "Segment Routing IPv6 Security Considerations"
+abbrev: "SRv6 Security Considerations"
 category: info
 pi: [toc, sortrefs, symrefs]
 
@@ -62,7 +62,6 @@ informative:
   RFC4593:
   RFC4655:
   RFC6518:
-  RFC6242:
   RFC9846:
   RFC9055:
   RFC7384:
@@ -81,12 +80,10 @@ informative:
   RFC9099:
   RFC8200:
   RFC7835:
-  RFC9050:
   RFC9602:
   RFC9087:
   RFC6291:
   RFC8355:
-  RFC4381:
   RFC6241:
   RFC8040:
   RFC9862:
