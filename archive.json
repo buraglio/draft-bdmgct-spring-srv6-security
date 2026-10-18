@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-15T03:32:08.251400+00:00",
+  "timestamp": "2026-10-18T03:23:11.745705+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -151,15 +151,15 @@
       "id": "I_kwDOKVF77M70FzaW",
       "title": "Major issues from directorate reviews",
       "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/issues/68",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "talmi",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "\nINTDIR review:\n\nhttps://datatracker.ietf.org/doc/review-ietf-spring-srv6-security-11-intdir-early-fressancourt-2026-02-25/\n\n* Throughout the document, the (loaded) term \"domain\" is used while its\ndefinition for the document is a bit unclear (at least to me). The document\nrefers to RFC 8402 which defines a SR domain as:\n        \"the set of nodes participating in the source-based routing model.\n        [...] some deployments may wish to subdivide the network into multiple\n        SR domains, each of which includes one or more protocol instances. It\n        is expected that all nodes in an SR domain are managed by the same\n        administrative entity.\"\nYet, quickly in the document it is mentioned that inter-domain segment routing\nis out of scope of the document: is this explicitly excluding inter-SR domain\nrun by the same administrative entity? Later in the document, it is mentioned\nthat segment routing runs in a Trusted domain: is this trusted domain broader\nthan a SR domain? Encompassing two SR instances run by a same administrative\nentity?\n\n\nRTGDIR review:\nhttps://datatracker.ietf.org/doc/review-ietf-spring-srv6-security-11-rtgdir-early-alston-2026-03-02/\n\nFirstly - in section 7.1 it refers to a trusted domain.  I would prefer some\nfurther wording to make it clear that the boundaries of a trusted domain must\nbe such that the trusted domain does not include, for example, servers\nconnected to the network that third parties have access to.  I have seen\nseveral companies that have made the assumption that a trusted domain starts\nand stops at the peering/transit interfaces and at the CPE.  Forgetting that\nhosting servers that customers have access to inside the network create a\nbreach in the concept of the trusted domain. This is of particular importance\nin the case of srv6 - since crafting and sending SRv6 packets from a server\ninto the network is a trivial exercise.\n\n\nOPSDIR review:\nhttps://datatracker.ietf.org/doc/review-ietf-spring-srv6-security-11-opsdir-early-combes-2026-02-24/\n\n<Major issue>\nNo clear definition of \u201ctrusted domain\u201d in RFC8402: what is the definition of\n\u201ctrusted domain\u201d, for SR use case, from a technical/operational point of view?\nIs \u201ctrusted domain\u201d only means \u201cthe traffic is filtered at the domain\nboundaries\u201d, as mentioned in Section 7.1.1? </Major issue> </JMC>\n\n   Therefore, in the current threat model the SR domain defines the\n   boundary that distinguishes internal from external threats.\n\n<Major issue>\n\u201cTherefore,\u201d: without definition of \u201ctrusted domain\u201d (cf. above), I must admit\nit is hard for me to have such a conclusion. </Major issue> </JMC>\n\n\n<Major issue>\n\u201cTraffic MUST be filtered at the domain boundaries.\u201d:\nIngress filtering? (as assumed in RFC 8402 and RFC 8754)\nEgress filtering? (as assumed in Section 6.2.1.2 and Section 6.2.2.2)\nBoth? (based on the previous 2 points)\n</Major issue>\n\n\n<Major issue>\n\u201c2.  A packet containing an SRH may not be destined to the SR domain\u201d\nIMHO, not consistent with Section 6.2.1.2, Section 6.2.2.2 and Section 6.2.3.2:\nwhere does this packet come from? </Major issue> </JMC>\n\n   For these reasons SRH filtering is not necessarily a useful method of\n   mitigation.\n\n\n<Major issue>\nIMHO, not consistent with RFC 8402, Section 8.2:\n\u201cTherefore, by default, the explicit routing information MUST NOT be leaked\nthrough the boundaries of the administered domain.\u201d IMHO, not consistent also\nwith Section 6.2.1.2, Section 6.2.2.2 and Section 6.2.3.2 </Major issue>",
       "createdAt": "2026-03-18T13:31:49Z",
-      "updatedAt": "2026-03-18T13:31:49Z",
-      "closedAt": null,
+      "updatedAt": "2026-10-16T16:41:47Z",
+      "closedAt": "2026-10-16T16:41:47Z",
       "comments": []
     }
   ],
@@ -2659,6 +2659,34 @@
       "mergedBy": "buraglio",
       "mergeCommit": {
         "oid": "262344e3220b6dd34a7d398a0858514d7bfa371c"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 81,
+      "id": "PR_kwDOKVF77M8AAAABI41dOg",
+      "title": "Finish all comments for DISCUSS ballots",
+      "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/81",
+      "state": "MERGED",
+      "author": "buraglio",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-10-16T16:41:16Z",
+      "updatedAt": "2026-10-16T16:41:30Z",
+      "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "baseRefName": "main",
+      "baseRefOid": "262344e3220b6dd34a7d398a0858514d7bfa371c",
+      "headRepository": "buraglio/draft-bdmgct-spring-srv6-security",
+      "headRefName": "ndb-iesg-discussion2",
+      "headRefOid": "5ee617bd4cb5e2979dd85ebbbee1e7e16d0df421",
+      "closedAt": "2026-10-16T16:41:30Z",
+      "mergedAt": "2026-10-16T16:41:30Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "9cc6ca2325d8d4e867523ac630e2defb03a2f2e0"
       },
       "comments": [],
       "reviews": []
