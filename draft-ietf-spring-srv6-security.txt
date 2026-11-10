@@ -5,14 +5,14 @@
 Source Packet Routing in Networking                          N. Buraglio
 Internet-Draft                                   Energy Sciences Network
 Intended status: Informational                                T. Mizrahi
-Expires: 19 April 2027                                            Huawei
+Expires: 14 May 2027                                              Huawei
                                                                  T. Tong
                                                             China Unicom
                                                          L. M. Contreras
                                                               Telefonica
                                                                  F. Gont
                                                             SI6 Networks
-                                                         16 October 2026
+                                                        10 November 2026
 
 
         Segment Routing over IPv6 (SRv6) Security Considerations
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 April 2027.
+   This Internet-Draft will expire on 14 May 2027.
 
 Copyright Notice
 
@@ -356,18 +356,20 @@ Table of Contents
    *  Communication Integrity: SRv6 attacks may cause packets to be
       forwarded through paths that the attacker controls, which may
       facilitate other attacks that compromise the integrity of user
-      data.  Integrity protection of user data, which is implemented in
-      higher layers, avoids these aspects, and therefore communication
-      integrity is not within the scope of this document.
+      data.  When integrity protection is applied at higher layers, it
+      mitigates this exposure; in its absence, an on-path attacker may
+      modify payload data undetected.  Since higher-layer integrity
+      protection is outside the SRv6 layer, it is not within the scope
+      of this document, but its absence increases the impact of path-
+      manipulation attacks.
 
    *  Confidentiality: as in communication integrity, packets forwarded
       through unintended paths may traverse nodes controlled by an
-      attacker.  Since eavesdropping of user data can be avoided by
-      using encryption in higher layers, it is not within the scope of
-      this document.  However, eavesdropping of a network that uses SRv6
-      is a specific form of reconnaissance.  This reconnaissance allows
-      the attacker to collect information about SR endpoint addresses,
-      SR policies, and network topologies.
+      attacker.  Encryption at higher layers mitigates user-data
+      eavesdropping; without it, an attacker on a diverted path can read
+      payload data.  Since higher-layer confidentiality protection is
+      outside the SRv6 layer, it is not within the scope of this
+      document.
 
    *  Denial of Service (DoS): the availability aspects of SRv6 include
       the ability of attackers to leverage SRv6 as a means for
@@ -1036,9 +1038,12 @@ Table of Contents
    of the HMAC.
 
    Using an HMAC in an SR domain can mitigate some of the SR
-   Modification Attacks (Section 6.2.1).
-
-   The following aspects of the HMAC should be considered:
+   Modification Attacks (Section 6.2.1).  Specifically, the HMAC
+   provides cryptographic integrity verification of those SRH fields,
+   enabling a receiving SRv6 node to detect unauthorized modification by
+   an on-path attacker who does not possess the pre-shared key.
+   However, several limitations constrain its effectiveness as a general
+   security mechanism:
 
    *  The HMAC TLV is optional [RFC8754].
 
@@ -1264,6 +1269,14 @@ Table of Contents
    check the limitations of their platforms when deploying SRv6, and to
    keep the resources needed for filtering low by following the SID
    allocation and summarization practices described in Section 7.1.3.
+   When ACL capacity cannot accommodate all required filters, operators
+   face a security tradeoff: applying coarser rules risks allowing
+   attacks that finer rules would block ("fail-open"), while overly
+   aggressive rules may inadvertently block legitimate SRv6 traffic.  In
+   such cases, the SID block summarization practices of Section 7.1.3
+   reduce the number of required rules, and operators should prioritize
+   ingress filters on untrusted-facing interfaces above intra-domain
+   rules.
 
 9.  Security Considerations
 
@@ -1330,9 +1343,9 @@ Table of Contents
               Horn, J., Morris, N., Horneffer, M., Hassen, C., Li, S.,
               and X. Xiao, "Addressing Recommendations for SRv6", Work
               in Progress, Internet-Draft, draft-ietf-srv6ops-
-              srv6addressing-00, 20 August 2026,
+              srv6addressing-01, 2 November 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-srv6ops-
-              srv6addressing-00>.
+              srv6addressing-01>.
 
    [ITU-Sec]  "ITU-T M.3016.1, Security for the management plane:
               Security requirements", 2005.
