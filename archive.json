@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-11-08T04:50:20.687079+00:00",
+  "timestamp": "2026-11-12T06:02:39.478702+00:00",
   "repo": "buraglio/draft-bdmgct-spring-srv6-security",
   "labels": [
     {
@@ -2696,7 +2696,7 @@
       "id": "PR_kwDOKVF77M8AAAABNZEoMA",
       "title": "Address deb cooley final comments",
       "url": "https://github.com/buraglio/draft-bdmgct-spring-srv6-security/pull/82",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "buraglio",
       "authorAssociation": "OWNER",
       "assignees": [
@@ -2705,19 +2705,35 @@
       "labels": [],
       "body": "Final comments before we send the doc to rfc editor. ",
       "createdAt": "2026-11-06T19:47:55Z",
-      "updatedAt": "2026-11-06T19:48:52Z",
+      "updatedAt": "2026-11-10T14:49:31Z",
       "baseRepository": "buraglio/draft-bdmgct-spring-srv6-security",
       "baseRefName": "main",
       "baseRefOid": "f9d06c98576845a3c452f797ac7d97defd6e603c",
       "headRepository": "buraglio/draft-bdmgct-spring-srv6-security",
       "headRefName": "deb-cooly-review",
       "headRefOid": "60779b72568db743d3b4f592b63fbed989ace11c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-11-10T14:49:31Z",
+      "mergedAt": "2026-11-10T14:49:30Z",
+      "mergedBy": "buraglio",
+      "mergeCommit": {
+        "oid": "470baf36fe4d0fcc70bbcc951ba2b1f5e27c1977"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOKVF77M8AAAABW_PRHA",
+          "commit": {
+            "abbreviatedOid": "60779b7"
+          },
+          "author": "talmi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Looks good! Ready to go!",
+          "createdAt": "2026-11-10T06:28:41Z",
+          "updatedAt": "2026-11-10T06:28:41Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
